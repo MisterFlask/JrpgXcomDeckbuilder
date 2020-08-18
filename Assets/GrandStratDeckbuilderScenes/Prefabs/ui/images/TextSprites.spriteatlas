@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TextSprites
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 53f96d19022920d4cba4b86103a870d1, type: 3}
+    - {fileID: 2800000, guid: 0268df5f8a033e94ebb4a57e0d7aea07, type: 3}
+    - {fileID: 2800000, guid: 4cebd7ea98e113c4899967ee15a29ead, type: 3}
+    - {fileID: 2800000, guid: fcce99276f6453747889ca9923ff0f45, type: 3}
+    - {fileID: 2800000, guid: e5afd74a51c6237438117ea6a32af90d, type: 3}
+    - {fileID: 2800000, guid: 3d17f298c64d5334db94c86d53c47ad6, type: 3}
+    - {fileID: 2800000, guid: a22be0f1fdecb704d9775ce0d6b10a75, type: 3}
+    - {fileID: 2800000, guid: 0c130847f829d5a4d902444a8f6b70d9, type: 3}
+    totalSpriteSurfaceArea: 8388608
+    bindAsDefault: 1
+    storedHash:
+      serializedVersion: 2
+      Hash: 464b13a920a55604c8a34a4a42e2c864
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: a22be0f1fdecb704d9775ce0d6b10a75, type: 3}
+  - {fileID: 21300000, guid: fcce99276f6453747889ca9923ff0f45, type: 3}
+  - {fileID: 21300000, guid: 0c130847f829d5a4d902444a8f6b70d9, type: 3}
+  - {fileID: 21300000, guid: 3d17f298c64d5334db94c86d53c47ad6, type: 3}
+  - {fileID: 21300000, guid: 53f96d19022920d4cba4b86103a870d1, type: 3}
+  - {fileID: 21300000, guid: e5afd74a51c6237438117ea6a32af90d, type: 3}
+  - {fileID: 21300000, guid: 4cebd7ea98e113c4899967ee15a29ead, type: 3}
+  - {fileID: 21300000, guid: 0268df5f8a033e94ebb4a57e0d7aea07, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - caesar
+  - erlenmeyer
+  - bread
+  - crown-coin
+  - stack
+  - evil-fork
+  - hammer
+  - rolling-energy
+  m_Tag: TextSprites
+  m_IsVariant: 0

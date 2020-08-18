@@ -1,0 +1,191 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1800071842358096607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1800071842358096604}
+  - component: {fileID: 1800071842358096602}
+  - component: {fileID: 1800071842358096605}
+  - component: {fileID: 1800071842358096600}
+  - component: {fileID: 1800071842358097189}
+  - component: {fileID: 1800071842358097190}
+  - component: {fileID: 1800071842358097191}
+  - component: {fileID: 1800071842358097188}
+  - component: {fileID: 1800071842358096601}
+  m_Layer: 5
+  m_Name: LTPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1800071842358096604
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800071842358096607}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -8, y: 2.5}
+  m_SizeDelta: {x: -112, y: -94.99997}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1800071842358096602
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800071842358096607}
+  m_CullTransparentMesh: 0
+--- !u!114 &1800071842358096605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800071842358096607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19eebf3c28ab20a45b013629c3449589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  Text: "<anim=type><size=1.5><b><color=#44FF44,#FFFFFFAA>Welcome</color></b>\r</size>\r\n\tPush
+    play to begin the demo <icon=caesar>. "
+  Font: {fileID: 12800000, guid: c8a8a1359783ea349b5aa2a0269d885c, type: 3}
+  FontSize: 32
+  FontStyle: 0
+  LineSpacing: 1
+  RichText: 1
+  Alignment: 4
+  AlignByGeometry: 1
+  HorizontalOverflow: 0
+  VerticalOverflow: 0
+  PageNumber: 1
+  PageBreakChars: 2e0021003f00
+  RaycastTarget: 0
+  Color: {r: 0.8871107, g: 1, b: 0.86764705, a: 1}
+  ColorOverride: 1
+  ColorBL: {r: 0.6292712, g: 0.7467531, b: 0.75735295, a: 1}
+  ColorTL: {r: 0.962154, g: 1, b: 0.74264705, a: 0.803}
+  ColorTR: {r: 1, g: 1, b: 1, a: 1}
+  ColorBR: {r: 0.77833045, g: 0.8233654, b: 0.89705884, a: 1}
+  IconAtlas: {fileID: 4343727234628468602, guid: 735029a305e179f4fbe36ccc6bae6883,
+    type: 2}
+  ShowDebugGlyphs: 0
+  ShowDebugWords: 0
+  ShowDebugLines: 0
+  ShowDebugBlock: 0
+  ShowDebugParse: 0
+--- !u!114 &1800071842358096600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800071842358096607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035932841da1fbd44ba45a9a5f8874e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: wave
+  Height: 0.1
+  Speed: 2
+  Frequency: 5.6
+--- !u!114 &1800071842358097189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800071842358096607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035932841da1fbd44ba45a9a5f8874e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: wave2
+  Height: 0.3
+  Speed: 1
+  Frequency: 0.05
+--- !u!114 &1800071842358097190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800071842358096607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16f37df68bb4c54099adce8c60f96f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: throb
+  hue: {r: 1, g: 0.5923443, b: 0.04411763, a: 0}
+  Speed: 1
+  Frequency: 0.1
+--- !u!114 &1800071842358097191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800071842358096607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6c24a6053a6144bb1f00ec2bb77b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: shake
+  Radius: 0.15
+  ShakesPerSecond: 20
+--- !u!114 &1800071842358097188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800071842358096607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.034}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 0
+--- !u!114 &1800071842358096601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800071842358096607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.11807959, g: 0.22925663, b: 0.38235295, a: 0.834}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1

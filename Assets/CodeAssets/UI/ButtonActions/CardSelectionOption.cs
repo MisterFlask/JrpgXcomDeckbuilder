@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using HyperCard;
 using UnityEngine.UI;
-using Ricimi;
 
 public class CardSelectionOption : MonoBehaviour, IPointerClickHandler
 {

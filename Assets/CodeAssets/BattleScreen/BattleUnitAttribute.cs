@@ -27,19 +27,4 @@ public abstract class BattleUnitAttribute
     {
         return 0;
     }
-
-    public BattleUnitAttributePrefab CreatePrefab()
-    {
-        var prefab = ServiceLocator.GameObjectTemplates().BattleUnitAttributePrefab..Spawn();
-    }
-
-
-}
-
-public class BattleUnitAttributePrefab: MonoBehaviour
-{
-    public CustomGuiText Text { get; set; }
-
-    public BattleUnitAttribute UnderlyingAttribute {get; set;}
-
 }

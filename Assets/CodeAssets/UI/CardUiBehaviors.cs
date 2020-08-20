@@ -16,44 +16,9 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     void Update()
     {
-        var card = this.GetComponent<Card>();
-        var logicalCard = card.LogicalCard;
-        if (isDragging)
-        {
-            RecalculateEffectiveMightFromMousePosition();
-        }
-        else
-        {
-            this.GetComponent<Card>().Refresh();
-        }
+        this.GetComponent<Card>().Refresh();
     }
 
-    private void RecalculateEffectiveMightFromMousePosition()
-    {
-        var logicalCard = this.GetComponent<PlayerCard>().LogicalCard;
-        var card = this.GetComponent<Card>();
-        var itemsUnderMouse = GetAllUIElements(Input.mousePosition);
-
-        if (itemsUnderMouse == null || itemsUnderMouse.IsEmpty())
-        {
-            card.Refresh();
-            return;
-        }
-        foreach (var element in itemsUnderMouse)
-        {
-            if (element.GetComponent<MissionSelector>() != null)
-            {
-                var mission = element.GetComponent<MissionSelector>().mission; 
-                break;
-            }
-            var clickableTile = element.GetComponent<ClickableTile>();
-            if (clickableTile != null)
-            {
-                break;
-            }
-        }
-        card.Refresh();
-    }
 
     void Start()
     {
@@ -91,7 +56,6 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
         //arrowController.SetVisible(true);
         //arrowController.SetStart(this.transform.position);
         isDragging = true;
-        ServiceLocator.GetActionManager().RefreshUi();
     }
 
     public void OnPointerUp(PointerEventData data)
@@ -106,7 +70,6 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
         SendMessageToFirstValidMouseButtonUpHandler(Input.mousePosition);
         ServiceLocator.GetGameStateTracker().SetCardSelected(null);
         this.GetComponent<Card>().HideTooltips();
-        ServiceLocator.GetActionManager().RefreshUi();
     }
 
     protected void SendMessageToFirstValidMouseButtonUpHandler(Vector2 position)
@@ -129,13 +92,6 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
             {
                 // We're ignoring any case where we release the mouse button over a card
                 return;
-            }
-
-            if (element.GetComponent<MissionSelector>() != null)
-            {
-                Debug.Log("First UI element observed is mission selector: " + element);
-                element.GetComponent<MissionSelector>().HandleOnMouseButtonUpEvent();
-                break;
             }
 
             if (element.GetComponent<DeployCardButton>() != null)

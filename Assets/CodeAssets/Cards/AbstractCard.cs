@@ -7,7 +7,7 @@ public abstract class AbstractCard
 {
     public string Name { get; set; } = "Name";
 
-    public Rarity Rarity { get; set; } = Rarity.Common;
+    public Rarity Rarity { get; set; } = Rarity.COMMON;
 
     public int UpgradeQuantity { get; set; } = 0;
 
@@ -59,18 +59,6 @@ public abstract class AbstractCard
     public virtual string Description()
     {
         return "";
-    }
-
-    public void DeployToRegion(TileLocation tileLocation)
-    {
-        PerformDefaultCardPlayEffects();
-
-        OnDeployToRegion(tileLocation);
-        var tile = tileLocation.ToTile();
-        if (tile.Toughness <= 0 && BasePower > 0 && ServiceLocator.GameLogic().GetConquerableRegions().Contains(tile.TileLocation))
-        {
-            ServiceLocator.GetActionManager().ReassignOwnershipOfTile(tileLocation, Faction.PlayerFaction);
-        }
     }
 
     public bool IsLegion()
@@ -205,4 +193,10 @@ public abstract class AbstractCard
 
         this.CurrentToughness = MaxToughness;
     }
+
+}
+
+public enum Rarity
+{
+    COMMON,UNCOMMON,RARE
 }

@@ -9,8 +9,6 @@ using System.Linq;
 
 public class GameState : MonoBehaviour
 {
-    public List<AbstractRivalUnit> RivalUnits { get; } = new List<AbstractRivalUnit>();
-    
     public void Start()
     {
         var totalDeck = new List<AbstractCard>
@@ -87,7 +85,6 @@ public class GameState : MonoBehaviour
             }
             if (!cardWasDeployedWithoutLocation && behavior.CanDeployToRegion(tileLocationSelected))
             {
-                behavior.DeployToRegion(tileLocationSelected);
                 if (Deck.Hand.Contains(behavior))
                 {
                     Deck.MoveCardToPile(behavior, CardPosition.DISCARD);

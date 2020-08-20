@@ -19,19 +19,15 @@ public class GameStarter : TopoMonobehavior
     {
         ServiceLocator.GetGameStateTracker().Factions = Faction.RivalFactionsList;
 
-        EntityRegistrar.RegisterMissions();
-        EntityRegistrar.RegisterCards();
-
         ServiceLocator.GetGameStateTracker().Deck = new Deck();
         var actionManager = ServiceLocator.GetActionManager();
 
-        actionManager.AssignStartingTilesAndUnitsForEachFaction();
 
         // add starting deck!
-        foreach (var card in GetStartingCards())
+        /* foreach (var card in GetStartingCards())
         {
             actionManager.AddCardToDeck(card);
-        }
+        }*/
 
         // Now, we assign defense values to all tiles
         var tilemap = ServiceLocator.GetTileMap();
@@ -44,21 +40,6 @@ public class GameStarter : TopoMonobehavior
         return 2;
     }
 
-
-    private IEnumerable<AbstractCard> GetStartingCards()
-    {
-
-        return new List<AbstractCard>
-        {
-            new Laborers(),
-            new Pilgrims(),
-            new ElderCouncil(),
-            new Laborers(),
-            new Pilgrims(),
-            new Palace()
-        };
-
-    }
 
     public override void Initialize()
     {

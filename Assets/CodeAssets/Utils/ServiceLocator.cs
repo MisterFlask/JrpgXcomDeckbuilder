@@ -14,6 +14,7 @@ public static class ServiceLocator
     private static GameLogic gameLogic;
 
     private static TemplateHolder _templateHolder;
+
     private static TemplateHolder GetTemplateHolder()
     {
         if (_templateHolder == null)
@@ -68,10 +69,6 @@ public static class ServiceLocator
     public static ExplainerPanel TooltipPanel()
     {
         return private_ExplainerPanel;
-    }
-    public static HexAttributePrefab GetHexAttributePrefabTemplate()
-    {
-        return GameObject.Find("ExampleTileAttribute").GetComponent<HexAttributePrefab>(); //TODO: Rationalize naming
     }
 
     static CardInstantiator cardInstantiator = null;
@@ -156,10 +153,6 @@ public static class ServiceLocator
         return GameObject.Find("GAME_STATE_TRACKER").GetComponent<GameState>();
     }
 
-    internal static MissionSelector GetMissionSelectorTemplate()
-    {
-        return GameObject.Find("MISSION_SELECTOR_TEMPLATE").GetComponent<MissionSelector>();
-    }
 
     public static GameObject GetMissionObjectiveShortDescriptionTemplate()
     {
@@ -181,10 +174,6 @@ public static class ServiceLocator
         return GameObject.Find("Hand");
     }
 
-    public static RivalUnitPrefab GetRivalUnitPrefab()
-    {
-        return GetTemplateHolder().RivalUnitPrefab;
-    }
     public static Transform GetUnitFolder()
     {
         return GetTemplateHolder().UnitHolder.transform;

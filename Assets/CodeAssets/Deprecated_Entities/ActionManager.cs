@@ -8,7 +8,6 @@ using HyperCard;
 
 public class ActionManager : MonoBehaviour
 {
-    FogOfWarManager fogManager = new FogOfWarManager();
     private Deck deck => ServiceLocator.GetGameStateTracker().Deck;
 
     GameState gameState;
@@ -20,16 +19,6 @@ public class ActionManager : MonoBehaviour
 
     public List<DelayedAction> actionsQueue = new List<DelayedAction>();
 
-    public RivalUnitPrefab RivalUnitPrefab => ServiceLocator.GetRivalUnitPrefab();
-
-    public void AddPassiveEffect(PassiveEffect effect)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-            var newEffect = effect.ClonePassiveEffect<PassiveEffect>();
-            ServiceLocator.GetGameStateTracker().AddPassiveEffect(newEffect);
-        });
-    }
 
     public void PromptPossibleUpgradeOfCard(AbstractCard beforeCard)
     {
@@ -74,33 +63,6 @@ public class ActionManager : MonoBehaviour
                 Name = "Modify card? Will cost you " + productionCost + $" production",
                 TitleMessage = "Modify card?  Will cost you " + productionCost + " production."
              });
-        });
-    }
-
-    public void ModifyPassiveEffect(PassiveEffect effect, Action<PassiveEffect> action)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-            action.Invoke(effect);
-            AllEffectsPanel.RefreshPassiveEffectsDisplay();
-        });
-    }
-
-    public void ModifyStacks(PassiveEffect effect, int stacks)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-            effect.Stacks += stacks;
-            AllEffectsPanel.RefreshPassiveEffectsDisplay();
-        });
-    }
-
-    public void RemovePassiveEffect(PassiveEffect effect)
-    {
-
-        QueuedActions.ImmediateAction(() =>
-        {
-            ServiceLocator.GetGameStateTracker().RemovePassiveEffects((item) => item.Id == effect.Id);
         });
     }
 
@@ -224,7 +186,6 @@ public class ActionManager : MonoBehaviour
             card.LogicalCard.PayCostsForCard();
             invocation.Invoke();
             ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(card.LogicalCard);
-            PerformStateBasedActions();
         }, queueingType);
     }
 
@@ -233,74 +194,10 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-
-#pragma warning disable CS0618 // Type or member is obsolete
             gameState.DeployCardSelectedIfApplicable(card, tileLocationSelected);
-#pragma warning restore CS0618 // Type or member is obsolete
-            PerformStateBasedActions();
         }, queueingType);
     }
 
-    public void ResolveMissionSuccess(Mission mission)
-    {
-
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            PerformStateBasedActions();
-        });
-    }
-
-    public void ResolveMissionFailure(Mission mission)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            mission.FailMission();
-            PerformStateBasedActions();
-        });
-
-    }
-    /// <summary>
-    /// meant to be idempotent
-    /// </summary>
-    public void PerformStateBasedActions()
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            var missionsToBeCompleted = gameState.GetMissions().Where(item => item.IsSuccessful()).ToList();
-            if (missionsToBeCompleted.Count() > 0)
-            {
-                foreach (var item in missionsToBeCompleted)
-                {
-                    item.OnMissionSuccess();
-                    gameState.RemoveMission(item);
-                }
-            }
-
-            var missionsToBeFailed = gameState.GetMissions().Where(item => item.IsFailed()).ToList();
-            if (missionsToBeFailed.Count() > 0)
-            {
-                foreach (var item in missionsToBeFailed)
-                {
-                    item.OnMissionFailure();
-                    gameState.RemoveMission(item);
-                }
-            }
-
-            RefreshUi();
-        });
-    }
-    public void RefreshUi()
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            var missionContentPanel = GameObject.FindObjectOfType<AllMissionsContentPanel>();
-            missionContentPanel.Refresh();
-        });
-    }
 
     public void DiscardCard(AbstractCard protoCard,  QueueingType queueingType = QueueingType.TO_BACK)
     {
@@ -322,14 +219,6 @@ public class ActionManager : MonoBehaviour
             {
                 DiscardCard(card);
             }
-        });
-    }
-
-    public void PromptPlayerWithDilemma(Dilemma dilemma)
-    {
-        QueuedActions.DelayedAction("dilemma", () =>
-        {
-            ServiceLocator.GetUiStateManager().ShowDilemmaToPlayer(dilemma);
         });
     }
 
@@ -384,97 +273,6 @@ public class ActionManager : MonoBehaviour
             }
             gameState.modifyStability(amount);
             animationHandler.PulseAndFlashElement(StabilityImage);
-        }, queueingType);
-    }
-
-    private float FACTION_HIGHLIGHT_ALPHA = .5f;
-
-    public void AssignStartingTilesAndUnitsForEachFaction()
-    {
-        var tilesByLocation = ServiceLocator.GetTileMap().TilesByLocation;
-        var tileLocations = tilesByLocation.Keys;
-        var factions = ServiceLocator.GetGameStateTracker().Factions;
-
-        var playerOwnedTiles = GetStartingPlayerOwnedTiles();
-
-        foreach(var tile in playerOwnedTiles)
-        {
-            ReassignOwnershipOfTile(tile, Faction.PlayerFaction);
-        }
-
-        // declare faction "bases"
-        foreach (var faction in factions)
-        {
-            faction.FactionBase = tileLocations.PickRandomWhere(item => item.NotIn(playerOwnedTiles));
-            CreateUnitAtTile(new DefaultRivalUnit
-            {
-            }, faction.FactionBase, faction);
-        }
-
-        // now, declare that tiles belong to whichever faction's base is closest.
-        foreach (var tile in tileLocations.Where(item => item.NotIn(playerOwnedTiles)))
-        {
-            int maxDistanceToBestFaction = 10000; // arbitrary big number
-            var currentBestFaction = factions.First();
-            foreach(var faction in factions)
-            {
-                var distanceToBase = faction.FactionBase.DistanceToTile(tile);
-                if (distanceToBase < maxDistanceToBestFaction)
-                {
-                    maxDistanceToBestFaction = distanceToBase;
-                    currentBestFaction = faction;
-                }
-            }
-            ReassignOwnershipOfTile(tile, currentBestFaction);
-        }
-        
-        // first, allocate four tiles to the player.
-    }
-
-    #region tilemap allocation impl
-
-
-    private List<TileLocation> GetStartingPlayerOwnedTiles()
-    {
-        var centerOfMap = ServiceLocator.GetTileMap().GetCenterOfMap();
-        var randomNeighbors = centerOfMap.GetNeighbors().PickRandom(3);
-        var ret = new List<TileLocation>();
-        ret.AddRange(randomNeighbors);
-        ret.Add(centerOfMap);
-        return ret;
-    }
-    #endregion
-
-
-    public void ReassignOwnershipOfTile(TileLocation tileLocation, Faction newOwner, QueueingType queueingType = QueueingType.TO_BACK)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            Debug.Log($"Attempting to reassign {tileLocation} to {newOwner.Name}");
-            var tile = tileLocation.ToTile();
-            if (tile.Owner == newOwner)
-            {
-
-                return;
-            }
-            // regardless, switch color
-            // special casing Wilderness
-
-            if (newOwner == Faction.WildernessFaction)
-            {
-                // tile.HexPrefab.BlurryWhiteOutline.enabled = false;
-            }
-
-            if (newOwner.IsPlayer)
-            {
-                ServiceLocator.GetCamera().ZoomToLookAt(tile.HexPrefab.gameObject);
-            }
-            tile.Owner = newOwner;
-
-            fogManager.UpdateFogOfWar();
-            tile.HexPrefab.Refresh();
-            tile.GetNeighbors().ForEach(item => item.HexPrefab.Refresh());
         }, queueingType);
     }
 
@@ -577,9 +375,10 @@ public class ActionManager : MonoBehaviour
     }
     #region RivalUnits
 
-
-    public void CreateUnitAtTile(AbstractRivalUnit unit, TileLocation tile, Faction faction)
+    // TODO
+    public void CreateUnitAtBattleUnitHolder(AbstractRivalUnit unit, TileLocation tile, Faction faction)
     {
+        /*
         var copyOfUnit = unit.Clone();
         var unitPrefab = ServiceLocator.GetRivalUnitPrefab().Spawn(ServiceLocator.GetUnitFolder());
         unitPrefab.RivalUnitEntity = copyOfUnit;
@@ -588,44 +387,7 @@ public class ActionManager : MonoBehaviour
         copyOfUnit.TileLocation = tile;
         unitPrefab.transform.position = tile.ToTile().HexPrefab.transform.position;
         gameState.RivalUnits.Add(copyOfUnit);
-    }
-
-    public void MoveUnitAttempt(AbstractRivalUnit unit, TileLocation tileLocation)
-    {
-        QueuedActions.ImmediateAction(() => 
-        { 
-
-            if (tileLocation.ToTile().Owner == Faction.PlayerFaction)
-            {
-                EnactRivalUnitToTileCombat(unit, tileLocation);
-            }
-            else
-            {
-                MoveUnitPrefab(unit, tileLocation);
-            }
-        });
-    }
-
-    private void EnactRivalUnitToTileCombat(AbstractRivalUnit unit, TileLocation tileLocation)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-            DamageTileFromUnit(unit, tileLocation, unit.Power);
-            DamageUnit(unit, tileLocation.ToTile().Power);
-        });
-    }
-
-    public void DamageTileFromUnit(AbstractRivalUnit unit, TileLocation location, int damage)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-            location.ToTile().Toughness -= unit.Power;
-            if (location.ToTile().Toughness <= 0)
-            {
-                // It's now another faction's
-                ReassignOwnershipOfTile(location, unit.Faction);
-            }
-        });
+        */
     }
 
     public void DamageUnit(AbstractRivalUnit unit, int damage)
@@ -642,19 +404,6 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            ServiceLocator.GetGameStateTracker().RivalUnits.Remove(unit);
-            unit.Prefab.gameObject.Despawn();
-        });
-    }
-
-    private void MoveUnitPrefab(AbstractRivalUnit unit, TileLocation tileLocation)
-    {
-
-
-        QueuedActions.DelayedAction("UnitMovement", () =>
-        {
-            unit.TileLocation = tileLocation;
-            StartCoroutine(MoveFromTo(unit.Prefab.transform, unit.Prefab.transform.position, tileLocation.GetWorldCoordinatesOfTile(), 1.0f));
         });
     }
 

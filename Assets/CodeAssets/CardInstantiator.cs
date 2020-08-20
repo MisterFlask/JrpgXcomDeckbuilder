@@ -2,13 +2,11 @@
 using System.Collections;
 using System.Linq;
 using System;
-using ModelShark;
 using HyperCard;
 
 [RequireComponent(typeof(CardAnimationManager))]
 public class CardInstantiator : MonoBehaviour
 {
-    public TooltipStyle tooltipStyle;
 
     Card cardTemplate;
     Canvas canvas;

@@ -17,7 +17,6 @@ public class TileMap : TopoMonobehavior
 
     }
 
-    public GameTilePrefab SquareTileImagePrefab;
     public Sprite underground;
     public Dictionary<TileLocation, LogicalTile> TilesByLocation { get; private set; }
 
@@ -63,45 +62,8 @@ public class TileMap : TopoMonobehavior
         }
     }
 
-    public void InitializeSquareTileMap()
-    {
-        var cameraObject = GameObject.FindObjectOfType<CameraController>();
-
-        TilesByLocation = new Dictionary<TileLocation, LogicalTile>();
-        var maxX = 10;
-        var maxY = 10;
-        var transform = SquareTileImagePrefab.transform as RectTransform;
-        var tileWidth = transform.rect.width;
-        var tileHeight = transform.rect.height;
-        GameTilePrefab lastTileCreated = null;
-        for (var x = 0; x < maxX; x++)
-        {
-            float currentPixelsX = tileWidth * x;
-            for (var y = 0; y < maxY; y++)
-            {
-                float currentPixelsY = tileHeight * y;
-                var thisTile = Instantiate(SquareTileImagePrefab);
-                thisTile.transform.SetParent(this.transform);
-                thisTile.transform.position = new Vector2(currentPixelsX, currentPixelsY);
-                thisTile.TileLocation = new TileLocation(x, y);
-                lastTileCreated = thisTile;
-                TilesByLocation[thisTile.TileLocation] = new LogicalTile
-                {
-                    HiddenByFog = false,
-                    Toughness = 1,
-                    Power = 1,
-                    Owner = null,
-                    HexPrefab = thisTile,
-                    TerrainType = TerrainType.Desert,
-                    TileLocation = thisTile.TileLocation
-                };
-            }
-        }
-        cameraObject.ZoomToLookAt(lastTileCreated.gameObject);
-    }
-
     public override void Initialize()
     {
-        InitializeSquareTileMap();
+
     }
 }

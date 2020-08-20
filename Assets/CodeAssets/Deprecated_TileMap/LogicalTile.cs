@@ -12,7 +12,6 @@ public class LogicalTile
 
     public int Power { get; set; } = 1;
     public int Toughness { get; set; } = 1;
-    public GameTilePrefab HexPrefab { get; set; }
 
     public bool HiddenByFog { get; set; }
 

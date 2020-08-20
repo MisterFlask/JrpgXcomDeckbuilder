@@ -6,15 +6,13 @@ using System.Linq;
 
 public class GameLogic
 {
-    List<AbstractCard> CardsAvailableForGame => EntityRegistrar.ResearchableCards;
-
     public GameLogic()
     {
     }
 
     public IEnumerable<AbstractCard> GetSelectableCardsFromScience()
     {
-        return CardsAvailableForGame.PickRandom(3);
+        return new List<AbstractCard>(); // TODO
     }
     // Returns the list of attackable regions, which should be all regions VISIBLE that are NOT in player territory.
 

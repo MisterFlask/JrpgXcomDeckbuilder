@@ -11,9 +11,6 @@ public class AbstractRivalUnit
     public Sprite Sprite { get; set; }
 
     public TileLocation TileLocation { get; set; }
-
-    public RivalUnitPrefab Prefab { get; set; }
-
     public Faction Faction { get; set; }
 
 

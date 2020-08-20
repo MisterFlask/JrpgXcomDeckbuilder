@@ -49,12 +49,6 @@ public class TileLocation
         return dx + dy;
     }
 
-    public Vector3 GetWorldCoordinatesOfTile()
-    {
-        var loc = ServiceLocator.GetTileMap().TilesByLocation[this];
-        return loc.HexPrefab.transform.position;
-    }
-
     public TileLocation Plus(TileLocation other)
     {
         return new TileLocation(this.X + other.X, this.Y + other.Y);
@@ -71,21 +65,6 @@ public class TileLocation
         };
     }
 
-    public AbstractRivalUnit UnitHere()
-    {
-        return ServiceLocator.GetGameStateTracker().RivalUnits.Where(item => item.TileLocation == this)
-            .FirstOrDefault();
-    }
-
-    public TileLocation GetNeighboringTileOrSelfClosestTo(TileLocation goal)
-    {
-        var neighbors = GetNeighbors().ToList();
-        neighbors.Add(this);
-        var closest = neighbors.OrderBy(item => item.DistanceToTile(goal))
-            .Where(item => item.UnitHere() == null || item == this)
-            .First();
-        return closest;
-    }
 
     public TileLocation ClosestTileOwnedByPlayer()
     {

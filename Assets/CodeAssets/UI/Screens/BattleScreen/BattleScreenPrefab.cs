@@ -17,7 +17,7 @@ public class BattleScreenPrefab : MonoBehaviour
         PotentialBattleEntityAllySpots = PotentialBattleEntityAllySpots.Shuffle().ToList();
         for(int i = 0; i < StartingAllies.Count; i++)
         {
-            PotentialBattleEntityAllySpots[i].BattleUnitAttributesHolder
+            // todo
         }
     }
 }

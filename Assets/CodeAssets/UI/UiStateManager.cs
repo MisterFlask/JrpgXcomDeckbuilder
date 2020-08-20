@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Ricimi;
 
 public class UiStateManager : MonoBehaviour
 {
@@ -15,11 +14,11 @@ public class UiStateManager : MonoBehaviour
 
     private Dictionary<string, GameObject[]> StateToGameObjectAssociations = new Dictionary<string, GameObject[]>();
 
-    private Dictionary<string, Popup> StateToPopupAssociations = new Dictionary<string, Popup>();
+    //private Dictionary<string, Popup> StateToPopupAssociations = new Dictionary<string, Popup>();
 
     public GameObject DeckDisplayPopup;
     public GameObject SelectCardToAddPopup;
-    public Popup SelectCardsFromHandDisplayScreenPopup;
+    //public Popup SelectCardsFromHandDisplayScreenPopup;
 
     public CardModificationDisplayScreen ShowCardModifiedScreen;
     private Canvas m_canvas;
@@ -46,27 +45,6 @@ public class UiStateManager : MonoBehaviour
         }
     }
 
-    public GameObject OpenPopup(Popup popup)
-    {
-        return OpenPopup(popup.gameObject);
-    }
-
-    public virtual GameObject OpenPopup(GameObject popupPrefab)
-    {
-        var popup = Instantiate(popupPrefab) as GameObject;
-        popup.SetActive(true);
-        popup.transform.localScale = Vector3.zero;
-        popup.transform.SetParent(m_canvas.transform, false);
-        popup.GetComponent<Popup>().Open();
-
-        popup.AddComponent<OrderableUiElement>();
-        popup.GetComponent<OrderableUiElement>().Order = 1;
-
-        popup.GetComponent<Popup>().GetBackground().AddComponent<OrderableUiElement>();
-        popup.GetComponent<Popup>().GetBackground().GetComponent<OrderableUiElement>().Order = 2;
-        return popup;
-    }
-
     public void SwitchToCardModificationScreen(ShowingCardModificationMessage message)
     {
         SwitchToUiState(message);
@@ -81,15 +59,16 @@ public class UiStateManager : MonoBehaviour
         // 3:  Make visible the Confirm button, the Title of the action ("Discard a card"),
         // and the area where the user is allowed to drop the card.
 
-        var popupPrefab = OpenPopup(SelectCardsFromHandDisplayScreenPopup.gameObject);
-        var showDeckScreen = popupPrefab.GetComponent<SelectCardsFromHandDisplayScreen>();
+        //var popupPrefab = OpenPopup(SelectCardsFromHandDisplayScreenPopup.gameObject);
+        //var showDeckScreen = popupPrefab.GetComponent<SelectCardsFromHandDisplayScreen>();
 
-        showDeckScreen.Populate(title: state.Name, minNumberCardsToSelect: state.NumCardsToSelect);
+        //showDeckScreen.Populate(title: state.Name, minNumberCardsToSelect: state.NumCardsToSelect);
         ServiceLocator.GetUiCanvas().SortChildrenBasedOnSortableUiElements();
     }
 
     public void SwitchToUiState(UiStateMessage state)
     {
+        /*
         if (state is ShowingCardsMessage)
         {
             var specific = (ShowingCardsMessage)state;
@@ -117,6 +96,7 @@ public class UiStateManager : MonoBehaviour
             var cardModdedScreen = popupPrefab.GetComponent<CardModificationDisplayScreen>();
             cardModdedScreen.Populate(specific);
         }
+        */
     }
     
 }

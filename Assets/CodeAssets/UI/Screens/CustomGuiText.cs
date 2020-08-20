@@ -8,13 +8,13 @@ using TMPro;
 [RequireComponent(typeof(TMPro.TextMeshProUGUI))]
 public class CustomGuiText : MonoBehaviour
 {
-    TextMeshProUGUI text;
+    TextMeshProUGUI Text;
     public void Start()
     {
-        text = this.GetComponent<TextMeshProUGUI>();
+        Text = this.GetComponent<TextMeshProUGUI>();
     }
     public void SetText(string textWeWant)
     {
-        text.text = textWeWant;
+        Text.text = textWeWant;
     }
 }

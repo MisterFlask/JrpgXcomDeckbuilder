@@ -1,6 +1,5 @@
 ﻿
 using HyperCard;
-using LivelyTextGlyphs;
 using PathologicalGames;
 using System;
 using System.Collections.Generic;
@@ -170,21 +169,6 @@ public static class ExtensionMethods
     }
 
 
-    #region Observers
-    public static void RegisterAsMissionsChangedObserver(this Observer<List<Mission>> observer)
-    {
-        var gameState = ServiceLocator.GetGameStateTracker().GetComponent<GameState>();
-        gameState.MissionStateChangedObservers.Add(observer);
-    }
-
-    public static void RegisterAsSelectedMissionChangedObserver(this Observer<Mission> observer)
-    {
-        var gameState = ServiceLocator.GetGameStateTracker().GetComponent<GameState>();
-        gameState.MissionSelectedChangedObservers.Add(observer);
-    }
-
-    #endregion
-
     private static SpawnPool spawnPool = null;
 
     private static SpawnPool GetSpawnPool()
@@ -295,12 +279,9 @@ public static class ExtensionMethods
         items.AddRange(tempList);
     }
 
-    public static void SetText(this LTText item, string newText)
+    public static void SetText(this CustomGuiText item, string newText)
     {
-#pragma warning disable CS0618 // Type or member is obsolete
-        item.Text = (newText);
-#pragma warning restore CS0618 // Type or member is obsolete
-        item.ForceRebuild();
+        item.SetText(newText);
     }
 
     public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)

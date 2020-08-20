@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 using static UnityEngine.UI.Button;
 using System;
-using Ricimi;
 using System.Linq;
 
 public class SelectCardsFromHandDisplayScreen : MonoBehaviour

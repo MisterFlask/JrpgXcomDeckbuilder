@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using Ricimi;
 
 public class CardSelectScreen : MonoBehaviour
 {
@@ -26,7 +25,7 @@ public class CardSelectScreen : MonoBehaviour
             var cardClone = CardTemplate.gameObject.Spawn(CardGrid.transform);
             cardClone.gameObject.SetActive(true);
             CardTemplate.Initialize(card);
-            CardTemplate.CardSelectionScreen = this.GetComponent<Popup>();
+            // CardTemplate.CardSelectionScreen = this.GetComponent<Popup>();
             var display = cardClone.GetComponent<GameCardDisplay>();
             var hypercard = display.GameCard;
             hypercard.SetToAbstractCardAttributes(card);

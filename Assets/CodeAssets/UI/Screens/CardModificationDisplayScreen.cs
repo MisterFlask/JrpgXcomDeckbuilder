@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 using static UnityEngine.UI.Button;
 using System;
-using Ricimi;
 
 public class CardModificationDisplayScreen : MonoBehaviour
 {

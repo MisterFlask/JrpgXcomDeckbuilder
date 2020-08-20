@@ -17,6 +17,10 @@ public abstract class Mission
 
     }
 
+    public bool IsFailed()
+    {
+        return false;
+    }
     public void OnStartOfBattle()
     {
 

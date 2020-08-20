@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using LivelyTextGlyphs;
 
 public class ExplainerPanel : MonoBehaviour
 {
-    public LTText tooltipText;
+    public CustomGuiText tooltipText;
     // Use this for initialization
     void Start()
     {

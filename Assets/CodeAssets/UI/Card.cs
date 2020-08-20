@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TMPro;
-using LivelyTextGlyphs;
 using System.Collections.Generic;
 using System;
 
@@ -15,8 +14,8 @@ namespace HyperCard
         public TextMeshProUGUI cardTags;
         public GameObject MightDisplayTooltipParent;
         public GameObject OtherDisplayTooltipParent;
-        public LTText MightDisplayTooltipText;
-        public LTText OtherDisplayTooltipText;
+        public CustomGuiText MightDisplayTooltipText;
+        public CustomGuiText OtherDisplayTooltipText;
         public TextMeshProUGUI powerValueText;
         public TextMeshProUGUI toughnessValueText;
         public GameObject powerValuePrefab;
@@ -29,22 +28,6 @@ namespace HyperCard
         public void Start()
         {
             HideTooltips();
-        }
-
-        public void ShowMightTooltip(List<EffectiveMightComponent> mightComponents)
-        {
-            MightDisplayTooltipText.SetText(GetTextOfMightTooltip(mightComponents));
-            MightDisplayTooltipParent.SetActive(true);
-        }
-
-        public string GetTextOfMightTooltip(List<EffectiveMightComponent> mightComponents)
-        {
-            var desc = "";
-            foreach(var item in mightComponents)
-            {
-                desc += item.FormattedString() + "\n";
-            }
-            return desc;
         }
 
         public void ShowOtherTooltips(string s)

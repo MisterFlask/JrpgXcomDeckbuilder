@@ -101,22 +101,10 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 component.HandleOnMouseButtonUpEvent();
                 break;
             }
-            if (element.GetComponent<ProductionActionButton>() != null)
+
+            if (element.GetComponent<BattleUnitPrefab>() != null)
             {
-                Debug.Log("First UI element observed: " + element);
-                var component = element.GetComponent<ProductionActionButton>();
-                component.HandleOnMouseButtonUpEvent();
-                break;
-            }
-            var clickableTile = element.GetComponent<ClickableTile>();
-            if (clickableTile != null)
-            {
-                Debug.Log("Released over tile");
-                if (logicalCard.CanDeployToRegion(clickableTile.TileLocation))
-                {
-                    ServiceLocator.GetActionManager().DeployCardSelectedIfApplicable(this.GetComponent<Card>(), clickableTile.TileLocation);
-                }
-                break;
+                // todo: We should play the card on the thing.
             }
         }
 

@@ -13,15 +13,11 @@ public static class ServiceLocator
 
     private static GameLogic gameLogic;
 
-    private static TemplateHolder _templateHolder;
+    public static UtilityObjectHolder UtilityObjectHolder;
 
     private static TemplateHolder GetTemplateHolder()
     {
-        if (_templateHolder == null)
-        {
-            _templateHolder = GameObject.FindObjectOfType<TemplateHolder>();
-        }
-        return _templateHolder;
+        return UtilityObjectHolder.TemplateHolder;
     }
 
     public static TemplateHolder GameObjectTemplates()
@@ -29,56 +25,16 @@ public static class ServiceLocator
         return GetTemplateHolder();
     }
 
-
-    private static GameObject GetObjectFromCache(string item)
-    {
-        if (objectCache.ContainsKey(item))
-        {
-            return objectCache[item];
-        }
-        else
-        {
-            objectCache[item] = GameObject.Find(item);
-            return objectCache[item];
-        }
-    }
-
     private static Dictionary<Type, MonoBehaviour> typeToObjectDict = new Dictionary<Type, MonoBehaviour>();//todo
 
-    public static T GetSingletonObjectOfType<T>() where T : MonoBehaviour
-    {
-        var type = typeof(T);
-        if (typeToObjectDict.ContainsKey(type))
-        {
-            return typeToObjectDict[type].GetComponent<T>();
-        }
-
-        var objs = GameObject.FindObjectsOfType<T>();
-        if (objs.IsEmpty())
-        {
-            throw new Exception($"Cannot find object of type {typeof(T).Name}");
-        }
-        if (objs.Count() > 1)
-        {
-            throw new Exception($"Found MORE THAN ONE object of type {typeof(T).Name}");
-        }
-        typeToObjectDict[type] = objs.Single();
-        return objs.Single();
-    }
-    public static ExplainerPanel private_ExplainerPanel;
     public static ExplainerPanel TooltipPanel()
     {
-        return private_ExplainerPanel;
+        return UtilityObjectHolder.ExplainerPanel;
     }
 
-    static CardInstantiator cardInstantiator = null;
     public static CardInstantiator GetCardInstantiator()
     {
-        if (cardInstantiator == null)
-        {
-            cardInstantiator = GameObject.FindObjectOfType<CardInstantiator>();
-        }
-        return cardInstantiator;
+        return UtilityObjectHolder.CardInstantiator;
     }
 
     public static GameLogic GameLogic()
@@ -91,13 +47,9 @@ public static class ServiceLocator
     }
 
     #region UI
-    public static GameObject GetMissionDisplayPanel()
-    {
-        return GameObject.Find("MISSION_DISPLAY_PANEL");
-    }
     public static GameObject GetUiCanvas()
     {
-        return GameObject.Find("UI_CANVAS");
+        return UtilityObjectHolder.UiCanvas;
     }
 
     public static CameraController GetCamera()
@@ -105,58 +57,23 @@ public static class ServiceLocator
         return GameObject.Find("MAIN_CAMERA").GetComponent<CameraController>();
     }
 
-    public static GameObject GetMissionDisplayPanelTitle()
-    {
-        return GameObject.Find("MISSION_DISPLAY_PANEL");
-    }
-    public static GameObject GetMissionDisplayPanelContentPane()
-    {
-        return GameObject.Find("MISSION_DISPLAY_CONTENT_PANE");
-    }
-    private static SpawnPool spawnPool = null;
     public static SpawnPool GetSpawnPool()
     {
-        if (spawnPool == null)
-        {
-            spawnPool = GameObject.Find("SpawnPool").GetComponent<SpawnPool>();
-        }
-        return spawnPool;
+        return UtilityObjectHolder.SpawnPool;
     }
     public static ActionManager GetActionManager()
     {
-        return GetSingletonObjectOfType<ActionManager>();
+        return UtilityObjectHolder.ActionManager;
     }
 
-    public static TileMap GetTileMap()
-    {
-        return GetSingletonObjectOfType<TileMap>();
-    }
-
-
-    private static CardAnimationManager handManager = null;
     public static CardAnimationManager GetCardAnimationManager()
     {
-        if (handManager == null)
-        {
-            handManager = GetSingletonObjectOfType<CardAnimationManager>();
-        }
-        return handManager;
-    }
-
-    public static GameObject GetAllMissionsContentPanel()
-    {
-        return GameObject.Find("ALL_MISSIONS_CONTENT_PANE");
+        return UtilityObjectHolder.CardAnimationManager;
     }
 
     public static GameState GetGameStateTracker()
     {
-        return GameObject.Find("GAME_STATE_TRACKER").GetComponent<GameState>();
-    }
-
-
-    public static GameObject GetMissionObjectiveShortDescriptionTemplate()
-    {
-        return GameObject.Find("OBJECTIVE_TEMPLATE");
+        return UtilityObjectHolder.GameState;
     }
 
     public static UiStateManager GetUiStateManager()
@@ -164,19 +81,28 @@ public static class ServiceLocator
         return GameObject.FindObjectOfType<UiStateManager>();
     }
 
-    public static SpriteRenderer GetBlurryWhiteOutlineForHexes()
-    {
-        return GameObject.Find("BLURRY_WHITE_OUTLINE").GetComponent<SpriteRenderer>();
-    }
-
-    public static GameObject GetHandObject()
-    {
-        return GameObject.Find("Hand");
-    }
-
     public static Transform GetUnitFolder()
     {
         return GetTemplateHolder().UnitHolder.transform;
     }
     #endregion
+}
+
+public class UtilityObjectHolder: MonoBehaviour
+{
+    public void Start()
+    {
+        ServiceLocator.UtilityObjectHolder = this;
+    }
+
+    public GameObject CardHolder;
+    public GameState GameState;
+    public CardAnimationManager CardAnimationManager;
+    public ActionManager ActionManager;
+    public SpawnPool SpawnPool;
+    public GameObject UiCanvas;
+    public CardInstantiator CardInstantiator;
+    public ExplainerPanel ExplainerPanel;
+    public TemplateHolder TemplateHolder;
+
 }

@@ -26,9 +26,9 @@ public abstract class Mission
 
     }
 
-    public List<BattleEntity> StartingEnemies()
+    public List<AbstractBattleUnit> StartingEnemies()
     {
-        return new List<BattleEntity>();
+        return new List<AbstractBattleUnit>();
     }
 
     public int MaxNumberOfFriendlyCharacters { get; set; } = 4;

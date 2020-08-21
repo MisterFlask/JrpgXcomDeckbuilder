@@ -4,5 +4,5 @@ using System.Collections.Generic;
 
 public class PlayerParty
 {
-    List<BattleEntity> Characters { get; set; }
+    List<AbstractBattleUnit> Characters { get; set; }
 }

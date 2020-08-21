@@ -215,23 +215,18 @@ public static class ExtensionMethods
         ret += "}";
         return ret;
     }
-    public static void ChangeOutlineColor(this LogicalTile tile, Color color) {
-        // tile.HexPrefab.BlurryWhiteOutline.color = new Color(color.r, color.g, color.b, Constants.HEX_OUTLINE_ALPHA);
-    }
-
     public static void SetToAbstractCardAttributes(this Card hyperCard, AbstractCard abstractCard)
     {
         hyperCard.SetCardTitle(abstractCard.Name);
         hyperCard.SetCardDescription(BuildTextBoxStringForCard(abstractCard));
         hyperCard.SetCardTags(abstractCard.CardType.ToString());
         hyperCard.SetCardEnergyCost(abstractCard.EnergyCost());
-        hyperCard.SetPowerToughness(abstractCard);
         hyperCard.LogicalCard = abstractCard;
     }
 
     private static string BuildTextBoxStringForCard(AbstractCard abstractCard)
     {
-        return abstractCard.Description() + "\n <color=yellow>" + abstractCard.CreateCardTagDescriptorString() + "</color>";
+        return abstractCard.Description();
     }
 
     public static T Spawn<T>(this T item) where T: MonoBehaviour
@@ -242,32 +237,6 @@ public static class ExtensionMethods
     public static T Spawn<T>(this T item, Transform transform) where T : MonoBehaviour
     {
         return item.gameObject.Spawn(transform).GetComponent<T>();
-    }
-
-    private static TileLocation MoveBy(this TileLocation tileLocation, int x, int y)
-    {
-        return new TileLocation { X = x + tileLocation.X, Y = tileLocation.Y + y };
-    }
-
-    public static List<TileLocation> GetTilesOwnedByPlayer(this TileMap tileMap)
-    {
-        return tileMap.TilesByLocation.Where(item => item.Value.Owner != null && item.Value.Owner.IsPlayer).Select(item => item.Key).ToList();
-    }
-
-    public static List<LogicalTile> ToTiles(this IEnumerable<TileLocation> tileLocations)
-    {
-        var tilemap = ServiceLocator.GetTileMap();
-        return tileLocations.Select(item => tilemap.TilesByLocation[item]).ToList();
-    }
-
-    public static LogicalTile ToTile(this TileLocation tileLocation)
-    {
-        var tilemap = ServiceLocator.GetTileMap();
-        if (!tilemap.TilesByLocation.ContainsKey(tileLocation))
-        {
-            return null;
-        }
-        return tilemap.TilesByLocation[tileLocation];
     }
 
     public static void AddToFront<T>(this List<T> items, T item)

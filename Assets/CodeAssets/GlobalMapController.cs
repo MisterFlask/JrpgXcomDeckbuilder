@@ -4,15 +4,8 @@ using HyperCard;
 using static TacMapController;
 
 // Singleton, attached to TileMap
-public class TacMapController : MonoBehaviour, Observer<MouseReleasedOverTileLocationMessage>, Observer<CardSelectedMessage>
+public class TacMapController : MonoBehaviour
 {
-
-
-    public void Notify(MouseReleasedOverTileLocationMessage obj)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public void Notify(CardSelectedMessage obj)
     {
         throw new System.NotImplementedException();
@@ -31,12 +24,6 @@ public class TacMapController : MonoBehaviour, Observer<MouseReleasedOverTileLoc
 
         }
     }
-
-    public class MouseReleasedOverTileLocationMessage
-    {
-        public TileLocation TileLocation { get; set; }
-    }
-
     public class CardSelectedMessage
     {
         bool Deselected { get; set; } = false;

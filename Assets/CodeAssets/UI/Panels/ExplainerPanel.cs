@@ -8,7 +8,7 @@ public class ExplainerPanel : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        ServiceLocator.private_ExplainerPanel = this;
+        ServiceLocator.UtilityObjectHolder.ExplainerPanel = this;
     }
 
     // Update is called once per frame

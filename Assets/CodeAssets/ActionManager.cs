@@ -19,14 +19,12 @@ public class ActionManager : MonoBehaviour
 
     public List<DelayedAction> actionsQueue = new List<DelayedAction>();
 
-
     public void PromptPossibleUpgradeOfCard(AbstractCard beforeCard)
     {
         QueuedActions.ImmediateAction(() =>
         {
             var afterCard = beforeCard.CopyCard();
             afterCard.Upgrade();
-            var productionCost = beforeCard.ProductionCostForNextUpgrade();
             ServiceLocator.GetUiStateManager().SwitchToCardModificationScreen(new ShowingCardModificationMessage
             {
                 afterCard = afterCard,
@@ -36,35 +34,13 @@ public class ActionManager : MonoBehaviour
                 {
                     beforeCard.Upgrade(); 
                     ServiceLocator.GetCardAnimationManager().RefreshCardAppearance(beforeCard);
-                    this.ModifyCommerce(-1 * productionCost);
                 },
-                Name = "Modify card? Will cost you " + productionCost + $" production",
-                TitleMessage = "Modify card?  Will cost you " + productionCost + " production."
+                Name = "Modify card? ",
+                TitleMessage = "Modify card? "
             });
         });
     }
-    public void PromptPossibleTransformationOfCard(AbstractCard beforeCard)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-            var afterCard = beforeCard.GetTransformedCardOnProductionAction();
-            var productionCost = beforeCard.ProductionCostForNextUpgrade();
-            ServiceLocator.GetUiStateManager().SwitchToCardModificationScreen(new ShowingCardModificationMessage
-            {
-                afterCard= afterCard,
-                beforeCard= beforeCard,
-                CanCancel = true,
-                ThingToDoUponConfirmation = () =>
-                {
-                    this.PurgeCardFromDeck(beforeCard);
-                    this.AddCardToDeck(afterCard);
-                    this.ModifyCommerce(-1 * productionCost);
-                },
-                Name = "Modify card? Will cost you " + productionCost + $" production",
-                TitleMessage = "Modify card?  Will cost you " + productionCost + " production."
-             });
-        });
-    }
+
 
     public void UpgradeCard(AbstractCard card)
     {
@@ -75,31 +51,6 @@ public class ActionManager : MonoBehaviour
 
     }
 
-    public void PerformProductionActionOnCardSelectedIfPossible()
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            var cardSelected = ServiceLocator.GetGameStateTracker().GetCardSelected();
-            if (cardSelected == null)
-            {
-                return;
-            }
-            if (cardSelected.LogicalCard.GetApplicableProductionAction() == ProductionAction.TRANSFORM_CARD)
-            {
-                PromptPossibleTransformationOfCard(cardSelected.LogicalCard);
-            }
-
-            if (cardSelected.LogicalCard.GetApplicableProductionAction() == ProductionAction.UPGRADE_CARD)
-            {
-                PromptPossibleUpgradeOfCard(cardSelected.LogicalCard);
-            }
-            if (cardSelected.LogicalCard.GetApplicableProductionAction() == ProductionAction.NONE_ALLOWED)
-            {
-                return;
-            }
-        });
-    }
     public Image StabilityImage;
     public Image ProductionImage;
     public Image ScienceImage;
@@ -189,12 +140,14 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    public void DeployCardSelectedIfApplicable(Card card, TileLocation tileLocationSelected = null, QueueingType queueingType = QueueingType.TO_BACK
+    public void DeployCardSelectedIfApplicable(Card card, QueueingType queueingType = QueueingType.TO_BACK
         )
     {
         QueuedActions.ImmediateAction(() =>
         {
-            gameState.DeployCardSelectedIfApplicable(card, tileLocationSelected);
+#pragma warning disable CS0618 // Type or member is obsolete
+            gameState.DeployCardSelectedIfApplicable(card);
+#pragma warning restore CS0618 // Type or member is obsolete
         }, queueingType);
     }
 
@@ -262,6 +215,7 @@ public class ActionManager : MonoBehaviour
             animationHandler.PulseAndFlashElement(ArmageddonCounterImage);
         }, queueingType);
     }
+
     public void ModifyStability(int amount, QueueingType queueingType = QueueingType.TO_BACK)
     {
         QueuedActions.ImmediateAction(() =>
@@ -316,26 +270,6 @@ public class ActionManager : MonoBehaviour
         ModifyCoin(commerce);
     }
 
-    #region Purely Graphical Effects
-    public List<TileLocation> TilesHighlighted = new List<TileLocation>();
-
-
-    public void HighlightTiles(List<TileLocation> tiles)
-    {
-        TilesHighlighted.AddRange(tiles);
-        var logicalTiles = tiles.Select(item => item.ToTile());
-        foreach(var logicalTile in logicalTiles)
-        {
-            // logicalTile.HexPrefab.BlurryWhiteOutline.color = logicalTile.FuzzyOutlineProperties.BaseColor.WithAlpha(1.0f);
-        }
-    }
-
-    public void ClearHighlightingOnTiles()
-    {
-        // TilesHighlighted.ForEach(item => item.ToTile().HexPrefab.BlurryWhiteOutline.color = item.ToTile().FuzzyOutlineProperties.BaseColor);
-        TilesHighlighted.Clear();
-    }
-    #endregion
 
     /// <summary>
     /// Prompts the player to discard a card.
@@ -375,8 +309,7 @@ public class ActionManager : MonoBehaviour
     }
     #region RivalUnits
 
-    // TODO
-    public void CreateUnitAtBattleUnitHolder(AbstractRivalUnit unit, TileLocation tile, Faction faction)
+    public void CreateUnitAtBattleUnitHolder(AbstractBattleUnit unit)
     {
         /*
         var copyOfUnit = unit.Clone();
@@ -390,24 +323,25 @@ public class ActionManager : MonoBehaviour
         */
     }
 
-    public void DamageUnit(AbstractRivalUnit unit, int damage)
+    public void DamageUnit(AbstractBattleUnit unit, int damage)
     {
-        unit.Toughness -= damage;
-        if (unit.Toughness <= 0)
+        unit.CurrentHp -= damage;
+        if (unit.CurrentHp <= 0)
         {
             DestroyUnit(unit);
         }
 
     }
 
-    public void DestroyUnit(AbstractRivalUnit unit)
+    public void DestroyUnit(AbstractBattleUnit unit)
     {
         QueuedActions.ImmediateAction(() =>
         {
+            unit.CorrespondingPrefab.gameObject.Despawn();
         });
     }
 
-    public void ChangeUnit(AbstractRivalUnit unit, Action<AbstractRivalUnit> action)
+    public void ChangeUnit(AbstractBattleUnit unit, Action<AbstractBattleUnit> action)
     {
         QueuedActions.ImmediateAction(() =>
         {

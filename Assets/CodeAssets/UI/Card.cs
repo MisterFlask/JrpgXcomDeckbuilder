@@ -63,19 +63,6 @@ namespace HyperCard
         {
             this.SetToAbstractCardAttributes(LogicalCard);
         }
-
-        internal void SetPowerToughness(AbstractCard abstractCard)
-        {
-            if (!abstractCard.IsLegion())
-            {
-                powerValuePrefab.SetActive(false);
-                toughnessValuePrefab.SetActive(false);
-                return;
-            }
-
-            this.powerValueText.SetText(abstractCard.BasePower.ToString());
-            this.toughnessValueText.SetText(abstractCard.CurrentToughness.ToString());
-        }
     }
 
 }

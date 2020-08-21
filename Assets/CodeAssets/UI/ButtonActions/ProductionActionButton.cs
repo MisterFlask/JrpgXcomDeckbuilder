@@ -12,7 +12,6 @@ public class ProductionActionButton : MonoBehaviour
     public void HandleOnMouseButtonUpEvent()
     {
         Debug.Log("Mouse up event on Production Action Button");
-        ServiceLocator.GetActionManager().PerformProductionActionOnCardSelectedIfPossible();
     }
 
 
@@ -32,13 +31,5 @@ public class ProductionActionButton : MonoBehaviour
             return;
         }
         var action = card.LogicalCard.GetApplicableProductionAction();
-        if (action == ProductionAction.UPGRADE_CARD)
-        {
-            this.text.text = $"Upgrade Card [requires {card.LogicalCard.ProductionCostForNextUpgrade()}]";
-        }
-        else
-        {
-            this.text.text = "No Production Action";
-        }
     }
 }

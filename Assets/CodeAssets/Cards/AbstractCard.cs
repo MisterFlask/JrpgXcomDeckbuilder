@@ -11,8 +11,7 @@ public abstract class AbstractCard
 
     public int UpgradeQuantity { get; set; } = 0;
 
-    public List<CardTag> Tags { get; } = new List<CardTag>();
-
+    public TargetType TargetType { get; set; } = TargetType.NO_TARGET;
 
     public CardType CardType { get; set; }
 
@@ -35,22 +34,6 @@ public abstract class AbstractCard
         this.CardType = cardType ?? CardType.TechCard;
     }
 
-    // Only applicable to building cards
-    public virtual bool EligibleForConstructingOnProvince(TileLocation location)
-    {
-        return false;
-    }
-
-    public virtual int ProductionCostForNextUpgrade()
-    {
-        return 20 + UpgradeQuantity * 5;
-    }
-
-    public virtual void OnDeployToRegion(TileLocation tileLocation)
-    {
-
-    }
-
     public virtual int EnergyCost()
     {
         return 1;
@@ -61,21 +44,6 @@ public abstract class AbstractCard
         return "";
     }
 
-    public bool IsLegion()
-    {
-        return MaxToughness > 0;
-    }
-
-
-    public virtual IEnumerable<TileLocation> GetTileLocationsThatCanDeployTo()
-    {
-        return new List<TileLocation>();
-    }
-
-    public virtual bool CanDeployToRegion(TileLocation tileLocation)
-    {
-        return false;
-    }
 
     public virtual bool CanAfford()
     {
@@ -101,20 +69,9 @@ public abstract class AbstractCard
     {
 
     }
-    private void PerformDefaultCardPlayEffects()
-    {
-        PayCostsForCard();
-        if (ExhaustedCount > 0)
-        {
-            ExhaustedCount--;
-            return;
-        }
 
-
-    }
     public virtual void PlayCard()
     {
-        PerformDefaultCardPlayEffects();
         OnPlay();
     }
 
@@ -163,19 +120,6 @@ public abstract class AbstractCard
         return copy;
     }
 
-    public string CreateCardTagDescriptorString()
-    {
-        var str = string.Join("; ", this.Tags.Select(item => item.ToString()));
-        return str;
-    }
-
-    #region specific effects
-    /// <summary>
-    /// Playing a card with >0 of this causes nothing to happen except this goes down by 1.
-    /// </summary>
-    public int ExhaustedCount { get; set; }
-
-    #endregion
 
     public Card FindCorrespondingHypercard()
     {
@@ -199,4 +143,11 @@ public abstract class AbstractCard
 public enum Rarity
 {
     COMMON,UNCOMMON,RARE
+}
+
+public enum TargetType
+{
+    NO_TARGET,
+    ENEMY,
+    ALLY
 }

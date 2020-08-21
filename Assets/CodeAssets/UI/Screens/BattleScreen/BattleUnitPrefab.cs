@@ -4,14 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class BattleEntityPrefab:MonoBehaviour
+public class BattleUnitPrefab:MonoBehaviour
 {
     public Image EnemyImage;
     public BattleUnitAttributesHolder BattleUnitAttributesHolder;
 
-    public BattleEntity UnderlyingEntity { get; private set; }
+    public AbstractBattleUnit UnderlyingEntity { get; private set; }
 
-    public void Initialize(BattleEntity entity)
+    public void Initialize(AbstractBattleUnit entity)
     {
         UnderlyingEntity = entity;
     }
@@ -19,11 +19,11 @@ public class BattleEntityPrefab:MonoBehaviour
 
 public class BattleUnitAttributesHolder: MonoBehaviour
 {
-    public void AddBattleAttribute(BattleUnitAttribute attr)
+    public void AddBattleAttribute(AbstractBattleUnitAttribute attr)
     {
-
+        
     }
-    public void RemoveBattleAttribute(BattleUnitAttribute attr)
+    public void RemoveBattleAttribute(AbstractBattleUnitAttribute attr)
     {
 
     }

@@ -24,8 +24,6 @@ public class GameState : MonoBehaviour
         ScriptExecutionTracker.ScriptsFinishedExecuting.Add(nameof(GameState));
     }
     private List<Mission> Missions { get; set; } = new List<Mission>();
-    public List<Faction> Factions;
-
 
     public Text scienceResourceText;
 
@@ -67,24 +65,15 @@ public class GameState : MonoBehaviour
     }
 
     [Obsolete("Use Actionmanager instead")]
-    public void DeployCardSelectedIfApplicable(Card card, TileLocation tileLocationSelected = null)
+    public void DeployCardSelectedIfApplicable(Card card)
     {
         var cardSelected = card;
-        var cardWasDeployedWithoutLocation = tileLocationSelected == null;
         if (cardSelected != null)
         {
             var behavior = cardSelected.GetComponent<PlayerCard>().LogicalCard;
-            if (cardWasDeployedWithoutLocation && behavior.CanPlay())
+            if (behavior.CanPlay())
             {
                 behavior.PlayCard();
-                if (Deck.Hand.Contains(behavior))
-                {
-                    Deck.MoveCardToPile(behavior, CardPosition.DISCARD);
-                    ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(behavior);
-                }
-            }
-            if (!cardWasDeployedWithoutLocation && behavior.CanDeployToRegion(tileLocationSelected))
-            {
                 if (Deck.Hand.Contains(behavior))
                 {
                     Deck.MoveCardToPile(behavior, CardPosition.DISCARD);

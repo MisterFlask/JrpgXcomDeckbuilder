@@ -2,11 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public abstract class BattleUnitAttribute
+public abstract class AbstractBattleUnitAttribute
 {
     public bool Stackable { get; set; } = false;
     public int Stacks { get; set; } = 1;
-
     public string ImageString { get; set; } = ImageUtils.StockPlaceholderImage;
 
     public virtual void OnTurnStart()

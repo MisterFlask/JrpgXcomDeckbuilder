@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BattleEntity : MonoBehaviour
+public class AbstractBattleUnit
 {
     public string ImageString { get; set; } = ImageUtils.StockPlaceholderImage;
 
@@ -12,11 +12,7 @@ public class BattleEntity : MonoBehaviour
 
     public string Name { get; set; }
 
-    public List<BattleUnitAttribute> Attributes { get; set; }
+    public List<AbstractBattleUnitAttribute> Attributes { get; set; }
 
-    public void OnDeath()
-    {
-
-    }
-
+    public BattleUnitPrefab CorrespondingPrefab { get; set; }
 }

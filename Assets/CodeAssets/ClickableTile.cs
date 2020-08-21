@@ -5,13 +5,11 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using HyperCard;
 
-[RequireComponent(typeof(MissionPopupCreator))]
 public class ClickableTile : MonoBehaviour
 {
     public int X { get; set; }
     public int Y { get; set; }
 
-    public TileLocation TileLocation => new TileLocation { X = X, Y = Y };
     // Use this for initialization
     void Start()
     {

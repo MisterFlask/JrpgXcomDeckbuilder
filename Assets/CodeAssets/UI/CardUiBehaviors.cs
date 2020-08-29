@@ -108,17 +108,17 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
             {
                 if (logicalCard.TargetType == TargetType.ENEMY && battleUnitMousedOver.UnderlyingEntity.IsEnemy)
                 {
-                    logicalCard.PlayCard(battleUnitMousedOver.UnderlyingEntity);
+                    logicalCard.PlayCardFromHandIfAble(battleUnitMousedOver.UnderlyingEntity);
                 }
                 if (logicalCard.TargetType == TargetType.ALLY && battleUnitMousedOver.UnderlyingEntity.IsAlly)
                 {
-                    logicalCard.PlayCard(battleUnitMousedOver.UnderlyingEntity);
+                    logicalCard.PlayCardFromHandIfAble(battleUnitMousedOver.UnderlyingEntity);
                 }
             }
 
             if (element.GetComponent<CardPlayArea>() != null && logicalCard.TargetType ==TargetType.NO_TARGET_OR_SELF)
             {
-                logicalCard.PlayCard(null);
+                logicalCard.PlayCardFromHandIfAble(null);
             } 
 
         }

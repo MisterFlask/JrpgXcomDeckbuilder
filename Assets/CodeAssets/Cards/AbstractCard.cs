@@ -1,4 +1,5 @@
-﻿using HyperCard;
+﻿
+using HyperCard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ public abstract class AbstractCard
 
     public CardType CardType { get; set; }
 
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public string Id { get; set; } = Guid.NewGuid().ToString();
 
     public int Damage { get; set; } = 0;
 
@@ -39,7 +40,12 @@ public abstract class AbstractCard
     }
     public List<AbstractBattleUnit> allies()
     {
-        return ServiceLocator.GetGameStateTracker().PlayerCharactersInBattle;
+        return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle;
+    }
+
+    public GameState state()
+    {
+        return ServiceLocator.GetGameStateTracker();
     }
     #endregion
 
@@ -84,9 +90,21 @@ public abstract class AbstractCard
 
     }
 
-    public void PlayCard(AbstractBattleUnit target)
+    public void PlayCardFromHandIfAble(AbstractBattleUnit target)
     {
+        if (!CanPlay())
+        {
+            return;
+        }
         OnPlay(target);
+
+        state().energy -= this.EnergyCost();
+        
+        if (state().Deck.Hand.Contains(this))
+        {
+            state().Deck.MoveCardToPile(this, CardPosition.DISCARD);
+            ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(this, assumedToExistInHand: true);
+        }
     }
 
     public Card CreateHyperCard()
@@ -110,10 +128,6 @@ public abstract class AbstractCard
 
     }
 
-    public void PayCostsForCard()
-    {
-        ServiceLocator.GetActionManager().ModifyEnergy(-1 * this.EnergyCost(), ModifyType.ADD_VALUE);
-    }
 
     public ProductionAction GetApplicableProductionAction()
     {
@@ -130,7 +144,7 @@ public abstract class AbstractCard
     {
         var copy = (AbstractCard)this.MemberwiseClone();
         CopyCardInner(copy);
-        copy.Id = Guid.NewGuid();
+        copy.Id = Guid.NewGuid().ToString();
         return copy;
     }
 

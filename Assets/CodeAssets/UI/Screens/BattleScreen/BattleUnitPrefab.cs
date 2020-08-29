@@ -32,6 +32,12 @@ public class BattleUnitPrefab:MonoBehaviour
             this.gameObject.SetActive(true);
         }
     }
+
+    public void Update()
+    {
+        this.HealthText.SetText($"HP: {UnderlyingEntity.CurrentHp}/{UnderlyingEntity.MaxHp}");
+        this.FatigueText.SetText($"Fatigue: {UnderlyingEntity.CurrentFatigue}/{UnderlyingEntity.MaxFatigue}");
+    }
 }
 
 public class BattleUnitAttributesHolder: MonoBehaviour

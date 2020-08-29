@@ -64,12 +64,7 @@ public class GameState : MonoBehaviour
             var behavior = cardSelected.GetComponent<PlayerCard>().LogicalCard;
             if (behavior.CanPlay())
             {
-                behavior.PlayCard(null);
-                if (Deck.Hand.Contains(behavior))
-                {
-                    Deck.MoveCardToPile(behavior, CardPosition.DISCARD);
-                    ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(behavior);
-                }
+                behavior.PlayCardFromHandIfAble(null);
             }
         }
         else
@@ -83,22 +78,10 @@ public class GameState : MonoBehaviour
 
 
     public int coins { get; private set; } = 0;
-    public int energy { get; private set; } = 3;
-    public int maxEnergy { get; private set; } = 3;
+    public int energy { get; set; } = 3;
+    public int maxEnergy { get; set; } = 3;
 
 
-    public void modifyEnergy(int mod, ModifyType type)
-    {
-        if (type == ModifyType.ADD_VALUE)
-        {
-            energy += mod;
-        }
-        else
-        {
-            energy = mod;
-        }
-        UpdateResources();
-    }
 
     public void ModifyCoin(int mod)
     {
@@ -132,7 +115,7 @@ public class GameState : MonoBehaviour
     #region BATTLE SCREEN
 
     public List<AbstractBattleUnit> PersistentCharacterRoster { get; set; } = new List<AbstractBattleUnit>();
-    public List<AbstractBattleUnit> PlayerCharactersInBattle { get; set; } = new List<AbstractBattleUnit>();
+    public List<AbstractBattleUnit> AllyUnitsInBattle { get; set; } = new List<AbstractBattleUnit>();
     public List<AbstractBattleUnit> EnemyUnitsInBattle { get; set; } = new List<AbstractBattleUnit>();
 
     #endregion

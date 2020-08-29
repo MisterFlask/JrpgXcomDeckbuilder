@@ -13,7 +13,7 @@ public class BattleTurnEndActions
         actionManager.DiscardHand();
 
         ServiceLocator.GetGameStateTracker().BattleTurn++;
-        gameState.PlayerCharactersInBattle.ForEach(item => item.OnTurnStart());
+        gameState.AllyUnitsInBattle.ForEach(item => item.OnTurnStart());
         gameState.EnemyUnitsInBattle.ForEach(item => item.OnTurnStart());
 
         actionManager.DrawCards(5);

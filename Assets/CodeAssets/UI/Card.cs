@@ -22,6 +22,7 @@ namespace HyperCard
         public GameObject toughnessValuePrefab;
 
         public AbstractCard LogicalCard { get; set; }
+        public string LogicalCardId { get; set; }
 
         public bool IsMovedToSelectionArea { get; set; } = false;
 

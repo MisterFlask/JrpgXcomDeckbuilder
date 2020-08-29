@@ -8,7 +8,7 @@ public static class IntentTargeting
 {
     public static AbstractBattleUnit GetRandomPlayerUnit()
     {
-        return ServiceLocator.GetGameStateTracker().PlayerCharactersInBattle.PickRandomWhere(item => !item.IsDead);
+        return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle.PickRandomWhere(item => !item.IsDead);
     }
 
     public static List<AbstractBattleUnit> GetEnemyUnitsOfType<T>() where T : AbstractBattleUnit

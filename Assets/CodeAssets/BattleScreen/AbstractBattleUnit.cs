@@ -12,6 +12,8 @@ public abstract class AbstractBattleUnit
     public bool IsDead => CurrentHp == 0;
 
     public int CurrentHp { get; set; }
+    public int CurrentFatigue { get; set; } = 4;
+    public int MaxFatigue { get; set; } = 4;
 
     public string Name { get; set; }
 
@@ -44,6 +46,15 @@ public abstract class AbstractBattleUnit
                 CurrentIntent.Execute();
             }
             CurrentIntent = GetNextIntent();
+        }
+    }
+
+    public void InitForBattle()
+    {
+        this.CurrentFatigue = MaxFatigue;
+        if (IsEnemy)
+        {
+            this.CurrentHp = MaxHp;
         }
     }
 }

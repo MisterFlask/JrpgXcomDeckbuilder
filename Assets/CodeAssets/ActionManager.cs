@@ -142,18 +142,6 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-
-    public void PlayCardForCost(Card card, Action invocation, QueueingType queueingType = QueueingType.TO_BACK)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            card.LogicalCard.PayCostsForCard();
-            invocation.Invoke();
-            ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(card.LogicalCard);
-        }, queueingType);
-    }
-
     public void DeployCardSelectedIfApplicable(Card card, QueueingType queueingType = QueueingType.TO_BACK
         )
     {
@@ -172,7 +160,7 @@ public class ActionManager : MonoBehaviour
         {
 
             gameState.Deck.MoveCardToPile(protoCard, CardPosition.DISCARD);
-            ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(protoCard);
+            ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(protoCard, assumedToExistInHand: false);
         }, queueingType);
     }
 
@@ -181,9 +169,10 @@ public class ActionManager : MonoBehaviour
         QueuedActions.ImmediateAction(() =>
         {
             gameState.Deck.MoveCardToPile(protoCard, CardPosition.EXPENDED);
-            ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(protoCard);
+            ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(protoCard, assumedToExistInHand: false);
         }, queueingType);
     }
+
     public void DiscardHand()
     {
         QueuedActions.ImmediateAction(() =>
@@ -195,19 +184,6 @@ public class ActionManager : MonoBehaviour
                 DiscardCard(card);
             }
         });
-    }
-
-    internal void ModifyEnergy(int v, ModifyType type = ModifyType.SET, QueueingType queueingType = QueueingType.TO_BACK)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            if (v == 0)
-            {
-                return;
-            }
-            gameState.modifyEnergy(v, type);
-        }, queueingType);
     }
 
     public void ModifyCoin(int amount, QueueingType queueingType = QueueingType.TO_BACK)

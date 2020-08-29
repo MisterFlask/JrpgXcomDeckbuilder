@@ -199,10 +199,11 @@ public class CardAnimationManager : MonoBehaviour
     }
 
     public void MoveCardToDiscardPile
-        (AbstractCard abstractCard)
+        (AbstractCard abstractCard, bool assumedToExistInHand)
     {
-        try { 
-            var hypercard = this.cardsInHand.Single(item => item.GetComponent<PlayerCard>().LogicalCard.Id == abstractCard.Id);
+        try {
+            var logicalCardsInHand = this.cardsInHand.Select(item => item.LogicalCard).ToList();
+            var hypercard = this.cardsInHand.Single(item => item.LogicalCard.Id == abstractCard.Id);
             if (cardsInHand.Contains(hypercard))
             {
                 //hypercard.GetComponent<CardMovementBehaviors>().DissolveAndDestroyCard();
@@ -217,7 +218,10 @@ public class CardAnimationManager : MonoBehaviour
         }
         catch (InvalidOperationException e)
         {
-            Debug.LogError($"Failed to move card {abstractCard.Name} because there exists two in hand with the same ID.");
+            if (assumedToExistInHand)
+            {
+                Debug.LogError($"Failed to move card {abstractCard.Name} because {e.Message}");
+            }
         }
     }
 

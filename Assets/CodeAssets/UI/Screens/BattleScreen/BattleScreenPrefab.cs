@@ -47,7 +47,7 @@ public class BattleScreenPrefab : MonoBehaviour
         /// TODO:  Remove after getting strategic map up and running
 
         state.EnemyUnitsInBattle.Add(new BasicEnemyUnit());
-        state.PlayerCharactersInBattle.Add(new BasicAllyUnit());
+        state.AllyUnitsInBattle.Add(new BasicAllyUnit());
 
         state.Deck.AddNewCardToDeck(new Grenade());
         state.Deck.AddNewCardToDeck(new Grenade());
@@ -60,10 +60,13 @@ public class BattleScreenPrefab : MonoBehaviour
         action.DrawCards(5);
 
         /// END TODO
-        Setup(ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle, ServiceLocator.GetGameStateTracker().PlayerCharactersInBattle);
+        Setup(ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle, ServiceLocator.GetGameStateTracker().AllyUnitsInBattle);
 
         PotentialBattleEntityAllySpots.ForEach(item => item.HideOrShowAsAppropriate());
         PotentialBattleEntityEnemySpots.ForEach(item => item.HideOrShowAsAppropriate());
+
+        state.EnemyUnitsInBattle.ForEach(item => item.InitForBattle());
+        state.AllyUnitsInBattle.ForEach(item => item.InitForBattle());
 
         BattleStarter.StartBattle(this);
     }

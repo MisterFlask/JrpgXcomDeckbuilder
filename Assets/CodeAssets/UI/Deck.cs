@@ -21,7 +21,7 @@ public class Deck
     public List<AbstractCard> Hand { get; set; } = new List<AbstractCard>();
 
 
-    public CardPosition GetCardPosition(Guid cardId)
+    public CardPosition GetCardPosition(string cardId)
     {
         if (Hand.Where(item => item.Id == cardId).Any())
         {
@@ -43,7 +43,7 @@ public class Deck
         return CardPosition.EXPENDED;
     }
 
-    public CardPosition PurgeCardFromDeck(Guid id)
+    public CardPosition PurgeCardFromDeck(string id)
     {
         if (!PersistentDeckList.Where(i => i.Id == id).Any())
         {

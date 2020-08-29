@@ -14,18 +14,9 @@ public class GameStarter : TopoMonobehavior
         Dependencies.Add(nameof(GameState));
     }
 
-    public void StartGame()
-    {
-        ServiceLocator.GetGameStateTracker().Deck = new Deck();
-        var actionManager = ServiceLocator.GetActionManager();
-
-        ServiceLocator.GetActionManager().EndTurn();
-    }
-
 
     public override void Initialize()
     {
-        StartGame();
     }
 
     public override void InnerStart()

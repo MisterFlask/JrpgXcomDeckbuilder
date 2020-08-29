@@ -5,23 +5,25 @@ using System.Linq;
 
 public abstract class AbstractCard
 {
+    public Guid OwnerGuid;
+
+    public AbstractBattleUnit Owner => ServiceLocator.GetGameStateTracker().PersistentCharacterRoster.First(item => item.Guid == OwnerGuid.ToString());
+
     public string Name { get; set; } = "Name";
 
     public Rarity Rarity { get; set; } = Rarity.COMMON;
 
     public int UpgradeQuantity { get; set; } = 0;
 
-    public TargetType TargetType { get; set; } = TargetType.NO_TARGET;
+    public TargetType TargetType { get; set; } = TargetType.NO_TARGET_OR_SELF;
 
     public CardType CardType { get; set; }
 
     public Guid Id { get; set; } = Guid.NewGuid();
 
-    public int BasePower { get; set; } = 0;
+    public int Damage { get; set; } = 0;
 
-    public virtual int Power => BasePower;
 
-    public int MaxToughness { get; set; } = 0; // This being >1 means the card's a Legion.
 
     public int CurrentToughness { get; set; } = 0;
 
@@ -135,7 +137,6 @@ public abstract class AbstractCard
     {
         // does postprocessing work
 
-        this.CurrentToughness = MaxToughness;
     }
 
 }
@@ -147,7 +148,7 @@ public enum Rarity
 
 public enum TargetType
 {
-    NO_TARGET,
+    NO_TARGET_OR_SELF,
     ENEMY,
     ALLY
 }

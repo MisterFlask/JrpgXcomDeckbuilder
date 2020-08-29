@@ -25,19 +25,10 @@ public class GameState : MonoBehaviour
     }
     private List<Mission> Missions { get; set; } = new List<Mission>();
 
-    public Text scienceResourceText;
-
     public Text coinResourceText;
-    public Text armageddonCounterText;
-
-    public Text stabilityResourceText;
-
-    public Text discardResourceText;
-    public Text drawPileResourceText;
-
     public Text energyResourceText;
 
-    public int Turn { get; set; }
+    public int BattleTurn { get; set; }
     public Deck Deck { get; set; } = new Deck();
 
     #region ui_handling
@@ -88,29 +79,13 @@ public class GameState : MonoBehaviour
     }
     #endregion
 
-    #region regions
-    #endregion
-
     #region resources
 
 
     public int coins { get; private set; } = 0;
-    public int armageddonCounter { get; private set; } = 0;
-    public int stability { get; private set; } = 10;
-
     public int energy { get; private set; } = 3;
     public int maxEnergy { get; private set; } = 3;
 
-    public void modifyStability(int mod)
-    {
-        stability += mod;
-        UpdateResources();
-    }
-    public void modifyArmageddonCounter(int mod)
-    {
-        armageddonCounter += mod;
-        UpdateResources();
-    }
 
     public void modifyEnergy(int mod, ModifyType type)
     {
@@ -136,13 +111,7 @@ public class GameState : MonoBehaviour
     public void UpdateResources()
     {
         this.coinResourceText.text = coins.ToString();
-        this.stabilityResourceText.text = stability.ToString();
-        this.armageddonCounterText.text = armageddonCounter.ToString();
-
-        this.discardResourceText.text = Deck.DiscardPile.Count.ToString();
-        this.drawPileResourceText.text = Deck.DrawPile.Count.ToString();
         this.energyResourceText.text = $"{energy}/{maxEnergy}";
-
     }
 
     public void AddMission (Mission mission)
@@ -159,4 +128,12 @@ public class GameState : MonoBehaviour
     {
         this.UpdateResources();
     }
+
+    #region BATTLE SCREEN
+
+    public List<AbstractBattleUnit> PersistentCharacterRoster { get; set; } = new List<AbstractBattleUnit>();
+    public List<AbstractBattleUnit> PlayerCharactersInBattle { get; set; } = new List<AbstractBattleUnit>();
+    public List<AbstractBattleUnit> EnemyUnitsInBattle { get; set; } = new List<AbstractBattleUnit>();
+
+    #endregion
 }

@@ -6,7 +6,7 @@ public abstract class AbstractBattleUnitAttribute
 {
     public bool Stackable { get; set; } = false;
     public int Stacks { get; set; } = 1;
-    public string ImageString { get; set; } = ImageUtils.StockPlaceholderImage;
+    public string ImageString { get; set; } = ImageUtils.MeepleImagePath;
 
     public virtual void OnTurnStart()
     {
@@ -26,4 +26,6 @@ public abstract class AbstractBattleUnitAttribute
     {
         return 0;
     }
+
+    public BattleUnitAttributePrefab CorrespondingPrefab { get; set; }
 }

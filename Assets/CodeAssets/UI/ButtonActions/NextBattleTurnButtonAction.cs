@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NextTurnButtonAction : MonoBehaviour
+public class NextBattleTurnButtonAction : MonoBehaviour
 {
 
     // Use this for initialization
@@ -16,9 +16,9 @@ public class NextTurnButtonAction : MonoBehaviour
 
     }
 
-    public void NextTurnButtonClicked()
+    public void NextBattleTurnButtonClicked()
     {
-        ServiceLocator.GetActionManager().EndTurn();
+        ServiceLocator.GetActionManager().EndBattleTurn();
     }
 
 }

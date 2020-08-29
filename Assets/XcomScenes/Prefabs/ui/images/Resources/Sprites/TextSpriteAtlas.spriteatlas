@@ -30,7 +30,6 @@ SpriteAtlas:
       enableTightPacking: 1
     variantMultiplier: 1
     packables:
-    - {fileID: 2800000, guid: 128f0054dc1de5b4695864e5aae0805b, type: 3}
     - {fileID: 2800000, guid: 1157fe8c2893b0d48b37d67884d05220, type: 3}
     - {fileID: 2800000, guid: 3d17f298c64d5334db94c86d53c47ad6, type: 3}
     - {fileID: 2800000, guid: fcce99276f6453747889ca9923ff0f45, type: 3}
@@ -40,7 +39,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 4cebd7ea98e113c4899967ee15a29ead, type: 3}
     - {fileID: 2800000, guid: 0268df5f8a033e94ebb4a57e0d7aea07, type: 3}
     - {fileID: 2800000, guid: 53f96d19022920d4cba4b86103a870d1, type: 3}
-    totalSpriteSurfaceArea: 10485760
+    totalSpriteSurfaceArea: 9437184
     bindAsDefault: 1
     storedHash:
       serializedVersion: 2
@@ -48,7 +47,6 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: a22be0f1fdecb704d9775ce0d6b10a75, type: 3}
-  - {fileID: 21300000, guid: 128f0054dc1de5b4695864e5aae0805b, type: 3}
   - {fileID: 21300000, guid: fcce99276f6453747889ca9923ff0f45, type: 3}
   - {fileID: 21300000, guid: 0c130847f829d5a4d902444a8f6b70d9, type: 3}
   - {fileID: 21300000, guid: 3d17f298c64d5334db94c86d53c47ad6, type: 3}
@@ -59,7 +57,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0268df5f8a033e94ebb4a57e0d7aea07, type: 3}
   m_PackedSpriteNamesToIndex:
   - caesar
-  - stone-tower
   - erlenmeyer
   - bread
   - crown-coin

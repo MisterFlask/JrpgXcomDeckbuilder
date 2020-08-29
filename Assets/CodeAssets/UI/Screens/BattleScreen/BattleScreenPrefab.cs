@@ -5,6 +5,8 @@ using System.Linq;
 
 public class BattleScreenPrefab : MonoBehaviour
 {
+    private GameState state => ServiceLocator.GetGameStateTracker();
+
     public List<BattleUnitPrefab> PotentialBattleEntityEnemySpots;
     public List<BattleUnitPrefab> PotentialBattleEntityAllySpots;
 
@@ -18,7 +20,6 @@ public class BattleScreenPrefab : MonoBehaviour
         if (StartingEnemies.Count > PotentialBattleEntityEnemySpots.Count)
         {
             throw new System.Exception("Too many enemies for availabel number of spots");
-
         }
         PotentialBattleEntityEnemySpots = PotentialBattleEntityEnemySpots.Shuffle().ToList();
         PotentialBattleEntityAllySpots = PotentialBattleEntityAllySpots.Shuffle().ToList();
@@ -30,5 +31,18 @@ public class BattleScreenPrefab : MonoBehaviour
         {
             PotentialBattleEntityEnemySpots[i].Initialize(StartingEnemies[i]);
         }
+    }
+
+    public void Start()
+    {
+        GameObject.FindObjectOfType<UtilityObjectHolder>().Start();
+        /// TODO:  Remove after getting strategic map up and running
+
+        state.EnemyUnitsInBattle.Add(new BasicEnemyUnit());
+        state.PlayerCharactersInBattle.Add(new BasicAllyUnit());
+
+        /// END TODO
+        Setup(ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle, ServiceLocator.GetGameStateTracker().PlayerCharactersInBattle);
+        BattleStarter.StartBattle(this);
     }
 }

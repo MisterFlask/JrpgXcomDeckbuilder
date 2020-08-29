@@ -8,4 +8,7 @@ public class TemplateHolder : MonoBehaviour
     public GameObject UnitHolder;
 
     public BattleUnitAttributePrefab BattleUnitAttributePrefab;
+
+    public IntentPrefab AttackPrefab;
+    public IntentPrefab DefendPrefab;
 }

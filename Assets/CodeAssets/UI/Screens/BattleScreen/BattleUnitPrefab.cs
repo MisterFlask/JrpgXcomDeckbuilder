@@ -6,13 +6,18 @@ using UnityEngine.UI;
 
 public class BattleUnitPrefab:MonoBehaviour
 {
-    public Image EnemyImage;
+    public Image SpriteImage;
     public BattleUnitAttributesHolder BattleUnitAttributesHolder;
+    public CustomGuiText FatigueText;
+    public CustomGuiText HealthText;
 
     public AbstractBattleUnit UnderlyingEntity { get; private set; }
 
     public void Initialize(AbstractBattleUnit entity)
     {
+        var img = entity.ProtoSprite.ToGameSpriteImage();
+        SpriteImage.sprite = img.Sprite;
+        SpriteImage.color = img.Color;
         UnderlyingEntity = entity;
     }
 }

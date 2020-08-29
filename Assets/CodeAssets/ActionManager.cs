@@ -41,6 +41,11 @@ public class ActionManager : MonoBehaviour
         });
     }
 
+    public void DoAThing(Action action)
+    {
+        QueuedActions.ImmediateAction(action);
+    }
+
 
     public void UpgradeCard(AbstractCard card)
     {
@@ -100,6 +105,15 @@ public class ActionManager : MonoBehaviour
         gameState = ServiceLocator.GetGameStateTracker();
         gameObject.AddComponent<UiAnimationHandler>();
         animationHandler = this.GetComponent<UiAnimationHandler>();
+    }
+
+    public void ApplyDefense(AbstractBattleUnit unit, int amountOfDefense)
+    {
+        var cardsThatCanBeSelected = ServiceLocator.GameLogic().GetSelectableCardsFromScience();
+        QueuedActions.ImmediateAction(() =>
+        {
+            // todo;
+        });
     }
 
     public void PromptCardReward()
@@ -188,20 +202,6 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-
-    public void ModifyArmageddonCounter(int amount, QueueingType queueingType = QueueingType.TO_BACK)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            if (amount == 0)
-            {
-                return;
-            }
-            gameState.modifyArmageddonCounter(amount);
-            animationHandler.PulseAndFlashElement(ArmageddonCounterImage);
-        }, queueingType);
-    }
     public void ModifyCoin(int amount, QueueingType queueingType = QueueingType.TO_BACK)
     {
         QueuedActions.ImmediateAction(() =>
@@ -216,19 +216,6 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    public void ModifyStability(int amount, QueueingType queueingType = QueueingType.TO_BACK)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            if (amount == 0)
-            {
-                return;
-            }
-            gameState.modifyStability(amount);
-            animationHandler.PulseAndFlashElement(StabilityImage);
-        }, queueingType);
-    }
 
     public void ModifyCard(AbstractCard card, Action<AbstractCard> actionToPerform, QueueingType queueingType = QueueingType.TO_BACK)
     {
@@ -250,8 +237,8 @@ public class ActionManager : MonoBehaviour
     }
 
 
-    TurnEndActions turnEndActions = new TurnEndActions();
-    public void EndTurn()
+    BattleTurnEndActions turnEndActions = new BattleTurnEndActions();
+    public void EndBattleTurn()
     {
         QueuedActions.ImmediateAction(() =>
         {

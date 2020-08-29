@@ -87,22 +87,3 @@ public static class ServiceLocator
     }
     #endregion
 }
-
-public class UtilityObjectHolder: MonoBehaviour
-{
-    public void Start()
-    {
-        ServiceLocator.UtilityObjectHolder = this;
-    }
-
-    public GameObject CardHolder;
-    public GameState GameState;
-    public CardAnimationManager CardAnimationManager;
-    public ActionManager ActionManager;
-    public SpawnPool SpawnPool;
-    public GameObject UiCanvas;
-    public CardInstantiator CardInstantiator;
-    public ExplainerPanel ExplainerPanel;
-    public TemplateHolder TemplateHolder;
-
-}

@@ -101,11 +101,26 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 component.HandleOnMouseButtonUpEvent();
                 break;
             }
-
-            if (element.GetComponent<BattleUnitPrefab>() != null)
+            var battleUnitMousedOver = element.GetComponent<BattleUnitPrefab>();
+            if (battleUnitMousedOver != null 
+                && battleUnitMousedOver.UnderlyingEntity != null 
+                && logicalCard.TargetType != TargetType.NO_TARGET_OR_SELF)
             {
-                // todo: We should play the card on the thing.
+                if (logicalCard.TargetType == TargetType.ENEMY && battleUnitMousedOver.UnderlyingEntity.IsEnemy)
+                {
+                    logicalCard.PlayCard(battleUnitMousedOver.UnderlyingEntity);
+                }
+                if (logicalCard.TargetType == TargetType.ALLY && battleUnitMousedOver.UnderlyingEntity.IsAlly)
+                {
+                    logicalCard.PlayCard(battleUnitMousedOver.UnderlyingEntity);
+                }
             }
+
+            if (element.GetComponent<CardPlayArea>() != null && logicalCard.TargetType ==TargetType.NO_TARGET_OR_SELF)
+            {
+                logicalCard.PlayCard(null);
+            } 
+
         }
 
         ServiceLocator.GetGameStateTracker().UnselectCard();

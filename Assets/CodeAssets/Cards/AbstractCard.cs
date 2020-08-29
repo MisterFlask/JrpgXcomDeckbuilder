@@ -158,9 +158,9 @@ public enum Rarity
     COMMON,UNCOMMON,RARE
 }
 
-public enum TargetType
+public class TargetType
 {
-    NO_TARGET_OR_SELF,
-    ENEMY,
-    ALLY
+    public static TargetType NO_TARGET_OR_SELF = new TargetType();
+    public static TargetType ENEMY = new TargetType();
+    public static TargetType ALLY = new TargetType();
 }

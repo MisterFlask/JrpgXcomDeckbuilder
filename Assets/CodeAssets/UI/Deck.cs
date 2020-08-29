@@ -37,10 +37,10 @@ public class Deck
         }
         if (PurgedPile.Where(item => item.Id == cardId).Any())
         {
-            return CardPosition.PURGED;
+            return CardPosition.EXPENDED;
         }
         Debug.Log($"Could not find card {cardId}; returning Purged");
-        return CardPosition.PURGED;
+        return CardPosition.EXPENDED;
     }
 
     public CardPosition PurgeCardFromDeck(Guid id)
@@ -99,7 +99,7 @@ public class Deck
         {
             return Hand;
         }
-        if (position == CardPosition.PURGED)
+        if (position == CardPosition.EXPENDED)
         {
             return PurgedPile;
         }
@@ -182,5 +182,5 @@ public enum CardPosition
     HAND,
     DRAW,
     DISCARD,
-    PURGED
+    EXPENDED
 }

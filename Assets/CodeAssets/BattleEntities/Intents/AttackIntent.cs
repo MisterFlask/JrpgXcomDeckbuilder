@@ -30,6 +30,6 @@ public class AttackIntent : Intent
     public override void Execute()
     {
         for(int i = 0; i < NumberOfTimesStruck; i++)
-        action.DamageUnit(Target, Damage);
+        action.AttackUnitForDamage(Target, Damage);
     }
 }

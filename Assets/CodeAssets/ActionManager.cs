@@ -176,6 +176,14 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
+    public void ExpendCard(AbstractCard protoCard, QueueingType queueingType = QueueingType.TO_BACK)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            gameState.Deck.MoveCardToPile(protoCard, CardPosition.EXPENDED);
+            ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(protoCard);
+        }, queueingType);
+    }
     public void DiscardHand()
     {
         QueuedActions.ImmediateAction(() =>
@@ -310,7 +318,7 @@ public class ActionManager : MonoBehaviour
         */
     }
 
-    public void DamageUnit(AbstractBattleUnit unit, int damage)
+    public void AttackUnitForDamage(AbstractBattleUnit unit, int damage)
     {
         unit.CurrentHp -= damage;
         if (unit.CurrentHp <= 0)

@@ -20,6 +20,18 @@ public class BattleUnitPrefab:MonoBehaviour
         SpriteImage.color = img.Color;
         UnderlyingEntity = entity;
     }
+
+    public void HideOrShowAsAppropriate()
+    {
+        if (UnderlyingEntity == null)
+        {
+            this.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.gameObject.SetActive(true);
+        }
+    }
 }
 
 public class BattleUnitAttributesHolder: MonoBehaviour

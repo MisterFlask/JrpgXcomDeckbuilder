@@ -11,10 +11,11 @@ public class BattleTurnEndActions
     internal void EndTurn()
     {
         actionManager.DiscardHand();
-        actionManager.DrawCards(5);
 
         ServiceLocator.GetGameStateTracker().BattleTurn++;
         gameState.PlayerCharactersInBattle.ForEach(item => item.OnTurnStart());
         gameState.EnemyUnitsInBattle.ForEach(item => item.OnTurnStart());
+
+        actionManager.DrawCards(5);
     }
 }

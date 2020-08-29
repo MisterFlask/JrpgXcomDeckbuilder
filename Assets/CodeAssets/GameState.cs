@@ -64,7 +64,7 @@ public class GameState : MonoBehaviour
             var behavior = cardSelected.GetComponent<PlayerCard>().LogicalCard;
             if (behavior.CanPlay())
             {
-                behavior.PlayCard();
+                behavior.PlayCard(null);
                 if (Deck.Hand.Contains(behavior))
                 {
                     Deck.MoveCardToPile(behavior, CardPosition.DISCARD);

@@ -27,10 +27,22 @@ public abstract class AbstractCard
 
     public int CurrentToughness { get; set; } = 0;
 
+    #region convenience functions
     public ActionManager action()
     {
         return ServiceLocator.GetActionManager();
     }
+
+    public List<AbstractBattleUnit> enemies()
+    {
+        return ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle;
+    }
+    public List<AbstractBattleUnit> allies()
+    {
+        return ServiceLocator.GetGameStateTracker().PlayerCharactersInBattle;
+    }
+    #endregion
+
     public AbstractCard(CardType cardType = null)
     {
         this.CardType = cardType ?? CardType.TechCard;
@@ -62,7 +74,7 @@ public abstract class AbstractCard
         
     }
 
-    protected virtual void OnPlay()
+    protected virtual void OnPlay(AbstractBattleUnit target)
     {
 
     }
@@ -72,9 +84,9 @@ public abstract class AbstractCard
 
     }
 
-    public virtual void PlayCard()
+    public void PlayCard(AbstractBattleUnit target)
     {
-        OnPlay();
+        OnPlay(target);
     }
 
     public Card CreateHyperCard()

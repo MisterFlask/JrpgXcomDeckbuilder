@@ -18,14 +18,16 @@ public class BattleUnitAttributesHolder : MonoBehaviour
             return;
         }
 
+        this.PurgeChildrenIf<BattleUnitAttributePrefab>(item => item.CorrespondingAttribute == null);
+
         var children = GetComponentsInChildren<BattleUnitAttributePrefab>().ToList();
-        var displayedAttributes = children.Select(item => item.CorrespondingAttribute);
+        var displayedAttributes = children.Select(item => item.CorrespondingAttribute).WhereNotNull();
         var currentAttributes = BattleUnit.Attributes;
         foreach(var attr in currentAttributes)
         {
             if (!displayedAttributes.Any(item => item.GetType() == attr.GetType())){
                 var newPrefab = AttributePrefabTemplate.Spawn(this.transform);
-                newPrefab.Initialize(attr);
+                newPrefab.Initialize(attr, this);
             }
 
             if (attr.Stacks <= 0 && attr.CorrespondingPrefab != null)

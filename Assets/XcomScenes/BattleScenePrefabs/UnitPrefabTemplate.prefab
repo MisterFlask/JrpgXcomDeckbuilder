@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteImage: {fileID: 844406128028859788}
-  BattleUnitAttributesHolder: {fileID: 0}
+  BattleUnitAttributesHolder: {fileID: 4084909274029756658}
   FatigueText: {fileID: 2991069020417319944}
   HealthText: {fileID: 7428136347720741907}
 --- !u!114 &8148492676870065089
@@ -461,6 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91834562d7c593c43afae21b24e01a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Text: {fileID: 209227852452787601}
 --- !u!1 &3074409870544638942
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91834562d7c593c43afae21b24e01a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Text: {fileID: 8918605002930172096}
 --- !u!1 &8582311966098358368
 GameObject:
   m_ObjectHideFlags: 0

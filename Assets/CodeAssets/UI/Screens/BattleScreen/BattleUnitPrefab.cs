@@ -38,6 +38,10 @@ public class BattleUnitPrefab:MonoBehaviour
 
     public void Update()
     {
+        if (UnderlyingEntity == null)
+        {
+            return;
+        }
         this.HealthText.SetText($"HP: {UnderlyingEntity.CurrentHp}/{UnderlyingEntity.MaxHp}");
         this.FatigueText.SetText($"Fatigue: {UnderlyingEntity.CurrentFatigue}/{UnderlyingEntity.MaxFatigue}");
     }

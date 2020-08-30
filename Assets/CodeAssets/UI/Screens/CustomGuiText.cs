@@ -5,14 +5,18 @@ using TMPro;
 /// <summary>
 /// This is just a wrapper over textmeshpro so I don't have to keep futzing around wtih it
 /// </summary>
-[RequireComponent(typeof(TMPro.TextMeshProUGUI))]
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class CustomGuiText : MonoBehaviour
 {
-    TextMeshProUGUI Text;
+    public TextMeshProUGUI Text;
     public void Start()
     {
-        Text = this.GetComponent<TextMeshProUGUI>();
+        if (Text == null)
+        {
+            Text = GetComponent<TextMeshProUGUI>();
+        }
     }
+
     public void SetText(string textWeWant)
     {
         Text.text = textWeWant;

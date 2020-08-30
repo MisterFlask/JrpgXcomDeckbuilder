@@ -17,7 +17,7 @@ public abstract class AbstractBattleUnit
 
     public string Name { get; set; }
 
-    public List<AbstractBattleUnitAttribute> Attributes { get; set; }
+    public List<AbstractBattleUnitAttribute> Attributes { get; set; } = new List<AbstractBattleUnitAttribute>();
 
     public BattleUnitPrefab CorrespondingPrefab { get; set; }
 

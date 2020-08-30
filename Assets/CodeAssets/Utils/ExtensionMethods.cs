@@ -127,7 +127,7 @@ public static class ExtensionMethods
             }
             if (func(child.GetComponent<T>()))
             {
-                UnityEngine.Object.DestroyImmediate(child.gameObject);
+                UnityEngine.Object.Destroy(child.gameObject);
             }
         }
     }
@@ -136,7 +136,7 @@ public static class ExtensionMethods
     {
         for (int i = 0; i < obj.gameObject.transform.childCount; i++)
         {
-            UnityEngine.Object.DestroyImmediate(obj.transform.GetChild(i));
+            UnityEngine.Object.Destroy(obj.transform.GetChild(i));
         }
     }
     public static void PurgeChildren(this GameObject obj)
@@ -263,6 +263,11 @@ public static class ExtensionMethods
         }
         return set;
 
+    }
+
+    public static List<T> WhereNotNull<T>(this IEnumerable<T> itemCollection)
+    {
+        return itemCollection.Where(item =>item != null).ToList();
     }
     #endregion
 }

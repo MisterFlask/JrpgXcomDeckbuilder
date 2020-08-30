@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Linq;
 
 public class BattleUnitPrefab:MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class BattleUnitPrefab:MonoBehaviour
         SpriteImage.sprite = img.Sprite;
         SpriteImage.color = img.Color;
         UnderlyingEntity = entity;
+
+        BattleUnitAttributesHolder.BattleUnit = entity;
     }
 
     public void HideOrShowAsAppropriate()
@@ -38,16 +41,5 @@ public class BattleUnitPrefab:MonoBehaviour
         this.HealthText.SetText($"HP: {UnderlyingEntity.CurrentHp}/{UnderlyingEntity.MaxHp}");
         this.FatigueText.SetText($"Fatigue: {UnderlyingEntity.CurrentFatigue}/{UnderlyingEntity.MaxFatigue}");
     }
-}
 
-public class BattleUnitAttributesHolder: MonoBehaviour
-{
-    public void AddBattleAttribute(AbstractBattleUnitAttribute attr)
-    {
-        
-    }
-    public void RemoveBattleAttribute(AbstractBattleUnitAttribute attr)
-    {
-
-    }
 }

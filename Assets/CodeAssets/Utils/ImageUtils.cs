@@ -12,7 +12,7 @@ public class ImageUtils
     private static string DefenseImage = "stone-tower";
 
 
-    public static ProtoGameSprite ProtoSpriteFromGameIcon(
+    public static ProtoGameSprite ProtoGameSpriteFromGameIcon(
         string path = MeepleImagePath,
         Color? color = null)
     {

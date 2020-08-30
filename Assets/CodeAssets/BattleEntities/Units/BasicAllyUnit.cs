@@ -9,7 +9,7 @@ public class BasicAllyUnit : AbstractBattleUnit
         this.CurrentHp = 20;
         this.Name = "Basic Ally";
         this.IsAlly = true;
-        this.ProtoSprite = ImageUtils.ProtoSpriteFromGameIcon(color:Color.blue);
+        this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(color:Color.blue);
         this.IsAiControlled = false;
     }
 

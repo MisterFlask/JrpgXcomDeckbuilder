@@ -1,12 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public abstract class AbstractBattleUnitAttribute
 {
+    #region convenience functions
+    public ActionManager action()
+    {
+        return ServiceLocator.GetActionManager();
+    }
+
+    public List<AbstractBattleUnit> enemies()
+    {
+        return ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle;
+    }
+    public List<AbstractBattleUnit> allies()
+    {
+        return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle;
+    }
+
+    public GameState state()
+    {
+        return ServiceLocator.GetGameStateTracker();
+    }
+    #endregion
+    public AbstractBattleUnit OwnerUnit { get; set; }
     public bool Stackable { get; set; } = false;
     public int Stacks { get; set; } = 1;
-    public string ImageString { get; set; } = ImageUtils.MeepleImagePath;
+    public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
 
     public virtual void OnTurnStart()
     {

@@ -9,8 +9,9 @@ public class BasicEnemyUnit : AbstractBattleUnit
         this.CurrentHp = 20;
         this.Name = "Basic Enemy";
         this.IsAlly = false;
-        this.ProtoSprite = ImageUtils.ProtoSpriteFromGameIcon(color: Color.red);
+        this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(color: Color.red);
         this.IsAiControlled = true;
+        this.Attributes.Add(new DyingStatusEffect());
     }
 
     public override Intent GetNextIntent()

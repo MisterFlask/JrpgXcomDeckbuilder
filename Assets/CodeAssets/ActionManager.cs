@@ -41,6 +41,47 @@ public class ActionManager : MonoBehaviour
         });
     }
 
+    public void RemoveStatusEffect<T>(AbstractBattleUnit unit) where T: AbstractBattleUnitAttribute
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            unit.Attributes.RemoveAll(item => item.GetType() == typeof(T));
+        });
+    }
+
+    public void KillUnit(AbstractBattleUnit unit)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            unit.Die();
+        });
+    }
+
+    public void ApplyStatusEffect(AbstractBattleUnit unit, AbstractBattleUnitAttribute attribute, int stacks = 1)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            var preexistingAttr = unit.Attributes.FirstOrDefault(item => item.GetType() == attribute.GetType());
+            if (preexistingAttr != null)
+            {
+                preexistingAttr.Stacks += stacks;
+                if (preexistingAttr.Stacks < 0)
+                {
+                    preexistingAttr.Stacks = 0;
+                }
+                if (preexistingAttr.Stacks == 0)
+                {
+                    unit.Attributes.RemoveAll(item => item.GetType() == attribute.GetType());
+                }
+            }
+            else
+            {
+                unit.Attributes.Add(attribute);
+            }
+        });
+    }
+
+
     public void DoAThing(Action action)
     {
         QueuedActions.ImmediateAction(action);
@@ -107,14 +148,6 @@ public class ActionManager : MonoBehaviour
         animationHandler = this.GetComponent<UiAnimationHandler>();
     }
 
-    public void ApplyDefense(AbstractBattleUnit unit, int amountOfDefense)
-    {
-        var cardsThatCanBeSelected = ServiceLocator.GameLogic().GetSelectableCardsFromScience();
-        QueuedActions.ImmediateAction(() =>
-        {
-            // todo;
-        });
-    }
 
     public void PromptCardReward()
     {

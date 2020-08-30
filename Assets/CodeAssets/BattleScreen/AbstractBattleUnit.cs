@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public abstract class AbstractBattleUnit
 {
     public string Guid = UnityEditor.GUID.Generate().ToString();
-    public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoSpriteFromGameIcon();
+    public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
 
     public int MaxHp { get; set; }
 
@@ -36,6 +36,11 @@ public abstract class AbstractBattleUnit
 
     public int Turn { get; set; } = 1;
 
+    public void Die()
+    {
+        CurrentHp = 0;
+    }
+
     public void OnTurnStart()
     {
         Turn++;
@@ -57,4 +62,26 @@ public abstract class AbstractBattleUnit
             this.CurrentHp = MaxHp;
         }
     }
+
+    #region convenience functions
+    public ActionManager action()
+    {
+        return ServiceLocator.GetActionManager();
+    }
+
+    public List<AbstractBattleUnit> enemies()
+    {
+        return ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle;
+    }
+    public List<AbstractBattleUnit> allies()
+    {
+        return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle;
+    }
+
+    public GameState state()
+    {
+        return ServiceLocator.GetGameStateTracker();
+    }
+    #endregion
+
 }

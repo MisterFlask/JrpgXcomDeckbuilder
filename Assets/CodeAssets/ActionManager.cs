@@ -41,7 +41,7 @@ public class ActionManager : MonoBehaviour
         });
     }
 
-    public void RemoveStatusEffect<T>(AbstractBattleUnit unit) where T: AbstractBattleUnitAttribute
+    public void RemoveStatusEffect<T>(AbstractBattleUnit unit) where T: AbstractStatusEffect
     {
         QueuedActions.ImmediateAction(() =>
         {
@@ -57,7 +57,7 @@ public class ActionManager : MonoBehaviour
         });
     }
 
-    public void ApplyStatusEffect(AbstractBattleUnit unit, AbstractBattleUnitAttribute attribute, int stacks = 1)
+    public void ApplyStatusEffect(AbstractBattleUnit unit, AbstractStatusEffect attribute, int stacks = 1)
     {
         QueuedActions.ImmediateAction(() =>
         {

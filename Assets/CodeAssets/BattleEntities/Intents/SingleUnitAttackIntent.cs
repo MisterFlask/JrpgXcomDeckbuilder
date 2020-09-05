@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class AttackIntent : Intent
+public class SingleUnitAttackIntent : Intent
 {
-    public AttackIntent(AbstractBattleUnit Source,
+    public SingleUnitAttackIntent(AbstractBattleUnit Source,
                         AbstractBattleUnit Target,
                         int damage,
-                        int numberOfTimesStruck = 1)
+                        int numberOfTimesStruck = 1): base(Source, Target.ToSingletonList())
     {
         this.Source = Source;
         this.Target = Target;
@@ -16,20 +17,24 @@ public class AttackIntent : Intent
 
     private ActionManager action => ServiceLocator.GetActionManager();
 
-    public AbstractBattleUnit Source { get; }
     public AbstractBattleUnit Target { get; }
     public int Damage { get; }
     public int NumberOfTimesStruck { get; }
 
-    public override GameObject GeneratePrefab(GameObject parent)
+    protected override IntentPrefab GeneratePrefab(GameObject parent)
     {
         var parentPrefab = ServiceLocator.GameObjectTemplates().AttackPrefab;
-        return parentPrefab.Spawn(parent.transform).gameObject;
+        var returnedPrefab = parentPrefab.Spawn(parent.transform);
+        returnedPrefab.Text.SetText($"{Damage}x{NumberOfTimesStruck}");
+        return returnedPrefab;
     }
 
     public override void Execute()
     {
         for(int i = 0; i < NumberOfTimesStruck; i++)
-        action.AttackUnitForDamage(Target, Damage);
+        {
+            action.AttackUnitForDamage(Target, Damage);
+        }
     }
+
 }

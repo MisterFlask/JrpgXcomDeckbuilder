@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BasicEnemyUnit : AbstractBattleUnit
 {
@@ -14,8 +15,8 @@ public class BasicEnemyUnit : AbstractBattleUnit
         this.Attributes.Add(new DyingStatusEffect());
     }
 
-    public override Intent GetNextIntent()
+    public override List<Intent> GetNextIntents()
     {
-        return new AttackIntent(this, IntentTargeting.GetRandomPlayerUnit(), 5);
+        return new List<Intent> { new SingleUnitAttackIntent(this, IntentTargeting.GetRandomPlayerUnit(), 5) };
     }
 }

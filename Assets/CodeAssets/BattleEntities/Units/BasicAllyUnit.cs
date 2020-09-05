@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BasicAllyUnit : AbstractBattleUnit
 {
@@ -13,8 +14,8 @@ public class BasicAllyUnit : AbstractBattleUnit
         this.IsAiControlled = false;
     }
 
-    public override Intent GetNextIntent()
+    public override List<Intent> GetNextIntents()
     {
-        throw new System.NotImplementedException();
+        return new List<Intent>();
     }
 }

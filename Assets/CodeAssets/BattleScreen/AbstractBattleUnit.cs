@@ -17,7 +17,7 @@ public abstract class AbstractBattleUnit
 
     public string Name { get; set; }
 
-    public List<AbstractBattleUnitAttribute> Attributes { get; set; } = new List<AbstractBattleUnitAttribute>();
+    public List<AbstractStatusEffect> Attributes { get; set; } = new List<AbstractStatusEffect>();
 
     public BattleUnitPrefab CorrespondingPrefab { get; set; }
 
@@ -28,12 +28,12 @@ public abstract class AbstractBattleUnit
     // Expected to be empty for enemies
     public List<AbstractCard> CardsInDeck { get; set; } = new List<AbstractCard>();
 
-    public abstract Intent GetNextIntent();
+    public abstract List<Intent> GetNextIntents();
 
     public bool IsAiControlled = true;
 
-    public Intent CurrentIntent = null;
-
+    public List<Intent> CurrentIntents = new List<Intent>();
+    
     public int Turn { get; set; } = 1;
 
     public void Die()
@@ -46,11 +46,14 @@ public abstract class AbstractBattleUnit
         Turn++;
         if (IsAiControlled)
         {
-            if (CurrentIntent != null)
+            if (CurrentIntents != null)
             {
-                CurrentIntent.Execute();
+                foreach(var intent in CurrentIntents)
+                {
+                    intent.Execute();
+                }
             }
-            CurrentIntent = GetNextIntent();
+            CurrentIntents = GetNextIntents();
         }
     }
 
@@ -61,24 +64,25 @@ public abstract class AbstractBattleUnit
         {
             this.CurrentHp = MaxHp;
         }
+        this.CurrentIntents = GetNextIntents();
     }
 
     #region convenience functions
-    public ActionManager action()
+    protected ActionManager action()
     {
         return ServiceLocator.GetActionManager();
     }
 
-    public List<AbstractBattleUnit> enemies()
+    protected List<AbstractBattleUnit> enemies()
     {
         return ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle;
     }
-    public List<AbstractBattleUnit> allies()
+    protected List<AbstractBattleUnit> allies()
     {
         return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle;
     }
 
-    public GameState state()
+    protected GameState state()
     {
         return ServiceLocator.GetGameStateTracker();
     }

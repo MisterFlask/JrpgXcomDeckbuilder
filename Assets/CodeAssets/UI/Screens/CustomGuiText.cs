@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TMPro;
+using System;
 
 /// <summary>
 /// This is just a wrapper over textmeshpro so I don't have to keep futzing around wtih it
@@ -14,6 +15,10 @@ public class CustomGuiText : MonoBehaviour
         if (Text == null)
         {
             Text = GetComponent<TextMeshProUGUI>();
+        }
+        if (Text == null)
+        {
+            throw new Exception("Prefab with name " + this.name + " has no text component.");
         }
     }
 

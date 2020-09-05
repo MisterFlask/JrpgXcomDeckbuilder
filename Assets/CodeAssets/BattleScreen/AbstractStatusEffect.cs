@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public abstract class AbstractBattleUnitAttribute
+public abstract class AbstractStatusEffect
 {
     #region convenience functions
     public ActionManager action()
@@ -50,4 +50,5 @@ public abstract class AbstractBattleUnitAttribute
     }
 
     public BattleUnitAttributePrefab CorrespondingPrefab { get; set; }
+
 }

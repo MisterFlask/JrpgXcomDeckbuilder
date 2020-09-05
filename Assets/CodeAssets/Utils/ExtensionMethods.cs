@@ -217,6 +217,10 @@ public static class ExtensionMethods
     }
     public static void SetToAbstractCardAttributes(this Card hyperCard, AbstractCard abstractCard)
     {
+        if (abstractCard == null)
+        {
+            throw new Exception("Can't set card to null for underlying abstract card.");
+        }
         hyperCard.SetCardTitle(abstractCard.Name);
         hyperCard.SetCardDescription(BuildTextBoxStringForCard(abstractCard));
         hyperCard.SetCardTags(abstractCard.CardType.ToString());
@@ -268,6 +272,11 @@ public static class ExtensionMethods
     public static List<T> WhereNotNull<T>(this IEnumerable<T> itemCollection)
     {
         return itemCollection.Where(item =>item != null).ToList();
+    }
+
+    public static List<T> ToSingletonList<T>(this T item)
+    {
+        return new List<T> { item };
     }
     #endregion
 }

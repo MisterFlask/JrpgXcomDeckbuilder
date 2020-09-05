@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DyingStatusEffect : AbstractBattleUnitAttribute
+public class DyingStatusEffect : AbstractStatusEffect
 {
     public DyingStatusEffect()
     {

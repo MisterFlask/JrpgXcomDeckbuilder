@@ -5,8 +5,11 @@ using System.Collections.Generic;
 
 public abstract class Intent
 {
-    public Intent(AbstractBattleUnit source, List<AbstractBattleUnit> unitsTargeted = null)
+    public Intent(AbstractBattleUnit source,
+        List<AbstractBattleUnit> unitsTargeted = null,
+        ProtoGameSprite protoSprite = null)
     {
+        this.ProtoSprite = protoSprite ?? ImageUtils.ProtoGameSpriteFromGameIcon(color: Color.blue);
         this.Source = source;
         this.UnitsTargeted = unitsTargeted ?? new List<AbstractBattleUnit>();
     }
@@ -21,6 +24,9 @@ public abstract class Intent
     {
         var prefab = GeneratePrefab(parent);
         prefab.UnderlyingIntent = this;
+        prefab.Picture.sprite = ProtoSprite.ToGameSpriteImage().Sprite;
+        prefab.Picture.color = ProtoSprite.ToGameSpriteImage().Color;
+        prefab.Init();
         return prefab;
     }
 
@@ -28,4 +34,6 @@ public abstract class Intent
     public List<AbstractBattleUnit> UnitsTargeted { get; set; } = new List<AbstractBattleUnit>();
 
     public AbstractBattleUnit Source { get; set; }
+
+    public ProtoGameSprite ProtoSprite { get; set; }
 }

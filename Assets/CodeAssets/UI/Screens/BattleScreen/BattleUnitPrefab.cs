@@ -4,8 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.EventSystems;
+using System;
 
-public class BattleUnitPrefab:MonoBehaviour
+public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image SpriteImage;
     public BattleUnitAttributesHolder BattleUnitAttributesHolder;
@@ -17,6 +19,9 @@ public class BattleUnitPrefab:MonoBehaviour
     public List<IntentPrefab> IntentPrefabs { get; set; } = new List<IntentPrefab>();
 
     public AbstractBattleUnit UnderlyingEntity { get; private set; }
+    Color OriginalImageColor { get; set; }
+    Color BrighterImageColor { get; set; }
+
 
     public void Initialize(AbstractBattleUnit entity)
     {
@@ -26,6 +31,9 @@ public class BattleUnitPrefab:MonoBehaviour
         UnderlyingEntity = entity;
 
         BattleUnitAttributesHolder.BattleUnit = entity;
+
+        OriginalImageColor = SpriteImage.color;
+        BrighterImageColor = SpriteImage.color * 1.5f;
     }
 
     public void HideOrShowAsAppropriate()
@@ -76,6 +84,30 @@ public class BattleUnitPrefab:MonoBehaviour
         }
         intentsToRemove.ForEach(item => IntentPrefabs.Remove(item)); // remove from list of prefabs
         intentsToRemove.ForEach(item => item.transform.parent = null); // remove from parent (thus removing from the UI)
+
+        if (ShouldHighlight())
+        {
+            Highlight(this.SpriteImage);
+        }
+        else
+        {
+            RemoveHighlights(this.SpriteImage);
+        }
+    }
+
+    private void RemoveHighlights(Image spriteImage)
+    {
+        spriteImage.color = OriginalImageColor;
+    }
+
+    private void Highlight(Image spriteImage)
+    {
+        spriteImage.color = BrighterImageColor;
+    }
+
+    private bool ShouldHighlight()
+    {
+        return BattleScreenPrefab.IntentMousedOver?.UnitsTargeted?.Contains(this.UnderlyingEntity) ?? false || BattleScreenPrefab.IntentMousedOver?.Source == this.UnderlyingEntity;
     }
 
     public List<Intent> IntentsRelevantToCharacter()
@@ -94,4 +126,15 @@ public class BattleUnitPrefab:MonoBehaviour
         return intentsAccumulator;
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Entered battle unit prefab; setting battle unit moused over");
+        BattleScreenPrefab.BattleUnitMousedOver = this.UnderlyingEntity;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Exited battle unit prefab; unsetting battle unit moused over");
+        BattleScreenPrefab.BattleUnitMousedOver = null;
+    }
 }

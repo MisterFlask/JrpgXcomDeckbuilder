@@ -5,6 +5,12 @@ using System.Linq;
 
 public class BattleScreenPrefab : MonoBehaviour
 {
+    public static BattleScreenPrefab INSTANCE;
+    public BattleScreenPrefab()
+    {
+        INSTANCE = this;
+    }
+
     private GameState state => ServiceLocator.GetGameStateTracker();
     private ActionManager action => ServiceLocator.GetActionManager();
 
@@ -13,6 +19,9 @@ public class BattleScreenPrefab : MonoBehaviour
 
     public GameObject EnemyUnitSpotsParent;
     public GameObject AllyUnitSpotsParent;
+
+    public static Intent IntentMousedOver { get; set; }
+    public static AbstractBattleUnit BattleUnitMousedOver { get; set; }
 
     public void Setup(List<AbstractBattleUnit> StartingEnemies, List<AbstractBattleUnit> StartingAllies
         )

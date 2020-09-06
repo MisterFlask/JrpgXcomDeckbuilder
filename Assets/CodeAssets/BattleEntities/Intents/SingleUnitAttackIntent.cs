@@ -13,6 +13,7 @@ public class SingleUnitAttackIntent : Intent
         this.Target = Target;
         Damage = damage;
         NumberOfTimesStruck = numberOfTimesStruck;
+        this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(color: Color.red, path: "Sprites/crossed-swords");
     }
 
     private ActionManager action => ServiceLocator.GetActionManager();

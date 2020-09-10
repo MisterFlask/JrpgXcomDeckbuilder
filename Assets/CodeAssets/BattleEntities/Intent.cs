@@ -16,7 +16,17 @@ public abstract class Intent
 
     public string Id = Guid.NewGuid().ToString();
 
-    public abstract void Execute();
+
+    public void ExecuteIntent()
+    {
+        if (Source.IsDead)
+        {
+            return;
+        }
+        Execute();
+    }
+
+    protected abstract void Execute();
 
     protected abstract IntentPrefab GeneratePrefab(GameObject parent);
 

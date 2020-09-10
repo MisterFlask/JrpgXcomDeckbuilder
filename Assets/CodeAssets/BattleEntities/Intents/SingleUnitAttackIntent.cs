@@ -30,7 +30,7 @@ public class SingleUnitAttackIntent : Intent
         return returnedPrefab;
     }
 
-    public override void Execute()
+    protected override void Execute()
     {
         for(int i = 0; i < NumberOfTimesStruck; i++)
         {

@@ -43,6 +43,12 @@ public abstract class AbstractBattleUnit
 
     public void OnTurnStart()
     {
+        if (IsDead)
+        {
+            CurrentIntents = null;
+            return;
+        }
+
         Turn++;
         if (IsAiControlled)
         {
@@ -50,7 +56,7 @@ public abstract class AbstractBattleUnit
             {
                 foreach(var intent in CurrentIntents)
                 {
-                    intent.Execute();
+                    intent.ExecuteIntent();
                 }
             }
             CurrentIntents = GetNextIntents();

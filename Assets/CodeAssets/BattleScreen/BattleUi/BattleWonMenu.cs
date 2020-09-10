@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class BattleWonMenu : MonoBehaviour
 {
-    Button ContinueButton;
+    public Button ContinueButton;
     public BattleWonMenu()
     {
         ServiceLocator.MenuHolder.BattleWonMenu = this;
@@ -13,14 +13,21 @@ public class BattleWonMenu : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         this.ContinueButton.onClick.AddListener(() => { 
-            
+                
         });
+
+        Hide();
     }
 
     public void Display()
     {
         this.gameObject.SetActive(true);
+    }
+    public void Hide()
+    {
+        this.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

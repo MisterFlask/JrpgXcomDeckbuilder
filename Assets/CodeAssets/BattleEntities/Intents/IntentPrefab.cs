@@ -46,6 +46,11 @@ public class IntentPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             RemoveHighlights(this.Picture);
         }
+
+        if (this.UnderlyingIntent.Source.IsDead)
+        {
+            HideAndDestroy();
+        }
     }
     private void RemoveHighlights(Image spriteImage)
     {
@@ -57,6 +62,11 @@ public class IntentPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         spriteImage.color = Color.yellow;
     }
 
+    public void HideAndDestroy()
+    {
+        this.transform.parent = null;
+        Destroy(this.gameObject);
+    }
 
     // mouseover behavior:  Highlight unit
 

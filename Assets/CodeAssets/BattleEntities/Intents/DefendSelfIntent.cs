@@ -14,7 +14,7 @@ public class DefendSelfIntent : Intent
         return parentPrefab.Spawn(parent.transform);
     }
 
-    public override void Execute()
+    protected override void Execute()
     {
 
     }

@@ -330,16 +330,20 @@ public class ActionManager : MonoBehaviour
     public void AttackUnitForDamage(AbstractBattleUnit targetUnit, int damage)
     {
         QueuedActions.DelayedAction("ShakeUnit", () => {
+            if (targetUnit.IsDead)
+            {
+                // do nothing if it's already dead
+                return;
+            }
             targetUnit.CorrespondingPrefab.gameObject.AddComponent<ShakePrefab>();
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
+            targetUnit.CurrentHp -= damage;
+            if (targetUnit.CurrentHp <= 0)
+            {
+                DestroyUnit(targetUnit);
+            }
         });
-        targetUnit.CurrentHp -= damage;
-        if (targetUnit.CurrentHp <= 0)
-        {
-            DestroyUnit(targetUnit);
-        }
-
     }
 
     public void DestroyUnit(AbstractBattleUnit unit)

@@ -9,9 +9,13 @@ using HyperCard;
 
 public class UtilityObjectHolder : MonoBehaviour
 {
-    public void Start()
+    public UtilityObjectHolder()
     {
         ServiceLocator.UtilityObjectHolder = this;
+    }
+
+    public void Start()
+    {
     }
 
     public GameObject CardHolder;

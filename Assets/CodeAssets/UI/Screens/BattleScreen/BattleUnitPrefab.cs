@@ -26,6 +26,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void Initialize(AbstractBattleUnit entity)
     {
         var img = entity.ProtoSprite.ToGameSpriteImage();
+        entity.CorrespondingPrefab = this;
         SpriteImage.sprite = img.Sprite;
         SpriteImage.color = img.Color;
         UnderlyingEntity = entity;
@@ -34,6 +35,12 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         OriginalImageColor = SpriteImage.color;
         BrighterImageColor = SpriteImage.color * 1.5f;
+    }
+
+    public void HideUnit()
+    {
+        this.UnderlyingEntity = null;
+        HideOrShowAsAppropriate();
     }
 
     public void HideOrShowAsAppropriate()

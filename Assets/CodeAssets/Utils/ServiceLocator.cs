@@ -86,4 +86,12 @@ public static class ServiceLocator
         return GetTemplateHolder().UnitHolder.transform;
     }
     #endregion
+
+    public static MenuHolder MenuHolder = new MenuHolder();
+
+}
+
+public class MenuHolder
+{
+    public BattleWonMenu BattleWonMenu { get; set; }
 }

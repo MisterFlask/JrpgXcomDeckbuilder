@@ -327,12 +327,17 @@ public class ActionManager : MonoBehaviour
         */
     }
 
-    public void AttackUnitForDamage(AbstractBattleUnit unit, int damage)
+    public void AttackUnitForDamage(AbstractBattleUnit targetUnit, int damage)
     {
-        unit.CurrentHp -= damage;
-        if (unit.CurrentHp <= 0)
+        QueuedActions.DelayedAction("ShakeUnit", () => {
+            targetUnit.CorrespondingPrefab.gameObject.AddComponent<ShakePrefab>();
+            var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
+            shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
+        });
+        targetUnit.CurrentHp -= damage;
+        if (targetUnit.CurrentHp <= 0)
         {
-            DestroyUnit(unit);
+            DestroyUnit(targetUnit);
         }
 
     }
@@ -341,7 +346,8 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            unit.CorrespondingPrefab.gameObject.Despawn();
+            // todo: Figure out approrpiate despawning logic.
+            unit.CorrespondingPrefab.HideUnit();
         });
     }
 

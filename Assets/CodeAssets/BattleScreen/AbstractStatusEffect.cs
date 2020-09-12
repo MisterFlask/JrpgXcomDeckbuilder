@@ -25,6 +25,9 @@ public abstract class AbstractStatusEffect
         return ServiceLocator.GetGameStateTracker();
     }
     #endregion
+
+    public string Name { get; set; }
+    public abstract string Description { get; }
     public AbstractBattleUnit OwnerUnit { get; set; }
     public bool Stackable { get; set; } = false;
     public int Stacks { get; set; } = 1;
@@ -40,13 +43,24 @@ public abstract class AbstractStatusEffect
 
     }
 
-    public virtual int DamageDealtMod()
+    public virtual int DamageDealtAddition()
     {
         return 0;
     }
-    public virtual int DamageReceivedMod()
+
+    public virtual int DamageReceivedAddition()
     {
         return 0;
+    }
+
+    public virtual float DamageDealtMultiplier()
+    {
+        return 1;
+    }
+
+    public virtual float DamageReceivedMultiplier()
+    {
+        return 1;
     }
 
     public BattleUnitAttributePrefab CorrespondingPrefab { get; set; }

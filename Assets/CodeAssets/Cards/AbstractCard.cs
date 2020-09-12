@@ -22,13 +22,19 @@ public abstract class AbstractCard
 
     public string Id { get; set; } = Guid.NewGuid().ToString();
 
-    public int Damage { get; set; } = 0;
+    public int BaseDamage { get; set; } = 0;
 
 
 
     public int CurrentToughness { get; set; } = 0;
 
     #region convenience functions
+
+    public int displayedDamage()
+    {
+        return BattleRules.GetDisplayedDamageOnCard(this);
+    }
+
     public ActionManager action()
     {
         return ServiceLocator.GetActionManager();
@@ -54,7 +60,7 @@ public abstract class AbstractCard
         this.CardType = cardType ?? CardType.TechCard;
     }
 
-    public virtual int EnergyCost()
+    public virtual int BaseEnergyCost()
     {
         return 1;
     }
@@ -67,7 +73,7 @@ public abstract class AbstractCard
 
     public virtual bool CanAfford()
     {
-        return ServiceLocator.GetGameStateTracker().energy >= this.EnergyCost();
+        return ServiceLocator.GetGameStateTracker().energy >= this.BaseEnergyCost();
     }
 
     public virtual bool CanPlay()
@@ -98,7 +104,7 @@ public abstract class AbstractCard
         }
         OnPlay(target);
 
-        state().energy -= this.EnergyCost();
+        state().energy -= this.BaseEnergyCost();
         
         if (state().Deck.Hand.Contains(this))
         {

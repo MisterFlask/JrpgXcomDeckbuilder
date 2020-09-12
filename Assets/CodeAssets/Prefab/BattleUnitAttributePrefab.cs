@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class BattleUnitAttributePrefab : MonoBehaviour
+using UnityEngine.EventSystems;
+
+public class BattleUnitAttributePrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image image;
     public CustomGuiText Text;
@@ -16,5 +18,15 @@ public class BattleUnitAttributePrefab : MonoBehaviour
         image.color = protoSprite.Color;
         Text.SetText(attr.Stacks.ToString());
         attr.CorrespondingPrefab = this;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ExplainerPanel.ShowStatusEffectHelp(this.CorrespondingAttribute);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ExplainerPanel.Hide();
     }
 }

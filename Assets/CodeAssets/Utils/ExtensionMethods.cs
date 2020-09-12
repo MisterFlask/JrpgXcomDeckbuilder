@@ -224,7 +224,7 @@ public static class ExtensionMethods
         hyperCard.SetCardTitle(abstractCard.Name);
         hyperCard.SetCardDescription(BuildTextBoxStringForCard(abstractCard));
         hyperCard.SetCardTags(abstractCard.CardType.ToString());
-        hyperCard.SetCardEnergyCost(abstractCard.EnergyCost());
+        hyperCard.SetCardEnergyCost(abstractCard.BaseEnergyCost());
         hyperCard.LogicalCardId = abstractCard.Id;
         hyperCard.LogicalCard = abstractCard;
     }

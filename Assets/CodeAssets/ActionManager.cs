@@ -102,6 +102,35 @@ public class ActionManager : MonoBehaviour
     public Image ScienceImage;
     public Image CoinImage;
 
+    public void AdvanceUnit(AbstractBattleUnit actor)
+    {
+        //todo
+    }
+
+    public void RetreatUnit(AbstractBattleUnit actor)
+    {
+        //todo
+    }
+
+    public void ForceRegenerateIntents(AbstractBattleUnit target)
+    { 
+        //todo
+    }
+
+    public void Taunt(AbstractBattleUnit target, AbstractBattleUnit tauntingCharacter)
+    {
+        //todo
+    }
+
+    public void ReverseTaunt(AbstractBattleUnit target, AbstractBattleUnit tauntingCharacter)
+    {
+        //todo
+    }
+
+
+
+
+
     internal void PurgeCardFromDeck(AbstractCard card, QueueingType queueingType = QueueingType.TO_BACK)
     {
         QueuedActions.ImmediateAction(() =>
@@ -327,7 +356,7 @@ public class ActionManager : MonoBehaviour
         */
     }
 
-    public void AttackUnitForDamage(AbstractBattleUnit targetUnit, int damage)
+    public void AttackUnitForDamage(AbstractBattleUnit targetUnit, AbstractBattleUnit sourceUnit, int baseDamage)
     {
         QueuedActions.DelayedAction("ShakeUnit", () => {
             if (targetUnit.IsDead)
@@ -338,7 +367,9 @@ public class ActionManager : MonoBehaviour
             targetUnit.CorrespondingPrefab.gameObject.AddComponent<ShakePrefab>();
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
-            targetUnit.CurrentHp -= damage;
+
+            targetUnit.CurrentHp -= BattleRules.GetAnticipatedDamageToUnit(sourceUnit, targetUnit, baseDamage);
+
             if (targetUnit.CurrentHp <= 0)
             {
                 DestroyUnit(targetUnit);

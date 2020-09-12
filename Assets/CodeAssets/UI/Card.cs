@@ -3,10 +3,11 @@ using System.Collections;
 using TMPro;
 using System.Collections.Generic;
 using System;
+using UnityEngine.EventSystems;
 
 namespace HyperCard
 {
-    public class Card : MonoBehaviour
+    public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public TextMeshProUGUI description;
         public TextMeshProUGUI title;
@@ -63,6 +64,16 @@ namespace HyperCard
         public void Refresh()
         {
             this.SetToAbstractCardAttributes(LogicalCard);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            ExplainerPanel.Hide();
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            ExplainerPanel.ShowCardHelp(this.LogicalCard);
         }
     }
 

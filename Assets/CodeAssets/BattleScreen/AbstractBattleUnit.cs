@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public abstract class AbstractBattleUnit
 {
     public string Guid = UnityEditor.GUID.Generate().ToString();
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
+
+    public bool HasStatusEffect<T>() where T:AbstractStatusEffect
+    {
+        return Attributes.Any(item => item.GetType() == typeof(T));
+    }
 
     public int MaxHp { get; set; }
 
@@ -26,7 +32,7 @@ public abstract class AbstractBattleUnit
     public bool IsEnemy { get => !IsAlly;  }
 
     // Expected to be empty for enemies
-    public List<AbstractCard> CardsInDeck { get; set; } = new List<AbstractCard>();
+    public List<AbstractCard> IntrinsicCardsInDeck { get; set; } = new List<AbstractCard>();
 
     public abstract List<Intent> GetNextIntents();
 
@@ -35,6 +41,8 @@ public abstract class AbstractBattleUnit
     public List<Intent> CurrentIntents = new List<Intent>();
     
     public int Turn { get; set; } = 1;
+
+    public bool IsAdvanced { get; set; } = false;
 
     public void Die()
     {

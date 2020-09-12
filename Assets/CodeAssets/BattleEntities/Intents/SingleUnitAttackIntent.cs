@@ -11,7 +11,7 @@ public class SingleUnitAttackIntent : Intent
     {
         this.Source = Source;
         this.Target = Target;
-        Damage = damage;
+        BaseDamage = damage;
         NumberOfTimesStruck = numberOfTimesStruck;
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(color: Color.red, path: "Sprites/crossed-swords");
     }
@@ -19,14 +19,15 @@ public class SingleUnitAttackIntent : Intent
     private ActionManager action => ServiceLocator.GetActionManager();
 
     public AbstractBattleUnit Target { get; }
-    public int Damage { get; }
+    public int BaseDamage { get; }
     public int NumberOfTimesStruck { get; }
 
     protected override IntentPrefab GeneratePrefab(GameObject parent)
     {
+        var totalDamageExpected = BattleRules.GetAnticipatedDamageToUnit(Source, Target, BaseDamage);
         var parentPrefab = ServiceLocator.GameObjectTemplates().AttackPrefab;
         var returnedPrefab = parentPrefab.Spawn(parent.transform);
-        returnedPrefab.Text.SetText($"{Damage}x{NumberOfTimesStruck}");
+        returnedPrefab.Text.SetText($"{totalDamageExpected}x{NumberOfTimesStruck}");
         return returnedPrefab;
     }
 
@@ -34,7 +35,7 @@ public class SingleUnitAttackIntent : Intent
     {
         for(int i = 0; i < NumberOfTimesStruck; i++)
         {
-            action.AttackUnitForDamage(Target, Damage);
+            action.AttackUnitForDamage(Target, Source, BaseDamage);
         }
     }
 

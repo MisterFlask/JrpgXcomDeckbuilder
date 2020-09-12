@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using UnityEditor;
 
 public abstract class AbstractBattleUnit
 {
@@ -21,7 +23,8 @@ public abstract class AbstractBattleUnit
     public int CurrentFatigue { get; set; } = 4;
     public int MaxFatigue { get; set; } = 4;
 
-    public string Name { get; set; }
+    public string UnitClassName { get; set; }
+    public string CharacterName { get; set; } = "";
 
     public List<AbstractStatusEffect> Attributes { get; set; } = new List<AbstractStatusEffect>();
 
@@ -32,7 +35,34 @@ public abstract class AbstractBattleUnit
     public bool IsEnemy { get => !IsAlly;  }
 
     // Expected to be empty for enemies
-    public List<AbstractCard> IntrinsicCardsInDeck { get; set; } = new List<AbstractCard>();
+    public List<AbstractCard> StartingCardsInDeck { get; set; } = new List<AbstractCard>();
+
+    private List<AbstractCard> _CardsInPersistentDeck { get; set; } = new List<AbstractCard>();
+
+    public IEnumerable<AbstractCard> CardsInPersistentDeck => _CardsInPersistentDeck;
+
+    public List<AbstractCard> BattleDeck { get; set; } = new List<AbstractCard>();
+
+    public void ResetPersistentDeck()
+    {
+        _CardsInPersistentDeck = new List<AbstractCard>();
+        AddCardsToPersistentDeck(StartingCardsInDeck);
+    }
+
+    public void AddCardsToPersistentDeck(IEnumerable<AbstractCard> cards)
+    {
+        foreach(var baseCard in cards)
+        {
+            AddCardToPersistentDeck(baseCard);
+        }
+    }
+
+    private void AddCardToPersistentDeck(AbstractCard baseCard)
+    {
+        var card = baseCard.CopyCard();
+        card.Owner = this;
+        _CardsInPersistentDeck.Add(card);
+    }
 
     public abstract List<Intent> GetNextIntents();
 
@@ -79,7 +109,22 @@ public abstract class AbstractBattleUnit
             this.CurrentHp = MaxHp;
         }
         this.CurrentIntents = GetNextIntents();
+        BattleDeck = new List<AbstractCard>();
+        BattleDeck.AddRange(CardsInPersistentDeck);
     }
+
+    public AbstractBattleUnit InitPersistentUnitFromTemplate()
+    {
+        var copy = (AbstractBattleUnit)this.MemberwiseClone();
+        copy.Guid = GUID.Generate().ToString();
+        copy.ResetPersistentDeck();
+        var newName = CharacterNameGenerator.GenerateCharacterName();
+        copy.CurrentFatigue = MaxFatigue;
+        copy.CurrentHp = MaxHp;
+        copy.CharacterName =  newName.Nickname;
+        return copy;
+    }
+
 
     #region convenience functions
     protected ActionManager action()

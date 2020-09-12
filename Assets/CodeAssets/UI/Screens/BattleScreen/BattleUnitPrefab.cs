@@ -9,6 +9,7 @@ using System;
 
 public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public CustomGuiText CharacterNameText;
     public Image SpriteImage;
     public BattleUnitAttributesHolder BattleUnitAttributesHolder;
     public CustomGuiText FatigueText;
@@ -61,6 +62,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             return;
         }
+        this.CharacterNameText.SetText(UnderlyingEntity.CharacterName);
         this.HealthText.SetText($"HP: {UnderlyingEntity.CurrentHp}/{UnderlyingEntity.MaxHp}");
         this.FatigueText.SetText($"Fatigue: {UnderlyingEntity.CurrentFatigue}/{UnderlyingEntity.MaxFatigue}");
         var intentsExistingInPrefabForm = this.IntentPrefabs.Select(item => item.UnderlyingIntent);

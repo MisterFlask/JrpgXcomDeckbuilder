@@ -7,13 +7,14 @@ public class BattleUnitAttributePrefab : MonoBehaviour, IPointerEnterHandler, IP
 {
     public Image image;
     public CustomGuiText Text;
-    public AbstractStatusEffect CorrespondingAttribute { get; }
+    public AbstractStatusEffect CorrespondingAttribute { get; set; }
     public BattleUnitAttributesHolder Holder {get;}
 
 
     public void Initialize(AbstractStatusEffect attr, BattleUnitAttributesHolder holder)
     {
         var protoSprite = attr.ProtoSprite.ToGameSpriteImage();
+        this.CorrespondingAttribute = attr;
         image.sprite = protoSprite.Sprite;
         image.color = protoSprite.Color;
         Text.SetText(attr.Stacks.ToString());
@@ -22,6 +23,10 @@ public class BattleUnitAttributePrefab : MonoBehaviour, IPointerEnterHandler, IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (this.CorrespondingAttribute == null)
+        {
+            return;
+        }
         ExplainerPanel.ShowStatusEffectHelp(this.CorrespondingAttribute);
     }
 

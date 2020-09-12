@@ -56,15 +56,18 @@ public class BattleScreenPrefab : MonoBehaviour
         /// TODO:  Remove after getting strategic map up and running
 
         state.EnemyUnitsInBattle.Add(new BasicEnemyUnit());
-        state.AllyUnitsInBattle.Add(new BasicAllyUnit());
+        state.AllyUnitsInBattle.Add(Rookie.Build());
+        state.AllyUnitsInBattle.Add(Rookie.Build());
+        state.AllyUnitsInBattle.Add(Rookie.Build());
 
-        state.Deck.AddNewCardToDeck(new Grenade());
-        state.Deck.AddNewCardToDeck(new Grenade());
-        state.Deck.AddNewCardToDeck(new Grenade());
-        state.Deck.AddNewCardToDeck(new Grenade());
-        state.Deck.AddNewCardToDeck(new Grenade());
-        state.Deck.AddNewCardToDeck(new Grenade());
-        state.Deck.AddNewCardToDeck(new Grenade());
+        foreach (var character in state.AllyUnitsInBattle)
+        {
+            character.InitForBattle();
+            foreach (var card in character.BattleDeck)
+            {
+                state.Deck.AddNewCardToDeck(card);
+            }
+        }
 
         action.DrawCards(5);
 

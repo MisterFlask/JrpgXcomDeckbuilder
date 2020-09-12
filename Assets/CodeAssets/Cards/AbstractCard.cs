@@ -8,7 +8,7 @@ public abstract class AbstractCard
 {
     public Guid OwnerGuid;
 
-    public AbstractBattleUnit Owner => ServiceLocator.GetGameStateTracker().PersistentCharacterRoster.First(item => item.Guid == OwnerGuid.ToString());
+    public AbstractBattleUnit Owner { get; set; }
 
     public string Name { get; set; } = "Name";
 

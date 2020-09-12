@@ -219,7 +219,7 @@ public static class ExtensionMethods
     {
         if (abstractCard == null)
         {
-            throw new Exception("Can't set card to null for underlying abstract card.");
+            return;
         }
         hyperCard.SetCardTitle(abstractCard.Name);
         hyperCard.SetCardDescription(BuildTextBoxStringForCard(abstractCard));

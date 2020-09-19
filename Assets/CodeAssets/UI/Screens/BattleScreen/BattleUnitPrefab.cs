@@ -14,6 +14,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public BattleUnitAttributesHolder BattleUnitAttributesHolder;
     public CustomGuiText FatigueText;
     public CustomGuiText HealthText;
+    public CustomGuiText DefenseText;
 
     public Transform IntentPrefabParent;
 
@@ -65,6 +66,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.CharacterNameText.SetText(UnderlyingEntity.CharacterName);
         this.HealthText.SetText($"HP: {UnderlyingEntity.CurrentHp}/{UnderlyingEntity.MaxHp}");
         this.FatigueText.SetText($"Fatigue: {UnderlyingEntity.CurrentFatigue}/{UnderlyingEntity.MaxFatigue}");
+        this.DefenseText.SetText($"{UnderlyingEntity.CurrentDefense}");
         var intentsExistingInPrefabForm = this.IntentPrefabs.Select(item => item.UnderlyingIntent);
         var relevantIntents = IntentsRelevantToCharacter();
         foreach (var intent in relevantIntents)

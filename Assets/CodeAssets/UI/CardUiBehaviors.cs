@@ -116,7 +116,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 }
             }
 
-            if (element.GetComponent<CardPlayArea>() != null && logicalCard.TargetType ==TargetType.NO_TARGET_OR_SELF)
+            if (element.GetComponent<CardPlayArea>() != null && logicalCard.TargetType == TargetType.NO_TARGET_OR_SELF)
             {
                 logicalCard.PlayCardFromHandIfAble(null);
             } 

@@ -63,6 +63,27 @@ public abstract class AbstractStatusEffect
         return 1;
     }
 
+
+    public virtual int DefenseDealtAddition()
+    {
+        return 0;
+    }
+
+    public virtual int DefenseReceivedAddition()
+    {
+        return 0;
+    }
+
+    public virtual float DefenseDealtMultiplier()
+    {
+        return 1;
+    }
+
+    public virtual float DefenseReceivedMultiplier()
+    {
+        return 1;
+    }
+
     public BattleUnitAttributePrefab CorrespondingPrefab { get; set; }
 
 }

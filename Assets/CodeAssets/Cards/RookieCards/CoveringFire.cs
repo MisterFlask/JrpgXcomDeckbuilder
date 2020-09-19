@@ -24,5 +24,6 @@ public class CoveringFire : AbstractCard
     protected override void OnPlay(AbstractBattleUnit target)
     {
         action().AttackUnitForDamage(target, this.Owner, BaseDamage);
+        action().ApplyStatusEffect(target, new WeakenedStatusEffect());
     }
 }

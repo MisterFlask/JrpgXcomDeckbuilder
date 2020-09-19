@@ -19,6 +19,7 @@ public abstract class AbstractBattleUnit
 
     public bool IsDead => CurrentHp == 0;
 
+    public int CurrentDefense { get; set; }
     public int CurrentHp { get; set; }
     public int CurrentFatigue { get; set; } = 4;
     public int MaxFatigue { get; set; } = 4;
@@ -81,6 +82,8 @@ public abstract class AbstractBattleUnit
 
     public void OnTurnStart()
     {
+        CurrentDefense = 0;
+
         if (IsDead)
         {
             CurrentIntents = null;

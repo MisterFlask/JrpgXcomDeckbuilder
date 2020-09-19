@@ -128,11 +128,23 @@ public class ActionManager : MonoBehaviour
     }
 
 
+    public void ApplyDefense(AbstractBattleUnit target, AbstractBattleUnit source, int baseQuantity)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            target.CurrentDefense += BattleRules.GetDefenseApplied(source, target, baseQuantity);
+            if (target.CurrentDefense < 0)
+            {
+                target.CurrentDefense = 0;
+            }
+        });
 
+    }
 
 
     internal void PurgeCardFromDeck(AbstractCard card, QueueingType queueingType = QueueingType.TO_BACK)
     {
+        Require.NotNull(card);
         QueuedActions.ImmediateAction(() =>
         {
 
@@ -159,6 +171,7 @@ public class ActionManager : MonoBehaviour
 
     internal void AddCardToHand(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
     {
+        Require.NotNull(abstractCard);
         QueuedActions.ImmediateAction(() =>
         {
 
@@ -356,8 +369,9 @@ public class ActionManager : MonoBehaviour
         */
     }
 
-    public void AttackUnitForDamage(AbstractBattleUnit targetUnit, AbstractBattleUnit sourceUnit, int baseDamage)
+    public void AttackUnitForDamage(AbstractBattleUnit targetUnit, AbstractBattleUnit sourceUnit, int baseDamageDealt)
     {
+        Require.NotNull(targetUnit);
         QueuedActions.DelayedAction("ShakeUnit", () => {
             if (targetUnit.IsDead)
             {
@@ -368,7 +382,7 @@ public class ActionManager : MonoBehaviour
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
 
-            targetUnit.CurrentHp -= BattleRules.GetAnticipatedDamageToUnit(sourceUnit, targetUnit, baseDamage);
+            BattleRules.ProcessPreModifierDamage(sourceUnit, targetUnit, baseDamageDealt);
 
             if (targetUnit.CurrentHp <= 0)
             {
@@ -379,6 +393,7 @@ public class ActionManager : MonoBehaviour
 
     public void DestroyUnit(AbstractBattleUnit unit)
     {
+        Require.NotNull(unit);
         QueuedActions.ImmediateAction(() =>
         {
             // todo: Figure out approrpiate despawning logic.
@@ -388,6 +403,7 @@ public class ActionManager : MonoBehaviour
 
     public void ChangeUnit(AbstractBattleUnit unit, Action<AbstractBattleUnit> action)
     {
+        Require.NotNull(unit);
         QueuedActions.ImmediateAction(() =>
         {
             action(unit);

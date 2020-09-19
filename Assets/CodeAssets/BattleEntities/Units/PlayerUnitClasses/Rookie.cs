@@ -15,10 +15,12 @@ public class Rookie : AbstractAllyUnit
             new Grenade(),
             new CoveringFire(),
             new CoveringFire(),
+            new Bayonet(),
+            new Bayonet()
         });
     }
 
-    public static AbstractBattleUnit Build()
+    public static AbstractBattleUnit Generate()
     {
         return new Rookie().InitPersistentUnitFromTemplate();
     }

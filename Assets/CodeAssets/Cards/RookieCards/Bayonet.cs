@@ -6,6 +6,8 @@ public class Bayonet : AbstractCard
     public Bayonet()
     {
         Name = "Bayonet";
+        BaseDamage = 10;
+        TargetType = TargetType.ENEMY;
     }
 
     public override int BaseEnergyCost()
@@ -22,6 +24,7 @@ public class Bayonet : AbstractCard
 
     protected override void OnPlay(AbstractBattleUnit target)
     {
+        Require.NotNull(target);
         action().AttackUnitForDamage(target, Owner, BaseDamage);
     }
 

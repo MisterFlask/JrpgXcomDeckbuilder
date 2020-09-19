@@ -88,7 +88,7 @@ public abstract class AbstractCard
 
     protected virtual void OnPlay(AbstractBattleUnit target)
     {
-
+        throw new Exception("No action defined for this card");
     }
 
     public virtual void InHandAtEndOfTurnAction()
@@ -102,6 +102,7 @@ public abstract class AbstractCard
         {
             return;
         }
+
         OnPlay(target);
 
         state().energy -= this.BaseEnergyCost();

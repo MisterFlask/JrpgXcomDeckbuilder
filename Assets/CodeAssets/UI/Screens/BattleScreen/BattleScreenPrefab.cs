@@ -20,8 +20,12 @@ public class BattleScreenPrefab : MonoBehaviour
     public GameObject EnemyUnitSpotsParent;
     public GameObject AllyUnitSpotsParent;
 
+    /// <summary>
+    /// These next couple attributes are just for tracking what we're currently mousing over.
+    /// </summary>
     public static Intent IntentMousedOver { get; set; }
     public static AbstractBattleUnit BattleUnitMousedOver { get; set; }
+    public static AbstractCard CardMousedOver { get; set; }
 
     public void Setup(List<AbstractBattleUnit> StartingEnemies, List<AbstractBattleUnit> StartingAllies
         )

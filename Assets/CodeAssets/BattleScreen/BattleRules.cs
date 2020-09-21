@@ -75,4 +75,15 @@ public static class BattleRules
 
         return (int)baseDamage;
     }
+    public static int GetDisplayedDefenseOnCard(AbstractCard card)
+    {
+        float baseDamage = card.BaseDefenseValue;
+        foreach (var attribute in card.Owner.Attributes)
+        {
+            baseDamage *= attribute.DefenseDealtMultiplier();
+            baseDamage += attribute.DefenseDealtAddition();
+        }
+
+        return (int)baseDamage;
+    }
 }

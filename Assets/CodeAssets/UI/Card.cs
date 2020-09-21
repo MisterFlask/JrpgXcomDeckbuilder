@@ -17,11 +17,6 @@ namespace HyperCard
         public GameObject OtherDisplayTooltipParent;
         public CustomGuiText MightDisplayTooltipText;
         public CustomGuiText OtherDisplayTooltipText;
-        public TextMeshProUGUI powerValueText;
-        public TextMeshProUGUI toughnessValueText;
-        public GameObject powerValuePrefab;
-        public GameObject toughnessValuePrefab;
-
         public AbstractCard LogicalCard { get; set; }
         public string LogicalCardId { get; set; }
 
@@ -69,11 +64,16 @@ namespace HyperCard
         public void OnPointerExit(PointerEventData eventData)
         {
             ExplainerPanel.Hide();
+            if (BattleScreenPrefab.CardMousedOver == this.LogicalCard)
+            {
+                BattleScreenPrefab.CardMousedOver = null;
+            } 
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             ExplainerPanel.ShowCardHelp(this.LogicalCard);
+            BattleScreenPrefab.CardMousedOver = this.LogicalCard;
         }
     }
 

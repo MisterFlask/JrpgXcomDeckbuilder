@@ -10,12 +10,23 @@ public class BattleTurnEndActions
 
     internal void EndTurn()
     {
+        gameState.EnemyUnitsInBattle.ForEach(item => item.ExecuteOnIntentIfAvailable());
         actionManager.DiscardHand();
-
         ServiceLocator.GetGameStateTracker().BattleTurn++;
-        gameState.AllyUnitsInBattle.ForEach(item => item.OnTurnStart());
-        gameState.EnemyUnitsInBattle.ForEach(item => item.OnTurnStart());
 
-        actionManager.DrawCards(5);
+        ServiceLocator.GetActionManager().DoAThing(() =>
+        {
+            gameState.AllyUnitsInBattle.ForEach(item => item.OnTurnStart());
+        });
+        ServiceLocator.GetActionManager().DoAThing(() =>
+        {
+            gameState.EnemyUnitsInBattle.ForEach(item => item.OnTurnStart());
+        }); 
+            actionManager.DrawCards(5);
+        ServiceLocator.GetActionManager().DoAThing(() =>
+        {
+            ServiceLocator.GetGameStateTracker().energy = ServiceLocator.GetGameStateTracker().maxEnergy;
+        });
+
     }
 }

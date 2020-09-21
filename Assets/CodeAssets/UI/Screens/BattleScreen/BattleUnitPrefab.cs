@@ -15,6 +15,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public CustomGuiText FatigueText;
     public CustomGuiText HealthText;
     public CustomGuiText DefenseText;
+    public Image DefenseImage;
 
     public Transform IntentPrefabParent;
 
@@ -62,6 +63,16 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (UnderlyingEntity == null)
         {
             return;
+        }
+        if (UnderlyingEntity.CurrentDefense > 0)
+        {
+            DefenseText.gameObject.SetActive(true);
+            DefenseImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            DefenseText.gameObject.SetActive(false);
+            DefenseImage.gameObject.SetActive(false);
         }
         this.CharacterNameText.SetText(UnderlyingEntity.CharacterName);
         this.HealthText.SetText($"HP: {UnderlyingEntity.CurrentHp}/{UnderlyingEntity.MaxHp}");

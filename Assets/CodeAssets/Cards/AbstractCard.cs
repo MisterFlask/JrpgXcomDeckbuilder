@@ -24,7 +24,7 @@ public abstract class AbstractCard
 
     public int BaseDamage { get; set; } = 0;
 
-
+    public int BaseDefenseValue { get; set; } = 0;
 
     public int CurrentToughness { get; set; } = 0;
 
@@ -86,15 +86,22 @@ public abstract class AbstractCard
         
     }
 
-    protected virtual void OnPlay(AbstractBattleUnit target)
-    {
-        throw new Exception("No action defined for this card");
-    }
+    protected abstract void OnPlay(AbstractBattleUnit target);
 
     public virtual void InHandAtEndOfTurnAction()
     {
 
     }
+
+    public int DisplayedDefense()
+    {
+        return BattleRules.GetDisplayedDefenseOnCard(this);
+    }
+    public int DisplayedDamage()
+    {
+        return BattleRules.GetDisplayedDamageOnCard(this);
+    }
+
 
     public void PlayCardFromHandIfAble(AbstractBattleUnit target)
     {

@@ -83,7 +83,10 @@ public abstract class AbstractBattleUnit
     public void OnTurnStart()
     {
         CurrentDefense = 0;
+    }
 
+    public void ExecuteOnIntentIfAvailable()
+    {
         if (IsDead)
         {
             CurrentIntents = null;
@@ -95,7 +98,7 @@ public abstract class AbstractBattleUnit
         {
             if (CurrentIntents != null)
             {
-                foreach(var intent in CurrentIntents)
+                foreach (var intent in CurrentIntents)
                 {
                     intent.ExecuteIntent();
                 }

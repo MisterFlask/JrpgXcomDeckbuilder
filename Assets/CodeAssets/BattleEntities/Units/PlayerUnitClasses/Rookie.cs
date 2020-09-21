@@ -16,7 +16,11 @@ public class Rookie : AbstractAllyUnit
             new CoveringFire(),
             new CoveringFire(),
             new Bayonet(),
-            new Bayonet()
+            new Bayonet(),
+            new Defend(),
+            new Defend(),
+            new Defend(),
+            new Defend()
         });
     }
 

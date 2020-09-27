@@ -10,7 +10,7 @@ public class ActionManager : MonoBehaviour
 {
     private Deck deck => ServiceLocator.GetGameStateTracker().Deck;
 
-    GameState gameState;
+    GameState gameState => ServiceLocator.GetGameStateTracker();
 
     public Image ArmageddonCounterImage;
 
@@ -45,7 +45,7 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            unit.Attributes.RemoveAll(item => item.GetType() == typeof(T));
+            unit.StatusEffects.RemoveAll(item => item.GetType() == typeof(T));
         });
     }
 
@@ -61,7 +61,7 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            var preexistingAttr = unit.Attributes.FirstOrDefault(item => item.GetType() == attribute.GetType());
+            var preexistingAttr = unit.StatusEffects.FirstOrDefault(item => item.GetType() == attribute.GetType());
             if (preexistingAttr != null)
             {
                 preexistingAttr.Stacks += stacks;
@@ -71,12 +71,12 @@ public class ActionManager : MonoBehaviour
                 }
                 if (preexistingAttr.Stacks == 0)
                 {
-                    unit.Attributes.RemoveAll(item => item.GetType() == attribute.GetType());
+                    unit.StatusEffects.RemoveAll(item => item.GetType() == attribute.GetType());
                 }
             }
             else
             {
-                unit.Attributes.Add(attribute);
+                unit.StatusEffects.Add(attribute);
             }
         });
     }
@@ -185,7 +185,6 @@ public class ActionManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        gameState = ServiceLocator.GetGameStateTracker();
         gameObject.AddComponent<UiAnimationHandler>();
         animationHandler = this.GetComponent<UiAnimationHandler>();
     }
@@ -302,6 +301,59 @@ public class ActionManager : MonoBehaviour
         QueuedActions.ImmediateAction(() =>
         {
             turnEndActions.EndTurn();
+        });
+    }
+
+    public void PerformAdvanceActionIfPossible(AbstractBattleUnit unit)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            if (gameState.energy > 0)
+            {
+                gameState.energy--;
+            }
+            else
+            {
+                // TODO:  Some kind of player-visible message that they hecked up
+                return;
+            }
+            unit.StatusEffects.Add(new AdvancedStatusEffect());
+        });
+    }
+    public void PerformFallbackActionIfPossible(AbstractBattleUnit unit)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            if (gameState.energy > 0)
+            {
+                gameState.energy--;
+            }
+            else
+            {
+                // TODO:  Some kind of player-visible message that they hecked up
+                return;
+            }
+
+            unit.StatusEffects.Add(new AdvancedStatusEffect());
+        });
+    }
+
+    public void Advance(AbstractBattleUnit unit)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            unit.StatusEffects.Add(new AdvancedStatusEffect());
+        });
+    }
+
+    public void FallBack(AbstractBattleUnit unit)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            if (unit.HasStatusEffect<AdvancedStatusEffect>())
+            {
+                unit.RemoveStatusEffect<AdvancedStatusEffect>();
+            }
         });
     }
 

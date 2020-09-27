@@ -12,7 +12,7 @@ public class BasicEnemyUnit : AbstractBattleUnit
         this.IsAlly = false;
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(color: Color.red);
         this.IsAiControlled = true;
-        this.Attributes.Add(new DyingStatusEffect());
+        this.StatusEffects.Add(new DyingStatusEffect());
     }
 
     public override List<Intent> GetNextIntents()

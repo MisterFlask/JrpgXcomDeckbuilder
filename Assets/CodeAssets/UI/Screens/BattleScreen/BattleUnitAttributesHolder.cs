@@ -22,7 +22,7 @@ public class BattleUnitAttributesHolder : MonoBehaviour
 
         var children = GetComponentsInChildren<BattleUnitAttributePrefab>().ToList();
         var displayedAttributes = children.Select(item => item.CorrespondingAttribute).WhereNotNull();
-        var currentAttributes = BattleUnit.Attributes;
+        var currentAttributes = BattleUnit.StatusEffects;
         foreach(var attr in currentAttributes)
         {
             if (!displayedAttributes.Any(item => item.GetType() == attr.GetType())){

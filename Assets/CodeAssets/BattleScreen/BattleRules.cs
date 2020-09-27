@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public static class BattleRules
 {
@@ -26,7 +27,7 @@ public static class BattleRules
 
         // first, go through the attacker's attributes
         float currentTotalDefense = baseDefense;
-        foreach (var attribute in source.Attributes)
+        foreach (var attribute in source.StatusEffects)
         {
             currentTotalDefense *= attribute.DefenseDealtMultiplier();
             currentTotalDefense += attribute.DefenseDealtAddition();
@@ -34,7 +35,7 @@ public static class BattleRules
 
         // then, go through defender's attributes
 
-        foreach (var attribute in source.Attributes)
+        foreach (var attribute in source.StatusEffects)
         {
             currentTotalDefense *= attribute.DefenseReceivedMultiplier();
             currentTotalDefense += attribute.DefenseReceivedAddition();
@@ -47,7 +48,7 @@ public static class BattleRules
     {
         // first, go through the attacker's attributes
         float currentTotalDamage = baseDamage;
-        foreach(var attribute in source.Attributes)
+        foreach(var attribute in source.StatusEffects)
         {
             currentTotalDamage *= attribute.DamageDealtMultiplier();
             currentTotalDamage += attribute.DamageDealtAddition();
@@ -55,7 +56,7 @@ public static class BattleRules
 
         // then, go through defender's attributes
 
-        foreach (var attribute in source.Attributes)
+        foreach (var attribute in source.StatusEffects)
         {
             currentTotalDamage *= attribute.DamageReceivedMultiplier();
             currentTotalDamage += attribute.DamageReceivedAddition();
@@ -64,10 +65,34 @@ public static class BattleRules
         return (int) currentTotalDamage;
     }
 
+    internal static bool CanFallBack(AbstractBattleUnit underlyingEntity)
+    {
+        return (underlyingEntity.IsAdvanced);
+    }
+
+    internal static bool CanAdvance(AbstractBattleUnit underlyingEntity)
+    {
+        return (!underlyingEntity.IsAdvanced);
+    }
+
+    public static string GetAdvanceOrFallBackButtonText(AbstractBattleUnit underlyingEntity)
+    {
+        if (CanFallBack(underlyingEntity))
+        {
+            return "Fall Back";
+        }
+        else if (CanAdvance(underlyingEntity))
+        {
+            return "Advance";
+        }
+
+        return "Can't Move";
+    }
+
     public static int GetDisplayedDamageOnCard(AbstractCard card)
     {
         float baseDamage = card.BaseDamage;
-        foreach(var attribute in card.Owner.Attributes)
+        foreach(var attribute in card.Owner.StatusEffects)
         {
             baseDamage *= attribute.DamageDealtMultiplier();
             baseDamage += attribute.DamageDealtAddition();
@@ -78,7 +103,7 @@ public static class BattleRules
     public static int GetDisplayedDefenseOnCard(AbstractCard card)
     {
         float baseDamage = card.BaseDefenseValue;
-        foreach (var attribute in card.Owner.Attributes)
+        foreach (var attribute in card.Owner.StatusEffects)
         {
             baseDamage *= attribute.DefenseDealtMultiplier();
             baseDamage += attribute.DefenseDealtAddition();

@@ -12,7 +12,7 @@ public abstract class AbstractBattleUnit
 
     public bool HasStatusEffect<T>() where T:AbstractStatusEffect
     {
-        return Attributes.Any(item => item.GetType() == typeof(T));
+        return StatusEffects.Any(item => item.GetType() == typeof(T));
     }
 
     public int MaxHp { get; set; }
@@ -27,7 +27,7 @@ public abstract class AbstractBattleUnit
     public string UnitClassName { get; set; }
     public string CharacterName { get; set; } = "";
 
-    public List<AbstractStatusEffect> Attributes { get; set; } = new List<AbstractStatusEffect>();
+    public List<AbstractStatusEffect> StatusEffects { get; set; } = new List<AbstractStatusEffect>();
 
     public BattleUnitPrefab CorrespondingPrefab { get; set; }
 
@@ -150,6 +150,15 @@ public abstract class AbstractBattleUnit
     protected GameState state()
     {
         return ServiceLocator.GetGameStateTracker();
+    }
+
+    public void RemoveStatusEffect<T>() where T:AbstractStatusEffect
+    {
+        if (this.HasStatusEffect<T>())
+        {
+            var attribute = this.StatusEffects.First(item => item is T);
+            this.StatusEffects.Remove(attribute);
+        }
     }
     #endregion
 

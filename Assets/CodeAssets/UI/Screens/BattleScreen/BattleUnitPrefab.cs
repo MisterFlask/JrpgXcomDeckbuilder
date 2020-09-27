@@ -18,6 +18,8 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public Image DefenseImage;
 
     public Transform IntentPrefabParent;
+    public Button AdvanceOrRetreatButton;
+    public CustomGuiText AdvanceOrRetreatButtonText;
 
     public List<IntentPrefab> IntentPrefabs { get; set; } = new List<IntentPrefab>();
 
@@ -64,6 +66,26 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             return;
         }
+        if (UnderlyingEntity.IsAiControlled)
+        {
+            this.AdvanceOrRetreatButton.gameObject.SetActive(false);
+            this.AdvanceOrRetreatButtonText.gameObject.SetActive(false);
+        }
+        else if (BattleRules.CanAdvance(this.UnderlyingEntity))
+        {
+            this.AdvanceOrRetreatButton.interactable = true;
+        }
+        else if (BattleRules.CanFallBack(this.UnderlyingEntity))
+        {
+            this.AdvanceOrRetreatButton.interactable = true;
+        }
+        else
+        {
+            this.AdvanceOrRetreatButton.interactable = false;
+        }
+        var buttonText = BattleRules.GetAdvanceOrFallBackButtonText(this.UnderlyingEntity);
+        this.AdvanceOrRetreatButtonText.SetText(buttonText);
+
         if (UnderlyingEntity.CurrentDefense > 0)
         {
             DefenseText.gameObject.SetActive(true);

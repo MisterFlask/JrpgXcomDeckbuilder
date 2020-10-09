@@ -73,7 +73,7 @@ public abstract class AbstractBattleUnit
     
     public int Turn { get; set; } = 1;
 
-    public bool IsAdvanced { get; set; } = false;
+    public bool IsAdvanced => HasStatusEffect<AdvancedStatusEffect>();
 
     public void Die()
     {

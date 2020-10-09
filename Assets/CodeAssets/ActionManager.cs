@@ -227,6 +227,7 @@ public class ActionManager : MonoBehaviour
             {
                 if (!logicalCard.CanAfford())
                 {
+                    EnergyIconGlow.Instance.Flash();
                     Shout(logicalCard.Owner, "I don't have enough energy.");
                 }
                 else if (logicalCard.CanPlay())
@@ -346,10 +347,12 @@ public class ActionManager : MonoBehaviour
         {
             if (gameState.energy > 0)
             {
+                EnergyIconGlow.Instance.Flash();
                 gameState.energy--;
             }
             else
             {
+                EnergyIconGlow.Instance.Flash();
                 Shout(unit, "Not enough energy!");
                 return;
             }
@@ -362,10 +365,12 @@ public class ActionManager : MonoBehaviour
         {
             if (gameState.energy > 0)
             {
+                EnergyIconGlow.Instance.Flash();
                 gameState.energy--;
             }
             else
             {
+                EnergyIconGlow.Instance.Flash();
                 Shout(unit, "Not enough energy!");
                 return;
             }

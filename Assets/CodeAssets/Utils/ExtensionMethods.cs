@@ -8,6 +8,12 @@ using UnityEngine;
 
 public static class ExtensionMethods
 {
+
+    public static void AddComponentAndPerformOperation<T>(this MonoBehaviour thisObject, Action<T> thingToDo) where T: MonoBehaviour
+    {
+        thisObject.gameObject.AddComponent<T>();
+        thingToDo(thisObject.gameObject.GetComponent<T>());
+    }
     public static Color WithAlpha(this Color color, float alpha)
     {
         var ret = new Color(color.r, color.g, color.b, alpha);
@@ -280,5 +286,6 @@ public static class ExtensionMethods
     {
         return new List<T> { item };
     }
+
     #endregion
 }

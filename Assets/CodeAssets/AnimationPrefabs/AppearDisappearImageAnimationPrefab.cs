@@ -9,21 +9,25 @@ using System;
 [RequireComponent(typeof(Image))]
 public class AppearDisappearImageAnimationPrefab : MonoBehaviour
 {
-    public void Begin(Action thingToDoAfterFadingIn = null, Action thingToDoBeforeFadingOut = null)
+    public void Begin(Action thingToDoAfterFadingIn = null, Action thingToDoBeforeFadingOut = null, float fadeoutTime = .1f, float secondsToBeOpaque = 1f)
     {
-        StartCoroutine(FadeImage(.1f, 1f, thingToDoAfterFadingIn, thingToDoBeforeFadingOut));
+        StartCoroutine(FadeImage(fadeoutTime, secondsToBeOpaque, thingToDoAfterFadingIn, thingToDoBeforeFadingOut));
     }
 
     Image img => this.GetComponent<Image>();
-    IEnumerator FadeImage(float transitionTimeInSeconds, float secondsToBeOpaque, Action thingToDoAfterFadingIn = null, Action thingToDoBeforeFadingOut = null)
+    IEnumerator FadeImage(float fadeOutTimeInSeconds, float secondsToBeOpaque, Action thingToDoAfterFadingIn = null, Action thingToDoBeforeFadingOut = null)
     {
+        
+        img.color = img.color.WithAlpha(1f);
+        /*
         // loop over 1 second
-        for (float i = 0; i <= transitionTimeInSeconds; i += Time.deltaTime)
+        for (float i = 0; i <= fadeOutTimeInSeconds; i += Time.deltaTime)
         {
             // set color with i as alpha
             img.color = new Color(1, 1, 1, i);
             yield return null;
         }
+        */
         thingToDoAfterFadingIn?.Invoke();
 
         float secondsSpentOpaque = 0;
@@ -35,13 +39,14 @@ public class AppearDisappearImageAnimationPrefab : MonoBehaviour
 
         thingToDoBeforeFadingOut?.Invoke();
 
-        // loop over 1 second backwards
-        for (float i = transitionTimeInSeconds; i >= 0; i -= Time.deltaTime)
+        for (float timeSpentFading = 0; timeSpentFading <= fadeOutTimeInSeconds; timeSpentFading += Time.deltaTime)
         {
+            var fractionNotFaded = (fadeOutTimeInSeconds - timeSpentFading) / fadeOutTimeInSeconds;
             // set color with i as alpha
-            img.color = new Color(1, 1, 1, i);
+            img.color = img.color.WithAlpha(fractionNotFaded);
             yield return null;
         }
+        img.color = img.color.WithAlpha(0);
 
         Destroy(this);
     }

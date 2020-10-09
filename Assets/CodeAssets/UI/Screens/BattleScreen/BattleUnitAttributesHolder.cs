@@ -36,6 +36,16 @@ public class BattleUnitAttributesHolder : MonoBehaviour
                 attr.CorrespondingPrefab = null;
             }
         }
+        var childrenToPurge = new List<AbstractStatusEffect>();
+        foreach(var attr in displayedAttributes)
+        {
+            if (!currentAttributes.Contains(attr))
+            {
+                childrenToPurge.Add(attr);
+            }
+        }
+        this.PurgeChildrenIf<BattleUnitAttributePrefab>(item => childrenToPurge.Contains(item.CorrespondingAttribute));
+
     }
 
 }

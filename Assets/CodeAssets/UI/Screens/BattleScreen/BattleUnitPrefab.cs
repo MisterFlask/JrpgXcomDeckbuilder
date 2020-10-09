@@ -143,6 +143,13 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             highlights.gameObject.SetActive(false);
         }
+
+        if (UnderlyingEntity.IsAiControlled)
+        {
+            // remove all the player interaction widgets
+            this.AdvanceOrRetreatButton.gameObject.SetActive(false);
+            this.FatigueText.gameObject.SetActive(false);
+        }
     }
 
     private void RemoveHighlights(Image spriteImage)

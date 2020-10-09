@@ -633,6 +633,7 @@ GameObject:
   - component: {fileID: 7087299421170647948}
   - component: {fileID: 6538203360648145573}
   - component: {fileID: 8608858815485725499}
+  - component: {fileID: 6642384838009878841}
   m_Layer: 0
   m_Name: AdvanceOrRetreatActionButton
   m_TagString: Untagged
@@ -657,8 +658,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -48.8, y: -1.6}
-  m_SizeDelta: {x: 36.77, y: 19.64}
+  m_AnchoredPosition: {x: -58.3, y: 3.47}
+  m_SizeDelta: {x: 55.76, y: 29.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7087299421170647948
 CanvasRenderer:
@@ -739,17 +740,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 6642384838009878841}
+        m_MethodName: AdvanceOrRetreatAsAppropriate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6642384838009878841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276469410231468443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 098b33cee685c8b428bc2b8b71896d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleUnitPrefab: {fileID: 599083291170331344}
 --- !u!1 &1939579082787562140
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,7 +856,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 7.25
+  m_fontSize: 12.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

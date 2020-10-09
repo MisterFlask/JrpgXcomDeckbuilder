@@ -216,14 +216,28 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    public void DeployCardSelectedIfApplicable(Card card, QueueingType queueingType = QueueingType.TO_BACK
+    public void PlayCardSelectedIfApplicable(Card card, QueueingType queueingType = QueueingType.TO_BACK
         )
     {
         QueuedActions.ImmediateAction(() =>
         {
-#pragma warning disable CS0618 // Type or member is obsolete
-            gameState.DeployCardSelectedIfApplicable(card);
-#pragma warning restore CS0618 // Type or member is obsolete
+            var cardSelected = card;
+            if (cardSelected != null)
+            {
+                var behavior = cardSelected.GetComponent<PlayerCard>().LogicalCard;
+                if (behavior.CanPlay())
+                {
+                    behavior.PlayCardFromHandIfAble(null);
+                }
+                else
+                {
+                    Shout(card.LogicalCard.Owner, "I can't play this!");
+                }
+            }
+            else
+            {
+                throw new System.Exception("Could not deploy card!  None selected.");
+            }
         }, queueingType);
     }
 
@@ -300,6 +314,26 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
+            turnEndActions.EndTurn();
+        });
+    }
+
+    public void Shout(AbstractBattleUnit unit, string stuffToSay)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            var speechBubbleText = unit.CorrespondingPrefab.SpeechBubbleText;
+            var bubbleImg = unit.CorrespondingPrefab.SpeechBubble;
+            bubbleImg.gameObject.AddComponent<AppearDisappearImageAnimationPrefab>();
+            var appearDisappearPrefab = bubbleImg.gameObject.GetComponent<AppearDisappearImageAnimationPrefab>();
+            appearDisappearPrefab.Begin(thingToDoAfterFadingIn: () => { 
+                speechBubbleText.gameObject.SetActive(true);
+                speechBubbleText.SetText(stuffToSay);
+            }, thingToDoBeforeFadingOut:()=>
+            {
+                speechBubbleText.gameObject.SetActive(false);
+            });
+
             turnEndActions.EndTurn();
         });
     }

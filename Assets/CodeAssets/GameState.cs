@@ -55,23 +55,6 @@ public class GameState : MonoBehaviour
         this.cardSelected = null;
     }
 
-    [Obsolete("Use Actionmanager instead")]
-    public void DeployCardSelectedIfApplicable(Card card)
-    {
-        var cardSelected = card;
-        if (cardSelected != null)
-        {
-            var behavior = cardSelected.GetComponent<PlayerCard>().LogicalCard;
-            if (behavior.CanPlay())
-            {
-                behavior.PlayCardFromHandIfAble(null);
-            }
-        }
-        else
-        {
-            throw new System.Exception("Could not deploy card!  None selected.");
-        }
-    }
     #endregion
 
     #region resources

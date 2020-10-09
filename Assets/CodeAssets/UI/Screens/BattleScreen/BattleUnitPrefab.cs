@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEngine.EventSystems;
 using System;
 
-public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public CustomGuiText CharacterNameText;
     public Image SpriteImage;
@@ -20,6 +20,9 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public Transform IntentPrefabParent;
     public Button AdvanceOrRetreatButton;
     public CustomGuiText AdvanceOrRetreatButtonText;
+
+    public Image SpeechBubble;
+    public CustomGuiText SpeechBubbleText;
 
     public List<IntentPrefab> IntentPrefabs { get; set; } = new List<IntentPrefab>();
 
@@ -180,5 +183,10 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         Debug.Log("Exited battle unit prefab; unsetting battle unit moused over");
         BattleScreenPrefab.BattleUnitMousedOver = null;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ServiceLocator.GetActionManager().Shout(this.UnderlyingEntity, "Clicked on unit.");
     }
 }

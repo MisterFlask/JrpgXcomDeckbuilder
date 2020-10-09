@@ -8,6 +8,8 @@ using HyperCard;
 
 public class ActionManager : MonoBehaviour
 {
+    public static ActionManager Instance => ServiceLocator.GetActionManager();
+
     private Deck deck => ServiceLocator.GetGameStateTracker().Deck;
 
     GameState gameState => ServiceLocator.GetGameStateTracker();
@@ -216,22 +218,24 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    public void PlayCardSelectedIfApplicable(Card card, QueueingType queueingType = QueueingType.TO_BACK
+    public void AttemptPlayCardFromHand(AbstractCard logicalCard, AbstractBattleUnit target, QueueingType queueingType = QueueingType.TO_BACK
         )
     {
         QueuedActions.ImmediateAction(() =>
         {
-            var cardSelected = card;
-            if (cardSelected != null)
+            if (logicalCard != null)
             {
-                var behavior = cardSelected.GetComponent<PlayerCard>().LogicalCard;
-                if (behavior.CanPlay())
+                if (!logicalCard.CanAfford())
                 {
-                    behavior.PlayCardFromHandIfAble(null);
+                    Shout(logicalCard.Owner, "I don't have enough energy.");
+                }
+                else if (logicalCard.CanPlay())
+                {
+                    logicalCard.PlayCardFromHandIfAble(target);
                 }
                 else
                 {
-                    Shout(card.LogicalCard.Owner, "I can't play this!");
+                    Shout(logicalCard.Owner, "I can't play this!");
                 }
             }
             else
@@ -333,8 +337,6 @@ public class ActionManager : MonoBehaviour
             {
                 speechBubbleText.gameObject.SetActive(false);
             });
-
-            turnEndActions.EndTurn();
         });
     }
 
@@ -348,7 +350,7 @@ public class ActionManager : MonoBehaviour
             }
             else
             {
-                // TODO:  Some kind of player-visible message that they hecked up
+                Shout(unit, "Not enough energy!");
                 return;
             }
             unit.StatusEffects.Add(new AdvancedStatusEffect());
@@ -364,11 +366,11 @@ public class ActionManager : MonoBehaviour
             }
             else
             {
-                // TODO:  Some kind of player-visible message that they hecked up
+                Shout(unit, "Not enough energy!");
                 return;
             }
 
-            unit.StatusEffects.Add(new AdvancedStatusEffect());
+            unit.RemoveStatusEffect<AdvancedStatusEffect>();
         });
     }
 

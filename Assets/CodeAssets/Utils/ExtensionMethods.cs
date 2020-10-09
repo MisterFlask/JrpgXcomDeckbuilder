@@ -223,7 +223,9 @@ public static class ExtensionMethods
         }
         hyperCard.SetCardTitle(abstractCard.Name);
         hyperCard.SetCardDescription(BuildTextBoxStringForCard(abstractCard));
-        hyperCard.SetCardTags(abstractCard.CardType.ToString());
+        var ownerName = abstractCard.Owner?.CharacterName ?? "Communal";
+        hyperCard.SetCardTopText($"{ownerName} | {abstractCard.CardType}");
+
         hyperCard.SetCardEnergyCost(abstractCard.BaseEnergyCost());
         hyperCard.LogicalCardId = abstractCard.Id;
         hyperCard.LogicalCard = abstractCard;

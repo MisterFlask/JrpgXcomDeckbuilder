@@ -7,6 +7,7 @@ public class Defend : AbstractCard
     {
         this.Name = "Defend";
         this.TargetType = TargetType.ALLY;
+        this.CardType = CardType.SkillCard;
         this.BaseDefenseValue = 10;
     }
 

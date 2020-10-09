@@ -15,8 +15,9 @@ public class CardType
         return Name;
     }
 
-    public static CardType LegionCard = new CardType("Legion");
-    public static CardType TechCard = new CardType("Tech");
-    public static CardType ConstructionCard = new CardType("Construction");
+    public static CardType AttackCard = new CardType("Attack");
+    public static CardType SkillCard = new CardType("Skill");
+    public static CardType PowerCard = new CardType("Power");
+    public static CardType StatusCard = new CardType("Status");
 
 }

@@ -8,6 +8,7 @@ public class CoveringFire : AbstractCard
     {
         this.BaseDamage = 2;
         TargetType = TargetType.ENEMY;
+        CardType = CardType.AttackCard;
         Name = "Covering Fire";
     }
 

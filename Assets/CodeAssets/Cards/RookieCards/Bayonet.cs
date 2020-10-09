@@ -8,6 +8,7 @@ public class Bayonet : AbstractCard
         Name = "Bayonet";
         BaseDamage = 10;
         TargetType = TargetType.ENEMY;
+        CardType = CardType.AttackCard;
     }
 
     public override int BaseEnergyCost()

@@ -51,7 +51,7 @@ namespace HyperCard
         {
             energyCost.text = text.ToString();
         }
-        public void SetCardTags(string text)
+        public void SetCardTopText(string text)
         {
             cardTags.text = text;
         }

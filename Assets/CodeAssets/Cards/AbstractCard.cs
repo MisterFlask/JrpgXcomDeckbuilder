@@ -57,7 +57,7 @@ public abstract class AbstractCard
 
     public AbstractCard(CardType cardType = null)
     {
-        this.CardType = cardType ?? CardType.TechCard;
+        this.CardType = cardType ?? CardType.SkillCard;
     }
 
     public virtual int BaseEnergyCost()

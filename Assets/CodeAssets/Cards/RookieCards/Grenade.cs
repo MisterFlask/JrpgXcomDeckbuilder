@@ -7,6 +7,7 @@ public class Grenade : AbstractCard
     {
         this.BaseDamage = 5;
         TargetType = TargetType.ENEMY;
+        CardType = CardType.AttackCard;
         Name = "Grenade";
     }
 

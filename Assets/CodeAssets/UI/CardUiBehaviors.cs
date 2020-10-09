@@ -8,6 +8,7 @@ using System;
 
 public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
+    AbstractCard logicalCard => this.GetComponent<PlayerCard>().LogicalCard;
 
     private Vector3 handleToOriginVector;
     public bool isDragging;
@@ -74,7 +75,6 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     protected void SendMessageToFirstValidMouseButtonUpHandler(Vector2 position)
     {
-        var logicalCard = this.GetComponent<PlayerCard>().LogicalCard;
         var elements = GetAllUIElements(position);
         if (elements == null)
         {
@@ -102,24 +102,35 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 break;
             }
             var battleUnitMousedOver = element.GetComponent<BattleUnitPrefab>();
+            var battleUnitTargeted = battleUnitMousedOver?.UnderlyingEntity;
+
             if (battleUnitMousedOver != null 
                 && battleUnitMousedOver.UnderlyingEntity != null 
                 && logicalCard.TargetType != TargetType.NO_TARGET_OR_SELF)
             {
                 if (logicalCard.TargetType == TargetType.ENEMY && battleUnitMousedOver.UnderlyingEntity.IsEnemy)
                 {
-                    logicalCard.PlayCardFromHandIfAble(battleUnitMousedOver.UnderlyingEntity);
+                    ActionManager.Instance.AttemptPlayCardFromHand(this.logicalCard, battleUnitMousedOver.UnderlyingEntity);
                 }
                 if (logicalCard.TargetType == TargetType.ALLY && battleUnitMousedOver.UnderlyingEntity.IsAlly)
                 {
-                    logicalCard.PlayCardFromHandIfAble(battleUnitMousedOver.UnderlyingEntity);
+                    ActionManager.Instance.AttemptPlayCardFromHand(this.logicalCard, battleUnitMousedOver.UnderlyingEntity);
+                }
+
+                if (logicalCard.TargetType == TargetType.ALLY && battleUnitMousedOver.UnderlyingEntity.IsEnemy)
+                {
+                    ActionManager.Instance.Shout(logicalCard.Owner, "This card can only be played on allies.");
+                }
+                if (logicalCard.TargetType == TargetType.ENEMY && battleUnitMousedOver.UnderlyingEntity.IsAlly)
+                {
+                    ActionManager.Instance.Shout(logicalCard.Owner, "This card can only be played on enemies.");
                 }
             }
 
             if (element.GetComponent<CardPlayArea>() != null && logicalCard.TargetType == TargetType.NO_TARGET_OR_SELF)
             {
-                logicalCard.PlayCardFromHandIfAble(null);
-            } 
+                ActionManager.Instance.AttemptPlayCardFromHand(this.logicalCard, null);
+            }
 
         }
 

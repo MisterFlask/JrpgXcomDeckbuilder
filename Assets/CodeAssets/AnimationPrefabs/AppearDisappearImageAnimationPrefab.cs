@@ -11,35 +11,32 @@ public class AppearDisappearImageAnimationPrefab : MonoBehaviour
 {
     public void Begin(Action thingToDoAfterFadingIn = null, Action thingToDoBeforeFadingOut = null)
     {
-        StartCoroutine(FadeImage(.4f, 3f, thingToDoAfterFadingIn, thingToDoBeforeFadingOut));
+        StartCoroutine(FadeImage(.1f, 1f, thingToDoAfterFadingIn, thingToDoBeforeFadingOut));
     }
 
     Image img => this.GetComponent<Image>();
-    IEnumerator FadeImage(float timeToFadeInSeconds, float secondsToWaitBeforeFading, Action thingToDoAfterFadingIn = null, Action thingToDoBeforeFadingOut = null)
+    IEnumerator FadeImage(float transitionTimeInSeconds, float secondsToBeOpaque, Action thingToDoAfterFadingIn = null, Action thingToDoBeforeFadingOut = null)
     {
         // loop over 1 second
-        for (float i = 0; i <= timeToFadeInSeconds; i += Time.deltaTime)
+        for (float i = 0; i <= transitionTimeInSeconds; i += Time.deltaTime)
         {
             // set color with i as alpha
             img.color = new Color(1, 1, 1, i);
             yield return null;
         }
-        if (thingToDoAfterFadingIn != null)
+        thingToDoAfterFadingIn?.Invoke();
+
+        float secondsSpentOpaque = 0;
+        while (secondsSpentOpaque < secondsToBeOpaque)
         {
-            thingToDoAfterFadingIn();
-        }
-        float timeSpentOpaque = 0;
-        while (timeSpentOpaque < secondsToWaitBeforeFading)
-        {
-            timeSpentOpaque += Time.deltaTime;
-        }
-        if (thingToDoBeforeFadingOut != null)
-        {
-            thingToDoBeforeFadingOut();
+            secondsSpentOpaque += Time.deltaTime;
+            yield return null;
         }
 
+        thingToDoBeforeFadingOut?.Invoke();
+
         // loop over 1 second backwards
-        for (float i = timeToFadeInSeconds; i >= 0; i -= Time.deltaTime)
+        for (float i = transitionTimeInSeconds; i >= 0; i -= Time.deltaTime)
         {
             // set color with i as alpha
             img.color = new Color(1, 1, 1, i);

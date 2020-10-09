@@ -9,7 +9,7 @@ public class DeployCardButton : MonoBehaviour
     public void HandleOnMouseButtonUpEvent()
     {
         Debug.Log("Mouse up event on Deploy Card Button");
-        ServiceLocator.GetActionManager().PlayCardSelectedIfApplicable(ServiceLocator.GetGameStateTracker().GetCardSelected());
+        // ServiceLocator.GetActionManager().PlayCardSelectedIfApplicable(ServiceLocator.GetGameStateTracker().GetCardSelected());
     }
 
 

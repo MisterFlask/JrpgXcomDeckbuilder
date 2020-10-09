@@ -27,9 +27,10 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public List<IntentPrefab> IntentPrefabs { get; set; } = new List<IntentPrefab>();
 
     public AbstractBattleUnit UnderlyingEntity { get; private set; }
+    public Image highlights;
+
     Color OriginalImageColor { get; set; }
     Color BrighterImageColor { get; set; }
-
 
     public void Initialize(AbstractBattleUnit entity)
     {
@@ -43,6 +44,8 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         OriginalImageColor = SpriteImage.color;
         BrighterImageColor = SpriteImage.color * 1.5f;
+
+        highlights.gameObject.SetActive(false);
     }
 
     public void HideUnit()
@@ -134,27 +137,32 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         if (ShouldHighlight())
         {
-            Highlight(this.SpriteImage);
+            highlights.gameObject.SetActive(true);
         }
         else
         {
-            RemoveHighlights(this.SpriteImage);
+            highlights.gameObject.SetActive(false);
         }
     }
 
     private void RemoveHighlights(Image spriteImage)
     {
-        spriteImage.color = OriginalImageColor;
+        // spriteImage.color = OriginalImageColor;
     }
 
     private void Highlight(Image spriteImage)
     {
-        spriteImage.color = BrighterImageColor;
+
+        // spriteImage.color = BrighterImageColor;
     }
 
     private bool ShouldHighlight()
     {
-        return BattleScreenPrefab.IntentMousedOver?.UnitsTargeted?.Contains(this.UnderlyingEntity) ?? false || BattleScreenPrefab.IntentMousedOver?.Source == this.UnderlyingEntity;
+        var intentIsRelevant = BattleScreenPrefab.IntentMousedOver?.UnitsTargeted?.Contains(this.UnderlyingEntity) ?? false
+            || BattleScreenPrefab.IntentMousedOver?.Source == this.UnderlyingEntity;
+        var unitIsRelevant = BattleScreenPrefab.CardMousedOver?.Owner == this.UnderlyingEntity;
+
+        return intentIsRelevant || unitIsRelevant;
     }
 
     public List<Intent> IntentsRelevantToCharacter()

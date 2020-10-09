@@ -18,7 +18,7 @@ public class EnergyIconGlow : MonoBehaviour
     {
         image.AddComponentAndPerformOperation<AppearDisappearImageAnimationPrefab>((anim) =>
         {
-            anim.Begin(fadeoutTime: 2f, secondsToBeOpaque: 0f);
+            anim.Begin(fadeoutTime: 1f, secondsToBeOpaque: 0f);
         });
     }
 

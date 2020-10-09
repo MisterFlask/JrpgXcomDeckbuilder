@@ -60,7 +60,7 @@ public class GameState : MonoBehaviour
     #region resources
 
 
-    public int coins { get; private set; } = 0;
+    public int coins { get; set; } = 0;
     public int energy { get; set; } = 3;
     public int maxEnergy { get; set; } = 3;
 

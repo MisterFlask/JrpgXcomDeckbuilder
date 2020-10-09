@@ -56,6 +56,14 @@ namespace HyperCard
             cardTags.text = text;
         }
 
+        public void Update()
+        {
+            if (LogicalCard != null)
+            {
+                Refresh();
+            }
+        }
+
         public void Refresh()
         {
             this.SetToAbstractCardAttributes(LogicalCard);

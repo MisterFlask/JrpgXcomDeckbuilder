@@ -43,6 +43,12 @@ public class ActionManager : MonoBehaviour
         });
     }
 
+    public void ModifyMoney(int newMoneyAmount)
+    {
+        gameState.coins = newMoneyAmount;
+        MoneyIconGlow.Instance.Flash();
+    }
+
     public void RemoveStatusEffect<T>(AbstractBattleUnit unit) where T: AbstractStatusEffect
     {
         QueuedActions.ImmediateAction(() =>

@@ -3,9 +3,9 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public abstract class Intent
+public abstract class AbstractIntent
 {
-    public Intent(AbstractBattleUnit source,
+    public AbstractIntent(AbstractBattleUnit source,
         List<AbstractBattleUnit> unitsTargeted = null,
         ProtoGameSprite protoSprite = null)
     {
@@ -18,6 +18,7 @@ public abstract class Intent
 
 
     public void ExecuteIntent()
+
     {
         if (Source.IsDead)
         {

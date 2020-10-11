@@ -7,7 +7,7 @@ public class IntentPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 {
     public CustomGuiText Text;
     public Image Picture;
-    public Intent UnderlyingIntent { get; set; }
+    public AbstractIntent UnderlyingIntent { get; set; }
 
     private Color OriginalImageColor { get; set; }
     private Color BrighterImageColor { get; set; }

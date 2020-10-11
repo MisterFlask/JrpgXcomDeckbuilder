@@ -172,10 +172,10 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         return intentIsRelevant || unitIsRelevant;
     }
 
-    public List<Intent> IntentsRelevantToCharacter()
+    public List<AbstractIntent> IntentsRelevantToCharacter()
     {
         // intents where I am being TARGETED.
-        var intentsAccumulator = new List<Intent>();
+        var intentsAccumulator = new List<AbstractIntent>();
 
         foreach(var enemyCharacter in ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle){
             var intentsForThisEnemy = enemyCharacter.CurrentIntents;
@@ -183,7 +183,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
 
         // My own intents
-        var myOwnIntents = this.UnderlyingEntity.CurrentIntents ?? new List<Intent>();
+        var myOwnIntents = this.UnderlyingEntity.CurrentIntents ?? new List<AbstractIntent>();
         intentsAccumulator.AddRange(myOwnIntents);
         return intentsAccumulator;
     }

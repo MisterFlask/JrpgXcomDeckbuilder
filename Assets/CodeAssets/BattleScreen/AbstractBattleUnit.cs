@@ -88,11 +88,11 @@ public abstract class AbstractBattleUnit
         _CardsInPersistentDeck.Add(card);
     }
 
-    public abstract List<Intent> GetNextIntents();
+    public abstract List<AbstractIntent> GetNextIntents();
 
     public bool IsAiControlled = true;
 
-    public List<Intent> CurrentIntents = new List<Intent>();
+    public List<AbstractIntent> CurrentIntents = new List<AbstractIntent>();
     
     public int Turn { get; set; } = 1;
 
@@ -150,7 +150,7 @@ public abstract class AbstractBattleUnit
         BattleDeck.AddRange(CardsInPersistentDeck);
     }
 
-    public AbstractBattleUnit InitPersistentUnitFromTemplate()
+    public AbstractBattleUnit CloneUnit()
     {
         var copy = (AbstractBattleUnit)this.MemberwiseClone();
         copy.Guid = GUID.Generate().ToString();
@@ -202,6 +202,17 @@ public abstract class AbstractBattleUnit
                 attribute.Stacks -= stacksToRemove ?? 0;
             }
         }
+    }
+
+    private bool difficultyInitialized = false;
+    public virtual void SetDifficulty(int difficulty)
+    {
+        if (difficultyInitialized)
+        {
+            throw new Exception("Initialized difficulty twice!");
+        }
+        difficultyInitialized = true;
+        AddStatusEffect(new PowerStatusEffect(), difficulty);
     }
     #endregion
 

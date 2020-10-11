@@ -23,7 +23,7 @@ public class BattleScreenPrefab : MonoBehaviour
     /// <summary>
     /// These next couple attributes are just for tracking what we're currently mousing over.
     /// </summary>
-    public static Intent IntentMousedOver { get; set; }
+    public static AbstractIntent IntentMousedOver { get; set; }
     public static AbstractBattleUnit BattleUnitMousedOver { get; set; }
     public static AbstractCard CardMousedOver { get; set; }
 

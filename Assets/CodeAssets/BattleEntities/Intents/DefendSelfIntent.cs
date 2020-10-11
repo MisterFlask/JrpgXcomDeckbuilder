@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class DefendSelfIntent : Intent
+public class DefendSelfIntent : AbstractIntent
 {
     public DefendSelfIntent(AbstractBattleUnit source) : base(source, source.ToSingletonList())
     {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SingleUnitAttackIntent : Intent
+public class SingleUnitAttackIntent : AbstractIntent
 {
     public SingleUnitAttackIntent(AbstractBattleUnit Source,
                         AbstractBattleUnit Target,

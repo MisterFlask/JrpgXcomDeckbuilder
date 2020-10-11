@@ -7,26 +7,26 @@ public abstract class Mission
     public string Name { get; set; }
     public int Difficulty { get; set; } // 1 to 5
 
-    public void OnFailed()
+    public virtual  void OnFailed()
     {
 
     }
 
-    public void OnSuccess()
+    public virtual void OnSuccess()
     {
 
     }
 
-    public bool IsFailed()
+    public virtual bool IsFailed()
     {
         return false;
     }
-    public void OnStartOfBattle()
+    public virtual void OnStartOfBattle()
     {
 
     }
 
-    public List<AbstractBattleUnit> StartingEnemies()
+    public virtual List<AbstractBattleUnit> StartingEnemies()
     {
         return new List<AbstractBattleUnit>();
     }

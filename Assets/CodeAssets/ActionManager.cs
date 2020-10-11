@@ -45,7 +45,7 @@ public class ActionManager : MonoBehaviour
 
     public void ModifyMoney(int newMoneyAmount)
     {
-        gameState.coins = newMoneyAmount;
+        gameState.money = newMoneyAmount;
         MoneyIconGlow.Instance.Flash();
     }
 

@@ -26,7 +26,7 @@ public class Rookie : AbstractAllyUnit
 
     public static AbstractBattleUnit Generate()
     {
-        return new Rookie().InitPersistentUnitFromTemplate();
+        return new Rookie().CloneUnit();
     }
 
     public override List<AbstractCard> CardsSelectableOnLevelUp()

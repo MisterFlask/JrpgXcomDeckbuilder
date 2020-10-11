@@ -10,9 +10,9 @@ public abstract class AbstractAllyUnit : AbstractBattleUnit
         this.IsAiControlled = false;
     }
 
-    public override List<Intent> GetNextIntents()
+    public override List<AbstractIntent> GetNextIntents()
     {
-        return new List<Intent>();
+        return new List<AbstractIntent>();
     }
 
     public abstract List<AbstractCard> CardsSelectableOnLevelUp();

@@ -15,8 +15,8 @@ public class BasicEnemyUnit : AbstractBattleUnit
         this.StatusEffects.Add(new DyingStatusEffect());
     }
 
-    public override List<Intent> GetNextIntents()
+    public override List<AbstractIntent> GetNextIntents()
     {
-        return new List<Intent> { new SingleUnitAttackIntent(this, IntentTargeting.GetRandomPlayerUnit(), 5) };
+        return new List<AbstractIntent> { new SingleUnitAttackIntent(this, IntentTargeting.GetRandomPlayerUnit(), 5) };
     }
 }

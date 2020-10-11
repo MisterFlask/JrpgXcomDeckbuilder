@@ -16,9 +16,9 @@ public class Greywing : AbstractEnemyUnit
         this.AddStatusEffect(new GreywingWoundOnDeath(), stacks: 4);
     }
 
-    public override List<Intent> GetNextIntents()
+    public override List<AbstractIntent> GetNextIntents()
     {
-        return SingleUnitAttackIntent.AttackRandomEnemy(this, 3, 2).ToSingletonList<Intent>();
+        return SingleUnitAttackIntent.AttackRandomEnemy(this, 3, 2).ToSingletonList<AbstractIntent>();
     }
 }
 

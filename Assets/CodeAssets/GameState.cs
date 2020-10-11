@@ -9,8 +9,11 @@ using System.Linq;
 
 public class GameState : MonoBehaviour
 {
+
+    public static GameState Instance;
     public void Start()
     {
+        Instance = this;
         var totalDeck = new List<AbstractCard>
         {
         }; //Temporary
@@ -60,7 +63,7 @@ public class GameState : MonoBehaviour
     #region resources
 
 
-    public int coins { get; set; } = 0;
+    public int money { get; set; } = 0;
     public int energy { get; set; } = 3;
     public int maxEnergy { get; set; } = 3;
 
@@ -68,7 +71,7 @@ public class GameState : MonoBehaviour
 
     public void ModifyCoin(int mod)
     {
-        coins += mod;
+        money += mod;
         UpdateResources();
     }
 
@@ -76,7 +79,7 @@ public class GameState : MonoBehaviour
 
     public void UpdateResources()
     {
-        this.coinResourceText.text = coins.ToString();
+        this.coinResourceText.text = money.ToString();
         this.energyResourceText.text = $"{energy}/{maxEnergy}";
     }
 

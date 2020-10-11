@@ -8,16 +8,34 @@ public static class CampaignMapState
     public static List<AbstractBattleUnit> CurrentSelectedParty;
 
     public static List<Mission> MissionsSelectable;
-    public static int Money => ServiceLocator.GetGameStateTracker().coins;
+    public static int Money => ServiceLocator.GetGameStateTracker().money;
 
     public static ShopData shopData;
     
 
     public static void InitializeRoster()
     {
-
+        Roster = new List<AbstractBattleUnit>
+        {
+            new Rookie(),
+            new Rookie(),
+            new Rookie(),
+            new Rookie(),
+            new Rookie()
+        };
     }
 
+    private static MissionGenerator missionGenerator = new MissionGenerator();
+
+    public static void InitializeSelectableMissions() 
+    {
+        MissionsSelectable = new List<Mission>
+        {
+            missionGenerator.GenerateNewMission(),
+            missionGenerator.GenerateNewMission(),
+            missionGenerator.GenerateNewMission()
+        };
+    }
 
 
 }
@@ -39,7 +57,7 @@ public abstract class AbstractShopOffer
 
     public void Purchase()
     {
-        ServiceLocator.GetGameStateTracker().coins -= Price;
+        ServiceLocator.GetGameStateTracker().money -= Price;
         MoneyIconGlow.Instance.Flash();
     }
 

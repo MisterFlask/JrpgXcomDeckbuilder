@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public abstract class Mission 
 {
     public string Name { get; set; }
-    public int Difficulty { get; set; }
+    public int Difficulty { get; set; } // 1 to 5
 
     public void OnFailed()
     {
@@ -31,5 +31,5 @@ public abstract class Mission
         return new List<AbstractBattleUnit>();
     }
 
-    public int MaxNumberOfFriendlyCharacters { get; set; } = 4;
+    public int MaxNumberOfFriendlyCharacters { get; set; } = 3;
 }

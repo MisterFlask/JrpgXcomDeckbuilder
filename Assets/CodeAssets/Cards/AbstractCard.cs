@@ -102,7 +102,6 @@ public abstract class AbstractCard
         return BattleRules.GetDisplayedDamageOnCard(this);
     }
 
-
     public void PlayCardFromHandIfAble(AbstractBattleUnit target)
     {
         if (!CanPlay())
@@ -110,9 +109,8 @@ public abstract class AbstractCard
             return;
         }
 
+        BattleRules.ProcessPlayingCardEnergyCost(this);
         OnPlay(target);
-
-        state().energy -= this.BaseEnergyCost();
         
         if (state().Deck.Hand.Contains(this))
         {

@@ -44,10 +44,32 @@ public abstract class AbstractBattleUnit
 
     public List<AbstractCard> BattleDeck { get; set; } = new List<AbstractCard>();
 
-    public void ResetPersistentDeck()
+    public void InitializePersistentDeck()
     {
         _CardsInPersistentDeck = new List<AbstractCard>();
         AddCardsToPersistentDeck(StartingCardsInDeck);
+    }
+
+    public void AddStatusEffect<T>(T effect, int stacks = 1) where T:AbstractStatusEffect
+    {
+        if (HasStatusEffect<T>() && !GetStatusEffect<T>().Stackable)
+        {
+            return;
+        }
+        if (HasStatusEffect<T>())
+        {
+            GetStatusEffect<T>().Stacks += stacks;
+        }
+        else
+        {
+            effect.Stacks = stacks;
+            StatusEffects.Add(effect);
+        }
+    }
+
+    public AbstractStatusEffect GetStatusEffect<T>()
+    {
+        return this.StatusEffects.Where(item => item is T).FirstOrDefault();
     }
 
     public void AddCardsToPersistentDeck(IEnumerable<AbstractCard> cards)
@@ -123,7 +145,7 @@ public abstract class AbstractBattleUnit
     {
         var copy = (AbstractBattleUnit)this.MemberwiseClone();
         copy.Guid = GUID.Generate().ToString();
-        copy.ResetPersistentDeck();
+        copy.InitializePersistentDeck();
         var newName = CharacterNameGenerator.GenerateCharacterName();
         copy.CurrentFatigue = MaxFatigue;
         copy.CurrentHp = MaxHp;
@@ -152,12 +174,24 @@ public abstract class AbstractBattleUnit
         return ServiceLocator.GetGameStateTracker();
     }
 
-    public void RemoveStatusEffect<T>() where T:AbstractStatusEffect
+    /// <summary>
+    /// If stacksToRemove is null, removes all stacks.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="stacksToRemove"></param>
+    public void RemoveStatusEffect<T>(int? stacksToRemove = null) where T:AbstractStatusEffect
     {
         if (this.HasStatusEffect<T>())
         {
             var attribute = this.StatusEffects.First(item => item is T);
-            this.StatusEffects.Remove(attribute);
+            if (stacksToRemove == null)
+            {
+                this.StatusEffects.Remove(attribute);
+            }
+            else
+            {
+                attribute.Stacks -= stacksToRemove ?? 0;
+            }
         }
     }
     #endregion

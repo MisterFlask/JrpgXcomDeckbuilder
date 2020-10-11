@@ -25,8 +25,8 @@ public class GameState : MonoBehaviour
     }
     private List<Mission> Missions { get; set; } = new List<Mission>();
 
-    public Text coinResourceText;
-    public Text energyResourceText;
+    public TMPro.TextMeshProUGUI coinResourceText;
+    public TMPro.TextMeshProUGUI energyResourceText;
 
     public int BattleTurn { get; set; }
     public Deck Deck { get; set; } = new Deck();

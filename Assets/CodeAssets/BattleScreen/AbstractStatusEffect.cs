@@ -38,7 +38,17 @@ public abstract class AbstractStatusEffect
         
     }
 
-    public virtual void OnDeath()
+    public virtual void OnDeath(AbstractBattleUnit unitThatKilledMe)
+    {
+
+    }
+
+    public virtual void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
+    {
+
+    }
+
+    public virtual void OnStriking(AbstractBattleUnit unitStriking, int totalDamageDealt)
     {
 
     }

@@ -16,6 +16,11 @@ public class SingleUnitAttackIntent : Intent
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(color: Color.red, path: "Sprites/crossed-swords");
     }
 
+    public static SingleUnitAttackIntent AttackRandomEnemy(AbstractBattleUnit source, int damage, int numTimesStruck)
+    {
+        return new SingleUnitAttackIntent(source, IntentTargeting.GetRandomPlayerUnit(), damage, numTimesStruck);
+    }
+
     private ActionManager action => ServiceLocator.GetActionManager();
 
     public AbstractBattleUnit Target { get; }

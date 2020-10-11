@@ -4,6 +4,27 @@ using System;
 
 public static class BattleRules
 {
+
+    public static int GetActualEnergyCost(AbstractCard card)
+    {
+        var owner = card.Owner;
+        var ownerFatigue = owner.CurrentFatigue;
+        if (ownerFatigue <= 0)
+        {
+            return card.BaseEnergyCost() + 1;
+        }
+        else
+        {
+            return card.BaseEnergyCost();
+        }
+    }
+
+    public static void ProcessPlayingCardEnergyCost(AbstractCard card)
+    {
+        ServiceLocator.GetGameStateTracker().energy -= GetActualEnergyCost(card);
+        EnergyIconGlow.Instance.Flash();
+    }
+
     public static void ProcessPreModifierDamage(AbstractBattleUnit source, AbstractBattleUnit target, int baseDamage)
     {
         var totalDamageAfterModifiers = GetAnticipatedDamageToUnit(source, target, baseDamage);
@@ -56,7 +77,7 @@ public static class BattleRules
 
         // then, go through defender's attributes
 
-        foreach (var attribute in source.StatusEffects)
+        foreach (var attribute in target.StatusEffects)
         {
             currentTotalDamage *= attribute.DamageReceivedMultiplier();
             currentTotalDamage += attribute.DamageReceivedAddition();

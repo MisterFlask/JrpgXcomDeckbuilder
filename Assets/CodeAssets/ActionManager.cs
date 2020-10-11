@@ -206,7 +206,8 @@ public class ActionManager : MonoBehaviour
         });
     }
 
-    public void AddCardToDeck(AbstractCard protoCard, QueueingType queueingType = QueueingType.TO_BACK)
+
+    public void AddCardToPersistentDeck(AbstractCard protoCard, QueueingType queueingType = QueueingType.TO_BACK)
     {
         QueuedActions.ImmediateAction(() =>
         {

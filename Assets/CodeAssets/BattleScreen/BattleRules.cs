@@ -5,7 +5,7 @@ using System;
 public static class BattleRules
 {
 
-    public static int GetActualEnergyCost(AbstractCard card)
+    public static int CalculateEnergyCost(AbstractCard card)
     {
         var owner = card.Owner;
         var ownerFatigue = owner.CurrentFatigue;
@@ -19,10 +19,14 @@ public static class BattleRules
         }
     }
 
-    public static void ProcessPlayingCardEnergyCost(AbstractCard card)
+    public static void ProcessPlayingCardCost(AbstractCard card)
     {
-        ServiceLocator.GetGameStateTracker().energy -= GetActualEnergyCost(card);
+        ServiceLocator.GetGameStateTracker().energy -= CalculateEnergyCost(card);
         EnergyIconGlow.Instance.Flash();
+        if (card.Owner.CurrentFatigue > 1)
+        {
+            card.Owner.CurrentFatigue -= 1;
+        }
     }
 
     public static void ProcessPreModifierDamage(AbstractBattleUnit source, AbstractBattleUnit target, int baseDamage)

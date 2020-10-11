@@ -62,6 +62,7 @@ public abstract class AbstractBattleUnit
         }
         else
         {
+            effect.AssignOwner(this);
             effect.Stacks = stacks;
             StatusEffects.Add(effect);
         }
@@ -105,6 +106,14 @@ public abstract class AbstractBattleUnit
     public void OnTurnStart()
     {
         CurrentDefense = 0;
+
+        ActionManager.Instance.DoAThing(() =>
+        {
+            if (CurrentFatigue < MaxFatigue)
+            {
+                this.CurrentFatigue += 1;
+            }
+        });
     }
 
     public void ExecuteOnIntentIfAvailable()

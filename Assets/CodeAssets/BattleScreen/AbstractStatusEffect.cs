@@ -94,6 +94,15 @@ public abstract class AbstractStatusEffect
         return 1;
     }
 
+    public void AssignOwner(AbstractBattleUnit unit)
+    {
+        if (OwnerUnit != null)
+        {
+            throw new System.Exception("Cannot reassign status effects.");
+        }
+        OwnerUnit = unit;
+    }
+
     public BattleUnitAttributePrefab CorrespondingPrefab { get; set; }
 
 }

@@ -109,7 +109,7 @@ public abstract class AbstractCard
             return;
         }
 
-        BattleRules.ProcessPlayingCardEnergyCost(this);
+        BattleRules.ProcessPlayingCardCost(this);
         OnPlay(target);
         
         if (state().Deck.Hand.Contains(this))

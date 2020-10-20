@@ -22,7 +22,7 @@ public static class BattleRules
     public static void ProcessPlayingCardCost(AbstractCard card)
     {
         ServiceLocator.GetGameStateTracker().energy -= CalculateEnergyCost(card);
-        EnergyIconGlow.Instance.Flash();
+        EnergyIcon.Instance.Flash();
         if (card.Owner.CurrentFatigue > 1)
         {
             card.Owner.CurrentFatigue -= 1;

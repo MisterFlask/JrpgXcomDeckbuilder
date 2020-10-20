@@ -59,6 +59,11 @@ public static class ServiceLocator
 
     public static SpawnPool GetSpawnPool()
     {
+        if (UtilityObjectHolder == null)
+        {
+            return GameObject.FindObjectOfType<SpawnPool>();
+        }
+
         return UtilityObjectHolder.SpawnPool;
     }
     public static ActionManager GetActionManager()
@@ -73,7 +78,7 @@ public static class ServiceLocator
 
     public static GameState GetGameStateTracker()
     {
-        return UtilityObjectHolder.GameState;
+        return GameState.Instance;
     }
 
     public static UiStateManager GetUiStateManager()

@@ -4,6 +4,12 @@ using System.Collections.Generic;
 
 public static class CampaignMapState 
 {
+    static CampaignMapState()
+    {
+        InitializeRoster();
+        InitializeSelectableMissions();
+    }
+
     public static List<AbstractBattleUnit> Roster;
     public static List<AbstractBattleUnit> CurrentSelectedParty;
 
@@ -12,16 +18,14 @@ public static class CampaignMapState
 
     public static ShopData shopData;
     
-
     public static void InitializeRoster()
     {
         Roster = new List<AbstractBattleUnit>
         {
-            new Rookie(),
-            new Rookie(),
-            new Rookie(),
-            new Rookie(),
-            new Rookie()
+            Rookie.Generate(),
+            Rookie.Generate(),
+            Rookie.Generate(),
+            Rookie.Generate()
         };
     }
 
@@ -58,7 +62,7 @@ public abstract class AbstractShopOffer
     public void Purchase()
     {
         ServiceLocator.GetGameStateTracker().money -= Price;
-        MoneyIconGlow.Instance.Flash();
+        MoneyIcon.Instance.Flash();
     }
 
     public bool CanAfford()

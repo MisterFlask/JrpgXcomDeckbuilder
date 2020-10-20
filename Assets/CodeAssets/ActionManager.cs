@@ -10,11 +10,9 @@ public class ActionManager : MonoBehaviour
 {
     public static ActionManager Instance => ServiceLocator.GetActionManager();
 
-    private Deck deck => ServiceLocator.GetGameStateTracker().Deck;
+    private BattleDeck deck => ServiceLocator.GetGameStateTracker().Deck;
 
     GameState gameState => ServiceLocator.GetGameStateTracker();
-
-    public Image ArmageddonCounterImage;
 
     // Used to end the current action/start the next delayed action
     public bool IsCurrentActionFinished { get; set; }
@@ -46,7 +44,6 @@ public class ActionManager : MonoBehaviour
     public void ModifyMoney(int newMoneyAmount)
     {
         gameState.money = newMoneyAmount;
-        MoneyIconGlow.Instance.Flash();
     }
 
     public void RemoveStatusEffect<T>(AbstractBattleUnit unit) where T: AbstractStatusEffect
@@ -234,7 +231,6 @@ public class ActionManager : MonoBehaviour
             {
                 if (!logicalCard.CanAfford())
                 {
-                    EnergyIconGlow.Instance.Flash();
                     Shout(logicalCard.Owner, "I don't have enough energy.");
                 }
                 else if (logicalCard.CanPlay())
@@ -284,20 +280,6 @@ public class ActionManager : MonoBehaviour
                 DiscardCard(card);
             }
         });
-    }
-
-    public void ModifyCoin(int amount, QueueingType queueingType = QueueingType.TO_BACK)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-
-            if (amount == 0)
-            {
-                return;
-            }
-            gameState.ModifyCoin(amount);
-            animationHandler.PulseAndFlashElement(ArmageddonCounterImage);
-        }, queueingType);
     }
 
 
@@ -354,12 +336,11 @@ public class ActionManager : MonoBehaviour
         {
             if (gameState.energy > 0)
             {
-                EnergyIconGlow.Instance.Flash();
                 gameState.energy--;
             }
             else
             {
-                EnergyIconGlow.Instance.Flash();
+                EnergyIcon.Instance.Flash();
                 Shout(unit, "Not enough energy!");
                 return;
             }
@@ -372,12 +353,11 @@ public class ActionManager : MonoBehaviour
         {
             if (gameState.energy > 0)
             {
-                EnergyIconGlow.Instance.Flash();
                 gameState.energy--;
             }
             else
             {
-                EnergyIconGlow.Instance.Flash();
+                EnergyIcon.Instance.Flash();
                 Shout(unit, "Not enough energy!");
                 return;
             }
@@ -409,13 +389,6 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(action);
     }
-
-    [Obsolete("Use modifyCoin instead")]
-    internal void ModifyCommerce(int commerce)
-    {
-        ModifyCoin(commerce);
-    }
-
 
     /// <summary>
     /// Prompts the player to discard a card.

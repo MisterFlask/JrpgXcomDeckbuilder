@@ -113,7 +113,6 @@ public class CardMovementBehaviors: MonoBehaviour
 
             this.gameObject.Despawn();
         }
-        ServiceLocator.GetGameStateTracker().UpdateResources();
         
     }
 }

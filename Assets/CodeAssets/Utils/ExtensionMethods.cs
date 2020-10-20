@@ -9,8 +9,12 @@ using UnityEngine;
 public static class ExtensionMethods
 {
 
-    public static void AddComponentAndPerformOperation<T>(this MonoBehaviour thisObject, Action<T> thingToDo) where T: MonoBehaviour
+    public static void AddTransientComponentAndPerformOperation<T>(this MonoBehaviour thisObject, Action<T> thingToDo, bool skipIfComponentExists = true) where T: MonoBehaviour
     {
+        if (thisObject.gameObject.GetComponent<T>() != null && skipIfComponentExists)
+        {
+            return;
+        }
         thisObject.gameObject.AddComponent<T>();
         thingToDo(thisObject.gameObject.GetComponent<T>());
     }

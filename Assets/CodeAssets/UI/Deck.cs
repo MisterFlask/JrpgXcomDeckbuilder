@@ -6,7 +6,7 @@ using System.Linq;
 
 [RequireComponent(typeof(CardAnimationManager))]
 // Rules:  Deck should look like face-down card
-public class Deck
+public class BattleDeck
 {
 
    

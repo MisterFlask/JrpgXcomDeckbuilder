@@ -7,13 +7,11 @@ public class CharacterDetailsInRoster : MonoBehaviour
     public AbstractBattleUnit BattleUnit { get; set; }
 
     public Image CharacterImage;
-    public Button ShowDeckButton;
     public TMPro.TextMeshProUGUI Title;
 
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame

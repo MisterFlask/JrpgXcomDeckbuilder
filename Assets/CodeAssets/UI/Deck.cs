@@ -13,7 +13,7 @@ public class BattleDeck
 
     public IEnumerable<AbstractCard> PersistentDeckList => CollectionUtils.Aggregate(DrawPile, DiscardPile, Hand);
 
-    public List<AbstractCard> PurgedPile { get; set; } = new List<AbstractCard>();
+    public List<AbstractCard> ExhaustPile { get; set; } = new List<AbstractCard>();
     public List<AbstractCard> DrawPile { get; set; } = new List<AbstractCard>();
 
     public List<AbstractCard> DiscardPile { get; set; } = new List<AbstractCard>();
@@ -35,7 +35,7 @@ public class BattleDeck
         {
             return CardPosition.DISCARD;
         }
-        if (PurgedPile.Where(item => item.Id == cardId).Any())
+        if (ExhaustPile.Where(item => item.Id == cardId).Any())
         {
             return CardPosition.EXPENDED;
         }
@@ -101,7 +101,7 @@ public class BattleDeck
         }
         if (position == CardPosition.EXPENDED)
         {
-            return PurgedPile;
+            return ExhaustPile;
         }
         throw new Exception($"Don't know about position {position}");
     }

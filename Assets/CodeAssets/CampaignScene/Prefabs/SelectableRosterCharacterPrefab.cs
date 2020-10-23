@@ -13,13 +13,13 @@ public class SelectableRosterCharacterPrefab : MonoBehaviour, IPointerClickHandl
 
     public AbstractBattleUnit Character { get; set; }
 
-    public static AbstractBattleUnit CurrentlySelected = null;
+    public static AbstractBattleUnit CurrentlySelected => GameState.Instance.CharacterSelected;
     public static List<SelectableRosterCharacterPrefab> AllSelectableCharacterPrefabs => RosterPrefab.Instance.ChildPrefabs;
     public static IEnumerable<SelectableRosterCharacterPrefab> SelectedPrefabs => AllSelectableCharacterPrefabs.Where(item => item.Toggle.isOn);
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        CurrentlySelected = this.Character;
+        GameState.Instance.CharacterSelected = this.Character;
     }
 
     // Use this for initialization

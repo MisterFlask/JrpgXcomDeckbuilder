@@ -11,7 +11,51 @@ public class ShowDeckScreen : MonoBehaviour
 
 
     private List<GameObject> CardsDisplayed = new List<GameObject>();
-    public void Populate(List<AbstractCard> cardsToDisplay)
+
+    private static ShowDeckScreen Instance;
+
+    public void Start()
+    {
+        Instance = this;
+    }
+
+    public static void ShowDiscardPile()
+    {
+        Show(GameState.Instance.Deck.DiscardPile);
+    }
+    public static void ShowDrawPile()
+    {
+        Show(GameState.Instance.Deck.DrawPile);
+    }
+    public static void ShowExhaustPile()
+    {
+        Show(GameState.Instance.Deck.ExhaustPile);
+    }
+
+    public static void ShowDeckForSelectedCharacter()
+    {
+        if (GameState.Instance.CharacterSelected != null)
+        {
+            Show(cardsToDisplay: GameState.Instance.CharacterSelected.CardsInPersistentDeck);
+        }
+        else
+        {
+            throw new System.Exception("No character selected!");
+        }
+    }
+
+    public static void Show(IEnumerable<AbstractCard> cardsToDisplay)
+    {
+        Instance.Populate(cardsToDisplay);
+        Instance.gameObject.SetActive(true);
+    }
+
+    public static void Hide()
+    {
+        Instance.gameObject.SetActive(false);
+    }
+
+    public void Populate(IEnumerable<AbstractCard> cardsToDisplay)
     {
         foreach (var card in CardsDisplayed)
         {

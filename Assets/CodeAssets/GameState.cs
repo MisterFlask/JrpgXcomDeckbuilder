@@ -53,4 +53,8 @@ public class GameState
     public List<AbstractBattleUnit> PersistentCharacterRoster { get; set; } = new List<AbstractBattleUnit>();
     public List<AbstractBattleUnit> AllyUnitsInBattle { get; set; } = new List<AbstractBattleUnit>();
     public List<AbstractBattleUnit> EnemyUnitsInBattle { get; set; } = new List<AbstractBattleUnit>();
+
+    #region UI State
+    public AbstractBattleUnit CharacterSelected { get; set; }
+    #endregion
 }

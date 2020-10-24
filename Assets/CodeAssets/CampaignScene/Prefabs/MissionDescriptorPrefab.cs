@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine.UI;
+using System;
+using System.Collections.Generic;
 
 public class MissionDescriptorPrefab : MonoBehaviour
 {
@@ -48,8 +50,31 @@ public class MissionDescriptorPrefab : MonoBehaviour
         {
             // todo: Figure out scene transition.
             // Set up static stuff for combat.
+            var selectedMission = GetMissionSelected();
+            var charactersSent = GetCharactersSent();
+            if (selectedMission == null || (charactersSent?.Count ?? 0) == 0)
+            {
+                if (selectedMission == null)
+                {
+                    Debug.Log("Can't go on mission; no mission selected.");
+                }
+                else
+                {
+                    Debug.Log("Can't go on mission; no characters selected.");
+                }
+                return;
+            }
+            GameScenes.SwitchToBattleScene(selectedMission, charactersSent);
         });
+    }
 
-        
+    private List<AbstractBattleUnit> GetCharactersSent()
+    {
+        return RosterPrefab.Instance.GetCharactersSelected().ToList();
+    }
+
+    private Mission GetMissionSelected()
+    {
+        return SelectedMission;
     }
 }

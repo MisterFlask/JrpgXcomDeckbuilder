@@ -25,7 +25,6 @@ public class UtilityObjectHolder : MonoBehaviour
     public SpawnPool SpawnPool;
     public GameObject UiCanvas;
     public CardInstantiator CardInstantiator;
-    public ExplainerPanel ExplainerPanel;
     public TemplateHolder TemplateHolder;
 
 }

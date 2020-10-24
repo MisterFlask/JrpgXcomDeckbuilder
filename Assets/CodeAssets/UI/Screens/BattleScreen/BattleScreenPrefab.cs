@@ -59,10 +59,6 @@ public class BattleScreenPrefab : MonoBehaviour
 
         /// TODO:  Remove after getting strategic map up and running
 
-        state.EnemyUnitsInBattle.Add(new BasicEnemyUnit());
-        state.AllyUnitsInBattle.Add(Rookie.Generate());
-        state.AllyUnitsInBattle.Add(Rookie.Generate());
-        state.AllyUnitsInBattle.Add(Rookie.Generate());
 
         foreach (var character in state.AllyUnitsInBattle)
         {

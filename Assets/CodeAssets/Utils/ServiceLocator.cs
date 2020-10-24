@@ -27,11 +27,6 @@ public static class ServiceLocator
 
     private static Dictionary<Type, MonoBehaviour> typeToObjectDict = new Dictionary<Type, MonoBehaviour>();//todo
 
-    public static ExplainerPanel TooltipPanel()
-    {
-        return UtilityObjectHolder.ExplainerPanel;
-    }
-
     public static CardInstantiator GetCardInstantiator()
     {
         return UtilityObjectHolder.CardInstantiator;

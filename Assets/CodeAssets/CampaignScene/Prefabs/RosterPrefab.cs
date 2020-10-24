@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class RosterPrefab : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class RosterPrefab : MonoBehaviour
     public SelectableRosterCharacterPrefab PrefabTemplate;
     public List<SelectableRosterCharacterPrefab> ChildPrefabs { get; set; } = new List<SelectableRosterCharacterPrefab>();
     public static RosterPrefab Instance => GameObject.FindObjectOfType<RosterPrefab>();
+
+    public IEnumerable<AbstractBattleUnit> GetCharactersSelected()
+    {
+        return SelectableRosterCharacterPrefab.SelectedPrefabs.Select(item => item.Character);
+    }
 
     public RosterPrefab()
     {

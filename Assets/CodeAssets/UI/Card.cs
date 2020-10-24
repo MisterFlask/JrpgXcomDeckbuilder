@@ -17,6 +17,7 @@ namespace HyperCard
         public GameObject OtherDisplayTooltipParent;
         public CustomGuiText MightDisplayTooltipText;
         public CustomGuiText OtherDisplayTooltipText;
+        public CardStickerHolder CardStickerHolder;
         public AbstractCard LogicalCard { get; set; }
         public string LogicalCardId { get; set; }
 

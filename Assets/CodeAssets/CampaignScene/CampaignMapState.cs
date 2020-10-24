@@ -6,9 +6,9 @@ public static class CampaignMapState
 {
     static CampaignMapState()
     {
-        InitializeRoster();
-        InitializeSelectableMissions();
     }
+
+    public static bool Initialized { get; set; } = false;
 
     public static List<AbstractBattleUnit> Roster;
     public static List<AbstractBattleUnit> CurrentSelectedParty;
@@ -18,31 +18,15 @@ public static class CampaignMapState
 
     public static ShopData shopData;
     
-    public static void InitializeRoster()
+
+    public static MissionGenerator MissionGenerator = new MissionGenerator();
+    public static void InitializeCampaignScreen()
     {
-        Roster = new List<AbstractBattleUnit>
-        {
-            Rookie.Generate(),
-            Rookie.Generate(),
-            Rookie.Generate(),
-            Rookie.Generate()
-        };
+        MissionListPrefab.Instance.Initialize();
+        RosterPrefab.Instance.Initialize();
     }
-
-    private static MissionGenerator missionGenerator = new MissionGenerator();
-
-    public static void InitializeSelectableMissions() 
-    {
-        MissionsSelectable = new List<Mission>
-        {
-            missionGenerator.GenerateNewMission(),
-            missionGenerator.GenerateNewMission(),
-            missionGenerator.GenerateNewMission()
-        };
-    }
-
-
 }
+
 
 public class ShopData 
 {

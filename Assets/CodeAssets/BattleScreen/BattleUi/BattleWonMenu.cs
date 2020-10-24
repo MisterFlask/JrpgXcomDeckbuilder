@@ -13,9 +13,8 @@ public class BattleWonMenu : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-        this.ContinueButton.onClick.AddListener(() => { 
-                
+        this.ContinueButton.onClick.AddListener(() => {
+            GameScenes.SwitchToBattleResultScene();
         });
 
         Hide();

@@ -32,9 +32,14 @@ public class ImageUtils
 
 }
 
-public interface ProtoGameSprite
+public abstract class ProtoGameSprite
 {
-    GameSprite ToGameSpriteImage();
+    public abstract GameSprite ToGameSpriteImage();
+
+    public Sprite ToSprite()
+    {
+        return ToGameSpriteImage().Sprite;
+    }
 }
 
 public class GameSprite
@@ -48,7 +53,7 @@ public class GameIconProtoSprite: ProtoGameSprite
     public string SpritePath { get; set; }
     public Color Color { get; set; }
 
-    public GameSprite ToGameSpriteImage()
+    public override GameSprite ToGameSpriteImage()
     {
         var loaded = Resources.Load<Sprite>(SpritePath);
         if (loaded == null)

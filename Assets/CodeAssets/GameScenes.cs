@@ -16,4 +16,8 @@ public class GameScenes
     {
         SceneManager.LoadScene(sceneName: "CampaignMapScene");
     }
+    public static void SwitchToBattleResultScene()
+    {
+        SceneManager.LoadScene(sceneName: "BattleResultScene");
+    }
 }

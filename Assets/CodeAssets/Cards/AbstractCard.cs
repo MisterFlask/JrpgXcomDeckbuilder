@@ -28,6 +28,8 @@ public abstract class AbstractCard
 
     public int CurrentToughness { get; set; } = 0;
 
+    public List<AbstractCardSticker> Stickers = new List<AbstractCardSticker>();
+
     #region convenience functions
 
     public int displayedDamage()
@@ -175,6 +177,21 @@ public abstract class AbstractCard
     {
         // does postprocessing work
 
+    }
+
+    public void AddSticker(AbstractCardSticker sticker)
+    {
+        Stickers.Add(sticker);
+    }
+
+    public  void RemoveSticker<T>() where T: AbstractCardSticker
+    {
+        var sticker = Stickers.FirstOrDefault(item => item.GetType() == typeof(T));
+        if (sticker == null)
+        {
+            return;
+        }
+        Stickers.Remove(sticker);
     }
 
 }

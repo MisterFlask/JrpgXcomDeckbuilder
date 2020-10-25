@@ -48,11 +48,10 @@ public class GameState
     public int money { get; set; } = 0;
     public int energy { get; set; } = 3;
     public int maxEnergy { get; set; } = 3;
-
-
     public List<AbstractBattleUnit> PersistentCharacterRoster { get; set; } = new List<AbstractBattleUnit>();
     public List<AbstractBattleUnit> AllyUnitsInBattle { get; set; } = new List<AbstractBattleUnit>();
     public List<AbstractBattleUnit> EnemyUnitsInBattle { get; set; } = new List<AbstractBattleUnit>();
+    public Mission CurrentMission { get; set; }
 
     #region UI State
     public AbstractBattleUnit CharacterSelected { get; set; }

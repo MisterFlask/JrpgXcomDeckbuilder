@@ -9,7 +9,7 @@ public class CampaignStarter : MonoBehaviour
     {
         InitializeSelectableMissions();
         InitializeRoster();
-        CampaignMapState.Initialized = true;
+        CampaignMapState.GameInitialized = true;
     }
 
     public static void InitializeRoster()
@@ -36,7 +36,7 @@ public class CampaignStarter : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (!CampaignMapState.Initialized)
+        if (!CampaignMapState.GameInitialized)
         {
             InitializeCampaign();
         }

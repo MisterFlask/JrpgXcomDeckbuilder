@@ -8,7 +8,7 @@ public static class CampaignMapState
     {
     }
 
-    public static bool Initialized { get; set; } = false;
+    public static bool GameInitialized { get; set; } = false;
 
     public static List<AbstractBattleUnit> Roster;
     public static List<AbstractBattleUnit> CurrentSelectedParty;

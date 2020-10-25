@@ -136,4 +136,25 @@ public static class BattleRules
 
         return (int)baseDamage;
     }
+
+    public static void CheckIsBattleOver()
+    {
+        var isVictory = GameState.Instance.EnemyUnitsInBattle.IsEmpty();
+        var isDefeat = GameState.Instance.CurrentMission.IsFailed();
+
+        if (isVictory)
+        {
+            GameState.Instance.CurrentMission.OnSuccess();
+        }
+        if (isDefeat)
+        {
+            GameState.Instance.CurrentMission.IsFailure = true;
+            GameState.Instance.CurrentMission.OnFailed();
+        }
+        var isOver = (isVictory || isDefeat) ;
+        if (isOver)
+        {
+            GameScenes.SwitchToBattleResultScene();
+        }
+    }
 }

@@ -30,6 +30,11 @@ public class ShakePrefab : MonoBehaviour
 
     public void Begin(Action whenDone)
     {
+        if (!this.gameObject.activeInHierarchy)
+        {
+            whenDone();
+            return;
+        }
         StartCoroutine(Shake(whenDone));
     }
 

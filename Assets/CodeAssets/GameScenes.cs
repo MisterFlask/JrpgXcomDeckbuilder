@@ -9,6 +9,7 @@ public class GameScenes
     {
         GameState.Instance.AllyUnitsInBattle = CharactersSent;
         GameState.Instance.EnemyUnitsInBattle = mission.StartingEnemies();
+        GameState.Instance.CurrentMission = mission;
         SceneManager.LoadScene(sceneName: "BattleMapScene");
 
     }

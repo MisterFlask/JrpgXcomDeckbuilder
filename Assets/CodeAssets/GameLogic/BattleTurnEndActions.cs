@@ -12,6 +12,11 @@ public class BattleTurnEndActions
     {
         gameState.EnemyUnitsInBattle.ForEach(item => item.ExecuteOnIntentIfAvailable());
         actionManager.DiscardHand();
+        StartNewTurn();
+    }
+
+    private void StartNewTurn()
+    {
         ServiceLocator.GetGameStateTracker().BattleTurn++;
 
         ServiceLocator.GetActionManager().DoAThing(() =>
@@ -21,12 +26,12 @@ public class BattleTurnEndActions
         ServiceLocator.GetActionManager().DoAThing(() =>
         {
             gameState.EnemyUnitsInBattle.ForEach(item => item.OnTurnStart());
-        }); 
-            actionManager.DrawCards(5);
+        });
+        actionManager.DrawCards(5);
         ServiceLocator.GetActionManager().DoAThing(() =>
         {
             ServiceLocator.GetGameStateTracker().energy = ServiceLocator.GetGameStateTracker().maxEnergy;
         });
-
+        ActionManager.Instance.CheckIsBattleOver();
     }
 }

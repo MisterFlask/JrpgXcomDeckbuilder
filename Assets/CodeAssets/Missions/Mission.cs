@@ -19,8 +19,9 @@ public abstract class Mission
 
     public virtual bool IsFailed()
     {
-        return false;
+        return GameState.Instance.AllyUnitsInBattle.IsEmpty();
     }
+
     public virtual void OnStartOfBattle()
     {
 
@@ -32,4 +33,7 @@ public abstract class Mission
     }
 
     public int MaxNumberOfFriendlyCharacters { get; set; } = 3;
+
+    public bool IsFailure { get; set; } = false;
+    public bool IsVictory { get; set; } = false;
 }

@@ -19,6 +19,14 @@ public class ActionManager : MonoBehaviour
 
     public List<DelayedAction> actionsQueue = new List<DelayedAction>();
 
+    public void CheckIsBattleOver()
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            BattleRules.CheckIsBattleOver();
+        });
+    }
+
     public void PromptPossibleUpgradeOfCard(AbstractCard beforeCard)
     {
         QueuedActions.ImmediateAction(() =>
@@ -246,6 +254,7 @@ public class ActionManager : MonoBehaviour
             {
                 throw new System.Exception("Could not deploy card!  None selected.");
             }
+            CheckIsBattleOver();
         }, queueingType);
     }
 

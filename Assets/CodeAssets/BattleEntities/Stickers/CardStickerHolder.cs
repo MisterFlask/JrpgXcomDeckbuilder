@@ -50,6 +50,7 @@ public class CardStickerHolder : MonoBehaviour
                 var newPrefab = PrefabTemplate.Spawn(this.transform);
                 newPrefab.Sticker = sticker;
                 sticker.Prefab = newPrefab;
+                Prefabs.Add(sticker.Prefab);
             }
         }
 

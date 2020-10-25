@@ -42,6 +42,16 @@ public abstract class ProtoGameSprite
     }
 }
 
+public static class ImageExtensions
+{
+    public static void SetProtoSprite(this Image image, ProtoGameSprite protoSprite)
+    {
+        image.sprite = protoSprite.ToSprite();
+        image.color = protoSprite.ToGameSpriteImage().Color;
+
+    }
+}
+
 public class GameSprite
 {
     public Sprite Sprite { get; set; }

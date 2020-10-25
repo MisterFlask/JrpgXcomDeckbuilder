@@ -13,10 +13,8 @@ public class BattleUnitAttributePrefab : MonoBehaviour, IPointerEnterHandler, IP
 
     public void Initialize(AbstractStatusEffect attr, BattleUnitAttributesHolder holder)
     {
-        var protoSprite = attr.ProtoSprite.ToGameSpriteImage();
         this.CorrespondingAttribute = attr;
-        image.sprite = protoSprite.Sprite;
-        image.color = protoSprite.Color;
+        image.SetProtoSprite(CorrespondingAttribute.ProtoSprite);
         Text.SetText(attr.Stacks.ToString());
         attr.CorrespondingPrefab = this;
     }

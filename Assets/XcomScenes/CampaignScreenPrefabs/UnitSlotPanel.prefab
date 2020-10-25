@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Title: {fileID: 580841938833068675}
-  MissionImage: {fileID: 580841937036903848}
+  CharacterImage: {fileID: 580841937036903848}
   Toggle: {fileID: 580841938149273688}
 --- !u!1 &580841938833068685
 GameObject:

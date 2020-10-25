@@ -8,7 +8,7 @@ using System.Linq;
 public class SelectableRosterCharacterPrefab : MonoBehaviour, IPointerClickHandler
 {
     public TMPro.TextMeshProUGUI Title;
-    public Image MissionImage;
+    public Image CharacterImage;
     public Toggle Toggle;
 
     public AbstractBattleUnit Character { get; set; }
@@ -25,12 +25,20 @@ public class SelectableRosterCharacterPrefab : MonoBehaviour, IPointerClickHandl
     // Use this for initialization
     void Start()
     {
-        MissionImage.sprite = ImageUtils.ProtoGameSpriteFromGameIcon().ToGameSpriteImage().Sprite;
     }
 
     // Update is called once per frame
     void Update()
     {
+        CharacterImage.SetProtoSprite(Character.ProtoSprite);
         Title.text = Character.CharacterName;
+        if (CurrentlySelected == Character)
+        {
+            Title.color = Color.red;
+        }
+        else
+        {
+            Title.color = Color.black;
+        }
     }
 }

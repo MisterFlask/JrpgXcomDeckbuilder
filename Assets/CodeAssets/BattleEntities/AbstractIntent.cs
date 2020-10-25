@@ -35,8 +35,7 @@ public abstract class AbstractIntent
     {
         var prefab = GeneratePrefab(parent);
         prefab.UnderlyingIntent = this;
-        prefab.Picture.sprite = ProtoSprite.ToGameSpriteImage().Sprite;
-        prefab.Picture.color = ProtoSprite.ToGameSpriteImage().Color;
+        prefab.Picture.SetProtoSprite(this.ProtoSprite);
         prefab.Init();
         return prefab;
     }

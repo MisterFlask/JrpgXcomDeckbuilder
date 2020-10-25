@@ -19,7 +19,7 @@ public class CharacterDetailsInRoster : MonoBehaviour
     {
         if (BattleUnit != null)
         {
-            CharacterImage.sprite = BattleUnit.ProtoSprite.ToGameSpriteImage().Sprite;
+            CharacterImage.SetProtoSprite(BattleUnit.ProtoSprite);
             Title.text = BattleUnit.CharacterName;
         }
     }

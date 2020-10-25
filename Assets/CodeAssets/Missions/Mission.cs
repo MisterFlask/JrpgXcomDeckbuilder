@@ -7,6 +7,8 @@ public abstract class Mission
     public string Name { get; set; }
     public int Difficulty { get; set; } // 1 to 5
 
+    public List<AbstractMissionReward> Rewards { get; set; } = new List<AbstractMissionReward>();
+
     public virtual  void OnFailed()
     {
 

@@ -7,7 +7,7 @@ public class ExplainerPanel : MonoBehaviour
 {
     private static string TooltipToDisplay { get; set; }
 
-    public static string DebuggingInfo => ActionManager.Instance?.GetQueueActionsDebugLogs()??"No action manager found";
+    public static string DebuggingInfo => ""; //ActionManager.Instance?.GetQueueActionsDebugLogs() ?? "No action manager found";
 
     public static void Hide()
     {

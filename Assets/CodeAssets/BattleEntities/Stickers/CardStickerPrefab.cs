@@ -14,6 +14,6 @@ public class CardStickerPrefab : MonoBehaviour
         {
             return;
         }
-        image.sprite = Sticker.ProtoSprite.ToSprite();
+        image.SetProtoSprite(Sticker.ProtoSprite);
     }
 }

@@ -18,7 +18,12 @@ public class SingleUnitAttackIntent : AbstractIntent
 
     public static SingleUnitAttackIntent AttackRandomEnemy(AbstractBattleUnit source, int damage, int numTimesStruck)
     {
-        return new SingleUnitAttackIntent(source, IntentTargeting.GetRandomPlayerUnit(), damage, numTimesStruck);
+        var target = IntentTargeting.GetRandomLivingPlayerUnit();
+        if (target == null)
+        {
+            return null;
+        }
+        return new SingleUnitAttackIntent(source, target, damage, numTimesStruck);
     }
 
     private ActionManager action => ServiceLocator.GetActionManager();

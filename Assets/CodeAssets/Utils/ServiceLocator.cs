@@ -63,7 +63,7 @@ public static class ServiceLocator
     }
     public static ActionManager GetActionManager()
     {
-        return UtilityObjectHolder.ActionManager;
+        return ActionManager.Instance;
     }
 
     public static CardAnimationManager GetCardAnimationManager()

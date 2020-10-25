@@ -36,11 +36,11 @@ public static class ExtensionMethods
 
     public static T PickRandom<T>(this IEnumerable<T> source)
     {
-        return source.PickRandom(1).Single();
+        return source.PickRandom(1).SingleOrDefault();
     }
     public static T PickRandomWhere<T>(this IEnumerable<T> source, Predicate<T> required)
     {
-        return source.Where(item => required(item)).PickRandom(1).Single();
+        return source.Where(item => required(item)).PickRandom(1).SingleOrDefault();
     }
 
     public static IEnumerable<T> PickRandom<T>(this IEnumerable<T> source, int count)
@@ -288,6 +288,10 @@ public static class ExtensionMethods
 
     public static List<T> ToSingletonList<T>(this T item)
     {
+        if (item == null)
+        {
+            return new List<T>();
+        }
         return new List<T> { item };
     }
 

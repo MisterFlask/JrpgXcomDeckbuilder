@@ -19,7 +19,7 @@ public abstract class Mission
 
     public virtual bool IsFailed()
     {
-        return GameState.Instance.AllyUnitsInBattle.IsEmpty();
+        return GameState.Instance.AllyUnitsInBattle.TrueForAll(item => item.IsDead);
     }
 
     public virtual void OnStartOfBattle()

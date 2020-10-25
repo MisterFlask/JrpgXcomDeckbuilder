@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public static class IntentTargeting
 {
-    public static AbstractBattleUnit GetRandomPlayerUnit()
+    public static AbstractBattleUnit GetRandomLivingPlayerUnit()
     {
         return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle.PickRandomWhere(item => !item.IsDead);
     }

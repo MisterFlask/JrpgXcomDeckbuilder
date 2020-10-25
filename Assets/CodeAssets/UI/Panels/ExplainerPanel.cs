@@ -7,16 +7,18 @@ public class ExplainerPanel : MonoBehaviour
 {
     private static string TooltipToDisplay { get; set; }
 
+    public static string DebuggingInfo => ActionManager.Instance?.GetQueueActionsDebugLogs()??"No action manager found";
+
     public static void Hide()
     {
-        TooltipToDisplay = "";
+        TooltipToDisplay = DebuggingInfo;
         // todo
     }
 
     public static void ShowStatusEffectHelp(AbstractStatusEffect effect)
     {
         var description = effect.Description;
-        TooltipToDisplay = description;
+        TooltipToDisplay = description + "\n" + DebuggingInfo;
     }
 
     public static void ShowCardHelp(AbstractCard card)
@@ -25,7 +27,7 @@ public class ExplainerPanel : MonoBehaviour
         {
             return;
         }
-        TooltipToDisplay = card.Description();
+        TooltipToDisplay = card.Description() + "\n" + DebuggingInfo;
     }
 
     public CustomGuiText tooltipText;

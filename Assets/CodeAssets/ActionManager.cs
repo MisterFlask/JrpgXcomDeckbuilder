@@ -8,7 +8,12 @@ using HyperCard;
 
 public class ActionManager : MonoBehaviour
 {
-    public static ActionManager Instance => ServiceLocator.GetActionManager();
+    public static ActionManager Instance;
+
+    public ActionManager()
+    {
+        Instance = this;
+    }
 
     private BattleDeck deck => ServiceLocator.GetGameStateTracker().Deck;
 
@@ -18,6 +23,13 @@ public class ActionManager : MonoBehaviour
     public bool IsCurrentActionFinished { get; set; }
 
     public List<DelayedAction> actionsQueue = new List<DelayedAction>();
+
+    public string GetQueueActionsDebugLogs()
+    {
+        var actionStrings = actionsQueue.Select(item => $"[id={item.ActionId}, started={item.IsStarted}]");
+        return $"ACTION MANAGER QUEUE STATE: [[{string.Join("|", actionStrings)}]]  ; total count of items in queue = ${actionStrings.Count()}";
+
+    }
 
     public void CheckIsBattleOver()
     {
@@ -458,6 +470,7 @@ public class ActionManager : MonoBehaviour
             if (targetUnit.IsDead)
             {
                 // do nothing if it's already dead
+                IsCurrentActionFinished = true;
                 return;
             }
             targetUnit.CorrespondingPrefab.gameObject.AddComponent<ShakePrefab>();

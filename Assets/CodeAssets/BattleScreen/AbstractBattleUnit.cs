@@ -17,7 +17,7 @@ public abstract class AbstractBattleUnit
 
     public int MaxHp { get; set; }
 
-    public bool IsDead => CurrentHp == 0;
+    public bool IsDead => CurrentHp <= 0;
 
     public int CurrentDefense { get; set; }
     public int CurrentHp { get; set; }

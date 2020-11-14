@@ -8,6 +8,7 @@ public abstract class AbstractCard
 {
     public Guid OwnerGuid;
 
+    public int FatigueCost => 1;
     public AbstractBattleUnit Owner { get; set; }
 
     public string Name { get; set; } = "Name";
@@ -25,6 +26,13 @@ public abstract class AbstractCard
     public int BaseDamage { get; set; } = 0;
 
     public int BaseDefenseValue { get; set; } = 0;
+
+    /// <summary>
+    /// Similar to focus; non-general-purpose and not applicable to all cards
+    /// </summary>
+    public int BaseTechValue { get; set; } = 0;
+
+    public int TechValue => BaseTechValue;
 
     public int CurrentToughness { get; set; } = 0;
 
@@ -60,6 +68,7 @@ public abstract class AbstractCard
     public AbstractCard(CardType cardType = null)
     {
         this.CardType = cardType ?? CardType.SkillCard;
+        this.Name = this.GetType().Name;
     }
 
     public virtual int BaseEnergyCost()
@@ -67,15 +76,16 @@ public abstract class AbstractCard
         return 1;
     }
 
-    public virtual string Description()
-    {
-        return "";
-    }
+    public int EnergyCostMod = 0;
+
+    public int EnergyCost => EnergyCostMod + BaseEnergyCost();
+
+    public abstract string Description();
 
 
     public virtual bool CanAfford()
     {
-        return ServiceLocator.GetGameStateTracker().energy >= this.BaseEnergyCost();
+        return ServiceLocator.GetGameStateTracker().energy >= EnergyCost;
     }
 
     public virtual bool CanPlay()

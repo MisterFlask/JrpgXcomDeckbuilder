@@ -2,6 +2,9 @@
 using System.Collections;
 using System;
 
+/// <summary>
+/// Responsible for going through all the combat hooks and such that play into how much damage is dealt, by whom, what attributes are applied or removed, and so on.
+/// </summary>
 public static class BattleRules
 {
 
@@ -9,13 +12,13 @@ public static class BattleRules
     {
         var owner = card.Owner;
         var ownerFatigue = owner.CurrentFatigue;
-        if (ownerFatigue <= 0)
+        if (ownerFatigue < card.FatigueCost)
         {
-            return card.BaseEnergyCost() + 1;
+            return card.EnergyCost + card.FatigueCost;
         }
         else
         {
-            return card.BaseEnergyCost();
+            return card.EnergyCost;
         }
     }
 
@@ -23,9 +26,9 @@ public static class BattleRules
     {
         ServiceLocator.GetGameStateTracker().energy -= CalculateEnergyCost(card);
         EnergyIcon.Instance.Flash();
-        if (card.Owner.CurrentFatigue > 1)
+        if (card.Owner.CurrentFatigue > card.FatigueCost)
         {
-            card.Owner.CurrentFatigue -= 1;
+            card.Owner.CurrentFatigue -= card.FatigueCost;
         }
     }
 
@@ -73,7 +76,7 @@ public static class BattleRules
     {
         // first, go through the attacker's attributes
         float currentTotalDamage = baseDamage;
-        foreach(var attribute in source.StatusEffects)
+        foreach (var attribute in source.StatusEffects)
         {
             currentTotalDamage *= attribute.DamageDealtMultiplier();
             currentTotalDamage += attribute.DamageDealtAddition();
@@ -85,6 +88,11 @@ public static class BattleRules
         {
             currentTotalDamage *= attribute.DamageReceivedMultiplier();
             currentTotalDamage += attribute.DamageReceivedAddition();
+        }
+
+        if (currentTotalDamage < 0)
+        {
+            return 0;
         }
 
         return (int) currentTotalDamage;

@@ -16,10 +16,10 @@ public class CampaignStarter : MonoBehaviour
     {
         CampaignMapState.Roster = new List<AbstractBattleUnit>
         {
-            Rookie.Generate(),
-            Rookie.Generate(),
-            Rookie.Generate(),
-            Rookie.Generate()
+            Soldier.Generate(),
+            Soldier.Generate(),
+            Soldier.Generate(),
+            Soldier.Generate()
         };
     }
 

@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Rookie : AbstractAllyUnit
+public class Soldier : AbstractAllyUnit
 {
-    public Rookie()
+    public Soldier()
     {
         this.MaxHp = 10;
         this.MaxFatigue = 4;
@@ -26,7 +26,7 @@ public class Rookie : AbstractAllyUnit
 
     public static AbstractBattleUnit Generate()
     {
-        return new Rookie().CloneUnit();
+        return new Soldier().CloneUnit();
     }
 
     public override List<AbstractCard> CardsSelectableOnLevelUp()

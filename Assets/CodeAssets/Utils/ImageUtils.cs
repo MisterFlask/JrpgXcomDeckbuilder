@@ -40,6 +40,15 @@ public abstract class ProtoGameSprite
     {
         return ToGameSpriteImage().Sprite;
     }
+
+    // convenience methods follow
+    public static ProtoGameSprite Default => ImageUtils.ProtoGameSpriteFromGameIcon();
+    public static ProtoGameSprite FromGameIcon(
+        string path = ImageUtils.MeepleImagePath,
+        Color? color = null)
+    {
+        return ImageUtils.ProtoGameSpriteFromGameIcon(path, color);
+    }
 }
 
 public static class ImageExtensions

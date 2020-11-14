@@ -44,6 +44,8 @@ public abstract class AbstractBattleUnit
 
     public List<AbstractCard> BattleDeck { get; set; } = new List<AbstractCard>();
 
+    public List<SoldierPerk> Perks { get; } = new List<SoldierPerk>();
+
     public void InitializePersistentDeck()
     {
         _CardsInPersistentDeck = new List<AbstractCard>();
@@ -202,6 +204,15 @@ public abstract class AbstractBattleUnit
                 attribute.Stacks -= stacksToRemove ?? 0;
             }
         }
+    }
+
+    public void ApplySoldierPerk(SoldierPerk perk)
+    {
+        Perks.Add(perk);
+    }
+    public void RemoveSoldierPerk<T>() where T : SoldierPerk
+    {
+        Perks.RemoveAll(item => item.GetType() == typeof(T));
     }
 
     private bool difficultyInitialized = false;

@@ -74,6 +74,35 @@ public static class ExtensionMethods
         return false;
     }
 
+    public static List<T> Multiply<T>(this IEnumerable<T> items, int multiplyBy)
+    {
+        var newList = new List<T>();
+        for(int i = 0; i < multiplyBy; i++)
+        {
+            newList.AddRange(items);
+        }
+        return newList;
+    }
+
+    public static List<T> TakeUnique<T>(this List<T> items, int numItems)
+    {
+        var newList = new List<T>();
+        int itemsLeft = numItems;
+        for (int i = 0; i < items.Count(); i++)
+        {
+            if (itemsLeft == 0)
+            {
+                return newList;
+            }
+            if (!newList.Contains(items[i]))
+            {
+                newList.Add(items[i]);
+                itemsLeft--;
+            }
+        }
+        return newList;
+    }
+
     #endregion
 
     public static List<T> ToComponents<T>(this List<GameObject> objects)
@@ -236,7 +265,7 @@ public static class ExtensionMethods
         var ownerName = abstractCard.Owner?.CharacterName ?? "Communal";
         hyperCard.SetCardTopText($"{ownerName} | {abstractCard.CardType}");
 
-        hyperCard.SetCardEnergyCost(abstractCard.BaseEnergyCost());
+        hyperCard.SetCardEnergyCost(BattleRules.CalculateEnergyCost(abstractCard));
         hyperCard.LogicalCardId = abstractCard.Id;
         hyperCard.LogicalCard = abstractCard;
     }

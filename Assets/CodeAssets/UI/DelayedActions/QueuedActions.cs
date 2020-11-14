@@ -10,11 +10,11 @@ public static class QueuedActions
     {
         if (queueingType == QueueingType.TO_BACK)
         {
-            ServiceLocator.GetActionManager().actionsQueue.Add(new DelayedAction(action, name));
+            ServiceLocator.GetActionManager().actionsQueue.Add(new BasicDelayedAction(action, name));
         }
         else
         {
-            ServiceLocator.GetActionManager().actionsQueue.AddToFront(new DelayedAction(action));
+            ServiceLocator.GetActionManager().actionsQueue.AddToFront(new BasicDelayedAction(action));
         }
     }
 

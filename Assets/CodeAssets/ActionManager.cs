@@ -6,6 +6,7 @@ using System;
 using UnityEngine.UI;
 using HyperCard;
 
+[RequireComponent(typeof(Log))]
 public class ActionManager : MonoBehaviour
 {
     public static ActionManager Instance;
@@ -22,13 +23,18 @@ public class ActionManager : MonoBehaviour
     // Used to end the current action/start the next delayed action
     public bool IsCurrentActionFinished { get; set; }
 
-    public List<DelayedAction> actionsQueue = new List<DelayedAction>();
+    public List<BasicDelayedAction> actionsQueue = new List<BasicDelayedAction>();
 
     public string GetQueueActionsDebugLogs()
     {
         var actionStrings = actionsQueue.Select(item => $"[id={item.ActionId}, started={item.IsStarted}]");
         return $"ACTION MANAGER QUEUE STATE: [[{string.Join("|", actionStrings)}]]  ; total count of items in queue = ${actionStrings.Count()}";
 
+    }
+
+    public void AddToFront(BasicDelayedAction action)
+    {
+        QueuedActions.DelayedAction(action.ActionId, action.onStart, queueingType: QueueingType.TO_FRONT);
     }
 
     public void CheckIsBattleOver()
@@ -127,15 +133,6 @@ public class ActionManager : MonoBehaviour
     public Image ScienceImage;
     public Image CoinImage;
 
-    public void AdvanceUnit(AbstractBattleUnit actor)
-    {
-        //todo
-    }
-
-    public void RetreatUnit(AbstractBattleUnit actor)
-    {
-        //todo
-    }
 
     public void ForceRegenerateIntents(AbstractBattleUnit target)
     { 
@@ -520,6 +517,7 @@ public class ActionManager : MonoBehaviour
     }
 
     #endregion
+
 }
 
 public enum ModifyType

@@ -9,9 +9,8 @@ public class CardSelectionOption : MonoBehaviour, IPointerClickHandler
     // set via unity
     public Card card;
     public CardSelectionButton CardSelectButton;
-    public Popup CardSelectionScreen;
 
-    private AbstractCard cardLogic;
+    private AbstractCard cardLogic { get; set; }
 
     public void Start()
     {
@@ -24,7 +23,6 @@ public class CardSelectionOption : MonoBehaviour, IPointerClickHandler
         card.SetToAbstractCardAttributes(abstractCard);
         cardLogic = abstractCard;
         Debug.Log("Initialized card selection option");
-
     }
 
 

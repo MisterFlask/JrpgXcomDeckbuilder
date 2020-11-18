@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public abstract class AbstractIntent
 {
@@ -46,4 +47,15 @@ public abstract class AbstractIntent
     public AbstractBattleUnit Source { get; set; }
 
     public ProtoGameSprite ProtoSprite { get; set; }
+
+    public static AbstractIntent GetIntentFromShuffle(List<AbstractIntent> options)
+    {
+         return options.Shuffle().First();
+    }
+
+    public static AbstractIntent GetIntentFromOrderedActions(List<AbstractIntent> optionsInOrder, int turnNumber)
+    {
+        var index = turnNumber % optionsInOrder.Count;
+        return optionsInOrder[index];
+    }
 }

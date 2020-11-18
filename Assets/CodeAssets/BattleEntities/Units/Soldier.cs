@@ -8,7 +8,7 @@ public class Soldier : AbstractAllyUnit
     {
         this.MaxHp = 10;
         this.MaxFatigue = 4;
-        this.UnitClassName = "Rookie";
+        this.SoldierClass = new RookieClass();
 
         this.StartingCardsInDeck.AddRange(new List<AbstractCard>
         {

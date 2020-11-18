@@ -5,14 +5,26 @@ using System.Collections.Generic;
 
 public class CardSelectScreen : MonoBehaviour
 {
+    public static CardSelectScreen Instance;
+    public CardSelectScreen()
+    {
+        Instance = this;
+    }
+
 
     public GridLayoutGroup CardGrid;
     public CardSelectionOption CardTemplate;
 
     private List<GameObject> CardsDisplayed = new List<GameObject>();
 
+    public static void Hide()
+    {
+        Instance.gameObject.SetActive(false);
+    }
+
     public void Populate(List<AbstractCard> cardsToDisplay)
     {
+        Instance.gameObject.SetActive(true);
         foreach (var card in CardsDisplayed)
         {
             card.transform.parent = null;

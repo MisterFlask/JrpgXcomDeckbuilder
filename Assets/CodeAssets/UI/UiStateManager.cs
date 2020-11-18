@@ -40,14 +40,8 @@ public class UiStateManager : MonoBehaviour
             m_canvas = GameObject.Find("UI_CANVAS").GetComponent<Canvas>();
 
             Debug.Log("Initialized ui state manager");
-            this.SwitchToUiState(new ShowingMapMessage());
             Initialized = true;
         }
-    }
-
-    public void SwitchToCardModificationScreen(ShowingCardModificationMessage message)
-    {
-        SwitchToUiState(message);
     }
 
     public void PromptPlayerForCardSelection(CardSelectingBoardUiState state) 
@@ -66,37 +60,4 @@ public class UiStateManager : MonoBehaviour
         ServiceLocator.GetUiCanvas().SortChildrenBasedOnSortableUiElements();
     }
 
-    public void SwitchToUiState(UiStateMessage state)
-    {
-        /*
-        if (state is ShowingCardsMessage)
-        {
-            var specific = (ShowingCardsMessage)state;
-
-            var popupPrefab = OpenPopup(DeckDisplayPopup);
-            var showDeckScreen = popupPrefab.GetComponent<ShowDeckScreen>();
-            showDeckScreen.Populate(specific.CardsToShow);
-        }
-
-        if (state is ShowSelectCardToAddScreenMessage)
-        {
-            var specific = (ShowSelectCardToAddScreenMessage)state;
-            var popupPrefab = OpenPopup(SelectCardToAddPopup);
-            var showSelectCardScreen = popupPrefab.GetComponent<CardSelectScreen>();
-            showSelectCardScreen.Populate(specific.CardsToShow);
-        }
-
-        if (state is ShowingCardModificationMessage)
-        {
-
-            var specific = (ShowingCardModificationMessage)state;
-
-            // ShowDeckScreen.Populate(specific.CardsToShow);
-            var popupPrefab = OpenPopup(ShowCardModifiedScreen.gameObject);
-            var cardModdedScreen = popupPrefab.GetComponent<CardModificationDisplayScreen>();
-            cardModdedScreen.Populate(specific);
-        }
-        */
-    }
-    
 }

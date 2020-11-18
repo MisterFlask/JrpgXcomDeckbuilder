@@ -191,12 +191,19 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
+    internal void AddCardToDrawPile(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
+    {
+        Require.NotNull(abstractCard);
+        QueuedActions.ImmediateAction(() =>
+        {
+            ServiceLocator.GetGameStateTracker().Deck.DrawPile.Add(abstractCard);
+        }, queueingType);
+    }
     internal void AddCardToHand(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
         QueuedActions.ImmediateAction(() =>
         {
-
             ServiceLocator.GetGameStateTracker().Deck.Hand.Add(abstractCard);
             ServiceLocator.GetCardAnimationManager().AddHypercardsToHand(new List<Card> { abstractCard.CreateHyperCard() });
         },queueingType);
@@ -212,11 +219,14 @@ public class ActionManager : MonoBehaviour
     }
 
 
-    public void PromptCardReward()
+    public void PromptCardReward(AbstractBattleUnit soldier)
     {
-        var cardsThatCanBeSelected = ServiceLocator.GameLogic().GetSelectableCardsFromScience();
-        QueuedActions.DelayedAction("Choose New Card For Deck", () => {
-            ServiceLocator.GetUiStateManager().SwitchToUiState(new ShowSelectCardToAddScreenMessage { CardsToShow = cardsThatCanBeSelected.ToList() });
+        var soldierClass = soldier.SoldierClass;
+        soldier.NumberCardRewardsEligibleFor--;
+
+        var cardsThatCanBeSelected = soldierClass.GetCardRewardChoices();
+        QueuedActions.DelayedAction("Choose New Card FGetCardRewardChoicesor Deck", () => {
+            CardRewardScreen.Show(cardsThatCanBeSelected);
         });
     }
 

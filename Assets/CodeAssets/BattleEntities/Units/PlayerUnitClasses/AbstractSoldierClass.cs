@@ -7,7 +7,7 @@ using System;
 public abstract class AbstractSoldierClass
 {
 
-
+    public string Name { get; set; }
     public int StartingMaxHp = 15;
     public int CurrentLevel = 1;
 
@@ -55,6 +55,11 @@ public abstract class AbstractSoldierClass
     {
         StartingMaxHp += 1;
         LevelUpAdditionalEffects();
+    }
+
+    public virtual void GainCardRewards(AbstractBattleUnit me)
+    {
+        ActionManager.Instance.PromptCardReward(me);
     }
 
     public virtual void LevelUpAdditionalEffects()

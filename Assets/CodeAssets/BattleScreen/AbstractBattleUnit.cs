@@ -10,13 +10,13 @@ public abstract class AbstractBattleUnit
     public string Guid = UnityEditor.GUID.Generate().ToString();
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
 
-    public bool HasStatusEffect<T>() where T:AbstractStatusEffect
+    public bool HasStatusEffect<T>() where T : AbstractStatusEffect
     {
         return StatusEffects.Any(item => item.GetType() == typeof(T));
     }
 
     public int MaxHp { get; set; }
-
+    public int NumberCardRewardsEligibleFor { get; set; } = 0;
     public bool IsDead => CurrentHp <= 0;
 
     public int CurrentDefense { get; set; }
@@ -24,7 +24,8 @@ public abstract class AbstractBattleUnit
     public int CurrentFatigue { get; set; } = 4;
     public int MaxFatigue { get; set; } = 4;
 
-    public string UnitClassName { get; set; }
+    public AbstractSoldierClass SoldierClass { get; protected set; } = new RookieClass();
+    public string UnitClassName => SoldierClass.Name;
     public string CharacterName { get; set; } = "";
 
     public List<AbstractStatusEffect> StatusEffects { get; set; } = new List<AbstractStatusEffect>();
@@ -213,6 +214,11 @@ public abstract class AbstractBattleUnit
     public void RemoveSoldierPerk<T>() where T : SoldierPerk
     {
         Perks.RemoveAll(item => item.GetType() == typeof(T));
+    }
+
+    public void ChangeClass(AbstractSoldierClass newClass)
+    {
+        this.SoldierClass = newClass;
     }
 
     private bool difficultyInitialized = false;

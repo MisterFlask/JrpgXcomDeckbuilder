@@ -5,18 +5,40 @@ using System;
 
 public class RookieClass : AbstractSoldierClass
 {
-    public override List<AbstractCard> UniqueCardRewardPool()
+    protected override List<AbstractCard> UniqueCardRewardPool()
     {
-        throw new System.NotImplementedException();
+        return new List<AbstractCard>()
+        {
+            new Defend(),
+            new Bayonet(),
+            new CoveringFire()
+        };
     }
 
     public override List<AbstractCard> StartingCards()
     {
-        throw new System.NotImplementedException();
+        return new List<AbstractCard>
+        {
+            new Defend(),
+            new Bayonet(),
+            new Bayonet(),
+            new Defend(),
+            new CoveringFire()
+        };
     }
 
-    public virtual void LevelUp(AbstractBattleUnit soldier)
+    public override void LevelUpAdditionalEffects()
     {
-        GetNewCardReward();
+
+    }
+
+    public override voi
+
+    private List<AbstractSoldierClass> GetClassesEligibleForPromotion()
+    {
+        return new List<AbstractSoldierClass>
+        {
+            new VanguardSoldierClass()
+        };// todo
     }
 }

@@ -13,7 +13,7 @@ public class CardSelectionButton : MonoBehaviour, IPointerClickHandler
         Debug.Log("Added card to hand!");
         ServiceLocator.GetActionManager().AddCardToHand(cardLogic.CopyCard());
         ServiceLocator.GetActionManager().IsCurrentActionFinished = true; // Done to declare that this action has been addressed for animation purposes
-        CardSelectScreen.Hide();
+        CardRewardScreen.Hide();
 
     }
 

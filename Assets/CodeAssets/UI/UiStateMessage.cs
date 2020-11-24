@@ -20,10 +20,6 @@ public class ShowingMapMessage : UiStateMessage
 
 public class ShowingCardModificationMessage : UiStateMessage
 {
-    public AbstractCard beforeCard;
-    public AbstractCard afterCard;
-
-    public string TitleMessage;
     public Action ThingToDoUponConfirmation = () => { };
     // If the player's allowed to cancel, this is populated
     public bool CanCancel = false;

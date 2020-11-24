@@ -43,6 +43,17 @@ public abstract class AbstractBattleUnit
 
     public IEnumerable<AbstractCard> CardsInPersistentDeck => _CardsInPersistentDeck;
 
+    public void RemoveCardsFromPersistentDeck(IEnumerable<AbstractCard> cardsToRemove)
+    {
+        _CardsInPersistentDeck.RemoveAll(item => cardsToRemove.Contains(item));
+
+    }
+    public void RemoveCardsFromPersistentDeckByType<T>() where T:AbstractCard
+    {
+        _CardsInPersistentDeck.RemoveAll(item => item.GetType() is T);
+
+    }
+
     public List<AbstractCard> BattleDeck { get; set; } = new List<AbstractCard>();
 
     public List<SoldierPerk> Perks { get; } = new List<SoldierPerk>();
@@ -80,7 +91,7 @@ public abstract class AbstractBattleUnit
     {
         foreach(var baseCard in cards)
         {
-            AddCardToPersistentDeck(baseCard);
+            AddCardToPersistentDeck(baseCard.CopyCard());
         }
     }
 

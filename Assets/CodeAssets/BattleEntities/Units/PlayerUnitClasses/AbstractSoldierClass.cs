@@ -6,17 +6,18 @@ using System;
 
 public abstract class AbstractSoldierClass
 {
+    public int CurrentLevel = 1;
 
     public string Name { get; set; }
+        
     public int StartingMaxHp = 15;
-    public int CurrentLevel = 1;
 
     /// <summary>
     /// Starting cards are held by ALL members of a class
     /// </summary>
-    public abstract List<AbstractCard> StartingCards();
+    public abstract List<AbstractCard> StartingCards(); 
 
-    protected abstract List<AbstractCard> UniqueCardRewardPool();
+    public abstract List<AbstractCard> UniqueCardRewardPool();
 
     public List<AbstractCard> GetCardRewardsForLevel(int level, int numRewards)
     {
@@ -51,10 +52,10 @@ public abstract class AbstractSoldierClass
         return UniqueCardRewardPool().Shuffle().Take(3).ToList();
     }
 
-    public void LevelUp()
+    public void LevelUp(AbstractBattleUnit me)
     {
-        StartingMaxHp += 1;
-        LevelUpAdditionalEffects();
+        CurrentLevel++;
+        LevelUpEffects(me);
     }
 
     public virtual void GainCardRewards(AbstractBattleUnit me)
@@ -62,9 +63,10 @@ public abstract class AbstractSoldierClass
         ActionManager.Instance.PromptCardReward(me);
     }
 
-    public virtual void LevelUpAdditionalEffects()
+    public virtual void LevelUpEffects(AbstractBattleUnit me)
     {
-        // subclasses fill this in
+        me.NumberCardRewardsEligibleFor++;
+        StartingMaxHp += 1;
     }
 }
 

@@ -45,32 +45,21 @@ public class ActionManager : MonoBehaviour
         });
     }
 
-    public void PromptPossibleUpgradeOfCard(AbstractCard beforeCard)
+    public void PromptPossibleUpgradeOfCard(AbstractCard beforeCard, int? cost = null)
     {
         QueuedActions.ImmediateAction(() =>
         {
             var afterCard = beforeCard.CopyCard();
             afterCard.Upgrade();
-            ServiceLocator.GetUiStateManager().SwitchToCardModificationScreen(new ShowingCardModificationMessage
-            {
-                afterCard = afterCard,
-                beforeCard = beforeCard,
-                CanCancel = true,
-                ThingToDoUponConfirmation = () =>
-                {
-                    beforeCard.Upgrade(); 
-                    ServiceLocator.GetCardAnimationManager().RefreshCardAppearance(beforeCard);
-                },
-                Name = "Modify card? ",
-                TitleMessage = "Modify card? "
-            });
+            CardModificationDisplayScreen.Instance.Show(
+                afterCard: afterCard,
+                beforeCard: beforeCard,
+                message: "Upgrade card?",
+                goldCost: cost
+            );
         });
     }
 
-    public void ModifyMoney(int newMoneyAmount)
-    {
-        gameState.money = newMoneyAmount;
-    }
 
     public void RemoveStatusEffect<T>(AbstractBattleUnit unit) where T: AbstractStatusEffect
     {
@@ -226,7 +215,7 @@ public class ActionManager : MonoBehaviour
 
         var cardsThatCanBeSelected = soldierClass.GetCardRewardChoices();
         QueuedActions.DelayedAction("Choose New Card FGetCardRewardChoicesor Deck", () => {
-            CardRewardScreen.Show(cardsThatCanBeSelected);
+            CardRewardScreen.Instance.Show(cardsThatCanBeSelected);
         });
     }
 
@@ -310,25 +299,6 @@ public class ActionManager : MonoBehaviour
         });
     }
 
-
-    public void ModifyCard(AbstractCard card, Action<AbstractCard> actionToPerform, QueueingType queueingType = QueueingType.TO_BACK)
-    {
-        QueuedActions.ImmediateAction(() =>
-        {
-            var beforeCard = card.CopyCard();
-            var afterCard = card.CopyCard();
-            actionToPerform(card);
-            actionToPerform(afterCard);
-            var cardState = ServiceLocator.GetGameStateTracker().Deck.GetCardPosition(card.Id);
-            ServiceLocator.GetUiStateManager().SwitchToCardModificationScreen(new ShowingCardModificationMessage
-            {
-                beforeCard = beforeCard,
-                afterCard = afterCard,
-                TitleMessage = $"Card Changed Notification (this one's in your {cardState} pile"
-            });
-            ServiceLocator.GetCardAnimationManager().RefreshCardAppearance(card);
-        }, queueingType);
-    }
 
 
     BattleTurnEndActions turnEndActions = new BattleTurnEndActions();

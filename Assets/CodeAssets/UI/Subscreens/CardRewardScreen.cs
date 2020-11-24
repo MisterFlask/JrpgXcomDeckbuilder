@@ -3,17 +3,19 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class CardSelectScreen : MonoBehaviour
+public class CardRewardScreen : MonoBehaviour
 {
-    public static CardSelectScreen Instance;
-    public CardSelectScreen()
+    public static CardRewardScreen Instance;
+    public CardRewardScreen()
     {
         Instance = this;
     }
 
 
+
     public GridLayoutGroup CardGrid;
     public CardSelectionOption CardTemplate;
+    public Button DeclineButton;
 
     private List<GameObject> CardsDisplayed = new List<GameObject>();
 
@@ -22,7 +24,7 @@ public class CardSelectScreen : MonoBehaviour
         Instance.gameObject.SetActive(false);
     }
 
-    public void Populate(List<AbstractCard> cardsToDisplay)
+    public void Show(List<AbstractCard> cardsToDisplay)
     {
         Instance.gameObject.SetActive(true);
         foreach (var card in CardsDisplayed)
@@ -45,6 +47,12 @@ public class CardSelectScreen : MonoBehaviour
             display.transform.localScale = Vector3.one;
             CardsDisplayed.Add(cardClone.gameObject);
         }
+    }
 
+    public void Start()
+    {
+        DeclineButton.onClick.AddListener(() => {
+            Hide();
+        });
     }
 }

@@ -15,7 +15,7 @@ public class VanguardSoldierClass : AbstractSoldierClass
         };
     }
 
-    protected override List<AbstractCard> UniqueCardRewardPool()
+    public override List<AbstractCard> UniqueCardRewardPool()
     {
         return new List<AbstractCard>
         {

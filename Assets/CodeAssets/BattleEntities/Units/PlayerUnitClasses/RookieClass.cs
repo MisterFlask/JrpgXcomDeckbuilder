@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class RookieClass : AbstractSoldierClass
 {
-    protected override List<AbstractCard> UniqueCardRewardPool()
+    public override List<AbstractCard> UniqueCardRewardPool()
     {
         return new List<AbstractCard>()
         {
@@ -27,12 +28,31 @@ public class RookieClass : AbstractSoldierClass
         };
     }
 
-    public override void LevelUpAdditionalEffects()
+    public override void LevelUpEffects(AbstractBattleUnit me)
     {
+        base.LevelUpEffects(me);
+        me.RemoveCardsFromPersistentDeckByType<Bayonet>();
+        me.RemoveCardsFromPersistentDeckByType<CoveringFire>();
+        me.ChangeClass(GetRandomNewClass());
 
+        var newClass = me.SoldierClass;
+        me.AddCardsToPersistentDeck(newClass.StartingCards());
+        var commonCardToAdd = newClass.UniqueCardRewardPool().Where(item => item.Rarity == Rarity.COMMON).PickRandom();
+        me.AddCardsToPersistentDeck(new List<AbstractCard> { 
+            commonCardToAdd.CopyCard(),
+            commonCardToAdd.CopyCard()
+        });
     }
 
-    public override voi
+    List<AbstractSoldierClass> PromotionClasses = new List<AbstractSoldierClass>
+    {
+        new VanguardSoldierClass()
+    };
+
+    private AbstractSoldierClass GetRandomNewClass()
+    {
+        return PromotionClasses.PickRandom();
+    }
 
     private List<AbstractSoldierClass> GetClassesEligibleForPromotion()
     {

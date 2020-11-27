@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 public class DefendSelfIntent : AbstractIntent
 {
-    public DefendSelfIntent(AbstractBattleUnit source) : base(source, source.ToSingletonList())
+    private int baseDefenseGranted;
+    public DefendSelfIntent(AbstractBattleUnit source, int baseDefenseGranted) : base(source, source.ToSingletonList())
     {
+        this.baseDefenseGranted = baseDefenseGranted;
     }
 
     protected override IntentPrefab GeneratePrefab(GameObject parent)
@@ -17,5 +19,10 @@ public class DefendSelfIntent : AbstractIntent
     protected override void Execute()
     {
 
+    }
+
+    public override string GetText()
+    {
+        return $"";
     }
 }

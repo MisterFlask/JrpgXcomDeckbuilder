@@ -34,10 +34,8 @@ public class SingleUnitAttackIntent : AbstractIntent
 
     protected override IntentPrefab GeneratePrefab(GameObject parent)
     {
-        var totalDamageExpected = BattleRules.GetAnticipatedDamageToUnit(Source, Target, BaseDamage);
         var parentPrefab = ServiceLocator.GameObjectTemplates().AttackPrefab;
         var returnedPrefab = parentPrefab.Spawn(parent.transform);
-        returnedPrefab.Text.SetText($"{totalDamageExpected}x{NumberOfTimesStruck}");
         return returnedPrefab;
     }
 
@@ -49,4 +47,9 @@ public class SingleUnitAttackIntent : AbstractIntent
         }
     }
 
+    public override string GetText()
+    {
+        var totalDamageExpected = BattleRules.GetAnticipatedDamageToUnit(Source, Target, BaseDamage);
+        return $"{totalDamageExpected}x{NumberOfTimesStruck}";
+    }
 }

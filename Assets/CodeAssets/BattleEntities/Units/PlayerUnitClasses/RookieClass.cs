@@ -54,7 +54,7 @@ public class RookieClass : AbstractSoldierClass
         return PromotionClasses.PickRandom();
     }
 
-    private List<AbstractSoldierClass> GetClassesEligibleForPromotion()
+    public static List<AbstractSoldierClass> GetClassesEligibleForPromotion()
     {
         return new List<AbstractSoldierClass>
         {

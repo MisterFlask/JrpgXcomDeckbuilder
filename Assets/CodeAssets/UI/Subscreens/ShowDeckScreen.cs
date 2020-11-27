@@ -8,7 +8,6 @@ public class ShowDeckScreen : MonoBehaviour
     public ShowDeckScreen()
     {
         Instance = this;
-        Hide();
     }
 
     public GridLayoutGroup CardParent;

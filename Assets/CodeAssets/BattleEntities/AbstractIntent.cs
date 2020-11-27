@@ -58,4 +58,6 @@ public abstract class AbstractIntent
         var index = turnNumber % optionsInOrder.Count;
         return optionsInOrder[index];
     }
+
+    public abstract string GetText();
 }

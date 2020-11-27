@@ -15,6 +15,9 @@ public abstract class AbstractBattleUnit
         return StatusEffects.Any(item => item.GetType() == typeof(T));
     }
 
+    public int CombatsParticipatedIn = 0;
+    public bool PromotionAvailable => this.SoldierClass is RookieClass && CombatsParticipatedIn > 0;
+
     public int MaxHp { get; set; }
     public int NumberCardRewardsEligibleFor { get; set; } = 0;
     public bool IsDead => CurrentHp <= 0;

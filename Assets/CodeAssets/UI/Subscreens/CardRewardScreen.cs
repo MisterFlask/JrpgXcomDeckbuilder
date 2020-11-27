@@ -11,9 +11,7 @@ public class CardRewardScreen : MonoBehaviour
         Instance = this;
     }
 
-
-
-    public GridLayoutGroup CardGrid;
+    public Transform CardGrid;
     public CardSelectionOption CardTemplate;
     public Button DeclineButton;
 
@@ -24,7 +22,7 @@ public class CardRewardScreen : MonoBehaviour
         Instance.gameObject.SetActive(false);
     }
 
-    public void Show(List<AbstractCard> cardsToDisplay)
+    public void Show(List<AbstractCard> cardsToDisplay, AbstractBattleUnit unitFor)
     {
         Instance.gameObject.SetActive(true);
         foreach (var card in CardsDisplayed)
@@ -36,21 +34,22 @@ public class CardRewardScreen : MonoBehaviour
         CardsDisplayed.Clear();
         foreach (var card in cardsToDisplay)
         {
-            var cardClone = CardTemplate.gameObject.Spawn(CardGrid.transform);
+            var cardClone = CardTemplate.Spawn(CardGrid.transform);
             cardClone.gameObject.SetActive(true);
-            CardTemplate.Initialize(card);
+            cardClone.Initialize(card, unitFor);
             // CardTemplate.CardSelectionScreen = this.GetComponent<Popup>();
-            var display = cardClone.GetComponent<GameCardDisplay>();
-            var hypercard = display.GameCard;
+            var hypercard = cardClone.card;
             hypercard.SetToAbstractCardAttributes(card);
-            display.transform.SetParent(CardGrid.gameObject.transform);
-            display.transform.localScale = Vector3.one;
+            cardClone.transform.SetParent(CardGrid.gameObject.transform);
+            cardClone.transform.localScale = Vector3.one;
             CardsDisplayed.Add(cardClone.gameObject);
         }
     }
 
     public void Start()
     {
+        Log.Info("new card reward screen: " + this.gameObject.name + $" [child of {this.gameObject.transform.parent.name}]");
+
         DeclineButton.onClick.AddListener(() => {
             Hide();
         });

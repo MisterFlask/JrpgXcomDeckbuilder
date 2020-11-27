@@ -27,4 +27,8 @@ public class VanguardSoldierClass : AbstractSoldierClass
             new Strafe()
         };
     }
+    public override string Name()
+    {
+        return "Vanguard";
+    }
 }

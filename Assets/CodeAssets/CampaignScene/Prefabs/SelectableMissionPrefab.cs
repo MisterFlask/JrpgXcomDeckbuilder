@@ -25,6 +25,10 @@ public class SelectableMissionPrefab : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
+        if (Mission == null)
+        {
+            return;
+        }
         Title.text = Mission.Name;
         if (CurrentlySelected == this)
         {

@@ -7,8 +7,6 @@ using System;
 public abstract class AbstractSoldierClass
 {
     public int CurrentLevel = 1;
-
-    public string Name { get; set; }
         
     public int StartingMaxHp = 15;
 
@@ -18,6 +16,8 @@ public abstract class AbstractSoldierClass
     public abstract List<AbstractCard> StartingCards(); 
 
     public abstract List<AbstractCard> UniqueCardRewardPool();
+
+    public abstract string Name();
 
     public List<AbstractCard> GetCardRewardsForLevel(int level, int numRewards)
     {

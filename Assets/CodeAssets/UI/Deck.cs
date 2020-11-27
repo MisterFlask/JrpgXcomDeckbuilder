@@ -11,7 +11,7 @@ public class BattleDeck
 
    
 
-    public IEnumerable<AbstractCard> PersistentDeckList => CollectionUtils.Aggregate(DrawPile, DiscardPile, Hand);
+    public IEnumerable<AbstractCard> TotalDeckList => CollectionUtils.Aggregate(DrawPile, DiscardPile, Hand);
 
     public List<AbstractCard> ExhaustPile { get; set; } = new List<AbstractCard>();
     public List<AbstractCard> DrawPile { get; set; } = new List<AbstractCard>();
@@ -45,11 +45,11 @@ public class BattleDeck
 
     public CardPosition PurgeCardFromDeck(string id)
     {
-        if (!PersistentDeckList.Where(i => i.Id == id).Any())
+        if (!TotalDeckList.Where(i => i.Id == id).Any())
         {
             throw new Exception("Could not find card with ID of " + id);
         }
-        var card = PersistentDeckList.Where(i => i.Id == id).Single();
+        var card = TotalDeckList.Where(i => i.Id == id).Single();
         if (DrawPile.Contains(card))
         {
             DrawPile.Remove(card);
@@ -71,7 +71,7 @@ public class BattleDeck
 
     public AbstractCard GetRandomMatchingCard(Func<AbstractCard, bool> pred)
     {
-        var matchesPred = this.PersistentDeckList.Where(pred);
+        var matchesPred = this.TotalDeckList.Where(pred);
         if (matchesPred.IsEmpty())
         {
             return null;
@@ -110,7 +110,7 @@ public class BattleDeck
     {
         var fromPosition = GetCardPosition(card.Id);
         var fromPile = GetPileForPosition(fromPosition);
-        if (!newCardsAllowed && !PersistentDeckList.Contains(card))
+        if (!newCardsAllowed && !TotalDeckList.Contains(card))
         {
             throw new Exception("Card did not exist prior to pile move");
         }
@@ -125,7 +125,7 @@ public class BattleDeck
 
     public void AddNewCardToDeck(AbstractCard card)
     {
-        if (PersistentDeckList.Any(item => item.Id == card.Id))
+        if (TotalDeckList.Any(item => item.Id == card.Id))
         {
             throw new Exception("Attempted to add duplicate card to deck: " + card.Name);
         }
@@ -142,7 +142,7 @@ public class BattleDeck
     public List<AbstractCard> DrawNextNCards(int n)
     {
         var cardsSoFar = new List<AbstractCard>();
-        int cardsToStart = PersistentDeckList.Count();
+        int cardsToStart = TotalDeckList.Count();
         try
         {
 
@@ -166,7 +166,7 @@ public class BattleDeck
         }
         finally
         {
-            var cardsAfterShuffle = PersistentDeckList.Count();
+            var cardsAfterShuffle = TotalDeckList.Count();
 
             if (cardsToStart != cardsAfterShuffle)
             {

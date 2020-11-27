@@ -10,6 +10,11 @@ public static class BattleRules
 
     public static int CalculateEnergyCost(AbstractCard card)
     {
+        if (card.Owner == null)
+        {
+            return card.BaseEnergyCost();
+        }
+
         var owner = card.Owner;
         var ownerFatigue = owner.CurrentFatigue;
         if (ownerFatigue < card.FatigueCost)
@@ -124,7 +129,14 @@ public static class BattleRules
 
     public static int GetDisplayedDamageOnCard(AbstractCard card)
     {
+        if (card.Owner == null)
+        {
+            // This branch is for card rewards.
+            return card.BaseDamage;
+        }
+
         float baseDamage = card.BaseDamage;
+
         foreach(var attribute in card.Owner.StatusEffects)
         {
             baseDamage *= attribute.DamageDealtMultiplier();
@@ -135,6 +147,12 @@ public static class BattleRules
     }
     public static int GetDisplayedDefenseOnCard(AbstractCard card)
     {
+        if (card.Owner == null)
+        {
+            // This branch is for card rewards.
+            return card.BaseDefenseValue;
+        }
+
         float baseDamage = card.BaseDefenseValue;
         foreach (var attribute in card.Owner.StatusEffects)
         {

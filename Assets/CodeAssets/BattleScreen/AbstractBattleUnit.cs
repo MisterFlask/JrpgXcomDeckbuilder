@@ -28,7 +28,7 @@ public abstract class AbstractBattleUnit
     public int MaxFatigue { get; set; } = 4;
 
     public AbstractSoldierClass SoldierClass { get; protected set; } = new RookieClass();
-    public string UnitClassName => SoldierClass.Name;
+    public string UnitClassName => SoldierClass.Name();
     public string CharacterName { get; set; } = "";
 
     public List<AbstractStatusEffect> StatusEffects { get; set; } = new List<AbstractStatusEffect>();
@@ -53,7 +53,7 @@ public abstract class AbstractBattleUnit
     }
     public void RemoveCardsFromPersistentDeckByType<T>() where T:AbstractCard
     {
-        _CardsInPersistentDeck.RemoveAll(item => item.GetType() is T);
+        _CardsInPersistentDeck.RemoveAll(item => item.GetType() == typeof(T));
 
     }
 
@@ -94,11 +94,11 @@ public abstract class AbstractBattleUnit
     {
         foreach(var baseCard in cards)
         {
-            AddCardToPersistentDeck(baseCard.CopyCard());
+            AddCardToPersistentDeck(baseCard);
         }
     }
 
-    private void AddCardToPersistentDeck(AbstractCard baseCard)
+    public void AddCardToPersistentDeck(AbstractCard baseCard)
     {
         var card = baseCard.CopyCard();
         card.Owner = this;

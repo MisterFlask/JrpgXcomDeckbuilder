@@ -214,27 +214,28 @@ public class ActionManager : MonoBehaviour
         soldier.NumberCardRewardsEligibleFor--;
 
         var cardsThatCanBeSelected = soldierClass.GetCardRewardChoices();
-        QueuedActions.DelayedAction("Choose New Card FGetCardRewardChoicesor Deck", () => {
-            CardRewardScreen.Instance.Show(cardsThatCanBeSelected);
+        QueuedActions.DelayedAction("Choose New Card For Deck", () => {
+            CardRewardScreen.Instance.Show(cardsThatCanBeSelected, soldier);
         });
     }
 
 
-    public void AddCardToPersistentDeck(AbstractCard protoCard, QueueingType queueingType = QueueingType.TO_BACK)
+    public void AddCardToPersistentDeck(AbstractCard protoCard, AbstractBattleUnit unit, QueueingType queueingType = QueueingType.TO_BACK)
     {
         QueuedActions.ImmediateAction(() =>
         {
 
-            var persistentDeckList = ServiceLocator.GetGameStateTracker().Deck.PersistentDeckList;
+            var persistentDeckList = unit.CardsInPersistentDeck;
             if (persistentDeckList.Where(item => item.Id == protoCard.Id).Any())
             {
                 throw new Exception("Attempted to add card to deck that already had the same ID as a card in the deck already: " + protoCard.Name);
             }
+            unit.AddCardToPersistentDeck(protoCard);
             Debug.Log("Added card to deck: " + protoCard.Name);
 
-            ServiceLocator.GetCardAnimationManager().RunCreateNewCardAndAddToDiscardPileAnimation(protoCard);
+            // ServiceLocator.GetCardAnimationManager().RunCreateNewCardAndAddToDiscardPileAnimation(protoCard); //todo
             // Animate: Card created in center of screen, wait for a second, and shrinks while going down to the deck.
-            ServiceLocator.GetGameStateTracker().Deck.DiscardPile.Add(protoCard);
+            
         }, queueingType);
     }
 

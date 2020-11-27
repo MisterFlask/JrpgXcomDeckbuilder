@@ -9,7 +9,7 @@ public class PromoteButton : MonoBehaviour
     AbstractBattleUnit SelectedUnit => SelectableRosterCharacterPrefab.CurrentlySelected;
     public void ClickAction()
     {
-        SelectedUnit.ChangeClass(RookieClass.GetClassesEligibleForPromotion().PickRandom());
+        SelectedUnit.SoldierClass.LevelUp(SelectedUnit);
     }
     public bool IsClickable()
     {

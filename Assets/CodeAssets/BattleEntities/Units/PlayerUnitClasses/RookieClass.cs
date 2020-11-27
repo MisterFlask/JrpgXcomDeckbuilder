@@ -38,10 +38,11 @@ public class RookieClass : AbstractSoldierClass
         var newClass = me.SoldierClass;
         me.AddCardsToPersistentDeck(newClass.StartingCards());
         var commonCardToAdd = newClass.UniqueCardRewardPool().Where(item => item.Rarity == Rarity.COMMON).PickRandom();
-        me.AddCardsToPersistentDeck(new List<AbstractCard> { 
+        me.AddCardsToPersistentDeck(new List<AbstractCard> {
             commonCardToAdd.CopyCard(),
             commonCardToAdd.CopyCard()
         });
+        Log.Info("Added common cards to deck on promotion: 2 copies of " + commonCardToAdd.Name);
     }
 
     List<AbstractSoldierClass> PromotionClasses = new List<AbstractSoldierClass>
@@ -60,5 +61,10 @@ public class RookieClass : AbstractSoldierClass
         {
             new VanguardSoldierClass()
         };// todo
+    }
+
+    public override string Name()
+    {
+        return "Rookie";
     }
 }

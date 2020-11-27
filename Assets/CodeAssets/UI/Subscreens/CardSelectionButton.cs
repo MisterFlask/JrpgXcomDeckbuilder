@@ -11,10 +11,9 @@ public class CardSelectionButton : MonoBehaviour, IPointerClickHandler
     {
         var cardLogic = option.card.LogicalCard;
         Debug.Log("Added card to hand!");
-        ServiceLocator.GetActionManager().AddCardToHand(cardLogic.CopyCard());
+        ServiceLocator.GetActionManager().AddCardToPersistentDeck(cardLogic.CopyCard(), option.unit);
         ServiceLocator.GetActionManager().IsCurrentActionFinished = true; // Done to declare that this action has been addressed for animation purposes
         CardRewardScreen.Hide();
-
     }
 
     // Use this for initialization

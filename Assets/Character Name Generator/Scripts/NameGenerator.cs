@@ -160,8 +160,6 @@ namespace CNG
 
 			// Output performance
 			performanceTracker.Stop ( );
-			if ( Settings.OutputPerformance )
-				Debug.Log ( "Character " + character.WesternNameOrder + " generated in " + performanceTracker.ElapsedMilliseconds + " ms" );
 
 			// Return the newly created character
 			return character;

@@ -8,21 +8,11 @@ public class CharacterDetailsInRoster : MonoBehaviour
 
     public Image CharacterImage;
     public TMPro.TextMeshProUGUI Title;
-    public Button GetCardRewardButton;
+    public TMPro.TextMeshProUGUI Description;
 
     // Use this for initialization
     void Start()
     {
-        GetCardRewardButton.onClick.AddListener(() => {
-            if (CharacterIsEligibleForCardReward(BattleUnit))
-            {
-                ActionManager.Instance.PromptCardReward(BattleUnit);
-            }
-            else
-            {
-                Log.Error("Clicked card reward for button, but the soldier isn't eligible");
-            }
-        });
     }
 
     // Update is called once per frame
@@ -33,24 +23,15 @@ public class CharacterDetailsInRoster : MonoBehaviour
             CharacterImage.SetProtoSprite(BattleUnit.ProtoSprite);
             Title.text = BattleUnit.CharacterName;
         }
-        GetCardRewardButton.gameObject.SetActive(CharacterIsEligibleForCardReward(BattleUnit));
     }
 
-    bool CharacterIsEligibleForCardReward(AbstractBattleUnit unit)
+    string CharacterDescription()
     {
-        if (unit == null)
+        if (BattleUnit.IsDead)
         {
-            return false;
+            return $"{BattleUnit.SoldierClass.Name}\n<color=red>Deceased.</color>";
         }
 
-        if (unit.NumberCardRewardsEligibleFor > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        return $"{BattleUnit.SoldierClass.Name}\nHP:{BattleUnit.CurrentHp}/{BattleUnit.MaxHp}\nStress:{BattleUnit.Stress}";
     }
 }

@@ -13,6 +13,10 @@ public class PromoteButton : MonoBehaviour
     }
     public bool IsClickable()
     {
+        if (SelectedUnit == null)
+        {
+            return false;
+        }
         return (SelectedUnit.PromotionAvailable);
     }
 

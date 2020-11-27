@@ -30,6 +30,11 @@ public class SelectableRosterCharacterPrefab : MonoBehaviour, IPointerClickHandl
     // Update is called once per frame
     void Update()
     {
+        if (Character == null)
+        {
+            return;
+        }
+
         CharacterImage.SetProtoSprite(Character.ProtoSprite);
         Title.text = Character.CharacterName;
         if (CurrentlySelected == Character)

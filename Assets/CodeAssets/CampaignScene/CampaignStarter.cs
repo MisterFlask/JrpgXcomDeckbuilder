@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class CampaignStarter : MonoBehaviour
 {
@@ -19,8 +20,28 @@ public class CampaignStarter : MonoBehaviour
             Soldier.Generate(),
             Soldier.Generate(),
             Soldier.Generate(),
-            Soldier.Generate()
+            Soldier.Generate(),
+            GetHigherLevelSoldier(),
+            GetDeadSoldier()
         };
+    }
+
+    private static AbstractBattleUnit GetDeadSoldier()
+    {
+        var soldier = Soldier.Generate();
+        soldier.CombatsParticipatedIn = 10;
+        soldier.NumberCardRewardsEligibleFor = 1;
+        return soldier;
+    }
+
+    private static AbstractBattleUnit GetHigherLevelSoldier()
+    {
+
+        var soldier = Soldier.Generate();
+        soldier.CombatsParticipatedIn = 10;
+        soldier.NumberCardRewardsEligibleFor = 1;
+        soldier.CurrentHp = 0;
+        return soldier;
     }
 
     public static void InitializeSelectableMissions()

@@ -10,6 +10,10 @@ public class CardRewardButton : MonoBehaviour
 
     bool IsEligible()
     {
+        if (SelectedUnit == null)
+        {
+            return false;
+        }
         return SelectedUnit.NumberCardRewardsEligibleFor > 0;
     }
 

@@ -115,6 +115,14 @@ public abstract class AbstractBattleUnit
 
     public bool IsAdvanced => HasStatusEffect<AdvancedStatusEffect>();
 
+    /// <summary>
+    /// If this is higher than the character's HP, the character snaps.  This resets stress back to 0, and adds a persistent Madness card to the character's deck.
+    /// This can only happen once per combat.
+    /// If Stress goes above the character's Max HP during combat, the character <color=red>dies.</color>
+    /// </summary>
+    public int Stress { get; set; } = 0;
+    public bool HasSnappedThisCombat { get; set; } = false;
+
     public void Die()
     {
         CurrentHp = 0;

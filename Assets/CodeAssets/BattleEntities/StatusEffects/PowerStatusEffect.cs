@@ -6,6 +6,7 @@ public class PowerStatusEffect : AbstractStatusEffect
     public PowerStatusEffect()
     {
         this.Stackable = true;
+        this.AllowedToGoNegative = true;
     }
 
     public override string Description => $"Increases damage by {Stacks}";

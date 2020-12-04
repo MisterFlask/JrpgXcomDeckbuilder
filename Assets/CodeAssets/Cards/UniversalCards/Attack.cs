@@ -1,16 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IneptShot : AbstractCard
+public class Attack : AbstractCard
 {
-    public IneptShot()
+    public Attack()
     {
-        BaseDamage = 4;
-    }
-
-    public override int BaseEnergyCost()
-    {
-        return 1;
+        BaseDamage = 6;
     }
 
     public override string Description()

@@ -6,7 +6,10 @@ public class Strafe : AbstractCard
 
     public Strafe()
     {
-        BaseDamage = 2;
+        BaseDamage = 6;
+        CardType = CardType.AttackCard;
+        TargetType = TargetType.ENEMY;
+        this.Rarity = Rarity.COMMON;
     }
 
     public override string Description()

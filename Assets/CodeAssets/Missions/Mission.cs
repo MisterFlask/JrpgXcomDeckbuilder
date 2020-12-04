@@ -9,7 +9,7 @@ public abstract class Mission
 
     public List<AbstractMissionReward> Rewards { get; set; } = new List<AbstractMissionReward>();
 
-    public virtual  void OnFailed()
+    public virtual void OnFailed()
     {
 
     }

@@ -37,6 +37,19 @@ public class ActionManager : MonoBehaviour
         QueuedActions.DelayedAction(action.ActionId, action.onStart, queueingType: QueueingType.TO_FRONT);
     }
 
+    public void AddToBack(BasicDelayedAction action)
+    {
+        QueuedActions.DelayedAction(action.ActionId, action.onStart, queueingType: QueueingType.TO_BACK);
+    }
+
+    public void AddStickerToCard(AbstractCard card, AbstractCardSticker stickerToAdd)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            card.AddSticker(stickerToAdd);
+        });
+    }
+
     public void CheckIsBattleOver()
     {
         QueuedActions.ImmediateAction(() =>
@@ -81,23 +94,7 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            var preexistingAttr = unit.StatusEffects.FirstOrDefault(item => item.GetType() == attribute.GetType());
-            if (preexistingAttr != null)
-            {
-                preexistingAttr.Stacks += stacks;
-                if (preexistingAttr.Stacks < 0)
-                {
-                    preexistingAttr.Stacks = 0;
-                }
-                if (preexistingAttr.Stacks == 0)
-                {
-                    unit.StatusEffects.RemoveAll(item => item.GetType() == attribute.GetType());
-                }
-            }
-            else
-            {
-                unit.StatusEffects.Add(attribute);
-            }
+            unit.AddStatusEffect(attribute);
         });
     }
 
@@ -149,7 +146,6 @@ public class ActionManager : MonoBehaviour
                 target.CurrentDefense = 0;
             }
         });
-
     }
 
 
@@ -456,6 +452,29 @@ public class ActionManager : MonoBehaviour
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
 
             BattleRules.ProcessPreModifierDamage(sourceUnit, targetUnit, baseDamageDealt);
+
+            if (targetUnit.CurrentHp <= 0)
+            {
+                DestroyUnit(targetUnit);
+            }
+        });
+    }
+
+    public void DamageUnitNonAttack(AbstractBattleUnit targetUnit, AbstractBattleUnit nullableSourceUnit, int baseDamageDealt)
+    {
+        Require.NotNull(targetUnit);
+        QueuedActions.DelayedAction("ShakeUnit", () => {
+            if (targetUnit.IsDead)
+            {
+                // do nothing if it's already dead
+                IsCurrentActionFinished = true;
+                return;
+            }
+            targetUnit.CorrespondingPrefab.gameObject.AddComponent<ShakePrefab>();
+            var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
+            shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
+
+            BattleRules.ProcessPreModifierDamage(nullableSourceUnit, targetUnit, baseDamageDealt);
 
             if (targetUnit.CurrentHp <= 0)
             {

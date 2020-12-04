@@ -21,7 +21,7 @@ public class GameState
         {
         }; 
         var deck = Deck;
-        totalDeck.ForEach(item => deck.AddNewCardToDeck(item));
+        totalDeck.ForEach(item => deck.AddNewCardToDiscardPile(item));
 
     }
 

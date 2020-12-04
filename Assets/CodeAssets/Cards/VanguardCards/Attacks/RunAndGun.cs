@@ -5,7 +5,10 @@ public class RunAndGun : AbstractCard
 {
     public RunAndGun()
     {
+        BaseDamage = 5;
         Name = "Run and Gun";
+        CardType = CardType.AttackCard;
+        TargetType = TargetType.ENEMY;
     }
 
     public override string Description()
@@ -21,16 +24,13 @@ public class RunAndGun : AbstractCard
     protected override void OnPlay(AbstractBattleUnit target)
     {
         ActionManager.Instance.AttackUnitForDamage(target, this.Owner, BaseDamage);
-        ActionManager.Instance.DoAThing(() =>
+        if (target.IsAdvanced)
         {
-            if (target.IsAdvanced)
-            {
-                ActionManager.Instance.RemoveStatusEffect<AdvancedStatusEffect>(Owner);
-            }
-            else
-            {
-                ActionManager.Instance.Advance(Owner);
-            }
-        });
+            ActionManager.Instance.RemoveStatusEffect<AdvancedStatusEffect>(Owner);
+        }
+        else
+        {
+            ActionManager.Instance.Advance(Owner);
+        }
     }
 }

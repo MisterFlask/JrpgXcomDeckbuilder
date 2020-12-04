@@ -65,7 +65,7 @@ public class BattleScreenPrefab : MonoBehaviour
             character.InitForBattle();
             foreach (var card in character.BattleDeck)
             {
-                state.Deck.AddNewCardToDeck(card);
+                state.Deck.AddNewCardToDiscardPile(card.CopyCard(logicallyIdenticalToExistingCard: true));
             }
         }
 

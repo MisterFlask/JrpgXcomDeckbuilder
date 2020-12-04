@@ -11,6 +11,11 @@ public abstract class AbstractCardSticker : MonoBehaviour
 
     public string Description { get; set; } = "Card Sticker Description";
 
+    public AbstractCardSticker CopySticker()
+    {
+        return this.MemberwiseClone() as AbstractCardSticker;
+    }
+
     public virtual void OnCardPlayed(AbstractCard card)
     {
 

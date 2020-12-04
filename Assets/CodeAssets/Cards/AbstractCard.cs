@@ -90,6 +90,11 @@ public abstract class AbstractCard
 
     public virtual bool CanPlay()
     {
+        if (Unplayable)
+        {
+            return false;
+        }
+
         return CanAfford();
     }
 
@@ -164,11 +169,26 @@ public abstract class AbstractCard
         this.UpgradeQuantity += 1;
     }
 
-    public AbstractCard CopyCard()
+    /// <summary>
+    /// logicallyIdenticalToExistingCard just means that the card is keeping its ID, since it's logically the same card as in the character's persistent decks.
+    /// This distinction here matters because things that happen to cards in combat don't in general affect the character's persistent deck.
+    /// It's pretty much ONLY true when we're first initializing the battle deck in a combat.
+    /// </summary>
+    public AbstractCard CopyCard(bool logicallyIdenticalToExistingCard = false)
     {
         var copy = (AbstractCard)this.MemberwiseClone();
+        copy.Stickers = new List<AbstractCardSticker>();
+        foreach (var sticker in copy.Stickers)
+        {
+            var newSticker = sticker.CopySticker();
+            copy.Stickers.Add(newSticker);
+        }
+
         CopyCardInner(copy);
-        copy.Id = Guid.NewGuid().ToString();
+        if (!logicallyIdenticalToExistingCard)
+        {
+            copy.Id = Guid.NewGuid().ToString();
+        }
         return copy;
     }
 
@@ -204,11 +224,18 @@ public abstract class AbstractCard
         Stickers.Remove(sticker);
     }
 
+    public bool Unplayable { get; set; }
+
+    public virtual void OnTookDamageWhileInHand()
+    {
+
+    }
 }
+
 
 public enum Rarity
 {
-    COMMON,UNCOMMON,RARE
+    COMMON,UNCOMMON,RARE,NOT_IN_CARD_POOL
 }
 
 public class TargetType

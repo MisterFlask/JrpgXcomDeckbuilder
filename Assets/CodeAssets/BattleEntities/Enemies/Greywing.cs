@@ -18,7 +18,7 @@ public class Greywing : AbstractEnemyUnit
 
     public override List<AbstractIntent> GetNextIntents()
     {
-        return SingleUnitAttackIntent.AttackRandomEnemy(this, 3, 2).ToSingletonList<AbstractIntent>();
+        return SingleUnitAttackIntent.AttackRandomEnemy(this, 1, 2).ToSingletonList<AbstractIntent>();
     }
 }
 
@@ -28,13 +28,17 @@ public class Greywing : AbstractEnemyUnit
 /// </summary>
 public class GreywingWoundOnDeath: AbstractStatusEffect
 {
+    public GreywingWoundOnDeath()
+    {
+        Name = "Greywing's Revenge";
+    }
     public override string Description => $"This applies ${Stacks} Wounded to whoever killed it.";
 
     public override void OnDeath(AbstractBattleUnit unitThatKilledMe)
     {
         if (unitThatKilledMe != null)
         {
-            unitThatKilledMe.AddStatusEffect(new Wounded(), stacks: Stacks);
+            unitThatKilledMe.AddStatusEffect(new WoundedStatusEffect(), stacks: Stacks);
         }
     }
 }

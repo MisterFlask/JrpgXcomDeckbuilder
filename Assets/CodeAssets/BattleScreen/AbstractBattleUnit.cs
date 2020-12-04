@@ -76,12 +76,25 @@ public abstract class AbstractBattleUnit
         if (HasStatusEffect<T>())
         {
             GetStatusEffect<T>().Stacks += stacks;
+            if (GetStatusEffect<T>().Stacks < 0 && !GetStatusEffect<T>().AllowedToGoNegative)
+            {
+                RemoveStatusEffect<T>();
+            }
+            else
+            {
+                if (stacks > 0)
+                {
+                    GetStatusEffect<T>().OnApplicationOrIncrease();
+                }
+            }
         }
         else
         {
             effect.AssignOwner(this);
             effect.Stacks = stacks;
-            StatusEffects.Add(effect);
+            StatusEffects.Add(effect); 
+            GetStatusEffect<T>().OnApplicationOrIncrease();
+
         }
     }
 
@@ -114,14 +127,6 @@ public abstract class AbstractBattleUnit
     public int Turn { get; set; } = 1;
 
     public bool IsAdvanced => HasStatusEffect<AdvancedStatusEffect>();
-
-    /// <summary>
-    /// If this is higher than the character's HP, the character snaps.  This resets stress back to 0, and adds a persistent Madness card to the character's deck.
-    /// This can only happen once per combat.
-    /// If Stress goes above the character's Max HP during combat, the character <color=red>dies.</color>
-    /// </summary>
-    public int Stress { get; set; } = 0;
-    public bool HasSnappedThisCombat { get; set; } = false;
 
     public void Die()
     {
@@ -198,7 +203,7 @@ public abstract class AbstractBattleUnit
     {
         return ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle;
     }
-    protected List<AbstractBattleUnit> allies()
+    protected List<AbstractBattleUnit> allAlliedUnits()
     {
         return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle;
     }
@@ -229,13 +234,19 @@ public abstract class AbstractBattleUnit
         }
     }
 
-    public void ApplySoldierPerk(SoldierPerk perk)
+    public void ApplySoldierPerk(SoldierPerk perk, int stacks = 1)
     {
+        perk.Stacks = stacks;
         Perks.Add(perk);
     }
     public void RemoveSoldierPerk<T>() where T : SoldierPerk
     {
         Perks.RemoveAll(item => item.GetType() == typeof(T));
+    }
+
+    public void RemoveSoldierPerkByType(Type t)
+    {
+        Perks.RemoveAll(item => item.GetType() == t);
     }
 
     public void ChangeClass(AbstractSoldierClass newClass)

@@ -37,9 +37,16 @@ public static class BattleRules
         }
     }
 
-    public static void ProcessPreModifierDamage(AbstractBattleUnit source, AbstractBattleUnit target, int baseDamage)
+    /// <summary>
+    /// Source is allowed to be null in cases where isAttack is false. 
+    /// </summary>
+    public static void ProcessPreModifierDamage(AbstractBattleUnit source, AbstractBattleUnit target, int baseDamage, bool isAttack = true)
     {
-        var totalDamageAfterModifiers = GetAnticipatedDamageToUnit(source, target, baseDamage);
+        int totalDamageAfterModifiers = baseDamage;
+        if (isAttack)
+        {
+            totalDamageAfterModifiers = GetAnticipatedDamageToUnit(source, target, baseDamage);
+        }
         var damageDealtToHp = totalDamageAfterModifiers;
         if (target.CurrentDefense >= totalDamageAfterModifiers)
         {

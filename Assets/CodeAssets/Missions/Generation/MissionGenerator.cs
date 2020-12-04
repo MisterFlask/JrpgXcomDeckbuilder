@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MissionGenerator
+
+public class BasicMissionGenerator: MissionGenerator
 {
     int missionsGenerated = 0;
-    public Mission GenerateNewMission()
+    public Mission GenerateMission()
     {
         missionsGenerated += 1;
         return new KillEnemiesMission() {
@@ -15,8 +16,17 @@ public class MissionGenerator
             Name = $"Mission {missionsGenerated}"
         };
     }
+
+    public bool ShouldGenerateMissionThisDay(int currentDay)
+    {
+        return currentDay % 3 == 1;
+    }
 }
 
+public interface MissionGenerator{
+    public bool ShouldGenerateMissionThisDay(int currentDay);
+    public Mission GenerateMission();
+}
 
 public class KillEnemiesMission: Mission
 {
@@ -38,12 +48,13 @@ public class KillEnemiesMission: Mission
 public class Squad
 {
     public List<AbstractBattleUnit> Members { get; set; }
-    
+    public int BaseDifficulty { get; set; }
+
     public void SetDifficulty(int difficulty)
     {
         foreach(var guy in Members)
         {
-            guy.SetDifficulty(difficulty);
+            guy.SetDifficulty(difficulty - BaseDifficulty);
         }
     }
 

@@ -10,11 +10,12 @@ public class Flamer : AbstractCard
 
     public override string Description()
     {
-        return $"Applies {TechValue} Burning.  Increase the cost of this card by 1.";
+        return $"Applies {TechValue} Burning.  Increase the cost of this card by 1.  Scales with Tech.";
     }
 
     protected override void OnPlay(AbstractBattleUnit target)
     {
-        this.EnergyCostMod += 1; //todo
+        this.EnergyCostMod += 1;
+        ActionManager.Instance.ApplyStatusEffect(target, new BurningStatusEffect(), TechValue);
     }
 }

@@ -8,10 +8,11 @@ public class VanguardSoldierClass : AbstractSoldierClass
     {
         return new List<AbstractCard> {
 
-            new FireSMG(),
-            new FireSMG(),
+            new Attack(),
+            new Attack(),
             new Defend(),
-            new Defend()
+            new Defend(),
+            new 
         };
     }
 

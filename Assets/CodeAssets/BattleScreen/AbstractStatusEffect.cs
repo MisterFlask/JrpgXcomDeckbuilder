@@ -26,10 +26,11 @@ public abstract class AbstractStatusEffect
     }
     #endregion
 
+    public bool AllowedToGoNegative = false;
     public string Name { get; set; }
     public abstract string Description { get; }
     public AbstractBattleUnit OwnerUnit { get; set; }
-    public bool Stackable { get; set; } = false;
+    public bool Stackable { get; set; } = true;
     public int Stacks { get; set; } = 1;
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
 
@@ -103,6 +104,21 @@ public abstract class AbstractStatusEffect
         OwnerUnit = unit;
     }
 
+    public virtual void OnApplicationOrIncrease()
+    {
+
+    }
+
+    public virtual void OnOtherStatusEffectApplication(StatusEffectChange increaseOrDecrease, AbstractStatusEffect statusEffectApplied)
+    {
+
+    }
+
     public BattleUnitAttributePrefab CorrespondingPrefab { get; set; }
 
+}
+
+public enum StatusEffectChange
+{
+    INCREASE,DECREASE
 }

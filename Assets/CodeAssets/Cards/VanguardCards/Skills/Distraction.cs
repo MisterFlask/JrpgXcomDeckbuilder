@@ -7,11 +7,13 @@ public class Distraction : AbstractCard
     {
         Name = "Distraction";
         BaseDefenseValue = 4;
+        CardType = CardType.SkillCard;
+        TargetType = TargetType.ALLY;
     }
 
     public override string Description()
     {
-        return $"Apply {DisplayedDefense()} to every other ally";
+        return $"Apply {DisplayedDefense()} to every OTHER ally.";
     }
 
     protected override void OnPlay(AbstractBattleUnit target)

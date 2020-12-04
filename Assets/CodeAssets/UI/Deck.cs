@@ -79,7 +79,7 @@ public class BattleDeck
         return matchesPred.PickRandom();
     }
 
-    public void DiscardCard(AbstractCard card)
+    public void DiscardCardFromHand(AbstractCard card)
     {
         Hand.Remove(card);
         DiscardPile.Add(card);
@@ -123,7 +123,7 @@ public class BattleDeck
         toPile.Add(card);
     }
 
-    public void AddNewCardToDeck(AbstractCard card)
+    public void AddNewCardToDiscardPile(AbstractCard card)
     {
         if (TotalDeckList.Any(item => item.Id == card.Id))
         {

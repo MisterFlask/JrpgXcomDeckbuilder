@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Wounded : AbstractStatusEffect
+public class WoundedStatusEffect : AbstractStatusEffect
 {
-    public Wounded()
+    public WoundedStatusEffect()
     {
         this.Name = "Wounded";
         this.Stackable = true;

@@ -6,6 +6,7 @@ public class Flamer : AbstractCard
     public Flamer()
     {
         BaseTechValue = 5;
+        SetCommonCardAttributes("Flamer", Rarity.BASIC, TargetType.ENEMY, CardType.AttackCard, 0);
     }
 
     public override string Description()

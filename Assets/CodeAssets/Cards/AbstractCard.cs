@@ -70,10 +70,10 @@ public abstract class AbstractCard
         this.CardType = cardType ?? CardType.SkillCard;
         this.Name = this.GetType().Name;
     }
-
+    int? StaticBaseEnergyCost = null;
     public virtual int BaseEnergyCost()
     {
-        return 1;
+        return StaticBaseEnergyCost ?? 1;
     }
 
     public int EnergyCostMod = 0;
@@ -230,12 +230,39 @@ public abstract class AbstractCard
     {
 
     }
+
+    public string OwnerDisplayName()
+    {
+        return Owner.CharacterName;
+    }
+
+    public void SetCommonCardAttributes(string name,
+        Rarity rarity,
+        TargetType targetType,
+        CardType cardType,
+        int baseEnergyCost)
+    {
+        this.Name = name;
+        this.Rarity = rarity;
+        this.TargetType = targetType;
+        this.CardType = cardType;
+        this.StaticBaseEnergyCost = baseEnergyCost;
+    }
+
+
+}
+
+public class DamageBlob
+{
+    public int Damage { get; set; }
+    public bool IsAttackDamage { get; set; }
+    public bool IsDamagePreview { get; set; } = false;
 }
 
 
 public enum Rarity
 {
-    COMMON,UNCOMMON,RARE,NOT_IN_CARD_POOL
+    COMMON,UNCOMMON,RARE,BASIC,NOT_IN_CARD_POOL
 }
 
 public class TargetType

@@ -5,7 +5,7 @@ public class Smg : AbstractCard
 {
     public Smg()
     {
-        this.Rarity = Rarity.NOT_IN_CARD_POOL;
+        this.Rarity = Rarity.BASIC;
         this.BaseDamage = 4;
         this.Name = "SMG";
         CardType = CardType.AttackCard;

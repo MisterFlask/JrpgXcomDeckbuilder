@@ -266,4 +266,13 @@ public abstract class AbstractBattleUnit
     }
     #endregion
 
+
+    public BattleUnitStatisticsInThisCombat StatsForThisCombat = new BattleUnitStatisticsInThisCombat();
+}
+
+
+public class BattleUnitStatisticsInThisCombat
+{
+    int AmountOfDamageTaken = 0;
+    int NumberOfTimesStruck = 0;
 }

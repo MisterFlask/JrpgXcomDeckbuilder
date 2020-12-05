@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Distraction : AbstractCard
+public class Withdraw : AbstractCard
 {
-    public Distraction()
+    public Withdraw()
     {
         Name = "Distraction";
         BaseDefenseValue = 4;
@@ -13,18 +13,13 @@ public class Distraction : AbstractCard
 
     public override string Description()
     {
-        return $"Apply {DisplayedDefense()} to every OTHER ally.";
+        return $"Apply {DisplayedDefense()} to an ally.  {OwnerDisplayName()} loses Advanced.";
     }
 
     protected override void OnPlay(AbstractBattleUnit target)
     {
-        foreach (var character in GameState.Instance.AllyUnitsInBattle)
-        {
-            if (character != Owner)
-            {
-                ActionManager.Instance.ApplyDefense(character, Owner, BaseDefenseValue);
-            }
-        }
+        ActionManager.Instance.ApplyDefense(target, Owner, BaseDefenseValue);
+        ActionManager.Instance.RemoveStatusEffect<AdvancedStatusEffect>(Owner);
     }
 
 }

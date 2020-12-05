@@ -8,6 +8,7 @@ public class Mobility : AbstractCard
         Name = "Mobility";
         CardType = CardType.PowerCard;
         TargetType = TargetType.NO_TARGET_OR_SELF;
+        Rarity = Rarity.UNCOMMON;
     }
     public override string Description()
     {

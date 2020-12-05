@@ -25,5 +25,6 @@ public class FlankingShot : AbstractCard
     {
         action().AttackUnitForDamage(target, Owner, BaseDamage);
         action().ApplyStatusEffect(target, new VulnerableStatusEffect(), 1);
+        action().ExpendCard(this);
     }
 }

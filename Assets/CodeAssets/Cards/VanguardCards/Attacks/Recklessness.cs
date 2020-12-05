@@ -9,6 +9,7 @@ public class Recklessness : AbstractCard
         BaseDamage = 8;
         CardType = CardType.AttackCard;
         TargetType = TargetType.ENEMY;
+        Rarity = Rarity.UNCOMMON;
     }
 
     public override string Description()

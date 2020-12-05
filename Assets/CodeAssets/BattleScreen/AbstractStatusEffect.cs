@@ -116,6 +116,16 @@ public abstract class AbstractStatusEffect
 
     public BattleUnitAttributePrefab CorrespondingPrefab { get; set; }
 
+    /// <summary>
+    /// Note that this BOTH modifies the damage AND does anything relating to the damage modification (such as decreasing stacks of the mitigating attribute.)
+    /// This is expected to mitigate damage AFTER block is consumed.  PRE-BLOCK damage is not impacted by this method.
+    /// </summary>
+    /// <param name="damageBlob"></param>
+    public virtual void ModifyDamage(DamageBlob damageBlob)
+    {
+
+    }
+
 }
 
 public enum StatusEffectChange

@@ -90,7 +90,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         var buttonText = BattleRules.GetAdvanceOrFallBackButtonText(this.UnderlyingEntity);
         this.AdvanceOrRetreatButtonText.SetText(buttonText);
 
-        if (UnderlyingEntity.CurrentDefense > 0)
+        if (UnderlyingEntity.CurrentBlock > 0)
         {
             DefenseText.gameObject.SetActive(true);
             DefenseImage.gameObject.SetActive(true);
@@ -103,7 +103,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.CharacterNameText.SetText(UnderlyingEntity.CharacterName);
         this.HealthText.SetText($"HP: {UnderlyingEntity.CurrentHp}/{UnderlyingEntity.MaxHp}");
         this.FatigueText.SetText($"Fatigue: {UnderlyingEntity.CurrentFatigue}/{UnderlyingEntity.MaxFatigue}");
-        this.DefenseText.SetText($"{UnderlyingEntity.CurrentDefense}");
+        this.DefenseText.SetText($"{UnderlyingEntity.CurrentBlock}");
         var intentsExistingInPrefabForm = this.IntentPrefabs.Select(item => item.UnderlyingIntent);
         var relevantIntents = IntentsRelevantToCharacter();
         foreach (var intent in relevantIntents)
@@ -148,6 +148,8 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
             this.AdvanceOrRetreatButton.gameObject.SetActive(false);
             this.FatigueText.gameObject.SetActive(false);
         }
+
+        UnderlyingEntity.PerformStateBasedActions();
     }
 
     private void RemoveHighlights(Image spriteImage)

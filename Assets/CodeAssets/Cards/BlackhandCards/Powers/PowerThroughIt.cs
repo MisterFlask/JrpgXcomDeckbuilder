@@ -23,7 +23,7 @@ public class PowerThroughItStatusEffect : AbstractStatusEffect
         Name = "Power Through It";
     }
 
-    public override void ModifyDamage(DamageBlob damageBlob)
+    public override void ModifyPostBlockDamageTaken(DamageBlob damageBlob)
     {
         int damageMitigated = Math.Min(damageBlob.Damage, this.Stacks);
 
@@ -36,5 +36,5 @@ public class PowerThroughItStatusEffect : AbstractStatusEffect
     }
 
 
-    public override string Description => $"Whenever you lose HP, mitigate it by up to {Stacks} health and take that much stress.";
+    public override string Description => $"Whenever you lose HP, mitigate the loss by up to {Stacks} health and take that much stress.";
 }

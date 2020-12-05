@@ -109,7 +109,7 @@ public abstract class AbstractStatusEffect
 
     }
 
-    public virtual void OnOtherStatusEffectApplication(StatusEffectChange increaseOrDecrease, AbstractStatusEffect statusEffectApplied)
+    public virtual void OnAnyStatusEffectApplicationToOwner(StatusEffectChange increaseOrDecrease, AbstractStatusEffect statusEffectApplied)
     {
 
     }
@@ -121,7 +121,7 @@ public abstract class AbstractStatusEffect
     /// This is expected to mitigate damage AFTER block is consumed.  PRE-BLOCK damage is not impacted by this method.
     /// </summary>
     /// <param name="damageBlob"></param>
-    public virtual void ModifyDamage(DamageBlob damageBlob)
+    public virtual void ModifyPostBlockDamageTaken(DamageBlob damageBlob)
     {
 
     }

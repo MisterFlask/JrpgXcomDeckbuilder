@@ -8,6 +8,33 @@ using System;
 public static class BattleRules
 {
 
+    public static void ProcessHooksWhenStatusEffectAppliedToUnit(AbstractBattleUnit unitAffected, AbstractStatusEffect effectApplied, int stacksAppliedOrDecremented)
+    {
+        foreach(var status in unitAffected.StatusEffects)
+        {
+            var incOrDec = StatusEffectChange.DECREASE;
+
+            if (stacksAppliedOrDecremented > 0) 
+            {
+                incOrDec = StatusEffectChange.INCREASE;
+            }
+
+            if (status.GetType() == effectApplied.GetType())
+            {
+                if (incOrDec == StatusEffectChange.INCREASE)
+                {
+                    status.OnApplicationOrIncrease();
+                }
+            }
+            else
+            {
+                status.OnAnyStatusEffectApplicationToOwner(incOrDec, effectApplied);
+            }
+        }
+
+
+    }
+
     public static int CalculateEnergyCost(AbstractCard card)
     {
         if (card.Owner == null)
@@ -40,26 +67,71 @@ public static class BattleRules
     /// <summary>
     /// Source is allowed to be null in cases where isAttack is false. 
     /// </summary>
-    public static void ProcessPreModifierDamage(AbstractBattleUnit source, AbstractBattleUnit target, int baseDamage, bool isAttack = true)
+    public static void ProcessDamageWithCalculatedModifiers(AbstractBattleUnit damageSource, AbstractBattleUnit target, int baseDamage, bool isAttack = true)
     {
         int totalDamageAfterModifiers = baseDamage;
         if (isAttack)
         {
-            totalDamageAfterModifiers = GetAnticipatedDamageToUnit(source, target, baseDamage);
+            totalDamageAfterModifiers = GetAnticipatedDamageToUnit(damageSource, target, baseDamage);
         }
-        var damageDealtToHp = totalDamageAfterModifiers;
-        if (target.CurrentDefense >= totalDamageAfterModifiers)
+
+
+        var damageDealtAfterBlocking = totalDamageAfterModifiers;
+        if (target.CurrentBlock >= totalDamageAfterModifiers)
         {
-            damageDealtToHp = 0;
-            target.CurrentDefense -= totalDamageAfterModifiers;
+            damageDealtAfterBlocking = 0;
+            target.CurrentBlock -= totalDamageAfterModifiers;
         }
         else
         {
-            damageDealtToHp -= target.CurrentDefense;
+            damageDealtAfterBlocking -= target.CurrentBlock;
 
-            target.CurrentHp -= damageDealtToHp;
-            target.CurrentDefense = 0;
+            target.CurrentBlock = 0;
         }
+        if (damageDealtAfterBlocking != 0)
+        {
+            var damageBlob = new DamageBlob
+            {
+                Damage = damageDealtAfterBlocking,
+                IsAttackDamage = isAttack,
+                IsDamagePreview = false
+            };
+
+            target.CurrentHp -= damageBlob.Damage;
+
+            
+            if (target.CurrentHp > 0 && isAttack)
+            {
+                ProcessAttackDamageReceivedHooks(damageSource, target, damageBlob.Damage);
+            }
+            CheckAndRegisterDeath(target, damageSource);
+        }
+    }
+
+    public static void CheckAndRegisterDeath(AbstractBattleUnit unit, AbstractBattleUnit nullableUnitThatKilledMe)
+    {
+
+        if (unit.CurrentHp <= 0)
+        {
+            foreach (var effect in unit.StatusEffects)
+            {
+                effect.OnDeath(nullableUnitThatKilledMe);
+            }
+            ActionManager.Instance.DestroyUnit(unit);
+        }
+    }
+
+    private static void ProcessAttackDamageReceivedHooks(AbstractBattleUnit source, AbstractBattleUnit target, int damageAfterBlockingAndModifiers)
+    {
+        foreach (var statusEffect in target.StatusEffects)
+        {
+            statusEffect.OnStruck(source, damageAfterBlockingAndModifiers);
+        }
+        foreach (var statusEffect in source.StatusEffects)
+        {
+            statusEffect.OnStriking(source, damageAfterBlockingAndModifiers);
+        }
+
     }
 
     public static int GetDefenseApplied(AbstractBattleUnit source, AbstractBattleUnit target, int baseDefense)

@@ -140,10 +140,10 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            target.CurrentDefense += BattleRules.GetDefenseApplied(source, target, baseQuantity);
-            if (target.CurrentDefense < 0)
+            target.CurrentBlock += BattleRules.GetDefenseApplied(source, target, baseQuantity);
+            if (target.CurrentBlock < 0)
             {
-                target.CurrentDefense = 0;
+                target.CurrentBlock = 0;
             }
         });
     }
@@ -451,12 +451,8 @@ public class ActionManager : MonoBehaviour
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
 
-            BattleRules.ProcessPreModifierDamage(sourceUnit, targetUnit, baseDamageDealt);
+            BattleRules.ProcessDamageWithCalculatedModifiers(sourceUnit, targetUnit, baseDamageDealt);
 
-            if (targetUnit.CurrentHp <= 0)
-            {
-                DestroyUnit(targetUnit);
-            }
         });
     }
 
@@ -474,12 +470,8 @@ public class ActionManager : MonoBehaviour
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
 
-            BattleRules.ProcessPreModifierDamage(nullableSourceUnit, targetUnit, baseDamageDealt);
+            BattleRules.ProcessDamageWithCalculatedModifiers(nullableSourceUnit, targetUnit, baseDamageDealt);
 
-            if (targetUnit.CurrentHp <= 0)
-            {
-                DestroyUnit(targetUnit);
-            }
         });
     }
 

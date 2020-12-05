@@ -22,7 +22,7 @@ public abstract class AbstractBattleUnit
     public int NumberCardRewardsEligibleFor { get; set; } = 0;
     public bool IsDead => CurrentHp <= 0;
 
-    public int CurrentDefense { get; set; }
+    public int CurrentBlock { get; set; }
     public int CurrentHp { get; set; }
     public int CurrentFatigue { get; set; } = 4;
     public int MaxFatigue { get; set; } = 4;
@@ -84,7 +84,7 @@ public abstract class AbstractBattleUnit
             {
                 if (stacks > 0)
                 {
-                    GetStatusEffect<T>().OnApplicationOrIncrease();
+                    BattleRules.ProcessHooksWhenStatusEffectAppliedToUnit(this, effect, stacks);
                 }
             }
         }
@@ -92,8 +92,8 @@ public abstract class AbstractBattleUnit
         {
             effect.AssignOwner(this);
             effect.Stacks = stacks;
-            StatusEffects.Add(effect); 
-            GetStatusEffect<T>().OnApplicationOrIncrease();
+            StatusEffects.Add(effect);
+            BattleRules.ProcessHooksWhenStatusEffectAppliedToUnit(this, effect, stacks);
 
         }
     }
@@ -135,13 +135,16 @@ public abstract class AbstractBattleUnit
 
     public void OnTurnStart()
     {
-        CurrentDefense = 0;
-
         ActionManager.Instance.DoAThing(() =>
         {
+            CurrentBlock = 0;
             if (CurrentFatigue < MaxFatigue)
             {
                 this.CurrentFatigue += 1;
+            }
+            foreach(var statusEffect in StatusEffects)
+            {
+                statusEffect.OnTurnStart();
             }
         });
     }
@@ -212,6 +215,23 @@ public abstract class AbstractBattleUnit
     {
         return ServiceLocator.GetGameStateTracker();
     }
+
+    /// <summary>
+    /// This is just a cleanup operation.
+    /// </summary>
+    public void PerformStateBasedActions()
+    {
+        foreach(var effect in StatusEffects.ToList())
+        {
+            if (effect.Stacks == 0)
+            {
+                StatusEffects.Remove(effect);
+            }
+        }
+        BattleRules.CheckAndRegisterDeath(this, null);
+    }
+
+
 
     /// <summary>
     /// If stacksToRemove is null, removes all stacks.

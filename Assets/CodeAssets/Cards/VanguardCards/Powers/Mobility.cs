@@ -25,7 +25,7 @@ public class MobilityStatusEffect : AbstractStatusEffect
 {
     public override string Description => $"Whenever {OwnerUnit.CharacterName} gains or loses Advanced, add a Flanking Shot to your hand.";
 
-    public override void OnOtherStatusEffectApplication(StatusEffectChange increaseOrDecrease, AbstractStatusEffect statusEffectApplied)
+    public override void OnAnyStatusEffectApplicationToOwner(StatusEffectChange increaseOrDecrease, AbstractStatusEffect statusEffectApplied)
     {
         if (statusEffectApplied.GetType() == typeof(AdvancedStatusEffect))
         {

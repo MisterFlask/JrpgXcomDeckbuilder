@@ -8,23 +8,17 @@ public class BurningStatusEffect : AbstractStatusEffect
     public override void OnTurnStart()
     {
         ActionManager.Instance.AttackUnitForDamage(OwnerUnit, null, Stacks);
-        ActionManager.Instance.DoAThing(() =>
-        {
-            Stacks -= 2;
-        });
+        Stacks -= 2;
     }
 
     public override void OnApplicationOrIncrease()
     {
-        ActionManager.Instance.DoAThing(() =>
+        var stacksOfFlammable = OwnerUnit.GetStatusEffect<FlammableStatusEffect>();
+        if (stacksOfFlammable != null)
         {
-            var stacksOfFlammable = OwnerUnit.GetStatusEffect<FlammableStatusEffect>();
-            if (stacksOfFlammable != null)
-            {
-                var stacks = stacksOfFlammable.Stacks;
-                ActionManager.Instance.RemoveStatusEffect<FlammableStatusEffect>(OwnerUnit);
-                ActionManager.Instance.ApplyStatusEffect(OwnerUnit, new BurningStatusEffect(), stacks);
-            }
-        });
+            var stacks = stacksOfFlammable.Stacks;
+            ActionManager.Instance.RemoveStatusEffect<FlammableStatusEffect>(OwnerUnit);
+            ActionManager.Instance.ApplyStatusEffect(OwnerUnit, new BurningStatusEffect(), stacks);
+        }
     }
 }

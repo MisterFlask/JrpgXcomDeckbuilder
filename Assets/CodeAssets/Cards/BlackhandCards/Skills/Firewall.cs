@@ -14,7 +14,7 @@ public class Firewall : AbstractCard
 
     public override string Description()
     {
-        return $"Apply {DisplayedDefense()} to ally.  Grant that ally {TemporaryThornsGranted} Temporary Thorns."
+        return $"Apply {DisplayedDefense()} to ally.  Grant that ally {TemporaryThornsGranted} Temporary Thorns.";
     }
 
     protected override void OnPlay(AbstractBattleUnit target)

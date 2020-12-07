@@ -19,7 +19,7 @@ public static class CampaignMapState
     public static ShopData shopData;
     
 
-    public static MissionGenerator MissionGenerator = new MissionGenerator();
+    public static MissionGenerator MissionGenerator = new BasicMissionGenerator();
     public static void InitializeCampaignScreen()
     {
         MissionListPrefab.Instance.Initialize();

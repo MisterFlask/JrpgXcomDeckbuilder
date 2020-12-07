@@ -8,6 +8,7 @@ public abstract class AbstractCard
 {
     public Guid OwnerGuid;
 
+    public ProtoGameSprite ProtoSprite = ProtoGameSprite.FromGameIcon();
     public int FatigueCost => 1;
     public AbstractBattleUnit Owner { get; set; }
 
@@ -240,13 +241,18 @@ public abstract class AbstractCard
         Rarity rarity,
         TargetType targetType,
         CardType cardType,
-        int baseEnergyCost)
+        int baseEnergyCost,
+        ProtoGameSprite protoGameSprite = null)
     {
         this.Name = name;
         this.Rarity = rarity;
         this.TargetType = targetType;
         this.CardType = cardType;
         this.StaticBaseEnergyCost = baseEnergyCost;
+        if (protoGameSprite != null)
+        {
+            this.ProtoSprite = protoGameSprite; 
+        }
     }
 
 

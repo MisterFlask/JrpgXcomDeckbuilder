@@ -9,7 +9,7 @@ public class PowerStatusEffect : AbstractStatusEffect
         this.AllowedToGoNegative = true;
     }
 
-    public override string Description => $"Increases damage by {Stacks}";
+    public override string Description => $"Increases damage by -1 per stack.";
 
     public override int DamageDealtAddition()
     {

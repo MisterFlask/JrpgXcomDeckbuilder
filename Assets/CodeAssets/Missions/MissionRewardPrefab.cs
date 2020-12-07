@@ -19,7 +19,7 @@ public class MissionRewardPrefab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Text.text = Reward.Description;
+        Text.text = Reward.Description();
         image.SetProtoSprite(Reward.ProtoSprite);
     }
 }

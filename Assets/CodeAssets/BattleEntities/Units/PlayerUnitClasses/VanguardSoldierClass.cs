@@ -12,7 +12,6 @@ public class VanguardSoldierClass : AbstractSoldierClass
             new Attack(),
             new Defend(),
             new Defend(),
-            new 
         };
     }
 

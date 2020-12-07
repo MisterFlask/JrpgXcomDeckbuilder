@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections.Generic;
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace HyperCard
 {
@@ -18,6 +19,8 @@ namespace HyperCard
         public CustomGuiText MightDisplayTooltipText;
         public CustomGuiText OtherDisplayTooltipText;
         public CardStickerHolder CardStickerHolder;
+        public Image CardImage;
+
         public AbstractCard LogicalCard { get; set; }
         public string LogicalCardId { get; set; }
 
@@ -57,11 +60,18 @@ namespace HyperCard
             cardTags.text = text;
         }
 
+        private ProtoGameSprite protoSpriteUsed = null;
+
         public void Update()
         {
             if (LogicalCard != null)
             {
                 Refresh();
+                if (protoSpriteUsed != LogicalCard?.ProtoSprite)
+                {
+                    protoSpriteUsed = LogicalCard?.ProtoSprite;
+                    CardImage.sprite = LogicalCard.ProtoSprite.ToSprite();
+                }
             }
         }
 

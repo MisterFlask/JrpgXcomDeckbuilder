@@ -25,7 +25,7 @@ public class ImageUtils
         if (loaded == null)
         {
             Debug.LogError("Could not load sprite from image path: " + imageName);
-            loaded = Resources.Load<Sprite>(imageName);
+            loaded = Resources.Load<Sprite>("Sprites/3d-meeple");
         }
         return loaded;
     }

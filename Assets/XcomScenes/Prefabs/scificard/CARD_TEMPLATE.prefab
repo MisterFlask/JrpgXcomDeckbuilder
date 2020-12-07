@@ -1181,6 +1181,7 @@ MonoBehaviour:
   MightDisplayTooltipText: {fileID: 0}
   OtherDisplayTooltipText: {fileID: 0}
   CardStickerHolder: {fileID: 8420998930171198095}
+  CardImage: {fileID: 5338327049465070991}
 --- !u!61 &-5625214315048553695
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -24,8 +24,8 @@ public class BasicMissionGenerator: MissionGenerator
 }
 
 public interface MissionGenerator{
-    public bool ShouldGenerateMissionThisDay(int currentDay);
-    public Mission GenerateMission();
+    bool ShouldGenerateMissionThisDay(int currentDay);
+    Mission GenerateMission();
 }
 
 public class KillEnemiesMission: Mission

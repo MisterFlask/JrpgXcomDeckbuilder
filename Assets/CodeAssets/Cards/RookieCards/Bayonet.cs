@@ -9,6 +9,8 @@ public class Bayonet : AbstractCard
         BaseDamage = 10;
         TargetType = TargetType.ENEMY;
         CardType = CardType.AttackCard;
+        this.ProtoSprite = GameIconProtoSprite.FromGameIcon(path: "Sprites/bayonet");
+
     }
 
     public override int BaseEnergyCost()

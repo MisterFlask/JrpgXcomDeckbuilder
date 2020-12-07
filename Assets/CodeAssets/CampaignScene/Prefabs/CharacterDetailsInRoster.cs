@@ -32,6 +32,6 @@ public class CharacterDetailsInRoster : MonoBehaviour
             return $"{BattleUnit.SoldierClass.Name()}\n<color=red>Deceased.</color>";
         }
 
-        return $"{BattleUnit.SoldierClass.Name()}\nHP:{BattleUnit.CurrentHp}/{BattleUnit.MaxHp}\nStress:{BattleUnit.Stress}";
+        return $"{BattleUnit.SoldierClass.Name()}\nHP:{BattleUnit.CurrentHp}/{BattleUnit.MaxHp}\nStress:0";
     }
 }

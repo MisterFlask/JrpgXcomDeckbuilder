@@ -12,7 +12,8 @@ public class RookieClass : AbstractSoldierClass
         {
             new Defend(),
             new Bayonet(),
-            new CoveringFire()
+            new IneptShot(),
+            new IneptShot()
         };
     }
 
@@ -21,10 +22,10 @@ public class RookieClass : AbstractSoldierClass
         return new List<AbstractCard>
         {
             new Defend(),
-            new Bayonet(),
-            new Bayonet(),
+            new IneptShot(),
+            new IneptShot(),
             new Defend(),
-            new CoveringFire()
+            new Bayonet()
         };
     }
 
@@ -32,7 +33,8 @@ public class RookieClass : AbstractSoldierClass
     {
         base.LevelUpEffects(me);
         me.RemoveCardsFromPersistentDeckByType<Bayonet>();
-        me.RemoveCardsFromPersistentDeckByType<CoveringFire>();
+        me.RemoveCardsFromPersistentDeckByType<Defend>();
+        me.RemoveCardsFromPersistentDeckByType<IneptShot>();
         me.ChangeClass(GetRandomNewClass());
 
         var newClass = me.SoldierClass;

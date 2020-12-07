@@ -5,10 +5,9 @@ public class Defend : AbstractCard
 {
     public Defend()
     {
-        this.Name = "Defend";
-        this.TargetType = TargetType.ALLY;
-        this.CardType = CardType.SkillCard;
         this.BaseDefenseValue = 5;
+        this.SetCommonCardAttributes("Defend", Rarity.BASIC, TargetType.ALLY, CardType.SkillCard, 1, protoGameSprite: ProtoGameSprite.FromGameIcon("Sprites/shield-reflect"));
+
     }
 
 

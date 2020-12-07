@@ -7,10 +7,14 @@ public class GoldMissionReward : AbstractMissionReward
     public GoldMissionReward(int amount)
     {
         MoneyEarned = amount;
-        this.Description = $"Earn {amount} gold.";
     }
     public override void OnReward()
     {
         GameState.Instance.money += MoneyEarned;
+    }
+
+    public override string Description()
+    {
+        return $"Earn {MoneyEarned} gold.";
     }
 }

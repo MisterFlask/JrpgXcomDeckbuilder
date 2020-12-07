@@ -11,7 +11,7 @@ public class FumesLeak : AbstractCard
 
     public override string Description()
     {
-        return $"Adds 8 Flammable to targeted enemy.  Apply {BaseDefenseValue} defense and 4 Stress to all allies.");
+        return $"Adds 8 Flammable to targeted enemy.  Apply {BaseDefenseValue} defense and 4 Stress to all allies.";
     }
 
     protected override void OnPlay(AbstractBattleUnit target)

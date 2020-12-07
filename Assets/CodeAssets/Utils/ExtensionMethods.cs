@@ -268,6 +268,7 @@ public static class ExtensionMethods
         hyperCard.SetCardEnergyCost(BattleRules.CalculateEnergyCost(abstractCard));
         hyperCard.LogicalCardId = abstractCard.Id;
         hyperCard.LogicalCard = abstractCard;
+        
     }
 
     private static string BuildTextBoxStringForCard(AbstractCard abstractCard)

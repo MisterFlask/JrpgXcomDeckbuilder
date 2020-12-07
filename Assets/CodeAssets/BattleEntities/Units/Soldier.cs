@@ -4,29 +4,23 @@ using System.Collections.Generic;
 
 public class Soldier : AbstractAllyUnit
 {
-    public Soldier()
+    public Soldier(AbstractSoldierClass soldierClass = null)
     {
         this.MaxHp = 10;
         this.MaxFatigue = 4;
-        this.SoldierClass = new RookieClass();
+        this.SoldierClass = soldierClass ?? new RookieClass();
 
-        this.StartingCardsInDeck.AddRange(new List<AbstractCard>
-        {
-            new Grenade(),
-            new CoveringFire(),
-            new CoveringFire(),
-            new Bayonet(),
-            new Bayonet(),
-            new Defend(),
-            new Defend(),
-            new Defend(),
-            new Defend()
-        });
+        this.StartingCardsInDeck.AddRange(SoldierClass.StartingCards());
     }
 
-    public static AbstractBattleUnit Generate()
+    public static AbstractBattleUnit GenerateRookie()
     {
         return new Soldier().CloneUnit();
+    }
+
+    public static AbstractBattleUnit GenerateSoldier(AbstractSoldierClass soldierClass)
+    {
+        return new Soldier(soldierClass);
     }
 
     public override List<AbstractCard> CardsSelectableOnLevelUp()

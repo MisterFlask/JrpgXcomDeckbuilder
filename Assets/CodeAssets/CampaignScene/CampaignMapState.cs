@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public static class CampaignMapState 
 {
@@ -13,7 +14,19 @@ public static class CampaignMapState
     public static List<AbstractBattleUnit> Roster;
     public static List<AbstractBattleUnit> CurrentSelectedParty;
 
-    public static List<Mission> MissionsSelectable;
+    public static List<Mission> MissionsActive;
+
+    private static string CampaignLog = "";
+    public static void AppendLogMessage(string msg)
+    {
+        CampaignLog += Environment.NewLine + msg;
+    }
+
+    public static string GetLogs()
+    {
+        return CampaignLog;
+    }
+
     public static int Money => ServiceLocator.GetGameStateTracker().money;
 
     public static ShopData shopData;

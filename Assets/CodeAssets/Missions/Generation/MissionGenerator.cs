@@ -12,8 +12,8 @@ public class BasicMissionGenerator: MissionGenerator
         return new KillEnemiesMission() {
             Squad = Squad.PredefinedSquads.PickRandom(),
             Difficulty = 1,
-            MoneyReward = 50,
-            Name = $"Mission {missionsGenerated}"
+            Name = Mission.GenerateMissionName(),
+            Rewards = new List<AbstractMissionReward> { new GoldMissionReward(50) }
         };
     }
 

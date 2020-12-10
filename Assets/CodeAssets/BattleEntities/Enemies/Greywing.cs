@@ -18,7 +18,13 @@ public class Greywing : AbstractEnemyUnit
 
     public override List<AbstractIntent> GetNextIntents()
     {
-        return SingleUnitAttackIntent.AttackRandomEnemy(this, 1, 2).ToSingletonList<AbstractIntent>();
+        return new List<AbstractIntent>
+        {
+            new BuffSelfIntent(this, new PowerStatusEffect()),
+            SingleUnitAttackIntent.AttackRandomEnemy(this, 1, 2)
+        }
+        .PickRandom()
+        .ToSingletonList();
     }
 }
 

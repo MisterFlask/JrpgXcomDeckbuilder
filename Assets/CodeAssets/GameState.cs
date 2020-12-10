@@ -55,5 +55,6 @@ public class GameState
 
     #region UI State
     public AbstractBattleUnit CharacterSelected { get; set; }
+    public int Day { get; set; }
     #endregion
 }

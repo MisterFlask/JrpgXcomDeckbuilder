@@ -46,7 +46,7 @@ public class CampaignStarter : MonoBehaviour
 
     public static void InitializeSelectableMissions()
     {
-        CampaignMapState.MissionsSelectable = new List<Mission>
+        CampaignMapState.MissionsActive = new List<Mission>
         {
             CampaignMapState.MissionGenerator.GenerateMission(),
             CampaignMapState.MissionGenerator.GenerateMission(),

@@ -9,7 +9,6 @@ public class ImageUtils
     public const string CrossedSwordsImagePath = "Sprites/crossed-swords";
 
 
-    private static string DefenseImage = "stone-tower";
 
 
     public static ProtoGameSprite ProtoGameSpriteFromGameIcon(

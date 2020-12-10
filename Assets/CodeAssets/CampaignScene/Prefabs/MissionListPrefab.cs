@@ -19,7 +19,7 @@ public class MissionListPrefab : MonoBehaviour
     public void Initialize()
     {
         MissionsParent.gameObject.PurgeChildren();
-        foreach(var mission in CampaignMapState.MissionsSelectable)
+        foreach(var mission in CampaignMapState.MissionsActive)
         {
             AddMission(mission);
         }

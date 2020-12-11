@@ -16,6 +16,10 @@ public class SingleUnitAttackIntent : AbstractIntent
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(color: Color.red, path: "Sprites/crossed-swords");
     }
 
+    public override string GetGenericDescription()
+    {
+        return "This unit will attack someone this turn.";
+    }
     public static SingleUnitAttackIntent AttackRandomEnemy(AbstractBattleUnit source, int damage, int numTimesStruck)
     {
         var target = IntentTargeting.GetRandomLivingPlayerUnit();

@@ -192,12 +192,14 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         Debug.Log("Entered battle unit prefab; setting battle unit moused over");
         BattleScreenPrefab.BattleUnitMousedOver = this.UnderlyingEntity;
+        ExplainerPanel.ShowBattleUnitHelp(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("Exited battle unit prefab; unsetting battle unit moused over");
         BattleScreenPrefab.BattleUnitMousedOver = null;
+        ExplainerPanel.Hide();
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -10,6 +10,10 @@ public class DefendSelfIntent : AbstractIntent
         this.baseDefenseGranted = baseDefenseGranted;
     }
 
+    public override string GetGenericDescription()
+    {
+        return "This unit will defend itself next turn.";
+    }
     protected override IntentPrefab GeneratePrefab(GameObject parent)
     {
         var parentPrefab = ServiceLocator.GameObjectTemplates().DefendPrefab;

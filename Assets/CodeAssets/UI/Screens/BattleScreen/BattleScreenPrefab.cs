@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 public class BattleScreenPrefab : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class BattleScreenPrefab : MonoBehaviour
     public GameObject EnemyUnitSpotsParent;
     public GameObject AllyUnitSpotsParent;
 
+    public Image Image;
+
     /// <summary>
     /// These next couple attributes are just for tracking what we're currently mousing over.
     /// </summary>
@@ -30,6 +33,7 @@ public class BattleScreenPrefab : MonoBehaviour
     public void Setup(List<AbstractBattleUnit> StartingEnemies, List<AbstractBattleUnit> StartingAllies
         )
     {
+        Image.sprite = GameState.Instance.CurrentMission.BattleBackground.ToSprite();
         if (StartingAllies.Count > PotentialBattleEntityAllySpots.Count)
         {
             throw new System.Exception("Too many allies for availabel number of spots");

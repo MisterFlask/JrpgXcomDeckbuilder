@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class ExplainerPanel : MonoBehaviour
 {
@@ -50,5 +51,10 @@ public class ExplainerPanel : MonoBehaviour
     public void HideTooltip()
     {
         // todo
+    }
+
+    public static void ShowBattleUnitHelp(BattleUnitPrefab battleUnitPrefab)
+    {
+        TooltipToDisplay = (battleUnitPrefab.UnderlyingEntity.GetTooltip());
     }
 }

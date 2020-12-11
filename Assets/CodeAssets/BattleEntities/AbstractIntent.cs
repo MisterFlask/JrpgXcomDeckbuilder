@@ -18,6 +18,8 @@ public abstract class AbstractIntent
     public string Id = Guid.NewGuid().ToString();
 
 
+    public abstract string GetGenericDescription();
+
     public void ExecuteIntent()
 
     {

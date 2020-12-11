@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Soldier : AbstractAllyUnit
 {
@@ -11,6 +12,12 @@ public class Soldier : AbstractAllyUnit
         this.SoldierClass = soldierClass ?? new RookieClass();
 
         this.StartingCardsInDeck.AddRange(SoldierClass.StartingCards());
+        this.ProtoSprite = GetRandomProtoSprite();
+    }
+
+    private ProtoGameSprite GetRandomProtoSprite()
+    {
+        return OryxSprites.SelectRandomCharacterSpriteWithRandomColoration();
     }
 
     public static AbstractBattleUnit GenerateRookie()

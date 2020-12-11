@@ -288,6 +288,21 @@ public abstract class AbstractBattleUnit
 
 
     public BattleUnitStatisticsInThisCombat StatsForThisCombat = new BattleUnitStatisticsInThisCombat();
+
+    public string GetTooltip()
+    {
+        string text = "";
+        if (CurrentIntents != null)
+        {
+            foreach(var intent in CurrentIntents)
+            {
+                text += Environment.NewLine + intent.GetGenericDescription();
+            }
+        }
+
+        return text;
+    }
+
 }
 
 

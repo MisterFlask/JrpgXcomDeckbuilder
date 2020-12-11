@@ -45,4 +45,6 @@ public abstract class Mission
 
     public bool IsFailure { get; set; } = false;
     public bool IsVictory { get; set; } = false;
+
+    public ProtoGameSprite BattleBackground { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Backgrounds/Battleback1");
 }

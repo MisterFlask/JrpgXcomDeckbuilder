@@ -2,14 +2,12 @@
 using System.Collections;
 using System;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class ImageUtils
 {
     public const string MeepleImagePath = "Sprites/3d-meeple";
     public const string CrossedSwordsImagePath = "Sprites/crossed-swords";
-
-
-
 
     public static ProtoGameSprite ProtoGameSpriteFromGameIcon(
         string path = MeepleImagePath,
@@ -17,7 +15,6 @@ public class ImageUtils
     {
         return new GameIconProtoSprite { Color = color ?? Color.white, SpritePath = path };
     }
-
     public static Sprite LoadSprite(string imageName)
     {
         var loaded = Resources.Load<Sprite>(imageName);
@@ -68,6 +65,11 @@ public class GameSprite
 
 public class GameIconProtoSprite: ProtoGameSprite
 {
+    public bool ReverseXAxis { get; set; } = false; //todo
+
+    // todo: animation functionality
+    //public List<string> AnimatedSpritePath = null;
+
     public string SpritePath { get; set; }
     public Color Color { get; set; }
 

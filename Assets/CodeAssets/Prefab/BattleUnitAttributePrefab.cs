@@ -15,7 +15,6 @@ public class BattleUnitAttributePrefab : MonoBehaviour, IPointerEnterHandler, IP
     {
         this.CorrespondingAttribute = attr;
         image.SetProtoSprite(CorrespondingAttribute.ProtoSprite);
-        Text.SetText(attr.Stacks.ToString());
         attr.CorrespondingPrefab = this;
     }
 
@@ -26,6 +25,19 @@ public class BattleUnitAttributePrefab : MonoBehaviour, IPointerEnterHandler, IP
             return;
         }
         ExplainerPanel.ShowStatusEffectHelp(this.CorrespondingAttribute);
+    }
+
+    public void Update()
+    {
+        if (CorrespondingAttribute == null)
+        {
+            return;
+        }
+
+        if (CorrespondingAttribute.Stacks != 1 && CorrespondingAttribute.Stacks != 0)
+        {
+            Text.SetText(CorrespondingAttribute.Stacks.ToString());
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)

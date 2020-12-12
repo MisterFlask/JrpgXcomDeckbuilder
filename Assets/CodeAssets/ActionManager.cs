@@ -94,7 +94,7 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            unit.AddStatusEffect(attribute);
+            unit.AddStatusEffect(attribute, stacks);
         });
     }
 

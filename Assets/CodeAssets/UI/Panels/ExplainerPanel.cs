@@ -7,7 +7,7 @@ using System;
 public class ExplainerPanel : MonoBehaviour
 {
     private static string TooltipToDisplay { get; set; }
-
+    const string Bullet = "\u2022";
     public static string DebuggingInfo => ""; //ActionManager.Instance?.GetQueueActionsDebugLogs() ?? "No action manager found";
 
     public static void Hide()
@@ -96,7 +96,7 @@ public class ExplainerPanel : MonoBehaviour
     }
     public static string ListItemFormat(string text)
     {
-        return $"*{text}";
+        return $"{Bullet}{text}";
     }
 
 

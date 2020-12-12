@@ -73,6 +73,7 @@ public abstract class AbstractBattleUnit
         {
             return;
         }
+
         if (HasStatusEffect<T>())
         {
             GetStatusEffect<T>().Stacks += stacks;
@@ -94,7 +95,6 @@ public abstract class AbstractBattleUnit
             effect.Stacks = stacks;
             StatusEffects.Add(effect);
             BattleRules.ProcessHooksWhenStatusEffectAppliedToUnit(this, effect, stacks);
-
         }
     }
 
@@ -229,6 +229,25 @@ public abstract class AbstractBattleUnit
             }
         }
         BattleRules.CheckAndRegisterDeath(this, null);
+
+        // kind of a hack, but should be fine
+        foreach(var statusEffect in StatusEffects.ToList())
+        {
+            if (!StatusEffects.Contains(statusEffect))
+            {
+                continue;
+            }
+
+            var effectsOfThisType = StatusEffects.Where(item => item.GetType() == statusEffect.GetType());
+            if (effectsOfThisType.Count() > 1)
+            {
+                var consolidatedStacks = effectsOfThisType.Sum(item => item.Stacks);
+                StatusEffects.RemoveAll(item => item.GetType() == statusEffect.GetType());
+                StatusEffects.Add(statusEffect);
+                statusEffect.Stacks = consolidatedStacks;
+            }
+        }
+
     }
 
 

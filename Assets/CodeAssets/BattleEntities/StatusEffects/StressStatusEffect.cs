@@ -13,7 +13,7 @@ public class StressStatusEffect : AbstractStatusEffect
     public override string Description => $"If this goes above a character's maximum Hit Points," +
         $" the character gets a permanent Madness card to their " +
         $"deck and the Snapped status effect.  If this goes above a character's " +
-        $"maximum hit points while Snapped, the character<color=red>dies</color>";
+        $"maximum hit points while Snapped, the character <color=red>dies.</color>";
 
     public override void OnApplicationOrIncrease()
     {

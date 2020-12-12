@@ -147,8 +147,12 @@ public static class BattleRules
             statusEffect.OnStriking(source, damageAfterBlockingAndModifiers);
         }
 
-        ProcessSpecialDamagedRules(source, target, damageAfterBlockingAndModifiers)
+        ProcessSpecialDamagedRules(source, target, damageAfterBlockingAndModifiers);
     }
+
+    /// <summary>
+    /// This deals with stress, and any other damage triggers not covered by status effects.
+    /// </summary>
 
     private static void ProcessSpecialDamagedRules(AbstractBattleUnit source, AbstractBattleUnit target, int damageAfterBlockingAndModifiers)
     {

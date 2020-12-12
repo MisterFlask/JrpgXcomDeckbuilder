@@ -6,6 +6,7 @@ public class AdvancedStatusEffect : AbstractStatusEffect
     public AdvancedStatusEffect()
     {
         this.Name = "Advanced";
+        this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/fast-forward-button");
         this.Stackable = false;
     }
 

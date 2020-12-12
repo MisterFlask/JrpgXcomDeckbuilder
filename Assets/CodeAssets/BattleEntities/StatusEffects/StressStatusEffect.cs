@@ -8,7 +8,7 @@ public class StressStatusEffect : AbstractStatusEffect
     public StressStatusEffect()
     {
         Name = "Stress";
-
+        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/cracked-glass", Color.red);
     }
     public override string Description => $"If this goes above a character's maximum Hit Points," +
         $" the character gets a permanent Madness card to their " +

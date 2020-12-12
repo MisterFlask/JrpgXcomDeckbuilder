@@ -38,8 +38,9 @@ public class GreywingWoundOnDeath: AbstractStatusEffect
     public GreywingWoundOnDeath()
     {
         Name = "Greywing's Revenge";
+        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/falling-bang", Color.yellow);
     }
-    public override string Description => $"This applies ${Stacks} Wounded to whoever killed it.";
+    public override string Description => $"This applies Wounded to whoever killed it equal to number of stacks.";
 
     public override void OnDeath(AbstractBattleUnit unitThatKilledMe)
     {

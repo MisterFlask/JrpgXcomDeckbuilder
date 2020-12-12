@@ -6,7 +6,7 @@ public static class DayBeginsActions
 {
 
     public static List<MissionGenerator> MissionGenerators = new List<MissionGenerator>{
-        new BasicMissionGenerator()
+        new ProbabilisticMissionGenerator()
     };
 
     public static void RotateMissions()

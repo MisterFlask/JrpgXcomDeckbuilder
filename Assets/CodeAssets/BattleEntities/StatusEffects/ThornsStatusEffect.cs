@@ -6,6 +6,7 @@ public class ThornsStatusEffect : AbstractStatusEffect
     public ThornsStatusEffect()
     {
         Name = "Thorns";
+        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/thorny-vine", Color.green);
     }
 
     public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)

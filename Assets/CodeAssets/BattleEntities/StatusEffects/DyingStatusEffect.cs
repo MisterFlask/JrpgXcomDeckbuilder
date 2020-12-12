@@ -6,6 +6,8 @@ public class DyingStatusEffect : AbstractStatusEffect
     public DyingStatusEffect()
     {
         this.Name = "Dying";
+
+        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/death-skull");
         this.Stacks = 3;
     }
 

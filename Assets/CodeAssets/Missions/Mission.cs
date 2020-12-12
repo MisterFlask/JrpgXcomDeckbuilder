@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public abstract class Mission 
 {
@@ -8,6 +9,17 @@ public abstract class Mission
     {
         return "Operation " + WordLists.GetRandomCommonAdjective() + " " + WordLists.GetRandomCommonNoun();
     }
+
+    public string GenerateMissionDescriptiveText()
+    {
+        var start = $"Kill enemies for a reward!  Rewards include: ";
+        foreach(var reward in Rewards)
+        {
+            start += Environment.NewLine + "*" + reward.Description();
+        }
+        return start;
+    }
+
     public string Name { get; set; }
     public int Difficulty { get; set; } // 1 to 5
 

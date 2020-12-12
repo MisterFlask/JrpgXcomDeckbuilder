@@ -2,8 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public static class StartingMissionGenerator
+{
+    public static List<Mission> GetStartingMissions()
+    {
+        return new List<Mission>
+        {
+            new KillEnemiesMission() {
+                Squad = Squad.PredefinedSquads.PickRandom(),
+                Difficulty = 1,
+                Name = Mission.GenerateMissionName(),
+                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(50) }
+            },
+            new KillEnemiesMission() {
+                Squad = Squad.PredefinedSquads.PickRandom(),
+                Difficulty = 1,
+                Name = Mission.GenerateMissionName(),
+                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(50) }
+            },
+            new KillEnemiesMission() {
+                Squad = Squad.PredefinedSquads.PickRandom(),
+                Difficulty = 1,
+                Name = Mission.GenerateMissionName(),
+                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(50) }
+            }
+        };
+    }
+}
 
-public class BasicMissionGenerator: MissionGenerator
+public class ProbabilisticMissionGenerator: MissionGenerator
 {
     int missionsGenerated = 0;
     public Mission GenerateMission()
@@ -17,9 +44,11 @@ public class BasicMissionGenerator: MissionGenerator
         };
     }
 
+    float Probability = .3f;
+
     public bool ShouldGenerateMissionThisDay(int currentDay)
     {
-        return currentDay % 3 == 1;
+        return Random.Range(0.0f, 1.0f) < Probability;
     }
 }
 

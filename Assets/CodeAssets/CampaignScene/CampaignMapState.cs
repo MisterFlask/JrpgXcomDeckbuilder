@@ -32,7 +32,7 @@ public static class CampaignMapState
     public static ShopData shopData;
     
 
-    public static MissionGenerator MissionGenerator = new BasicMissionGenerator();
+    public static MissionGenerator MissionGenerator = new ProbabilisticMissionGenerator();
     public static void InitializeCampaignScreen()
     {
         MissionListPrefab.Instance.Initialize();

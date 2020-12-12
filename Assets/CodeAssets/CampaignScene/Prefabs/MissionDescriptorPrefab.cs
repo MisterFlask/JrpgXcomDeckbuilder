@@ -31,6 +31,7 @@ public class MissionDescriptorPrefab : MonoBehaviour
         if (SelectedMission == null)
         {
             Title.text = "Select a mission.";
+            Description.text = "";
             return;
         }
 
@@ -42,6 +43,8 @@ public class MissionDescriptorPrefab : MonoBehaviour
         {
             Title.text = SelectedMission.Name + $"[Unable to embark; too many characters.  Max is {SelectedMission?.MaxNumberOfFriendlyCharacters}]";
         }
+
+        Description.text = SelectedMission.GenerateMissionDescriptiveText();
      }
 
     public void Start()

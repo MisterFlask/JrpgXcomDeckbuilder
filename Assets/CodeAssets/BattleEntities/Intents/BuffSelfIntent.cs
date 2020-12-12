@@ -6,7 +6,7 @@ public class BuffSelfIntent : SimpleIntent
     public BuffSelfIntent(AbstractBattleUnit self,
         AbstractStatusEffect statusEffect): 
         base(self,
-            ProtoGameSprite.FromGameIcon(path: "Sprites/weight-lifting-up", color: Color.cyan))
+            ProtoGameSprite.FromGameIcon(path: "Sprites/fire-bowl-strength", color: Color.cyan))
     {
         this.StatusEffect = statusEffect;
     }

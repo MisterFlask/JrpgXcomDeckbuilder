@@ -1,9 +1,12 @@
 ﻿
+using UnityEngine;
+
 public class TemporaryThorns : AbstractStatusEffect
 {
     public TemporaryThorns()
     {
         Name = "Temporary Thorns";
+        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/thorny-vine", Color.yellow);
     }
 
     public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)

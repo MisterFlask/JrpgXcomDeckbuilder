@@ -34,6 +34,11 @@ public abstract class AbstractStatusEffect
     public int Stacks { get; set; } = 1;
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
 
+    public AbstractStatusEffect()
+    {
+        Name = GetType().Name;
+    }
+
     public virtual void OnTurnStart()
     {
         

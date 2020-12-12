@@ -5,6 +5,11 @@ public class BurningStatusEffect : AbstractStatusEffect
 {
     public override string Description => $"Target takes damage per turn equal to the number of stacks of burning, then decreases Stacks by 2.  If the target has Flammable when Burning is applied, it consumes all stacks of Flammable and applies that much Burning.";
 
+    public BurningStatusEffect()
+    {
+        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/firewall", Color.red);
+    }
+
     public override void OnTurnStart()
     {
         ActionManager.Instance.AttackUnitForDamage(OwnerUnit, null, Stacks);

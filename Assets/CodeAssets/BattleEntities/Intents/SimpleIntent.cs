@@ -9,7 +9,7 @@ public abstract class SimpleIntent : AbstractIntent
         this.ProtoSprite = protoSprite;
     }
 
-    public override string GetText()
+    public override string GetOverlayText()
     {
         return "";
     }

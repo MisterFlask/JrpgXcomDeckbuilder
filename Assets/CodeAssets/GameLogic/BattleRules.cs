@@ -72,7 +72,7 @@ public static class BattleRules
         int totalDamageAfterModifiers = baseDamage;
         if (isAttack)
         {
-            totalDamageAfterModifiers = GetAnticipatedDamageToUnit(damageSource, target, baseDamage);
+            totalDamageAfterModifiers = GetAnticipatedDamageToUnit(damageSource, target, baseDamage, isAttack);
         }
 
 
@@ -93,19 +93,34 @@ public static class BattleRules
             var damageBlob = new DamageBlob
             {
                 Damage = damageDealtAfterBlocking,
-                IsAttackDamage = isAttack,
-                IsDamagePreview = false
+                IsAttackDamage = isAttack
             };
+
+            if (target.CurrentHp > 0)
+            {
+                foreach(var effect in target.StatusEffects)
+                {
+                    effect.ModifyPostBlockDamageTaken(damageBlob);
+                }
+            }
 
             target.CurrentHp -= damageBlob.Damage;
 
-            
             if (target.CurrentHp > 0 && isAttack)
             {
                 ProcessAttackDamageReceivedHooks(damageSource, target, damageBlob.Damage);
             }
+
+            ProcessHpLossHooks(damageSource, target, damageBlob.Damage);
+
             CheckAndRegisterDeath(target, damageSource);
         }
+    }
+
+    private static void ProcessHpLossHooks(AbstractBattleUnit damageSource, AbstractBattleUnit target, object damage)
+    {
+        //todo
+
     }
 
     public static void CheckAndRegisterDeath(AbstractBattleUnit unit, AbstractBattleUnit nullableUnitThatKilledMe)
@@ -132,6 +147,16 @@ public static class BattleRules
             statusEffect.OnStriking(source, damageAfterBlockingAndModifiers);
         }
 
+        ProcessSpecialDamagedRules(source, target, damageAfterBlockingAndModifiers)
+    }
+
+    private static void ProcessSpecialDamagedRules(AbstractBattleUnit source, AbstractBattleUnit target, int damageAfterBlockingAndModifiers)
+    {
+        if (damageAfterBlockingAndModifiers > 0)
+        {
+            // characters take 2 stress after taking damage.
+            ActionManager.Instance.ApplyStatusEffect(target, new StressStatusEffect(), 2);
+        }
     }
 
     public static int GetDefenseApplied(AbstractBattleUnit source, AbstractBattleUnit target, int baseDefense)
@@ -156,7 +181,7 @@ public static class BattleRules
         return (int)currentTotalDefense;
     }
 
-    public static int GetAnticipatedDamageToUnit(AbstractBattleUnit source, AbstractBattleUnit target, int baseDamage)
+    public static int GetAnticipatedDamageToUnit(AbstractBattleUnit source, AbstractBattleUnit target, int baseDamage, bool isAttackDamage)
     {
         // first, go through the attacker's attributes
         float currentTotalDamage = baseDamage;
@@ -178,6 +203,7 @@ public static class BattleRules
         {
             return 0;
         }
+
 
         return (int) currentTotalDamage;
     }

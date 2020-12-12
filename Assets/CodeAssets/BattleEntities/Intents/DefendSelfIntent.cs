@@ -25,7 +25,7 @@ public class DefendSelfIntent : AbstractIntent
 
     }
 
-    public override string GetText()
+    public override string GetOverlayText()
     {
         return $"";
     }

@@ -61,5 +61,5 @@ public abstract class AbstractIntent
         return optionsInOrder[index];
     }
 
-    public abstract string GetText();
+    public abstract string GetOverlayText();
 }

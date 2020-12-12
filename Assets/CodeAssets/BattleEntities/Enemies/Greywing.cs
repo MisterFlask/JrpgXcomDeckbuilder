@@ -12,6 +12,7 @@ public class Greywing : AbstractEnemyUnit
 {
     public Greywing()
     {
+        this.CharacterName = "Greywing";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/BlackBirdi", color: Color.white);
         this.MaxHp = 30;
         this.AddStatusEffect(new GreywingWoundOnDeath(), stacks: 4);
@@ -40,13 +41,13 @@ public class GreywingWoundOnDeath: AbstractStatusEffect
         Name = "Greywing's Revenge";
         ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/falling-bang", Color.yellow);
     }
-    public override string Description => $"This applies Wounded to whoever killed it equal to number of stacks.";
+    public override string Description => $"This applies Burning to whoever killed it equal to number of stacks.";
 
     public override void OnDeath(AbstractBattleUnit unitThatKilledMe)
     {
         if (unitThatKilledMe != null)
         {
-            unitThatKilledMe.AddStatusEffect(new WoundedStatusEffect(), stacks: Stacks);
+            unitThatKilledMe.AddStatusEffect(new BurningStatusEffect(), stacks: Stacks);
         }
     }
 }

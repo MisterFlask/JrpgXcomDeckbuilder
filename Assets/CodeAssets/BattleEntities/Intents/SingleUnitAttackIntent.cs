@@ -51,7 +51,7 @@ public class SingleUnitAttackIntent : AbstractIntent
         }
     }
 
-    public override string GetText()
+    public override string GetOverlayText()
     {
         var totalDamageExpected = BattleRules.GetAnticipatedDamageToUnit(Source, Target, BaseDamage);
         return $"{totalDamageExpected}x{NumberOfTimesStruck}";

@@ -262,7 +262,6 @@ public class DamageBlob
 {
     public int Damage { get; set; }
     public bool IsAttackDamage { get; set; }
-    public bool IsDamagePreview { get; set; } = false;
 }
 
 

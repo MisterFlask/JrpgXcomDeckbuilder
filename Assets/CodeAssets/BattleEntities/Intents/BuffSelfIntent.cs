@@ -3,11 +3,15 @@ using System.Collections;
 
 public class BuffSelfIntent : SimpleIntent
 {
+    public int Stacks;
+
     public BuffSelfIntent(AbstractBattleUnit self,
-        AbstractStatusEffect statusEffect): 
+        AbstractStatusEffect statusEffect,
+        int stacks = 1): 
         base(self,
             ProtoGameSprite.FromGameIcon(path: "Sprites/fire-bowl-strength", color: Color.cyan))
     {
+        Stacks = stacks;
         this.StatusEffect = statusEffect;
     }
 
@@ -20,6 +24,6 @@ public class BuffSelfIntent : SimpleIntent
 
     protected override void Execute()
     {
-        ActionManager.Instance.ApplyStatusEffect(Source, StatusEffect);
+        ActionManager.Instance.ApplyStatusEffect(Source, StatusEffect, Stacks);
     }
 }

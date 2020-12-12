@@ -29,10 +29,7 @@ public class PowerThroughItStatusEffect : AbstractStatusEffect
 
         damageBlob.Damage -= damageMitigated;
 
-        if (!damageBlob.IsDamagePreview)
-        {
-            action().ApplyStatusEffect(OwnerUnit, new StressStatusEffect(), damageMitigated);
-        }
+        action().ApplyStatusEffect(OwnerUnit, new StressStatusEffect(), damageMitigated);
     }
 
 

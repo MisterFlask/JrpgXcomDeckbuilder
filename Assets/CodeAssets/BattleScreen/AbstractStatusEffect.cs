@@ -109,6 +109,11 @@ public abstract class AbstractStatusEffect
         OwnerUnit = unit;
     }
 
+    public virtual void OnDealingUnblockedDamage()
+    {
+
+    }
+
     public virtual void OnApplicationOrIncrease()
     {
 

@@ -52,7 +52,7 @@ public class IntentPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             HideAndDestroy();
         }
 
-        this.Text.SetText(UnderlyingIntent.GetText());
+        this.Text.SetText(UnderlyingIntent.GetOverlayText());
     }
     private void RemoveHighlights(Image spriteImage)
     {

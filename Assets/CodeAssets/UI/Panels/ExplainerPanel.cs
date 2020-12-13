@@ -62,10 +62,11 @@ public class ExplainerPanel : MonoBehaviour
         var entity = battleUnitPrefab.UnderlyingEntity;
 
         string nameTooltip = $"<color=yellow>{entity.CharacterName}</color>" + Newline();
-
-        string intentTooltip = "<color=red>Intent:</color>";
+        string intentTooltip = "";
         if (battleUnitPrefab.UnderlyingEntity.CurrentIntents != null)
         {
+            intentTooltip = "<color=red>Intent:</color>";
+
             foreach (var intent in battleUnitPrefab.UnderlyingEntity.CurrentIntents)
             {
                 intentTooltip += Environment.NewLine + intent.GetGenericDescription();
@@ -75,14 +76,16 @@ public class ExplainerPanel : MonoBehaviour
 
         // now, for each attribute, say what the attribute does
 
-        basicTooltip += Newline();
-        basicTooltip += "<color=red>Status Effects:</color>" + Newline(); 
-        foreach(var effect in battleUnitPrefab.UnderlyingEntity.StatusEffects)
+        if (!battleUnitPrefab.UnderlyingEntity.StatusEffects.IsEmpty())
         {
             basicTooltip += Newline();
-            basicTooltip += ListItemFormat(H1Format($"{effect.Name}[{effect.Stacks}]") + ":  " + effect.Description);
+            basicTooltip += "<color=red>Status Effects:</color>" + Newline();
+            foreach (var effect in battleUnitPrefab.UnderlyingEntity.StatusEffects)
+            {
+                basicTooltip += Newline();
+                basicTooltip += ListItemFormat(H1Format($"{effect.Name}[{effect.Stacks}]") + ":  " + effect.Description);
+            }
         }
-
         TooltipToDisplay = (basicTooltip);
 
     }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BrainCrab : AbstractBattleUnit
+public class BrainCrab : AbstractEnemyUnit
 {
 
     public BrainCrab()

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BasicEnemyUnit : AbstractBattleUnit
+public class BasicEnemyUnit : AbstractEnemyUnit
 {
     public BasicEnemyUnit()
     {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class UnitThatAppliesDazedWhenStruck : AbstractBattleUnit
+public class UnitThatAppliesDazedWhenStruck : AbstractEnemyUnit
 {
     public UnitThatAppliesDazedWhenStruck()
     {

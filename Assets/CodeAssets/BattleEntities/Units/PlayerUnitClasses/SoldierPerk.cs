@@ -9,7 +9,9 @@ using System.Collections;
 public abstract class SoldierPerk
 {
     public int Stacks { get; set; } = 1;
-    public string Name { get; set; } = "unnamed";
+    public abstract string Name();
+    public abstract string Description();
+
     public ProtoGameSprite Sprite { get; set; } = ProtoGameSprite.Default;
 
     public virtual void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)
@@ -18,6 +20,14 @@ public abstract class SoldierPerk
     }
 
     public virtual void PerformAtBeginningOfNewDay(AbstractBattleUnit soldierAffected)
+    {
+
+    }
+
+    /// <summary>
+    ///  This is run on the deck after the perk is gained, and also on every card as it enters the deck.
+    /// </summary>
+    public virtual void ModifyCardsUponAcquisition(AbstractCard card)
     {
 
     }

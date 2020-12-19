@@ -292,4 +292,37 @@ public static class BattleRules
             GameScenes.SwitchToBattleResultScene();
         }
     }
+
+
+    public static void ProcessRetreat()
+    {
+        foreach(var character in GameState.Instance.AllyUnitsInBattle)
+        {
+            ActionManager.Instance.ApplyStatusEffect(character, new RetreatingStatusEffect(), 2);
+        }
+    }
+}
+
+
+public class RetreatingStatusEffect : AbstractStatusEffect
+{
+    public RetreatingStatusEffect()
+    {
+        Name = "Retreating";
+    }
+
+    public override string Description => "Stacks decreaese by 1 every turn.  When it reaches zero stacks, flee combat.";
+
+    public override void OnTurnStart()
+    {
+        Stacks--;
+
+        if (Stacks == 0)
+        {
+            ActionManager.Instance.FleeCombat();
+        }
+    }
+
+
+
 }

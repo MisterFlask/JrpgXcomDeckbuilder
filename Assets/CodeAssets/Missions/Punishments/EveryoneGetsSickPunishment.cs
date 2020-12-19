@@ -31,6 +31,17 @@ public class SickenedSoldierPerk: SoldierPerk
     {
         soldierAffected.AddStatusEffect(new PowerStatusEffect(), -1 * Stacks);
     }
+
+    public override string Name()
+    {
+        return "Sickened";
+
+    }
+
+    public override string Description()
+    {
+        return "At the beginning of combat, decreases the soldier's strength by the number of stacks";
+    }
 }
 
 

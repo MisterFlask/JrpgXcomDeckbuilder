@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 public class MissionListPrefab : MonoBehaviour
 {
@@ -35,6 +37,30 @@ public class MissionListPrefab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var missionsRepresentedByPrefabs = ChildPrefabs.Select(item => item.Mission).ToList();
 
+        // first, ensure we have all prefabs needed and all those we don't have
+        foreach(var mission in CampaignMapState.MissionsActive)
+        {
+            if (!missionsRepresentedByPrefabs.Contains(mission)){
+                AddMission(mission);
+            }
+        }
+
+        //now remove (deparent, really) all prefabs unnecessary
+        foreach (var mission in missionsRepresentedByPrefabs)
+        {
+            if (!CampaignMapState.MissionsActive.Contains(mission))
+            {
+                var obj = GetMissionPrefab(mission);
+                obj.transform.SetParent(null);
+            }
+        }
+
+    }
+
+    private GameObject GetMissionPrefab(Mission mission)
+    {
+        return ChildPrefabs.FirstOrDefault(item => item.Mission == mission).gameObject;
     }
 }

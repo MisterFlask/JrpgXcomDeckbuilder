@@ -15,6 +15,11 @@ public class Bayonet : AbstractCard
 
     public override int BaseEnergyCost()
     {
+        if (Owner == null)
+        {
+            return 2;
+        }
+
         if (Owner.HasStatusEffect<AdvancedStatusEffect>())
         {
             return 1;

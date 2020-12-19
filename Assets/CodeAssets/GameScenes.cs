@@ -8,7 +8,7 @@ public class GameScenes
     public static void SwitchToBattleScene(Mission mission, List<AbstractBattleUnit> CharactersSent)
     {
         GameState.Instance.AllyUnitsInBattle = CharactersSent;
-        GameState.Instance.EnemyUnitsInBattle = mission.StartingEnemies();
+        GameState.Instance.EnemyUnitsInBattle = mission.EnemySquad.Members;
         GameState.Instance.CurrentMission = mission;
         SceneManager.LoadScene(sceneName: "BattleMapScene");
 

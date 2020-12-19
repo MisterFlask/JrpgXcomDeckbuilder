@@ -14,7 +14,7 @@ public static class CampaignMapState
     public static List<AbstractBattleUnit> Roster;
     public static List<AbstractBattleUnit> CurrentSelectedParty;
 
-    public static List<Mission> MissionsActive;
+    public static List<Mission> MissionsActive= new List<Mission>();
 
     private static string CampaignLog = "";
     public static void AppendLogMessage(string msg)
@@ -32,7 +32,6 @@ public static class CampaignMapState
     public static ShopData shopData;
     
 
-    public static MissionGenerator MissionGenerator = new ProbabilisticMissionGenerator();
     public static void InitializeCampaignScreen()
     {
         MissionListPrefab.Instance.Initialize();

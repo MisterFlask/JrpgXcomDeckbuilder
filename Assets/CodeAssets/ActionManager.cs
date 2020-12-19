@@ -287,7 +287,6 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-
             var hand = ServiceLocator.GetGameStateTracker().Deck.Hand.ToList();
             foreach (var card in hand)
             {
@@ -305,6 +304,12 @@ public class ActionManager : MonoBehaviour
         {
             turnEndActions.EndTurn();
         });
+    }
+
+    public void FleeCombat()
+    {
+        actionsQueue.Clear();
+        GameScenes.SwitchToBattleResultScene();
     }
 
     public void Shout(AbstractBattleUnit unit, string stuffToSay)

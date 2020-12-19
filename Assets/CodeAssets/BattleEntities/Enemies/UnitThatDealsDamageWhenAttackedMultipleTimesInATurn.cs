@@ -55,7 +55,6 @@ public class DealsDamageOnAttackMultipleTimesInATurn : AbstractStatusEffect
 public class DealtDamageThisTurnMarker : AbstractStatusEffect
 {
     //todo
-
     public DealtDamageThisTurnMarker()
     {
         Name = "Number of times attacked this turn.";

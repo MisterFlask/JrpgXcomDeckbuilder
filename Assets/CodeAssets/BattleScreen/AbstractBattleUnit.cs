@@ -20,6 +20,8 @@ public abstract class AbstractBattleUnit
 
     public int MaxHp { get; set; }
     public int NumberCardRewardsEligibleFor { get; set; } = 0;
+
+
     public bool IsDead => CurrentHp <= 0;
 
     public int CurrentBlock { get; set; }

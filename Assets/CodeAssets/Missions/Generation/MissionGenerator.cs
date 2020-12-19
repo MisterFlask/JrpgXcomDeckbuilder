@@ -1,76 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
-public static class StartingMissionGenerator
+
+public static class MissionGenerator
 {
-    public static List<Mission> GetStartingMissions()
+    public static List<Mission> GenerateAllMissionsForDay()
     {
+        var dayNumber = GameState.Instance.Day;
+
         return new List<Mission>
         {
-            new KillEnemiesMission() {
-                Squad = Squad.PredefinedSquads.PickRandom(),
+
+            new KillEnemiesMission()
+            {
+                DaysUntilExpiration = 3,
                 Difficulty = 1,
+                MaxNumberOfFriendlyCharacters = 3,
+                MoneyReward = 50,
                 Name = Mission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(50) }
-            },
-            new KillEnemiesMission() {
-                Squad = Squad.PredefinedSquads.PickRandom(),
+                Rewards = new List<AbstractMissionReward>{new GoldMissionReward(50)},
+                EnemySquad = MissionRules.GetRandomSquad(dayNumber)
+    },
+            new KillEnemiesMission()
+            {
+                DaysUntilExpiration = 3,
                 Difficulty = 1,
+                MaxNumberOfFriendlyCharacters = 3,
+                MoneyReward = 60,
                 Name = Mission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(50) }
-            },
-            new KillEnemiesMission() {
-                Squad = Squad.PredefinedSquads.PickRandom(),
-                Difficulty = 1,
-                Name = Mission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(50) }
+                Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
+                EnemySquad = MissionRules.GetRandomSquad(dayNumber)
             }
         };
     }
 }
 
-public class ProbabilisticMissionGenerator: MissionGenerator
-{
-    int missionsGenerated = 0;
-    public Mission GenerateMission()
-    {
-        missionsGenerated += 1;
-        return new KillEnemiesMission() {
-            Squad = Squad.PredefinedSquads.PickRandom(),
-            Difficulty = 1,
-            Name = Mission.GenerateMissionName(),
-            Rewards = new List<AbstractMissionReward> { new GoldMissionReward(50) }
-        };
-    }
-
-    float Probability = .3f;
-
-    public bool ShouldGenerateMissionThisDay(int currentDay)
-    {
-        return Random.Range(0.0f, 1.0f) < Probability;
-    }
-}
-
-public interface MissionGenerator{
-    bool ShouldGenerateMissionThisDay(int currentDay);
-    Mission GenerateMission();
-}
 
 public class KillEnemiesMission: Mission
 {
     public int MoneyReward { get; set; } = 50;
-    public Squad Squad { get; set; }
+    public string Description { get; set; }
+
+    public string GetDescription()
+    {
+        if (Description == null)
+        {
+            var names = EnemySquad.Members.Select(item => item.CharacterName);
+            return string.Join(",", names);
+        }
+        return Description;
+    }
 
     public override void OnSuccess()
     {
         GameState.Instance.money += MoneyReward;
-    }
-
-    public override List<AbstractBattleUnit> StartingEnemies()
-    {
-        Squad.SetDifficulty(Difficulty);
-        return Squad.Members;
     }
 }
 
@@ -86,18 +71,14 @@ public class Squad
             guy.SetDifficulty(difficulty - BaseDifficulty);
         }
     }
-
-    public static List<Squad> PredefinedSquads = new List<Squad>
-    {
-        new Squad
-        {
-            Members = new List<AbstractBattleUnit>
-            {
-                new Greywing(),
-                new Greywing(),
-                new Greywing(),
-                new Greywing()
-            }
-        }
-    };
 }
+
+
+public abstract class MissionModifier
+{
+    public abstract void OnMissionCombatBegins();
+    public abstract string Description();
+}
+
+
+

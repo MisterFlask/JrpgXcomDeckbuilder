@@ -17,6 +17,10 @@ public abstract class Mission
         {
             start += Environment.NewLine + "*" + reward.Description();
         }
+
+
+        start += Environment.NewLine + "Foes: TBD";
+        start += Environment.NewLine + "Days left: " + DaysUntilExpiration;
         return start;
     }
 
@@ -48,10 +52,7 @@ public abstract class Mission
 
     }
 
-    public virtual List<AbstractBattleUnit> StartingEnemies()
-    {
-        return new List<AbstractBattleUnit>();
-    }
+    public Squad EnemySquad { get; set; }
 
     public int MaxNumberOfFriendlyCharacters { get; set; } = 3;
 

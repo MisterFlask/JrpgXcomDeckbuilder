@@ -20,9 +20,11 @@ public class Soldier : AbstractAllyUnit
         return OryxSprites.SelectRandomCharacterSpriteWithRandomColoration();
     }
 
-    public static AbstractBattleUnit GenerateRookie()
+    public static AbstractBattleUnit GenerateFreshRookie()
     {
-        return new Soldier().CloneUnit();
+        var rookie= new Soldier().CloneUnit();
+
+        return rookie;
     }
 
     public static AbstractBattleUnit GenerateSoldier(AbstractSoldierClass soldierClass)

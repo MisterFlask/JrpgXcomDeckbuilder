@@ -17,10 +17,10 @@ public class CampaignStarter : MonoBehaviour
     {
         CampaignMapState.Roster = new List<AbstractBattleUnit>
         {
-            Soldier.GenerateRookie(),
-            Soldier.GenerateRookie(),
-            Soldier.GenerateRookie(),
-            Soldier.GenerateRookie(),
+            Soldier.GenerateFreshRookie(),
+            Soldier.GenerateFreshRookie(),
+            Soldier.GenerateFreshRookie(),
+            Soldier.GenerateFreshRookie(),
             GetHigherLevelSoldier(),
             GetDeadSoldier()
         };
@@ -28,7 +28,7 @@ public class CampaignStarter : MonoBehaviour
 
     private static AbstractBattleUnit GetDeadSoldier()
     {
-        var soldier = Soldier.GenerateRookie();
+        var soldier = Soldier.GenerateFreshRookie();
         soldier.CombatsParticipatedIn = 10;
         soldier.NumberCardRewardsEligibleFor = 1;
         return soldier;
@@ -37,7 +37,7 @@ public class CampaignStarter : MonoBehaviour
     private static AbstractBattleUnit GetHigherLevelSoldier()
     {
 
-        var soldier = Soldier.GenerateRookie();
+        var soldier = Soldier.GenerateFreshRookie();
         soldier.CombatsParticipatedIn = 10;
         soldier.NumberCardRewardsEligibleFor = 1;
         soldier.CurrentHp = 0;
@@ -46,12 +46,7 @@ public class CampaignStarter : MonoBehaviour
 
     public static void InitializeSelectableMissions()
     {
-        CampaignMapState.MissionsActive = new List<Mission>
-        {
-            CampaignMapState.MissionGenerator.GenerateMission(),
-            CampaignMapState.MissionGenerator.GenerateMission(),
-            CampaignMapState.MissionGenerator.GenerateMission()
-        };
+        CampaignMapState.MissionsActive = MissionGenerator.GenerateAllMissionsForDay();
     }
 
     // Use this for initialization

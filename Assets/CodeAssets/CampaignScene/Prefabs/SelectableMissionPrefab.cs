@@ -2,9 +2,12 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class SelectableMissionPrefab : MonoBehaviour, IPointerClickHandler
 {
+    public Guid guid = Guid.NewGuid();
+
     public TMPro.TextMeshProUGUI Title;
     public Image MissionImage;
 
@@ -29,7 +32,7 @@ public class SelectableMissionPrefab : MonoBehaviour, IPointerClickHandler
         {
             return;
         }
-        Title.text = Mission.Name;
+        Title.text = Mission.Name + $"[{Mission.DaysUntilExpiration} days remain]";
         if (CurrentlySelected == this)
         {
             Title.color = Color.yellow;

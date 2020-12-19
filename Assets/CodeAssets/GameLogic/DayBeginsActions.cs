@@ -2,12 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public static class DayBeginsActions
+public class DayBeginsActions : MonoBehaviour
 {
-
-    public static List<MissionGenerator> MissionGenerators = new List<MissionGenerator>{
-        new ProbabilisticMissionGenerator()
-    };
 
     public static void RotateMissions()
     {
@@ -23,16 +19,10 @@ public static class DayBeginsActions
         //now remove them from the active missions list.
         CampaignMapState.MissionsActive.RemoveAll(item => item.DaysUntilExpiration <= 0);
 
-        foreach (var generator in MissionGenerators)
-        {
-            if (generator.ShouldGenerateMissionThisDay(GameState.Instance.Day))
-            {
-                var mission = generator.GenerateMission();
-                CampaignMapState.MissionsActive.Add(mission);
-            }
-        }
-        
+        var newMissions = MissionGenerator.GenerateAllMissionsForDay();
+        CampaignMapState.MissionsActive.AddRange(newMissions);
     }
+
     public static void ApplyTriggers()
     {
         foreach(var character in GameState.Instance.PersistentCharacterRoster)
@@ -43,5 +33,14 @@ public static class DayBeginsActions
             }
         }
     }
+
+    public void StartANewDay()
+    {
+        GameState.Instance.Day++;
+        RotateMissions();
+        ApplyTriggers();
+    }
+
+
 }
 

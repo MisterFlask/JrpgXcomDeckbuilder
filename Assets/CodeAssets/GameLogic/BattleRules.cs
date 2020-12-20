@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Linq;
 
 /// <summary>
 /// Responsible for going through all the combat hooks and such that play into how much damage is dealt, by whom, what attributes are applied or removed, and so on.
@@ -274,7 +275,7 @@ public static class BattleRules
 
     public static void CheckIsBattleOver()
     {
-        var isVictory = GameState.Instance.EnemyUnitsInBattle.IsEmpty();
+        var isVictory = GameState.Instance.EnemyUnitsInBattle.All(item => item.IsDead);
         var isDefeat = GameState.Instance.CurrentMission.IsFailed();
 
         if (isVictory)

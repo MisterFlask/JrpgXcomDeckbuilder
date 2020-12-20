@@ -1032,11 +1032,11 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
+  m_fontSize: 49.4
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 11.41
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_textAlignment: 257
@@ -1078,7 +1078,7 @@ MonoBehaviour:
     spaceCount: 1
     wordCount: 2
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1139,6 +1139,7 @@ RectTransform:
   - {fileID: 1488296117}
   - {fileID: 86090938}
   - {fileID: 67857217}
+  - {fileID: 716928180}
   m_Father: {fileID: 449036990}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2019,17 +2020,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716928179}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1470107278}
-  m_RootOrder: 0
+  m_Father: {fileID: 403290928}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.03994751, y: -242.90002}
+  m_SizeDelta: {x: -553.9275, y: -223.90002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &716928181
 MonoBehaviour:
@@ -2870,7 +2871,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 37.722477, y: 0}
+  m_AnchoredPosition: {x: 35.57032, y: 0}
   m_SizeDelta: {x: -333.4, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1086840023
@@ -3516,8 +3517,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 716928180}
+  m_Children: []
   m_Father: {fileID: 682663518}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4269,7 +4269,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 11
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_textAlignment: 257

@@ -12,17 +12,29 @@ public class MissionDescriptorPrefab : MonoBehaviour
     public Button EmbarkButton;
 
     public static Mission SelectedMission => SelectableMissionPrefab.CurrentlySelected?.Mission;
-    public static bool ShouldBeAbleToGoOnMission
+    public static bool ShouldBeAbleToGoOnMission(out string reasonWhyNot)
     {
-        get
+        if (SelectedMission == null)
         {
-            if (SelectedMission == null)
-            {
-                return false;
-            }
-
-            return SelectedMission.MaxNumberOfFriendlyCharacters <= SelectableRosterCharacterPrefab.SelectedPrefabs.Count();
+            reasonWhyNot = "No mission selected!";
+            return false;
         }
+
+        var selectedNumberOfCharacters = SelectableRosterCharacterPrefab.SelectedPrefabs.Count();
+
+        if (selectedNumberOfCharacters == 0)
+        {
+            reasonWhyNot = "No characters selected";
+            return false;
+        }
+        if (SelectedMission.MaxNumberOfFriendlyCharacters <= selectedNumberOfCharacters)
+        {
+            reasonWhyNot = $"Too many charactes for mission max ({SelectedMission.MaxNumberOfFriendlyCharacters})";
+
+            return false;
+        }
+        reasonWhyNot = "";
+        return true;
 
     }
 
@@ -35,13 +47,16 @@ public class MissionDescriptorPrefab : MonoBehaviour
             return;
         }
 
-        if (ShouldBeAbleToGoOnMission)
+        string reasonInadmissable;
+        if (ShouldBeAbleToGoOnMission(out reasonInadmissable))
         {
             Title.text = SelectedMission.Name;
+            EmbarkButton.interactable = true;
         }
         else
         {
-            Title.text = SelectedMission.Name + $"[Unable to embark; too many characters.  Max is {SelectedMission?.MaxNumberOfFriendlyCharacters}]";
+            Title.text = SelectedMission.Name + $"<color=red>[Unable to embark; {reasonInadmissable}]</color>";
+            EmbarkButton.interactable = false;
         }
 
         Description.text = SelectedMission.GenerateMissionDescriptiveText();

@@ -23,11 +23,18 @@ public abstract class AbstractBattleUnit
 
 
     public bool IsDead => CurrentHp <= 0;
-
+    public int CurrentLevel { get; set; } = 1;
     public int CurrentBlock { get; set; }
     public int CurrentHp { get; set; }
+    public int PerDayHealingRate { get; set; } = 2;
+
+    public int CurrentStress => this.GetStatusEffect<StressStatusEffect>()?.Stacks ?? 0;
+    public int MaxStress = 100;
+    public int PerDayStressHealingRate = 5;
+
     public int CurrentFatigue { get; set; } = 4;
     public int MaxFatigue { get; set; } = 4;
+
 
     public AbstractSoldierClass SoldierClass { get; protected set; } = new RookieClass();
     public string UnitClassName => SoldierClass.Name();
@@ -310,9 +317,14 @@ public abstract class AbstractBattleUnit
 
     public BattleUnitStatisticsInThisCombat StatsForThisCombat = new BattleUnitStatisticsInThisCombat();
 
+    internal void LevelUp()
+    {
+        CurrentLevel ++;
+        NumberCardRewardsEligibleFor ++;
+        CurrentHp += 2;
 
+    }
 }
-
 
 public class BattleUnitStatisticsInThisCombat
 {

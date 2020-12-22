@@ -25,13 +25,4 @@ public class CharacterDetailsInRoster : MonoBehaviour
         }
     }
 
-    string CharacterDescription()
-    {
-        if (BattleUnit.IsDead)
-        {
-            return $"{BattleUnit.SoldierClass.Name()}\n<color=red>Deceased.</color>";
-        }
-
-        return $"{BattleUnit.SoldierClass.Name()}\nHP:{BattleUnit.CurrentHp}/{BattleUnit.MaxHp}\nStress:0";
-    }
 }

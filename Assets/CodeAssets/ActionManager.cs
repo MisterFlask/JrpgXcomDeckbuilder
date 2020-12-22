@@ -54,7 +54,7 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            BattleRules.CheckIsBattleOver();
+            BattleRules.CheckIsBattleOverAndIfSoSwitchScenes();
         });
     }
 
@@ -309,7 +309,7 @@ public class ActionManager : MonoBehaviour
     public void FleeCombat()
     {
         actionsQueue.Clear();
-        GameScenes.SwitchToBattleResultScene();
+        GameScenes.SwitchToBattleResultSceneAndProcessCombatResults(CombatResult.FLED);
     }
 
     public void Shout(AbstractBattleUnit unit, string stuffToSay)

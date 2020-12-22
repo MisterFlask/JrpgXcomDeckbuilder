@@ -273,24 +273,23 @@ public static class BattleRules
         return (int)baseDamage;
     }
 
-    public static void CheckIsBattleOver()
+    public static void CheckIsBattleOverAndIfSoSwitchScenes()
     {
-        var isVictory = GameState.Instance.EnemyUnitsInBattle.All(item => item.IsDead);
-        var isDefeat = GameState.Instance.CurrentMission.IsFailed();
+        var isVictoryBecauseAllEnemiesDead = GameState.Instance.EnemyUnitsInBattle.All(item => item.IsDead);
+        var isDefeatBecauseTpk = GameState.Instance.AllyUnitsInBattle.All(item => item.IsDead);
+        CombatResult combatResult = null;
+        if (isVictoryBecauseAllEnemiesDead)
+        {
+            combatResult = (CombatResult.VICTORY);
+        }
+        if (isDefeatBecauseTpk)
+        {
+            combatResult = (CombatResult.TPK);
+        }
 
-        if (isVictory)
+        if (combatResult != null)
         {
-            GameState.Instance.CurrentMission.OnSuccess();
-        }
-        if (isDefeat)
-        {
-            GameState.Instance.CurrentMission.IsFailure = true;
-            GameState.Instance.CurrentMission.OnFailed();
-        }
-        var isOver = (isVictory || isDefeat) ;
-        if (isOver)
-        {
-            GameScenes.SwitchToBattleResultScene();
+            GameScenes.SwitchToBattleResultSceneAndProcessCombatResults(combatResult);
         }
     }
 
@@ -300,6 +299,39 @@ public static class BattleRules
         foreach(var character in GameState.Instance.AllyUnitsInBattle)
         {
             ActionManager.Instance.ApplyStatusEffect(character, new RetreatingStatusEffect(), 2);
+        }
+    }
+    
+    /// <summary>
+    /// Expected to be called as part of EndCombatAndSwitchToBattleResultScene
+    /// </summary>
+    /// <param name="result"></param>
+    public static void ProcessCombatResults(CombatResult result)
+    {
+        var currentMission = GameState.Instance.CurrentMission;
+
+        if (result == CombatResult.VICTORY)
+        {
+            currentMission.IsVictory = true;
+            currentMission.OnSuccess();
+        }
+        else
+        {
+            currentMission.IsFailure = true;
+            currentMission.OnFailed();
+        }
+        
+        // now, remove all non-persistent status effects.  Right now that's going to be everything except stress.
+
+        foreach(var character in GameState.Instance.AllyUnitsInBattle)
+        {
+            character.StatusEffects.RemoveAll(item => item.GetType() != typeof(StressStatusEffect));
+        }
+
+        // for each character who participated, give them a card reward.
+        foreach (var character in GameState.Instance.AllyUnitsInBattle)
+        {
+            character.LevelUp();
         }
     }
 }
@@ -324,6 +356,17 @@ public class RetreatingStatusEffect : AbstractStatusEffect
         }
     }
 
+}
 
+public class CombatResult
+{
+    public bool WasVictory { get; set; }
+    public CombatResult(bool wasVictory)
+    {
+        WasVictory = wasVictory;
+    }
 
+    public static CombatResult FLED = new CombatResult(false);
+    public static CombatResult TPK = new CombatResult(false);
+    public static CombatResult VICTORY = new CombatResult(true);
 }

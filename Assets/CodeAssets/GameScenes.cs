@@ -17,8 +17,9 @@ public class GameScenes
     {
         SceneManager.LoadScene(sceneName: "CampaignMapScene");
     }
-    public static void SwitchToBattleResultScene()
+    public static void SwitchToBattleResultSceneAndProcessCombatResults(CombatResult combatResult)
     {
+        BattleRules.ProcessCombatResults(combatResult);
         SceneManager.LoadScene(sceneName: "BattleResultScene");
     }
 }

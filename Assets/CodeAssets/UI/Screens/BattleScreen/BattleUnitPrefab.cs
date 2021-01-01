@@ -179,7 +179,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         foreach(var enemyCharacter in ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle){
             var intentsForThisEnemy = enemyCharacter.CurrentIntents;
-            intentsAccumulator.AddRange(intentsForThisEnemy.Where(item => item.UnitsTargeted.Contains(UnderlyingEntity)));
+            intentsAccumulator.AddRange(intentsForThisEnemy.Where(item => item.UnitsTargeted!= null && item.UnitsTargeted.Contains(UnderlyingEntity)));
         }
 
         // My own intents

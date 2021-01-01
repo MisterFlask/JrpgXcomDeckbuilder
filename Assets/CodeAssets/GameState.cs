@@ -25,7 +25,10 @@ public class GameState
 
     }
 
-    public int BattleTurn { get; set; }
+    /// <summary>
+    /// Battles start at turn ZERO, and iterate at the start of each new turn.
+    /// </summary>
+    public int BattleTurn { get; set; } = 0;
     public BattleDeck Deck { get; set; } = new BattleDeck();
 
     Card cardSelected = null;

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public abstract class SimpleIntent : AbstractIntent
 {
@@ -69,5 +70,26 @@ public static class Intents
     {
         var turnModNumOptions = GameState.Instance.BattleTurn % possibilities.Count();
         return possibilities.ToList()[turnModNumOptions];
+    }
+
+    public static List<AbstractIntent> LeadupAndRepeatLastOneForever(
+        params List<AbstractIntent>[] leadup)
+    {
+        var turnOrLast = Math.Min(GameState.Instance.BattleTurn, leadup.Count() - 1);
+        return leadup[turnOrLast];
+    }
+
+    public static List<AbstractIntent> LeadupAndThenGenerateIntentsFromFunction(
+        Func<int, List<AbstractIntent>> generateLastAction,
+        params List<AbstractIntent>[] leadup)
+    {
+        var turn = GameState.Instance.BattleTurn;
+
+        if (turn <= leadup.Count() - 1)
+        {
+            return leadup[turn];
+        }
+
+        return generateLastAction(GameState.Instance.BattleTurn);
     }
 }

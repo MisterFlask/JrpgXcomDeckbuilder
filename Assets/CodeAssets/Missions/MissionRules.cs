@@ -31,11 +31,15 @@ public static class MissionRules
     public static Dictionary<GameAct, List<Squad>> ActToSquadsMet => new Dictionary<GameAct, List<Squad>>
     {
         { 
-            ActOne, new List<Squad>{ 
+            ActOne, 
+            
+            
+            new List<Squad>{ 
             new Squad
             {
                 Members = new List<AbstractBattleUnit>
                 {
+                    new BrainCrab(),
                     new BrainCrab()
                 }
             },
@@ -86,7 +90,7 @@ public static class MissionRules
         return squads;
     }
 
-    public static Squad GetRandomSquad(int dayMissionSpawned)
+    public static Squad GetRandomSquadForDay(int dayMissionSpawned)
     {
         return GetPossibleEnemySquadsForDay(dayMissionSpawned).First();
     }

@@ -53,8 +53,32 @@ public class GameState
     public List<AbstractBattleUnit> EnemyUnitsInBattle { get; set; } = new List<AbstractBattleUnit>();
     public Mission CurrentMission { get; set; }
 
+    /// <summary>
+    /// List of global battle mechanics for the mission.  Note that this list is emptied at the start of each mission.
+    /// </summary>
+    public List<AbstractGlobalBattleMechanic> GlobalBattleMechanics = new List<AbstractGlobalBattleMechanic>();
+
     #region UI State
     public AbstractBattleUnit CharacterSelected { get; set; }
     public int Day { get; set; }
     #endregion
+}
+
+/// <summary>
+/// These represent triggers/action hooks that aren't associated to any specific character in battle.
+/// Examples: Retreating mechanic, most mission modifiers
+/// </summary>
+public abstract class AbstractGlobalBattleMechanic
+{
+    public int Stacks { get; set; }
+
+    public virtual void OnTurnStart()
+    {
+
+    }
+
+    public virtual void OnCardPlayed() 
+    { 
+    
+    }
 }

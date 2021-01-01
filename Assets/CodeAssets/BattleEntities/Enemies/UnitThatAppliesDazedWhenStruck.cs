@@ -18,9 +18,9 @@ public class UnitThatAppliesDazedWhenStruck : AbstractEnemyUnit
         {
             new BuffSelfIntent(this, new PowerStatusEffect()),
             new BuffSelfIntent(this, new PowerStatusEffect()),
-            SingleUnitAttackIntent.AttackRandomEnemy(this, 10, 1),
-            SingleUnitAttackIntent.AttackRandomEnemy(this, 15, 1),
-            SingleUnitAttackIntent.AttackRandomEnemy(this, 4, 2)
+            SingleUnitAttackIntent.AttackRandomPc(this, 10, 1),
+            SingleUnitAttackIntent.AttackRandomPc(this, 15, 1),
+            SingleUnitAttackIntent.AttackRandomPc(this, 4, 2)
         }
         .PickRandom()
         .ToSingletonList();

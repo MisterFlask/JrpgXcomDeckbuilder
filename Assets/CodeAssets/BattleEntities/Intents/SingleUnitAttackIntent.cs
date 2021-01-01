@@ -20,7 +20,7 @@ public class SingleUnitAttackIntent : AbstractIntent
     {
         return "This unit will attack someone this turn.";
     }
-    public static SingleUnitAttackIntent AttackRandomEnemy(AbstractBattleUnit source, int damage, int numTimesStruck)
+    public static SingleUnitAttackIntent AttackRandomPc(AbstractBattleUnit source, int damage, int numTimesStruck)
     {
         var target = IntentTargeting.GetRandomLivingPlayerUnit();
         if (target == null)

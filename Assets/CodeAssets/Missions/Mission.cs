@@ -5,6 +5,7 @@ using System;
 
 public abstract class Mission 
 {
+
     public static string GenerateMissionName()
     {
         return "Operation " + WordLists.GetRandomCommonAdjective() + " " + WordLists.GetRandomCommonNoun();
@@ -60,4 +61,6 @@ public abstract class Mission
     public bool IsVictory { get; set; } = false;
 
     public ProtoGameSprite BattleBackground { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Backgrounds/Battleback1");
+
 }
+

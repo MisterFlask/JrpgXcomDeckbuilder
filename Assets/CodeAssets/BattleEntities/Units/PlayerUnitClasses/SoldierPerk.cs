@@ -27,7 +27,7 @@ public abstract class SoldierPerk
     /// <summary>
     ///  This is run on the deck after the perk is gained, and also on every card as it enters the deck.
     /// </summary>
-    public virtual void ModifyCardsUponAcquisition(AbstractCard card)
+    public virtual void ModifyCardsUponAcquisition(AbstractCard card, AbstractBattleUnit soldierAffecte)
     {
 
     }
@@ -48,5 +48,54 @@ public abstract class SoldierPerk
         {
             soldierAffected.RemoveSoldierPerkByType(this.GetType());
         }
+    }
+
+
+    public static SoldierPerk CreateGrantsStatusEffectPerk(
+        string name,
+        string description,
+        AbstractStatusEffect effect,
+        int stacks)
+    {
+        return CreateGrantsStatusEffectPerk(
+        name,
+        description,
+        effect,
+        stacks);
+    }
+}
+
+
+public class GrantsStatusEffectPerk : SoldierPerk
+{
+    private string GivenName { get; set; }
+    private string GivenDescription { get; set; }
+    private AbstractStatusEffect Effect { get; set; }
+    private int Stacks { get; set; }
+    public GrantsStatusEffectPerk(
+        string name,
+        string description,
+        AbstractStatusEffect effect,
+        int stacks)
+    {
+        GivenName = name;
+        GivenDescription = description;
+        Stacks = stacks;
+        Effect = effect;
+    }
+
+    public override void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)
+    {
+        soldierAffected.AddStatusEffect(Effect, Stacks);
+    }
+
+    public override string Name()
+    {
+        return GivenName;
+    }
+
+    public override string Description()
+    {
+        return GivenDescription;
     }
 }

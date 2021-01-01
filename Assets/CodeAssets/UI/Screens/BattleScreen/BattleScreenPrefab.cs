@@ -34,13 +34,14 @@ public class BattleScreenPrefab : MonoBehaviour
         )
     {
         Image.sprite = GameState.Instance.CurrentMission.BattleBackground.ToSprite();
+        
         if (StartingAllies.Count > PotentialBattleEntityAllySpots.Count)
         {
-            throw new System.Exception("Too many allies for availabel number of spots");
+            throw new System.Exception("Too many allies for available number of spots");
         }
         if (StartingEnemies.Count > PotentialBattleEntityEnemySpots.Count)
         {
-            throw new System.Exception("Too many enemies for availabel number of spots");
+            throw new System.Exception("Too many enemies for available number of spots");
         }
         PotentialBattleEntityEnemySpots = PotentialBattleEntityEnemySpots.Shuffle().ToList();
         PotentialBattleEntityAllySpots = PotentialBattleEntityAllySpots.Shuffle().ToList();
@@ -53,6 +54,34 @@ public class BattleScreenPrefab : MonoBehaviour
             PotentialBattleEntityEnemySpots[i].Initialize(StartingEnemies[i]);
         }
     }
+
+    public BattleUnitPrefab GetFirstEmptyBattleUnitHolder()
+    {
+        return PotentialBattleEntityEnemySpots.FirstOrDefault(item => item.UnderlyingEntity == null);
+    }
+
+    public bool IsRoomForAnotherEnemy()
+    {
+        return GetFirstEmptyBattleUnitHolder() != null;
+    }
+
+    public CreateEnemyResult CreateNewEnemyAndRegisterWithGamestate(AbstractBattleUnit battleUnit)
+    {
+        var firstEmptyBattleUnitHolder = GetFirstEmptyBattleUnitHolder();
+        if (firstEmptyBattleUnitHolder == null)
+        {
+
+            return new CreateEnemyResult
+            {
+                FailedDueToNoSpaceLeft = true
+            };
+        }
+
+        firstEmptyBattleUnitHolder.Initialize(battleUnit);
+        GameState.Instance.EnemyUnitsInBattle.Add(battleUnit);
+        return new CreateEnemyResult();
+    }
+
 
     public void Start()
     {
@@ -86,4 +115,10 @@ public class BattleScreenPrefab : MonoBehaviour
 
         BattleStarter.StartBattle(this);
     }
+}
+
+public class CreateEnemyResult
+{
+    public bool FailedDueToNoSpaceLeft = false;
+    public bool Successful => !FailedDueToNoSpaceLeft;
 }

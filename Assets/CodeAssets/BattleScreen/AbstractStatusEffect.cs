@@ -41,7 +41,7 @@ public abstract class AbstractStatusEffect
 
     public virtual void OnTurnStart()
     {
-        
+
     }
 
     public virtual void OnDeath(AbstractBattleUnit unitThatKilledMe)
@@ -120,6 +120,11 @@ public abstract class AbstractStatusEffect
     }
 
     public virtual void OnAnyStatusEffectApplicationToOwner(StatusEffectChange increaseOrDecrease, AbstractStatusEffect statusEffectApplied)
+    {
+
+    }
+
+    public virtual void OnAnyCardPlayed(AbstractCard cardPlayed)
     {
 
     }

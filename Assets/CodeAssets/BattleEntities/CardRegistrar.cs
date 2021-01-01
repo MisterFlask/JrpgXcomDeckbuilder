@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 public class CardRegistrar : MonoBehaviour
 {
-    private Dictionary<Type, List<AbstractCard>> cardCache = new Dictionary<Type, List<AbstractCard>>();
+    private Dictionary<Type, List<AbstractCard>> ReflectiveCardCache = new Dictionary<Type, List<AbstractCard>>();
 
-    public void Init()
+    public void InitCardsReflectively()
     {
-        cardCache.Clear();
+        ReflectiveCardCache.Clear();
         var types = Assembly
           .GetExecutingAssembly()
           .GetTypes();
@@ -21,23 +21,23 @@ public class CardRegistrar : MonoBehaviour
             foreach(var registeredAttribute in registeredAttributes)
             {
                 var type = registeredAttribute.SoldierClass;
-                if (!cardCache.ContainsKey(t))
+                if (!ReflectiveCardCache.ContainsKey(t))
                 {
-                    cardCache[t] = new List<AbstractCard>();
+                    ReflectiveCardCache[t] = new List<AbstractCard>();
                 }
                 var card = Activator.CreateInstance(t) as AbstractCard;
                 if (card == null)
                 {
                     throw new Exception("Could not get registered card!: " + t.Name);
                 }
-                cardCache[t].Add(card);
+                ReflectiveCardCache[t].Add(card);
             }
         }
     }
 
     public List<AbstractCard> GetCardPool(Type soldierClass)
     {
-        return cardCache[soldierClass];
+        return ReflectiveCardCache[soldierClass];
     }
 }
 

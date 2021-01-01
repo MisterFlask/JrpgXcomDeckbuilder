@@ -21,7 +21,7 @@ public static class MissionGenerator
                 MoneyReward = 50,
                 Name = Mission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GoldMissionReward(50)},
-                EnemySquad = MissionRules.GetRandomSquad(dayNumber)
+                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber)
     },
             new KillEnemiesMission()
             {
@@ -31,7 +31,7 @@ public static class MissionGenerator
                 MoneyReward = 60,
                 Name = Mission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
-                EnemySquad = MissionRules.GetRandomSquad(dayNumber)
+                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber)
             }
         };
     }

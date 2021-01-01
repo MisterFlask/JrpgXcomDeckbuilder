@@ -20,6 +20,6 @@ public class Parasite : AbstractCard
 
     protected override void OnPlay(AbstractBattleUnit target)
     {
-        ActionManager.Instance.ExpendCard(this);
+        ActionManager.Instance.ExhaustCard(this);
     }
 }

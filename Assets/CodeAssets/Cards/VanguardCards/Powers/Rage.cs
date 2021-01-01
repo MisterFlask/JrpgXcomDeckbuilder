@@ -20,6 +20,6 @@ public class Rage : AbstractCard
     {
         action().ApplyStatusEffect(Owner, new PowerStatusEffect(), 1);
         var cardToExpend = state().Deck.DiscardPile.PickRandom();
-        action().ExpendCard(cardToExpend);
+        action().ExhaustCard(cardToExpend);
     }
 }

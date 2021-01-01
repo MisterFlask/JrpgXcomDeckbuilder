@@ -24,6 +24,6 @@ public class Grenade : AbstractCard
         {
             action().AttackUnitForDamage(otherTarget, this.Owner, BaseDamage);
         }
-        action().ExpendCard(this);
+        action().ExhaustCard(this);
     }
 }

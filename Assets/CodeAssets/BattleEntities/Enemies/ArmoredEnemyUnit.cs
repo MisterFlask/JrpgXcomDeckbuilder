@@ -17,7 +17,7 @@ public class ArmoredEnemyUnit : AbstractEnemyUnit
         return new List<AbstractIntent>
         {
             new BuffSelfIntent(this, new PowerStatusEffect(), 5),
-            SingleUnitAttackIntent.AttackRandomEnemy(this, 1, 1)
+            SingleUnitAttackIntent.AttackRandomPc(this, 1, 1)
         }
         .PickRandom()
         .ToSingletonList();

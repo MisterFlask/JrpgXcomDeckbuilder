@@ -274,7 +274,7 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    public void ExpendCard(AbstractCard protoCard, QueueingType queueingType = QueueingType.TO_BACK)
+    public void ExhaustCard(AbstractCard protoCard, QueueingType queueingType = QueueingType.TO_BACK)
     {
         QueuedActions.ImmediateAction(() =>
         {
@@ -428,18 +428,23 @@ public class ActionManager : MonoBehaviour
     }
     #region RivalUnits
 
-    public void CreateUnitAtBattleUnitHolder(AbstractBattleUnit unit)
+    /// <summary>
+    /// Spawns a new enemy in battle, if there's room.
+    /// </summary>
+    /// <param name="unit"></param>
+    public void CreateMinionInBattle(AbstractBattleUnit unit)
     {
-        /*
-        var copyOfUnit = unit.Clone();
-        var unitPrefab = ServiceLocator.GetRivalUnitPrefab().Spawn(ServiceLocator.GetUnitFolder());
-        unitPrefab.RivalUnitEntity = copyOfUnit;
-        copyOfUnit.Prefab = unitPrefab;
-        copyOfUnit.Faction = faction;
-        copyOfUnit.TileLocation = tile;
-        unitPrefab.transform.position = tile.ToTile().HexPrefab.transform.position;
-        gameState.RivalUnits.Add(copyOfUnit);
-        */
+        var clone = unit.CloneUnit();
+        BattleScreenPrefab.INSTANCE.CreateNewEnemyAndRegisterWithGamestate(unit);
+    }
+
+    public void HealUnit(AbstractBattleUnit unitHealed, int healedAmount, AbstractBattleUnit healer = null)
+    {
+        unitHealed.CurrentHp += healedAmount;
+        if (unitHealed.CurrentHp > unitHealed.MaxHp)
+        {
+            unitHealed.CurrentHp = unitHealed.MaxHp;
+        }
     }
 
     public void AttackUnitForDamage(AbstractBattleUnit targetUnit, AbstractBattleUnit sourceUnit, int baseDamageDealt)

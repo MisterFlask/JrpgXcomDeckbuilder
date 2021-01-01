@@ -18,7 +18,7 @@ public class HighWindsMissionModifier : MissionModifier
         );
         foreach(var card in cardsToExhaust)
         {
-            ActionManager.Instance.ExpendCard(card);
+            ActionManager.Instance.ExhaustCard(card);
         }
 
     }

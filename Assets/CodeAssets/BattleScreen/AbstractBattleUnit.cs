@@ -256,6 +256,10 @@ public abstract class AbstractBattleUnit
                 statusEffect.Stacks = consolidatedStacks;
             }
         }
+    }
+
+    public virtual void OnCombatStart()
+    {
 
     }
 
@@ -317,12 +321,12 @@ public abstract class AbstractBattleUnit
 
     public BattleUnitStatisticsInThisCombat StatsForThisCombat = new BattleUnitStatisticsInThisCombat();
 
-    internal void LevelUp()
+    public void LevelUp()
     {
         CurrentLevel ++;
         NumberCardRewardsEligibleFor ++;
+        MaxHp += 2;
         CurrentHp += 2;
-
     }
 }
 

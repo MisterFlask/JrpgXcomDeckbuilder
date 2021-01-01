@@ -5,6 +5,8 @@ using System;
 
 public class Soldier : AbstractAllyUnit
 {
+    public Soldier NULL_SOLDIER = new Soldier();
+
     public Soldier(AbstractSoldierClass soldierClass = null)
     {
         this.MaxHp = 10;

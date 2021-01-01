@@ -22,6 +22,11 @@ public class ExplainerPanel : MonoBehaviour
         TooltipToDisplay = description + "\n" + DebuggingInfo;
     }
 
+    internal static void ShowRawTextHelp(string v)
+    {
+        TooltipToDisplay = v;
+    }
+
     public static void ShowCardHelp(AbstractCard card)
     {
         if (card == null)

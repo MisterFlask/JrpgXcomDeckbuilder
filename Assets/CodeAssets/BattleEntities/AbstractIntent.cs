@@ -32,6 +32,11 @@ public abstract class AbstractIntent
 
     protected abstract void Execute();
 
+    protected virtual bool CurrentlyAvailableForUsage()
+    {
+        return true;
+    }
+
     protected abstract IntentPrefab GeneratePrefab(GameObject parent);
 
     public IntentPrefab GeneratePrefabAndAssign(GameObject parent)

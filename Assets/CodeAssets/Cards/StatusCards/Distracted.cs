@@ -18,7 +18,7 @@ public class Distracted : AbstractCard
 
     public override void InHandAtEndOfTurnAction()
     {
-        ActionManager.Instance.ExpendCard(this);
+        ActionManager.Instance.ExhaustCard(this);
     }
 
     protected override void OnPlay(AbstractBattleUnit target)

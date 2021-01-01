@@ -14,13 +14,11 @@ public class ArmoredEnemyUnit : AbstractEnemyUnit
 
     public override List<AbstractIntent> GetNextIntents()
     {
-        return new List<AbstractIntent>
-        {
-            new BuffSelfIntent(this, new PowerStatusEffect(), 5),
-            SingleUnitAttackIntent.AttackRandomPc(this, 1, 1)
-        }
-        .PickRandom()
-        .ToSingletonList();
+        return Intents.FixedRotation(
+            Intents.BuffSelfOrHeal(this, new PowerStatusEffect(), 5),
+            Intents.AttackRandomPc(this, 1, 1)
+        );
+
     }
 
 

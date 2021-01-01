@@ -17,6 +17,6 @@ public class BasicEnemyUnit : AbstractEnemyUnit
 
     public override List<AbstractIntent> GetNextIntents()
     {
-        return new List<AbstractIntent> { new SingleUnitAttackIntent(this, IntentTargeting.GetRandomLivingPlayerUnit(), 5) };
+        return Intents.AttackRandomPc(this, 5);
     }
 }

@@ -43,8 +43,13 @@ public static class Intents
             .Where(item => !item.IsDead)
             .PickRandom(numEnemies);
         return enemiesToHit
-            .SelectMany(item => AttackRandomPc(source, damagePerHit, numHits))
-            .ToList();
+            .Select(target => new SingleUnitAttackIntent(source, target, damagePerHit, numHits))
+            .ToList<AbstractIntent>();
+    }
+    public static List<AbstractIntent> AttackAllPcs(AbstractBattleUnit source,
+        int damagePerHit, int numHits)
+    {
+        return AttackSetOfPcs(source, damagePerHit, numHits, 20); //20 arbitrarily chosen; will hit everyone
     }
 
     public static List<AbstractIntent> BuffSelfOrHeal(AbstractBattleUnit self,
@@ -53,5 +58,16 @@ public static class Intents
     {
         return new BuffSelfIntent(self, statusEffect, stacks)
             .ToSingletonList<AbstractIntent>();
+    }
+
+    public static List<AbstractIntent> RandomIntent(params List<AbstractIntent>[] possibilities)
+    {
+        return possibilities.ToList().PickRandom();
+    }
+
+    public static List<AbstractIntent> FixedRotation(params List<AbstractIntent>[] possibilities)
+    {
+        var turnModNumOptions = GameState.Instance.BattleTurn % possibilities.Count();
+        return possibilities.ToList()[turnModNumOptions];
     }
 }

@@ -27,7 +27,7 @@ public class MissionDescriptorPrefab : MonoBehaviour
             reasonWhyNot = "No characters selected";
             return false;
         }
-        if (SelectedMission.MaxNumberOfFriendlyCharacters <= selectedNumberOfCharacters)
+        if (SelectedMission.MaxNumberOfFriendlyCharacters < selectedNumberOfCharacters)
         {
             reasonWhyNot = $"Too many charactes for mission max ({SelectedMission.MaxNumberOfFriendlyCharacters})";
 

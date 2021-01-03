@@ -56,6 +56,11 @@ public class ShowDeckScreen : MonoBehaviour
         Instance.gameObject.SetActive(false);
     }
 
+    public void HideShowDeckScreen()
+    {
+        Hide();
+    }
+
     public void Populate(IEnumerable<AbstractCard> cardsToDisplay)
     {
         CardPresentationUtil.PopulateCards(cardsToDisplay, CardsDisplayed, CardTemplate.gameObject, CardParent.gameObject);

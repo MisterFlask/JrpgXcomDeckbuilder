@@ -6,7 +6,7 @@ public class UnitThatAppliesDazedWhenStruck : AbstractEnemyUnit
 {
     public UnitThatAppliesDazedWhenStruck()
     {
-        this.CharacterName = "Drone";
+        this.CharacterFullName = "Drone";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/Charger1", color: Color.white);
         this.MaxHp = 30;
         this.AddStatusEffect(new ApplyDazedOnHit(), stacks: 4);

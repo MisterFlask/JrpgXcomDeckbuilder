@@ -66,7 +66,7 @@ public class ExplainerPanel : MonoBehaviour
         }
         var entity = battleUnitPrefab.UnderlyingEntity;
 
-        string nameTooltip = $"<color=yellow>{entity.CharacterName}</color>" + Newline();
+        string nameTooltip = $"<color=yellow>{entity.CharacterFullName}</color>" + Newline();
         string intentTooltip = "";
         if (battleUnitPrefab.UnderlyingEntity.CurrentIntents != null)
         {

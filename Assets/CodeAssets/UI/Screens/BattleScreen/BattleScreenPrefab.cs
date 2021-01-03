@@ -33,8 +33,11 @@ public class BattleScreenPrefab : MonoBehaviour
     public void Setup(List<AbstractBattleUnit> StartingEnemies, List<AbstractBattleUnit> StartingAllies
         )
     {
-        Image.sprite = GameState.Instance.CurrentMission.BattleBackground.ToSprite();
-        
+        if (GameState.Instance.CurrentMission?.BattleBackground != null)
+        {
+            Image.sprite = GameState.Instance.CurrentMission.BattleBackground.ToSprite();
+        }
+
         if (StartingAllies.Count > PotentialBattleEntityAllySpots.Count)
         {
             throw new System.Exception("Too many allies for available number of spots");

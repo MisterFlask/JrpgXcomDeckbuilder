@@ -24,6 +24,6 @@ public class SelectedCharacterDisplay : MonoBehaviour
             return;
         }
         image.SetProtoSprite(SelectedCharacter.ProtoSprite);
-        Text.text = $"{SelectedCharacter.CharacterName} [{SelectedCharacter.UnitClassName}]";
+        Text.text = $"{SelectedCharacter.CharacterFullName} [{SelectedCharacter.UnitClassName}]";
     }
 }

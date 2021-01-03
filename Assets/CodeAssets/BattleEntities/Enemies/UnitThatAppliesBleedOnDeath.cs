@@ -12,7 +12,7 @@ public class Greywing : AbstractEnemyUnit
 {
     public Greywing()
     {
-        this.CharacterName = "Greywing";
+        this.CharacterFullName = "Greywing";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/BlackBirdi", color: Color.white);
         this.MaxHp = 30;
         this.AddStatusEffect(new GreywingWoundOnDeath(), stacks: 4);

@@ -47,7 +47,7 @@ public class KillEnemiesMission: Mission
     {
         if (Description == null)
         {
-            var names = EnemySquad.Members.Select(item => item.CharacterName);
+            var names = EnemySquad.Members.Select(item => item.CharacterFullName);
             return string.Join(",", names);
         }
         return Description;

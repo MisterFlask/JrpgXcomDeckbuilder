@@ -21,7 +21,7 @@ public class CharacterDetailsInRoster : MonoBehaviour
         if (BattleUnit != null)
         {
             CharacterImage.SetProtoSprite(BattleUnit.ProtoSprite);
-            Title.text = BattleUnit.CharacterName;
+            Title.text = BattleUnit.CharacterFullName;
         }
     }
 

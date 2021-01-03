@@ -10,7 +10,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies
     {
         public SensorDrone()
         {
-            this.CharacterName = "Sensor Drone";
+            this.CharacterFullName = "Sensor Drone";
             this.MaxHp = 30;
         }
 

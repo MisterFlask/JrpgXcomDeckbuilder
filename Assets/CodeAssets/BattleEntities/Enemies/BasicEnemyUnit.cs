@@ -8,7 +8,7 @@ public class BasicEnemyUnit : AbstractEnemyUnit
     {
         this.MaxHp = 20;
         this.CurrentHp = 20;
-        this.CharacterName = "Basic Enemy";
+        this.CharacterFullName = "Basic Enemy";
         this.IsAlly = false;
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(color: Color.red);
         this.IsAiControlled = true;

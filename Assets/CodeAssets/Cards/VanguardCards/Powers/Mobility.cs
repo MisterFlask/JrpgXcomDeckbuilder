@@ -12,7 +12,7 @@ public class Mobility : AbstractCard
     }
     public override string Description()
     {
-        return $"Whenever {Owner.CharacterName} gains or loses Advanced, add a Flanking Shot to your hand.";
+        return $"Whenever {Owner.CharacterFullName} gains or loses Advanced, add a Flanking Shot to your hand.";
     }
 
     protected override void OnPlay(AbstractBattleUnit target)
@@ -23,7 +23,7 @@ public class Mobility : AbstractCard
 
 public class MobilityStatusEffect : AbstractStatusEffect
 {
-    public override string Description => $"Whenever {OwnerUnit.CharacterName} gains or loses Advanced, add a Flanking Shot to your hand.";
+    public override string Description => $"Whenever {OwnerUnit.CharacterFullName} gains or loses Advanced, add a Flanking Shot to your hand.";
 
     public override void OnAnyStatusEffectApplicationToOwner(StatusEffectChange increaseOrDecrease, AbstractStatusEffect statusEffectApplied)
     {

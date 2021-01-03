@@ -8,6 +8,11 @@ public abstract class AbstractCard
 {
     public Guid OwnerGuid;
 
+    /// <summary>
+    /// I just added this for debugging purposes
+    /// </summary>
+    public GameState GameState => GameState.Instance;
+
     public ProtoGameSprite ProtoSprite = ProtoGameSprite.FromGameIcon();
     public int FatigueCost => 1;
     public AbstractBattleUnit Owner { get; set; }
@@ -234,7 +239,7 @@ public abstract class AbstractCard
 
     public string OwnerDisplayName()
     {
-        return Owner.CharacterName;
+        return Owner.CharacterFullName;
     }
 
     public void SetCommonCardAttributes(string name,

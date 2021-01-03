@@ -8,7 +8,7 @@ public class DecayingEnemy : AbstractEnemyUnit
 
     public DecayingEnemy()
     {
-        this.CharacterName = "DecayingEnemy";
+        this.CharacterFullName = "DecayingEnemy";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.white);
         this.MaxHp = 300;
         this.AddStatusEffect(new MalfunctioningStatusEffect(), stacks: 1);

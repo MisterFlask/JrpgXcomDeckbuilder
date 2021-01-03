@@ -6,7 +6,7 @@ public class BrainCrab : AbstractEnemyUnit
 {
     public BrainCrab()
     {
-        this.CharacterName = "Brain Crab";
+        this.CharacterFullName = "Brain Crab";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.white);
         this.MaxHp = 14;
         this.AddStatusEffect(new AddsParasiteOnDealingDamage(), stacks: 1);

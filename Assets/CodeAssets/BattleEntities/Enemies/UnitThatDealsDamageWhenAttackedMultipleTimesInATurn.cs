@@ -7,7 +7,7 @@ public class UnitThatDealsDamageWhenAttackedMultipleTimesInATurn : AbstractEnemy
 
     public UnitThatDealsDamageWhenAttackedMultipleTimesInATurn()
     {
-        this.CharacterName = "UnitThatDealsDamageWhenAttackedMultipleTimesInATurn";
+        this.CharacterFullName = "UnitThatDealsDamageWhenAttackedMultipleTimesInATurn";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.white);
         this.MaxHp = 44;
         this.AddStatusEffect(new DealsDamageOnAttackMultipleTimesInATurn(), stacks: 4);

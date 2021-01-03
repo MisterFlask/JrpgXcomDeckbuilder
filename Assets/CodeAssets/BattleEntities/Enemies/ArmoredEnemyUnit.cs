@@ -6,7 +6,7 @@ public class ArmoredEnemyUnit : AbstractEnemyUnit
 {
         public ArmoredEnemyUnit()
         {
-            this.CharacterName = "ArmoredEnemy";
+            this.CharacterFullName = "ArmoredEnemy";
             this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.blue);
             this.MaxHp = 30;
             this.AddStatusEffect(new ArmoredStatusEffect(), stacks: 4);

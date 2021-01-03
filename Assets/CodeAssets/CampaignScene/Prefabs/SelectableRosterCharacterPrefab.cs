@@ -36,7 +36,7 @@ public class SelectableRosterCharacterPrefab : MonoBehaviour, IPointerClickHandl
         }
 
         CharacterImage.SetProtoSprite(Character.ProtoSprite);
-        Title.text = Character.CharacterName;
+        Title.text = Character.CharacterFullName;
         if (CurrentlySelected == Character)
         {
             Title.color = Color.red;

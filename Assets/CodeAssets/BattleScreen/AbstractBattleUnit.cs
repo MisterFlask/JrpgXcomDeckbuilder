@@ -26,6 +26,8 @@ public abstract class AbstractBattleUnit
     public int CurrentLevel { get; set; } = 1;
     public int CurrentBlock { get; set; }
     public int CurrentHp { get; set; }
+    public string CharacterFirstName { get; set; }
+    public string CharacterLastName { get; set; }
     public int PerDayHealingRate { get; set; } = 2;
 
     public int CurrentStress => this.GetStatusEffect<StressStatusEffect>()?.Stacks ?? 0;
@@ -38,7 +40,9 @@ public abstract class AbstractBattleUnit
 
     public AbstractSoldierClass SoldierClass { get; protected set; } = new RookieClass();
     public string UnitClassName => SoldierClass.Name();
-    public string CharacterName { get; set; } = "";
+    public string CharacterFullName { get; set; } = "";
+
+    public string CharacterNickname { get; set; } = "";
 
     public List<AbstractStatusEffect> StatusEffects { get; set; } = new List<AbstractStatusEffect>();
 
@@ -200,7 +204,10 @@ public abstract class AbstractBattleUnit
         var newName = CharacterNameGenerator.GenerateCharacterName();
         copy.CurrentFatigue = MaxFatigue;
         copy.CurrentHp = MaxHp;
-        copy.CharacterName =  newName.Nickname;
+        copy.CharacterFirstName = newName.FirstName;
+        copy.CharacterLastName = newName.LastName;
+        copy.CharacterFullName = newName.FirstName + " " + newName.LastName;
+        copy.CharacterNickname = newName.Nickname;
         return copy;
     }
 
@@ -328,8 +335,45 @@ public abstract class AbstractBattleUnit
         MaxHp += 2;
         CurrentHp += 2;
     }
+
+
+    public string GetDisplayName(DisplayNameType type)
+    {
+        if (type == DisplayNameType.FULL_NAME)
+        {
+            if (CurrentLevel > 1)
+            {
+                return $"{CharacterFirstName} \"{CharacterNickname}\" {CharacterLastName}";
+            }
+            else
+            {
+                return $"{CharacterFirstName} {CharacterLastName}";
+            }
+        }
+
+        if (type == DisplayNameType.SHORT_NAME)
+        {
+            if (CurrentLevel > 1)
+            {
+                return CharacterNickname;
+            }
+            else
+            {
+                return CharacterFirstName;
+            }
+        }
+        return CharacterFirstName;
+    }
+
+
 }
 
+
+public enum DisplayNameType
+{
+    FULL_NAME,
+    SHORT_NAME
+}
 public class BattleUnitStatisticsInThisCombat
 {
     int AmountOfDamageTaken = 0;

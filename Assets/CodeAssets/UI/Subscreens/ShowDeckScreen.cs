@@ -32,7 +32,7 @@ public class ShowDeckScreen : MonoBehaviour
     {
         Show(GameState.Instance.Deck.ExhaustPile);
     }
-
+     
     public static void ShowDeckForSelectedCharacter()
     {
         if (GameState.Instance.CharacterSelected != null)

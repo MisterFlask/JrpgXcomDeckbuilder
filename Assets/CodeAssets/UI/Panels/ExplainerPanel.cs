@@ -48,15 +48,16 @@ public class ExplainerPanel : MonoBehaviour
         SetAndShowTooltip(description: TooltipToDisplay);
     }
 
+    internal static void ShowPerkHelp(SoldierPerk perk)
+    {
+        TooltipToDisplay = $"<color=green>{perk.Name()}</color>: {perk.Description()}";
+    }
+
     public void SetAndShowTooltip(string description, string title = "")
     {
         tooltipText.SetText(description);
     }
 
-    public void HideTooltip()
-    {
-        // todo
-    }
 
     public static void ShowBattleUnitHelp(BattleUnitPrefab battleUnitPrefab)
     {
@@ -92,6 +93,7 @@ public class ExplainerPanel : MonoBehaviour
             }
         }
         TooltipToDisplay = (basicTooltip);
+
 
     }
     public static string Newline()

@@ -2,12 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using Assets.CodeAssets.BattleEntities.Augmentations;
+using Assets.CodeAssets.GameLogic;
 
 public class CampaignStarter : MonoBehaviour
 {
 
     public void InitializeCampaign()
     {
+        MagicWordsAttribute.RegisterMagicWordsReflectively();
+        CardRegistrar.InitCardsReflectively();
         InitializeSelectableMissions();
         InitializeRoster();
         CampaignMapState.GameInitialized = true;
@@ -24,6 +28,10 @@ public class CampaignStarter : MonoBehaviour
             GetHigherLevelSoldier(),
             GetDeadSoldier()
         };
+
+        foreach (var soldier in CampaignMapState.Roster) {
+            soldier.ApplySoldierPerk(new DealGreaterDamageToEnemiesWithStatusEffectPerk(new BurningStatusEffect(), 1, "Firefighter"));
+        }
     }
 
     private static AbstractBattleUnit GetDeadSoldier()

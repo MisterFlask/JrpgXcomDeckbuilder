@@ -56,14 +56,14 @@ namespace Assets.CodeAssets.BattleEntities.Augmentations
     /// </summary>
     public abstract class AbstractDamageModifierToEnemiesWithStatusEffect : AbstractStatusEffect
     {
-        public AbstractStatusEffect TargetStatusEffect;
+        public AbstractStatusEffect TargetStatusEffect { get; private set; }
         public AbstractDamageModifierToEnemiesWithStatusEffect(AbstractStatusEffect targetStatusEffect)
         {
             Name = "Damage Mod: " + targetStatusEffect.Name;
-
+            TargetStatusEffect = targetStatusEffect;
         }
 
-        public override string Description =>  $"Deals {Stacks} greater damage to enemies afflicted with " + TargetStatusEffect.Name;
+        public override string Description =>  $"Deals {Stacks} greater damage to enemies afflicted with " + TargetStatusEffect?.Name ?? "UNKNOWN";
 
     }
 

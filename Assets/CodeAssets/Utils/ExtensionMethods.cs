@@ -224,6 +224,24 @@ public static class ExtensionMethods
         return spawnPool;
     }
 
+    public static bool ContainsAll<T>(this IEnumerable<T> first, IEnumerable<T> second)
+    {
+        foreach (var item in second)
+        {
+            if (!first.Contains(item))
+            {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public static bool EquivalentMembers<T>(this IEnumerable<T> first, IEnumerable<T> second)
+    {
+        return first.ContainsAll(second) && second.ContainsAll(first);
+    }
+
     #region object pools
     public static Transform Spawn(this GameObject transform)
     {

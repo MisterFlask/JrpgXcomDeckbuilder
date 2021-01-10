@@ -4,11 +4,12 @@ using System.Reflection;
 using System;
 using System.Collections.Generic;
 
-public class CardRegistrar : MonoBehaviour
-{
-    private Dictionary<Type, List<AbstractCard>> ReflectiveCardCache = new Dictionary<Type, List<AbstractCard>>();
+public class CardRegistrar 
+{ 
 
-    public void InitCardsReflectively()
+    private static Dictionary<Type, List<AbstractCard>> ReflectiveCardCache = new Dictionary<Type, List<AbstractCard>>();
+
+    public static void InitCardsReflectively()
     {
         ReflectiveCardCache.Clear();
         var types = Assembly
@@ -40,6 +41,7 @@ public class CardRegistrar : MonoBehaviour
         return ReflectiveCardCache[soldierClass];
     }
 }
+
 
 public class RegisteredCardAttribute: Attribute
 {

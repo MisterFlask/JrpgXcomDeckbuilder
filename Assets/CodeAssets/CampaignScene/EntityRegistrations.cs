@@ -15,5 +15,10 @@ namespace Assets.CodeAssets.CampaignScene
         public static List<AbstractCard> AllClassCards => NonRookieSoldierClasses
             .SelectMany(item => item.UniqueCardRewardPool())
             .ToList();
+
     }
+
+
+
+
 }

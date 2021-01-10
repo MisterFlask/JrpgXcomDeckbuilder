@@ -71,7 +71,6 @@ public class GrantsStatusEffectPerk : SoldierPerk
     private string GivenName { get; set; }
     private string GivenDescription { get; set; }
     private AbstractStatusEffect Effect { get; set; }
-    private int Stacks { get; set; }
     public GrantsStatusEffectPerk(
         string name,
         string description,

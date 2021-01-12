@@ -10,7 +10,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
     {
         public Image Image;
         public TMPro.TextMeshProUGUI PriceText;
-        public AbstractShopAugmentationOffer ShopOffer { get; set; }
+        public ShopAugmentationOffer ShopOffer { get; set; }
 
         public bool IsActive => ShopOffer != null;
 
@@ -36,7 +36,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
         {
 
         }
-        public void Initialize(AbstractShopAugmentationOffer offer)
+        public void Initialize(ShopAugmentationOffer offer)
         {
             ShopOffer = offer;
             Image.sprite = offer.Augmentation.ProtoSprite.ToSprite();

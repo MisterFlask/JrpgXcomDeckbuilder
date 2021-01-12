@@ -11,7 +11,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
         public TMPro.TextMeshProUGUI PriceText;
         public Card Card; 
 
-        public AbstractShopCardOffer Offer { get; set; }
+        public ShopCardOffer Offer { get; set; }
 
         public bool IsActive => Offer != null;
         
@@ -36,7 +36,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
 
         }
 
-        public void Initialize(AbstractShopCardOffer offer)
+        public void Initialize(ShopCardOffer offer)
         {
             Offer = offer;
             Card.SetToAbstractCardAttributes(offer.Card);

@@ -14,6 +14,8 @@ namespace Assets.CodeAssets.CampaignScene.Shop
             Instance = this;
         }
 
+        public int MaxNumCardOffersAvailable => CardOffers.Count;
+        public int MaxNumAugmentationOffersAvailable => AugmentationOffers.Count;
 
         public GameObject CardOfferParent;
         public GameObject AugmeticsParent;
@@ -22,20 +24,29 @@ namespace Assets.CodeAssets.CampaignScene.Shop
         public List<ShopCardOfferPrefab> CardOffers { get; set; }
         public List<ShopAugmentationOfferPrefab> AugmentationOffers { get; set; }
 
+        public bool Initialized = false;
+
         public void Start()
         {
-            CardOffers = CardOfferParent.GetComponentsInChildren<ShopCardOfferPrefab>().ToList();
-            AugmentationOffers = AugmeticsParent.GetComponentsInChildren<ShopAugmentationOfferPrefab>().ToList();
-
-            CancelButton.onClick.AddListener(() =>
+            if (!Initialized)
             {
-                Hide();
-            });
+                CardOffers = CardOfferParent.GetComponentsInChildren<ShopCardOfferPrefab>().ToList();
+                AugmentationOffers = AugmeticsParent.GetComponentsInChildren<ShopAugmentationOfferPrefab>().ToList();
+
+                CancelButton.onClick.AddListener(() =>
+                {
+                    Hide();
+                });
+                Initialized = true;
+            }
         }
 
 
         public void Show()
         {
+            Start();
+
+            InitCardsInShop();
             this.gameObject.SetActive(true);
         }
 
@@ -45,9 +56,25 @@ namespace Assets.CodeAssets.CampaignScene.Shop
         }
 
 
+        public void InitCardsInShop()
+        {
+            SetItemsInShop(new List<ShopCardOffer>
+            {
+                new ShopCardOffer()
+                {
+                    Card = new Bayonet(),
+                    Price = 50,
+                    Purchased = false
+                }
+            }, new List<ShopAugmentationOffer>()
+            {
+
+            });
+        }
+
         public void SetItemsInShop(
-            List<AbstractShopCardOffer> cardsOnSale,
-            List<AbstractShopAugmentationOffer> augmentationsOnSale)
+            List<ShopCardOffer> cardsOnSale,
+            List<ShopAugmentationOffer> augmentationsOnSale)
         {
             if (cardsOnSale.Count > CardOffers.Count)
             {

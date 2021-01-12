@@ -109,7 +109,7 @@ public class PerkAugmentation : AbstractAugmentation
 
 
 
-public class AbstractShopCardOffer: AbstractShopOffer
+public class ShopCardOffer: AbstractShopOffer
 {
     public AbstractCard Card { get; set; }
 
@@ -119,7 +119,7 @@ public class AbstractShopCardOffer: AbstractShopOffer
     }
 }
 
-public class AbstractShopAugmentationOffer: AbstractShopOffer
+public class ShopAugmentationOffer: AbstractShopOffer
 {
     public AbstractAugmentation Augmentation { get; set; }
 

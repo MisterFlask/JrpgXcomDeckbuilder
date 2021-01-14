@@ -9,7 +9,8 @@ namespace Assets.CodeAssets.CampaignScene.Shop
     public class ShopCardOfferPrefab : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public TMPro.TextMeshProUGUI PriceText;
-        public Card Card; 
+        public Card Card;
+        public GameObject CardSoldSticker;
 
         public ShopCardOffer Offer { get; set; }
 
@@ -17,7 +18,15 @@ namespace Assets.CodeAssets.CampaignScene.Shop
         
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (GameState.Instance.money < this.Offer.Price)
+            {
+                // TODO:  "You broke?"
+                return;
+            }
+
             // purchase logic
+            GameState.Instance.CardInventory.Add(this.Card.LogicalCard);
+            GameState.Instance.money -= this.Offer.Price;
         }
 
         public void OnPointerEnter(PointerEventData eventData)

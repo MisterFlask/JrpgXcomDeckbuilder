@@ -33,6 +33,10 @@ public class GameState
 
     Card cardSelected = null;
 
+    public List<AbstractCard> CardInventory { get; set; }
+
+    public List<AbstractAugmentation> AugmentationInventory { get; set; }
+
     public Card GetCardSelected()
     {
         return cardSelected;

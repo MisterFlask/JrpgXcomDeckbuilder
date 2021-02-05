@@ -16,6 +16,11 @@ public class ExplainerPanel : MonoBehaviour
         // todo
     }
 
+    internal static void ShowAugmentationHelp(AbstractAugmentation augmentation)
+    {
+        throw new NotImplementedException();
+    }
+
     public static void ShowStatusEffectHelp(AbstractStatusEffect effect)
     {
         var description = effect.Description;

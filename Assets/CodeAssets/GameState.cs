@@ -33,7 +33,7 @@ public class GameState
 
     Card cardSelected = null;
 
-    public List<AbstractCard> CardInventory { get; set; }
+    public List<AbstractCard> CardInventory { get; set; } = new List<AbstractCard>();
 
     public List<AbstractAugmentation> AugmentationInventory { get; set; }
 

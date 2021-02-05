@@ -59,6 +59,16 @@ public abstract class AbstractBattleUnit
 
     public IEnumerable<AbstractCard> CardsInPersistentDeck => _CardsInPersistentDeck;
 
+    public List<AbstractAugmentation> Augmentations { get; } = new List<AbstractAugmentation>();
+
+
+    public void ApplyAugmentation(AbstractAugmentation aug)
+    {
+        aug.Owner = this;
+        aug.OnAssignment(this);        
+        Augmentations.Add(aug);
+    }
+
     public void RemoveCardsFromPersistentDeck(IEnumerable<AbstractCard> cardsToRemove)
     {
         _CardsInPersistentDeck.RemoveAll(item => cardsToRemove.Contains(item));

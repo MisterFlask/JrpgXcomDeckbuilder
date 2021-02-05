@@ -57,6 +57,8 @@ public abstract class AbstractAugmentation
     public string Description { get; set; }
     public ProtoGameSprite ProtoSprite { get; set; }
 
+    public AbstractBattleUnit Owner { get; set; }
+
     public Rarity Rarity { get; set; }
 
     public abstract void OnAssignment(AbstractBattleUnit battleUnit);

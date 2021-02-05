@@ -6,6 +6,12 @@ using System.Linq;
 
 public abstract class AbstractCard
 {
+
+    /// <summary>
+    /// if this is empty, any class can use it.
+    /// </summary>
+    public List<AbstractSoldierClass> SpecificToClasses { get; } = new List<AbstractSoldierClass>();
+        
     public Guid OwnerGuid;
 
     /// <summary>
@@ -163,13 +169,6 @@ public abstract class AbstractCard
 
     }
 
-
-    public ProductionAction GetApplicableProductionAction()
-    {
-        return ProductionAction.UPGRADE_CARD;
-    }
-
-
     public void Upgrade()
     {
         this.UpgradeQuantity += 1;
@@ -202,11 +201,6 @@ public abstract class AbstractCard
     public Card FindCorrespondingHypercard()
     {
         return ServiceLocator.GetCardAnimationManager().GetGraphicalCard(this);
-    }
-
-    public AbstractCard GetTransformedCardOnProductionAction()
-    {
-        throw new NotImplementedException("This must be overridden if ProductionAction is 'transform card'");
     }
 
     public void _Initialize()
@@ -258,6 +252,12 @@ public abstract class AbstractCard
         {
             this.ProtoSprite = protoGameSprite; 
         }
+    }
+
+    public bool IsValidForClass(AbstractBattleUnit unit)
+    {
+        return SpecificToClasses.IsEmpty() 
+            || SpecificToClasses.Select(item => item.Name()).Contains(unit.SoldierClass.Name());
     }
 
 

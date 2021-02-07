@@ -45,6 +45,7 @@ namespace Assets.CodeAssets.UI.Subscreens
                 {
                     IsTaken = true;
                     UnitSelected.AddCardToPersistentDeck(this.Card);
+                    GameState.Instance.CardInventory.Remove(this.Card);
                 }
             });
         }
@@ -60,11 +61,15 @@ namespace Assets.CodeAssets.UI.Subscreens
             {
                 CardNotAvailableText.gameObject.SetActive(true);
                 CardNotAvailableText.text = "SOLD";
+                SelectCardButton.interactable = false;
             }
             else if (!Card.IsValidForClass(UnitSelected))
             {
                 CardNotAvailableText.gameObject.SetActive(true);
-                CardNotAvailableText.text = $"NOT AVAILABLE FOR {UnitSelected.SoldierClass.Name().ToUpper()}";
+                CardNotAvailableText.text = $"NOT AVAILABLE FOR {UnitSelected.SoldierClass.Name().ToUpper()}"; 
+                SelectCardButton.interactable = false;
+
+
             }
         }
     }

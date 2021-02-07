@@ -33,9 +33,15 @@ public class GameState
 
     Card cardSelected = null;
 
-    public List<AbstractCard> CardInventory { get; set; } = new List<AbstractCard>();
+    public List<AbstractCard> CardInventory { get; set; } = new List<AbstractCard>
+    {
+        new Bayonet()
+    };
 
-    public List<AbstractAugmentation> AugmentationInventory { get; set; }
+    public List<AbstractAugmentation> AugmentationInventory { get; set; } = new List<AbstractAugmentation>
+    {
+        new PerkAugmentation(new AgilePerk())
+    };
 
     public Card GetCardSelected()
     {

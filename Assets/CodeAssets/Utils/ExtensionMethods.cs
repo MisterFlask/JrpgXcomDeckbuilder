@@ -187,7 +187,7 @@ public static class ExtensionMethods
     {
         for (int i = 0; i < obj.transform.childCount; i++)
         {
-            UnityEngine.Object.Destroy(obj.transform.GetChild(i));
+            UnityEngine.Object.Destroy(obj.transform.GetChild(i).gameObject);
         }
     }
 

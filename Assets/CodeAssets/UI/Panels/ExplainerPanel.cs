@@ -18,7 +18,7 @@ public class ExplainerPanel : MonoBehaviour
 
     internal static void ShowAugmentationHelp(AbstractAugmentation augmentation)
     {
-        throw new NotImplementedException();
+        TooltipToDisplay = augmentation.Title + ": " +augmentation.Description;
     }
 
     public static void ShowStatusEffectHelp(AbstractStatusEffect effect)

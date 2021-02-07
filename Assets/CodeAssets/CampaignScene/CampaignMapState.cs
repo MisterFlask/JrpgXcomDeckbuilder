@@ -55,7 +55,7 @@ public abstract class AbstractAugmentation
 {
     public string Title { get; set; }
     public string Description { get; set; }
-    public ProtoGameSprite ProtoSprite { get; set; }
+    public ProtoGameSprite ProtoSprite { get; set; } = GameIconProtoSprite.Default;
 
     public AbstractBattleUnit Owner { get; set; }
 

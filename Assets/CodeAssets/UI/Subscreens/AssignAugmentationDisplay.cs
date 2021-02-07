@@ -30,19 +30,41 @@ namespace Assets.CodeAssets.UI.Subscreens
             ExplainerPanel.Hide();
         }
 
+        public void Init()
+        {
+            Require.NotNull(Augmentation);
+            Require.NotNull(SoldierWeAreConsideringAssigningThisTo);
+            AssignmentButton.onClick.AddListener(() =>
+            {
+                if (IsTaken)
+                {
+                    return;
+                }
+                IsTaken = true;
+                SoldierWeAreConsideringAssigningThisTo.ApplyAugmentation(Augmentation);
+                GameState.Instance.AugmentationInventory.Remove(this.Augmentation);
+            });
+        }
+
         // Use this for initialization
         void Start()
         {
-            AssignmentButton.onClick.AddListener(() =>
-            {
-                SoldierWeAreConsideringAssigningThisTo.ApplyAugmentation(Augmentation);
-            });
+           
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (Augmentation == null)
+            {
+                return;
+            }
+
             AugmentationImage.SetProtoSprite(Augmentation.ProtoSprite);
+            if (IsTaken)
+            {
+                AssignmentButton.interactable = false;
+            }
         }
     }
 }

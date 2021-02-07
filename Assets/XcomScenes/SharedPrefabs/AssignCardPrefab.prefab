@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a465bc62afde95478197fdef02537d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardNotAvailableText: {fileID: 0}
-  SelectCardButton: {fileID: 0}
+  CardNotAvailableText: {fileID: 3871637990559011680}
+  SelectCardButton: {fileID: 4150983417113320908}
 --- !u!1 &5533534822066723609
 GameObject:
   m_ObjectHideFlags: 0

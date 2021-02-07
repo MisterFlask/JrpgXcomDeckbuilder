@@ -14,7 +14,6 @@ namespace Assets.CodeAssets.UI.Subscreens
 
         private AbstractBattleUnit BattleUnitSelected => GameState.Instance.CharacterSelected;
         public AbstractAugmentation Augmentation { get; set; }
-        public AbstractBattleUnit SoldierWeAreConsideringAssigningThisTo { get; set; }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -32,8 +31,8 @@ namespace Assets.CodeAssets.UI.Subscreens
 
         public void Init()
         {
+            Require.NotNull(BattleUnitSelected);
             Require.NotNull(Augmentation);
-            Require.NotNull(SoldierWeAreConsideringAssigningThisTo);
             AssignmentButton.onClick.AddListener(() =>
             {
                 if (IsTaken)
@@ -41,7 +40,7 @@ namespace Assets.CodeAssets.UI.Subscreens
                     return;
                 }
                 IsTaken = true;
-                SoldierWeAreConsideringAssigningThisTo.ApplyAugmentation(Augmentation);
+                GameState.Instance.CharacterSelected.ApplyAugmentation(Augmentation);
                 GameState.Instance.AugmentationInventory.Remove(this.Augmentation);
             });
         }

@@ -33,7 +33,6 @@ namespace Assets.CodeAssets.UI.Subscreens
         {
             Init(GameState.Instance.AugmentationInventory);
             this.gameObject.SetActive(true);
-            
         }
 
         public void Hide()
@@ -49,7 +48,6 @@ namespace Assets.CodeAssets.UI.Subscreens
             {
                 var newDisplay = AugmentationDisplayTemplate.Spawn(AugmentationDisplayParent);
                 newDisplay.Augmentation = augmentation;
-                newDisplay.SoldierWeAreConsideringAssigningThisTo = GameState.Instance.CharacterSelected;
                 newDisplay.Init();
             }
         }

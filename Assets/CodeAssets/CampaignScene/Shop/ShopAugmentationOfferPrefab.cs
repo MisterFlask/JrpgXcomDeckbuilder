@@ -26,7 +26,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
             // purchase logic
             GameState.Instance.AugmentationInventory.Add(this.ShopOffer.Augmentation);
             GameState.Instance.money -= this.ShopOffer.Price;
-            // purchase logic
+            GameState.Instance.ShopData.AugmentationOffers.Remove(this.ShopOffer);
         }
 
         public void OnPointerEnter(PointerEventData eventData)

@@ -42,10 +42,10 @@ public static class CampaignMapState
     }
 }
 
-public class ShopData 
+public class ShopData
 {
-    public List<AbstractShopOffer> CardsOnOffer;
-    public List<AbstractShopOffer> OtherStuffOnOffer;
+    public List<ShopCardOffer> CardOffers { get; set; }
+    public List<ShopAugmentationOffer> AugmentationOffers { get; set; }
 }
 
 /// <summary>

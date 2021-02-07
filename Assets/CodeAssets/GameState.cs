@@ -71,6 +71,8 @@ public class GameState
     /// </summary>
     public List<AbstractGlobalBattleMechanic> GlobalBattleMechanics = new List<AbstractGlobalBattleMechanic>();
 
+    public ShopData ShopData { get; } = new ShopData();
+
     #region UI State
     public AbstractBattleUnit CharacterSelected { get; set; }
     public int Day { get; set; }

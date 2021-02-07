@@ -11,6 +11,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
         public TMPro.TextMeshProUGUI PriceText;
         public Card Card;
         public GameObject CardSoldSticker;
+        public Button PurchaseButton;
 
         public ShopCardOffer Offer { get; set; }
 
@@ -24,7 +25,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
                 return;
             }
 
-            // purchase logic
+            // purchase logic; I should move this elsewhere.
             GameState.Instance.CardInventory.Add(this.Card.LogicalCard);
             GameState.Instance.money -= this.Offer.Price;
         }
@@ -49,11 +50,19 @@ namespace Assets.CodeAssets.CampaignScene.Shop
         {
             Offer = offer;
             Card.SetToAbstractCardAttributes(offer.Card);
+            PurchaseButton.onClick.AddListener(() => {
+                PurchaseButton.interactable = false;
+                GameState.Instance.CardInventory.Add(this.Card.LogicalCard);
+                GameState.Instance.ShopData.CardOffers.Remove(Offer);
+            });
         }
         // Update is called once per frame
         void Update()
         {
-            if (Card == null) return;
+            if (Card == null)
+            {
+                return;
+            }
             PriceText.text = "" + Offer.Price;
         }
     }

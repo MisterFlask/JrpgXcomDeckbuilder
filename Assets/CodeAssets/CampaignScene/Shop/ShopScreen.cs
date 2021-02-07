@@ -76,6 +76,9 @@ namespace Assets.CodeAssets.CampaignScene.Shop
             List<ShopCardOffer> cardsOnSale,
             List<ShopAugmentationOffer> augmentationsOnSale)
         {
+            GameState.Instance.ShopData.CardOffers = cardsOnSale;
+            GameState.Instance.ShopData.AugmentationOffers = augmentationsOnSale;
+
             if (cardsOnSale.Count > CardOffers.Count)
             {
                 throw new System.Exception("Too any cards on sale; can't hold them all.");

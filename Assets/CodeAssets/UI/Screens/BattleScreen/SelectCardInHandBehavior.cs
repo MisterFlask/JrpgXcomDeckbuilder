@@ -22,6 +22,11 @@ namespace Assets.CodeAssets.UI.Screens.BattleScreen
 
     public class DiscardCardsBehavior: SelectCardInHandBehavior
     {
+        public DiscardCardsBehavior()
+        {
+            SelectCardsDisplayText = "Select one card to discard.";
+        }
+
         public int MinCardsToSelect { get; set; } = 1;
         public int MaxCardsToSelect { get; set; } = 1;
 

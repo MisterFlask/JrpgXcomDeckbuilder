@@ -76,8 +76,11 @@ namespace Assets.CodeAssets.UI.Screens.BattleScreen
         // Update is called once per frame
         void Update()
         {
-            SelectInstructions.text = $"Select card to discard: [{CardAnimationManager.INSTANCE.cardsInHand.Count}]";
-
+            if (BehaviorActive == null)
+            {
+                return;
+            }
+            SelectInstructions.text = $"{BehaviorActive.SelectCardsDisplayText} [{CardAnimationManager.SelectedCardsInHand.Count} selected]";
         }
 
         private static void Submit()

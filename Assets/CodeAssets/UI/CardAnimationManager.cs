@@ -34,6 +34,11 @@ public class CardAnimationManager : MonoBehaviour
     public static Vector3 NaturalCardSize { get; internal set; } = new Vector2(1.2f, 1.2f);
     public static Vector2 EnlargedCardSize { get; internal set; } = new Vector2(1.6f, 1.6f);
 
+
+    public static List<AbstractCard> SelectedCardsInHand => INSTANCE.cardsInHand
+        .Where(item => item.IsSelected)
+        .Select(item => item.LogicalCard).ToList();
+
     // Use this for initialization
     void Start() 
     {

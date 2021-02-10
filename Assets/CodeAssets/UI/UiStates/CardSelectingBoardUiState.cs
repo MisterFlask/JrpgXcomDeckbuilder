@@ -14,7 +14,7 @@ public abstract class CardSelectingBoardUiState
     protected virtual void HandleCardReleasedEventForCardSelect(List<GameObject> elements, AbstractCard logicalCard)
     {
         var card = ServiceLocator.GetCardAnimationManager().GetGraphicalCard(logicalCard);
-        card.IsMovedToSelectionArea = !card.IsMovedToSelectionArea;
+        card.IsSelected = !card.IsSelected;
         ServiceLocator.GetCardAnimationManager().ReorientAllCards();
     }
 

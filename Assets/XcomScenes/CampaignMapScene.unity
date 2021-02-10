@@ -440,7 +440,6 @@ GameObject:
   - component: {fileID: 54701041}
   - component: {fileID: 54701040}
   - component: {fileID: 54701043}
-  - component: {fileID: 54701044}
   m_Layer: 5
   m_Name: AssignCardsButton
   m_TagString: Untagged
@@ -571,19 +570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec73ed517b5ef7d4d939812e276786ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &54701044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 54701038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66e3400add6baa847a40e891ded0056e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Text: {fileID: 0}
 --- !u!1 &67857216
 GameObject:
   m_ObjectHideFlags: 0

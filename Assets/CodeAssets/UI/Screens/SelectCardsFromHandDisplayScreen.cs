@@ -37,7 +37,7 @@ public class SelectCardsFromHandDisplayScreen : MonoBehaviour
         okButtonClickEvent.AddListener(() => {
             var cardsSelected = ServiceLocator.GetCardAnimationManager()
                 .cardsInHand
-                .Where(item => item.IsMovedToSelectionArea).ToList();
+                .Where(item => item.IsSelected).ToList();
             if (cardsSelected.Count >= minCardsToSelect && cardsSelected.Count <= (maxCardsToSelect ?? 100))
             {
                 // TODO: Add actual logic for this

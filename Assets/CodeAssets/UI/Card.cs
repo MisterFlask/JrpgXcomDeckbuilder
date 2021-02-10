@@ -24,7 +24,7 @@ namespace HyperCard
         public AbstractCard LogicalCard { get; set; }
         public string LogicalCardId { get; set; }
 
-        public bool IsMovedToSelectionArea { get; set; } = false;
+        public bool IsSelected { get; set; } = false;
 
         public void Start()
         {

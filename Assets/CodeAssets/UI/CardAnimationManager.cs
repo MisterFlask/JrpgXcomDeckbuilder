@@ -5,9 +5,17 @@ using HyperCard;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Assets.CodeAssets.UI.Screens.BattleScreen;
 
 public class CardAnimationManager : MonoBehaviour
 {
+    public static CardAnimationManager INSTANCE;
+
+    public CardAnimationManager()
+    {
+        INSTANCE = this;
+    }
+
     GameObject handPanel;
 
     public List<Card> cardsInHand;
@@ -18,8 +26,7 @@ public class CardAnimationManager : MonoBehaviour
     // Card select area follows
     GameObject cardSelectAreaBottomMarker;
     Canvas canvas;
-    RectTransform DefaultHandPanel;
-    RectTransform SelectedHandPanel;
+    RectTransform SelectedCardsHolder => SelectCardInHandOverlay.INSTANCE.SelectedCardHolder;
     Card cardTemplate;
 
     GameObject cardSpawnPoint;
@@ -69,12 +76,17 @@ public class CardAnimationManager : MonoBehaviour
         }
     }
 
-    public Vector3 GetAppropriateCardRotation(int i, int cardsInHand, bool isMousedOver)
+    public Vector3 GetAppropriateCardRotation(int i, int cardsInHand, bool isMousedOver, bool isSelected)
     {
         if (isMousedOver)
         {
             return new Vector3(0, 0, 0);
         }
+        if (isSelected)
+        {
+            return new Vector3(0, 0, 0);
+        }
+
         var startRotationOffsetInDegrees = 20;
         var endRotationOffsetInDegrees = -20;
 
@@ -148,14 +160,14 @@ public class CardAnimationManager : MonoBehaviour
         var scriptableMovement = card.GetComponent<CardMovementBehaviors>();
         scriptableMovement.KillMovement();
 
-        if (card.IsMovedToSelectionArea)
+        if (card.IsSelected)
         {
             scriptableMovement.MoveToLocation(GetAppropriateCardPositionInCardSelectionArea(index, cardsInHand.Count));
         }
         else
         {
             scriptableMovement.MoveToLocation(GetAppropriateCardPositionInHand(index, cardsInHand.Count, mousedOver),
-                GetAppropriateCardRotation(index, cardsInHand.Count, mousedOver), GetAppropriateScale(mousedOver));
+                GetAppropriateCardRotation(index, cardsInHand.Count, mousedOver, card.IsSelected), GetAppropriateScale(mousedOver));
         }
         // now, we reorder the cards on the canvas according to z-axis
         var hand = GameObject.Find("Hand");

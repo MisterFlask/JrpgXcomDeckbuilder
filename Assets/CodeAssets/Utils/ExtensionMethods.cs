@@ -242,6 +242,14 @@ public static class ExtensionMethods
         return first.ContainsAll(second) && second.ContainsAll(first);
     }
 
+    public static string GetCardNames(this IEnumerable<AbstractCard> cards)
+    {
+        var cardNames = cards.Select(item => item.Name).ToList();
+        var aggregated = cardNames.Aggregate((item1, item2) => item1 + ", " + item2);
+        return $"[{aggregated}]";
+            
+    }
+
     #region object pools
     public static Transform Spawn(this GameObject transform)
     {

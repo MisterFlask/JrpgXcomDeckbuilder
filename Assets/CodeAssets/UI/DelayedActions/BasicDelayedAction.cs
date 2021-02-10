@@ -31,43 +31,20 @@ public class BasicDelayedAction
     }
 }
 
-public abstract class AbstractDelayedAction : BasicDelayedAction
+
+public class DelayedActionWithFinishTrigger : BasicDelayedAction
 {
+    Func<bool> IsFinishedFunction;
 
-    DateTime StartTime;
-
-    public AbstractDelayedAction() : base(() => { })
+    public DelayedActionWithFinishTrigger(string name, Action toPerform, Func<bool> isFinished) : base(toPerform)
     {
-        onStart = () => PerformOuter();
-        ActionId = GetName();
+        onStart = toPerform;
+        ActionId = name;
+        IsFinishedFunction = isFinished;
     }
-
-    public void PerformOuter()
-    {
-        StartTime = DateTime.Now;
-        Perform();        
-    }
-
-    public abstract string GetName();
-
-    public abstract void Perform();
 
     public override bool IsFinished()
     {
-        return ServiceLocator.GetActionManager().IsCurrentActionFinished || TimeoutHasOccurred();
-    }
-
-    private bool TimeoutHasOccurred()
-    {
-        var span = DateTime.Now - StartTime;
-        if (span > Timeout)
-        {
-            Log.Error("Timeout occurred on action: " + ActionId);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return IsFinishedFunction();
     }
 }

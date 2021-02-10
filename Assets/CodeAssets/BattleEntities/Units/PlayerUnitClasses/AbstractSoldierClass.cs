@@ -58,10 +58,6 @@ public abstract class AbstractSoldierClass
         LevelUpEffects(me);
     }
 
-    public virtual void GainCardRewards(AbstractBattleUnit me)
-    {
-        ActionManager.Instance.PromptCardReward(me);
-    }
 
     public virtual void LevelUpEffects(AbstractBattleUnit me)
     {

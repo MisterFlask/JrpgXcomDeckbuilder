@@ -5,6 +5,7 @@ using HyperCard;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Assets.CodeAssets.UI.Screens.BattleScreen;
 
 public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -86,6 +87,23 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
             HandleCardReleasedEventForCardSelect(elements, logicalCard);
             return;
         }
+
+        if (SelectCardInHandOverlay.INSTANCE.IsCardSelectBehaviorActive)
+        {
+            foreach (var element in elements)
+            {
+                var cardUiBehaviorNullable = element.GetComponent<CardUiBehaviors>();
+                if (cardUiBehaviorNullable != null)
+                {
+                    var card = cardUiBehaviorNullable.GetComponent<Card>();
+                    card.IsSelected = !card.IsSelected;
+                    CardAnimationManager.INSTANCE.ReorientAllCards();
+                    SelectCardInHandOverlay.INSTANCE.ExecuteClickingOnCard(cardUiBehaviorNullable);
+                }
+            }
+            return;
+        }
+
         foreach (var element in elements)
         {
             if (element.GetComponent<CardUiBehaviors>() != null)
@@ -101,6 +119,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 component.HandleOnMouseButtonUpEvent();
                 break;
             }
+
             var battleUnitMousedOver = element.GetComponent<BattleUnitPrefab>();
             var battleUnitTargeted = battleUnitMousedOver?.UnderlyingEntity;
 
@@ -144,7 +163,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private void HandleCardReleasedEventForCardSelect(List<GameObject> elements, AbstractCard logicalCard)
     {
         var card = logicalCard.FindCorrespondingHypercard();
-        card.IsMovedToSelectionArea = !card.IsMovedToSelectionArea;
+        card.IsSelected = !card.IsSelected;
 
         ServiceLocator.GetCardAnimationManager().ReorientAllCards();
     }

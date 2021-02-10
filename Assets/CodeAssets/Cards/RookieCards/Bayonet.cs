@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class Bayonet : AbstractCard
 {
@@ -34,10 +35,15 @@ public class Bayonet : AbstractCard
     {
         Require.NotNull(target);
         action().AttackUnitForDamage(target, Owner, BaseDamage);
+        var cardDiscarded = action().PromptDiscardOfSingleCard();
+        action().DoAThing(() =>
+        {
+            Debug.Log("Cards discarded: " + cardDiscarded.CardsSelected.GetCardNames());
+        });
     }
 
     public override string Description()
     {
-        return $"Deals {displayedDamage()} damage to an enemy unit.  Costs 1 less if Advanced.";
+        return $"Deals {displayedDamage()} damage to an enemy unit.  Costs 1 less if Advanced.  Discard a card.";
     }
 }

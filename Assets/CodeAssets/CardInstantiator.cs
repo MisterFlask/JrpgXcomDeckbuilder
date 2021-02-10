@@ -49,7 +49,7 @@ public class CardInstantiator : MonoBehaviour
         }
 
         newCard.gameObject.GetComponent<CardUiBehaviors>().enabled = true;
-        newCard.IsMovedToSelectionArea = false;
+        newCard.IsSelected = false;
         newCard.transform.localScale = CardAnimationManager.NaturalCardSize;
         Profiler.Profile("ResetCardBehaviors", () =>
         {

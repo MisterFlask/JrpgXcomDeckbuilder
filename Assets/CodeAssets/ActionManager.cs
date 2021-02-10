@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using UnityEngine.UI;
 using HyperCard;
+using Assets.CodeAssets.UI.Screens.BattleScreen;
 
 [RequireComponent(typeof(Log))]
 public class ActionManager : MonoBehaviour
@@ -34,12 +35,12 @@ public class ActionManager : MonoBehaviour
 
     public void AddToFront(BasicDelayedAction action)
     {
-        QueuedActions.DelayedAction(action.ActionId, action.onStart, queueingType: QueueingType.TO_FRONT);
+        QueuedActions.DelayedActionWithCustomTrigger(action.ActionId, action.onStart, queueingType: QueueingType.TO_FRONT);
     }
 
     public void AddToBack(BasicDelayedAction action)
     {
-        QueuedActions.DelayedAction(action.ActionId, action.onStart, queueingType: QueueingType.TO_BACK);
+        QueuedActions.DelayedActionWithCustomTrigger(action.ActionId, action.onStart, queueingType: QueueingType.TO_BACK);
     }
 
     public void AddStickerToCard(AbstractCard card, AbstractCardSticker stickerToAdd)
@@ -58,6 +59,8 @@ public class ActionManager : MonoBehaviour
         });
     }
 
+    /*
+     * This doesn't really make sense anymore, since we're not doing this in combat.
     public void PromptPossibleUpgradeOfCard(AbstractCard beforeCard, int? cost = null)
     {
         QueuedActions.ImmediateAction(() =>
@@ -72,7 +75,7 @@ public class ActionManager : MonoBehaviour
             );
         });
     }
-
+    */
 
     public void RemoveStatusEffect<T>(AbstractBattleUnit unit) where T: AbstractStatusEffect
     {
@@ -204,17 +207,17 @@ public class ActionManager : MonoBehaviour
     }
 
 
+    // I should probably stop using the action manager for campaign actions
     public void PromptCardReward(AbstractBattleUnit soldier)
     {
         var soldierClass = soldier.SoldierClass;
         soldier.NumberCardRewardsEligibleFor--;
 
         var cardsThatCanBeSelected = soldierClass.GetCardRewardChoices();
-        QueuedActions.DelayedAction("Choose New Card For Deck", () => {
+        QueuedActions.DelayedActionWithCustomTrigger("Choose New Card For Deck", () => {
             CardRewardScreen.Instance.Show(cardsThatCanBeSelected, soldier);
         });
     }
-
 
     public void AddCardToPersistentDeck(AbstractCard protoCard, AbstractBattleUnit unit, QueueingType queueingType = QueueingType.TO_BACK)
     {
@@ -261,6 +264,29 @@ public class ActionManager : MonoBehaviour
             }
             CheckIsBattleOver();
         }, queueingType);
+    }
+
+    public CardSelectionFuture PromptDiscardOfSingleCard()
+    {
+        var future = new CardSelectionFuture();
+
+        QueuedActions.DelayedActionWithFinishTrigger("Discard Prompt", 
+        // starting action
+        () =>
+        {
+            if (GameState.Instance.Deck.Hand.Count == 0)
+            {
+                return;
+            }
+            SelectCardInHandOverlay.ShowPromptForCardSelection(new DiscardCardsBehavior(), future);
+        },
+        // finish trigger
+        () =>
+        {
+            return future.IsReady;
+        });
+        return future;
+
     }
 
 
@@ -390,6 +416,8 @@ public class ActionManager : MonoBehaviour
         QueuedActions.ImmediateAction(action);
     }
 
+    /*
+     * Trying to do away with the UI State Manager.
     /// <summary>
     /// Prompts the player to discard a card.
     /// </summary>
@@ -400,7 +428,7 @@ public class ActionManager : MonoBehaviour
             ServiceLocator.GetUiStateManager().PromptPlayerForCardSelection(new DiscardCardUiState());
         });
     }
-
+    */
     public void Update()
     {
         var firstAction = this.actionsQueue.FirstOrDefault();
@@ -450,7 +478,7 @@ public class ActionManager : MonoBehaviour
     public void AttackUnitForDamage(AbstractBattleUnit targetUnit, AbstractBattleUnit sourceUnit, int baseDamageDealt)
     {
         Require.NotNull(targetUnit);
-        QueuedActions.DelayedAction("ShakeUnit", () => {
+        QueuedActions.DelayedActionWithCustomTrigger("ShakeUnit", () => {
             if (targetUnit.IsDead)
             {
                 // do nothing if it's already dead
@@ -469,7 +497,7 @@ public class ActionManager : MonoBehaviour
     public void DamageUnitNonAttack(AbstractBattleUnit targetUnit, AbstractBattleUnit nullableSourceUnit, int baseDamageDealt)
     {
         Require.NotNull(targetUnit);
-        QueuedActions.DelayedAction("ShakeUnit", () => {
+        QueuedActions.DelayedActionWithCustomTrigger("ShakeUnit", () => {
             if (targetUnit.IsDead)
             {
                 // do nothing if it's already dead

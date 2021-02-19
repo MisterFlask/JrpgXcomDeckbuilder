@@ -248,7 +248,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 45.35
+  m_fontSize: 44.9
   m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 35.05
+  m_fontSize: 34.6
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1128,10 +1128,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -222, y: 15.599998}
-  m_SizeDelta: {x: -373.9109, y: 2.175537}
+  m_SizeDelta: {x: 286.0891, y: 414.17554}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5338327048099568847
 CanvasRenderer:
@@ -1233,9 +1233,14 @@ MonoBehaviour:
   - name: TitleText
     placeholder: '%TitleText%'
     value: 
+  - name: DescriptionText
+    placeholder: '%DescriptionText%'
+    value: 
   dynamicImageFields: []
   dynamicSectionFields:
   - name: CardPrefab
+    isOn: 1
+  - name: DescriptionTextSection
     isOn: 1
   isRemotelyActivated: 0
   backgroundTint: {r: 1, g: 1, b: 1, a: 1}

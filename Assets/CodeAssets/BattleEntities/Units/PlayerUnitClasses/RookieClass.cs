@@ -6,17 +6,6 @@ using System.Linq;
 
 public class RookieClass : AbstractSoldierClass
 {
-    public override List<AbstractCard> UniqueCardRewardPool()
-    {
-        return new List<AbstractCard>()
-        {
-            new Defend(),
-            new Bayonet(),
-            new IneptShot(),
-            new IneptShot()
-        };
-    }
-
     public override List<AbstractCard> StartingCards()
     {
         return new List<AbstractCard>

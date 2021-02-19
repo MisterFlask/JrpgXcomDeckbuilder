@@ -5,6 +5,7 @@ public class MovingTarget : AbstractCard
 {
     public MovingTarget()
     {
+        SoldierClassCardPools.Add(typeof(VanguardSoldierClass));
         SetCommonCardAttributes("Moving Target", Rarity.BASIC, TargetType.ENEMY, CardType.AttackCard, 1);
     }
     public override string Description()

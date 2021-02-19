@@ -76,11 +76,6 @@ public static class ServiceLocator
         return GameState.Instance;
     }
 
-    public static UiStateManager GetUiStateManager()
-    {
-        return GameObject.FindObjectOfType<UiStateManager>();
-    }
-
     public static Transform GetUnitFolder()
     {
         return GetTemplateHolder().UnitHolder.transform;

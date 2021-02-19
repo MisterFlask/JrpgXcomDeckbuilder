@@ -13,9 +13,12 @@ public abstract class AbstractSoldierClass
     /// <summary>
     /// Starting cards are held by ALL members of a class
     /// </summary>
-    public abstract List<AbstractCard> StartingCards(); 
+    public abstract List<AbstractCard> StartingCards();
 
-    public abstract List<AbstractCard> UniqueCardRewardPool();
+    public virtual List<AbstractCard> UniqueCardRewardPool()
+    {
+        return CardRegistrar.GetCardPool(this.GetType());
+    }
 
     public abstract string Name();
 

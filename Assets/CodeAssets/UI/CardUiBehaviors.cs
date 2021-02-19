@@ -71,7 +71,6 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         SendMessageToFirstValidMouseButtonUpHandler(Input.mousePosition);
         ServiceLocator.GetGameStateTracker().SetCardSelected(null);
-        this.GetComponent<Card>().HideTooltips();
     }
 
     protected void SendMessageToFirstValidMouseButtonUpHandler(Vector2 position)
@@ -79,12 +78,6 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
         var elements = GetAllUIElements(position);
         if (elements == null)
         {
-            return;
-        }
-        var currentUiState = ServiceLocator.GetUiStateManager().CurrentCardSelectingUiState;
-        if (!currentUiState.AllowsNormalActions)
-        {
-            HandleCardReleasedEventForCardSelect(elements, logicalCard);
             return;
         }
 

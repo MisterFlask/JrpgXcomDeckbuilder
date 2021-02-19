@@ -3,12 +3,16 @@ using System.Collections;
 using System.Reflection;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 public class CardRegistrar 
-{ 
+{
 
-    private static Dictionary<Type, List<AbstractCard>> ReflectiveCardCache = new Dictionary<Type, List<AbstractCard>>();
+    private static bool initialized = false;
 
+    private static Dictionary<string, List<AbstractCard>> ReflectiveCardCache = new Dictionary<string, List<AbstractCard>>();
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public static void InitCardsReflectively()
     {
         ReflectiveCardCache.Clear();
@@ -18,32 +22,41 @@ public class CardRegistrar
 
         foreach (var t in types)
         {
-            var registeredAttributes = t.GetCustomAttributes<RegisteredCardAttribute>();
-            foreach(var registeredAttribute in registeredAttributes)
+            if (t.IsSubclassOf(typeof(AbstractCard)))
             {
-                var type = registeredAttribute.SoldierClass;
-                if (!ReflectiveCardCache.ContainsKey(t))
+                var cardType = t; 
+                var card = Activator.CreateInstance(cardType) as AbstractCard;
+
+                foreach (var soldierClass in card.SoldierClassCardPools)
                 {
-                    ReflectiveCardCache[t] = new List<AbstractCard>();
+                    if (!ReflectiveCardCache.ContainsKey(soldierClass.Name))
+                    {
+                        ReflectiveCardCache[soldierClass.Name] = new List<AbstractCard>();
+                    }
+
+                    ReflectiveCardCache[soldierClass.Name].Add(card);
                 }
-                var card = Activator.CreateInstance(t) as AbstractCard;
-                if (card == null)
-                {
-                    throw new Exception("Could not get registered card!: " + t.Name);
-                }
-                ReflectiveCardCache[t].Add(card);
+                Debug.Log($"Registered card {t.Name} with soldier classes {card.SoldierClassCardPools.AsString(item => item.Name)}");
             }
         }
+        foreach (var clazz in ReflectiveCardCache.Keys)
+        {
+            Debug.Log($"Cards for {clazz}: {ReflectiveCardCache[clazz].Count} cards");
+        }
+        initialized = true;
     }
 
-    public List<AbstractCard> GetCardPool(Type soldierClass)
+    public static List<AbstractCard> GetCardPool(Type soldierClass)
     {
-        return ReflectiveCardCache[soldierClass];
+        if (!initialized)
+        {
+            InitCardsReflectively();
+        }
+
+        if (!soldierClass.IsSubclassOf(typeof(AbstractSoldierClass)))
+        {
+            throw new Exception($"Can't get card pool for non-soldier-class {soldierClass.Name}");
+        }
+        return ReflectiveCardCache[soldierClass.Name];
     }
-}
-
-
-public class RegisteredCardAttribute: Attribute
-{
-    public Type SoldierClass;
 }

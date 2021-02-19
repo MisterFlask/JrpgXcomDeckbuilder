@@ -5,6 +5,7 @@ public class Doubletap : AbstractCard
 {
     public Doubletap()
     {
+        SoldierClassCardPools.Add(typeof(VanguardSoldierClass));
         Name = "Doubletap";
         BaseDamage = 4;
         CardType = CardType.AttackCard;

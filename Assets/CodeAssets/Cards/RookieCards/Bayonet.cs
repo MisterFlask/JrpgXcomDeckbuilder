@@ -6,6 +6,7 @@ public class Bayonet : AbstractCard
 {
     public Bayonet()
     {
+        SoldierClassCardPools.Add(typeof(RookieClass));
         Name = "Bayonet";
         BaseDamage = 10;
         TargetType = TargetType.ENEMY;

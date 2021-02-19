@@ -270,6 +270,21 @@ public static class ExtensionMethods
         return GetSpawnPool().Spawn(transform.transform, position, rotation);
     }
 
+    public static string AsString<T>(this IEnumerable<T> list, Func<T, string> stringifyFunction)
+    {
+        if (list == null)
+        {
+            return "null";
+        }
+
+        var ret = "{";
+        foreach (var item in list)
+        {
+            ret += stringifyFunction(item) + ", ";
+        }
+        ret += "}";
+        return ret;
+    }
     public static string AsString<T>(this IEnumerable<T> list)
     {
         if (list == null)

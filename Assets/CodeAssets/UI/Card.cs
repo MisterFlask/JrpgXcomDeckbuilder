@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Assets.CodeAssets.UI.Tooltips;
 
 namespace HyperCard
 {
@@ -14,33 +15,19 @@ namespace HyperCard
         public TextMeshProUGUI title;
         public TextMeshProUGUI energyCost;
         public TextMeshProUGUI cardTags;
-        public GameObject MightDisplayTooltipParent;
-        public GameObject OtherDisplayTooltipParent;
-        public CustomGuiText MightDisplayTooltipText;
-        public CustomGuiText OtherDisplayTooltipText;
         public CardStickerHolder CardStickerHolder;
         public Image CardImage;
+        public TooltipTriggerController TooltipController;
+
 
         public AbstractCard LogicalCard { get; set; }
         public string LogicalCardId { get; set; }
 
         public bool IsSelected { get; set; } = false;
+        public bool TooltipsDisabled { get; set; } = false;
 
         public void Start()
         {
-            HideTooltips();
-        }
-
-        public void ShowOtherTooltips(string s)
-        {
-            OtherDisplayTooltipText.SetText(s);
-            OtherDisplayTooltipParent.SetActive(true);
-        }
-
-        public void HideTooltips()
-        {
-            MightDisplayTooltipParent.SetActive(false);
-            OtherDisplayTooltipParent.SetActive(false);
         }
 
         public void SetCardTitle(string text)
@@ -78,6 +65,8 @@ namespace HyperCard
         public void Refresh()
         {
             this.SetToAbstractCardAttributes(LogicalCard);
+            // we'll make this useful later.
+
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -91,6 +80,11 @@ namespace HyperCard
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!TooltipsDisabled)
+            {
+                TooltipController.ShowTooltipForCard(LogicalCard);
+            }
+
             ExplainerPanel.ShowCardHelp(this.LogicalCard);
             BattleScreenPrefab.CardMousedOver = this.LogicalCard;
         }

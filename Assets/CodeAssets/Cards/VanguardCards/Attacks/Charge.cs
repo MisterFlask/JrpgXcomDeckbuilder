@@ -6,6 +6,7 @@ public class Charge : AbstractCard
 
     public Charge()
     {
+        SoldierClassCardPools.Add(typeof(VanguardSoldierClass));
         BaseDamage = 5;
         Name = "Charge";
         CardType = CardType.AttackCard;

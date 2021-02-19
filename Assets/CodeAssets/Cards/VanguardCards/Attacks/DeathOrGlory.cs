@@ -5,6 +5,7 @@ public class DeathOrGlory : AbstractCard
 {
     public DeathOrGlory()
     {
+        SoldierClassCardPools.Add(typeof(VanguardSoldierClass));
         this.BaseDamage = 20;
         this.Name = "Death or Glory";
         CardType = CardType.AttackCard;

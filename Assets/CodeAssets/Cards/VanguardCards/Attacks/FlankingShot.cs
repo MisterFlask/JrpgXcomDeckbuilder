@@ -5,6 +5,7 @@ public class FlankingShot : AbstractCard
 {
     public FlankingShot()
     {
+        SoldierClassCardPools.Add(typeof(VanguardSoldierClass));
         Name = "Flanking Shot";
         CardType = CardType.AttackCard;
         TargetType = TargetType.ENEMY;

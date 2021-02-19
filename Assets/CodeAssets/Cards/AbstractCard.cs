@@ -10,7 +10,7 @@ public abstract class AbstractCard
     /// <summary>
     /// if this is empty, any class can use it.
     /// </summary>
-    public List<AbstractSoldierClass> SpecificToClasses { get; } = new List<AbstractSoldierClass>();
+    public List<Type> SoldierClassCardPools { get; } = new List<Type>();
         
     public Guid OwnerGuid;
 
@@ -76,6 +76,8 @@ public abstract class AbstractCard
         return ServiceLocator.GetGameStateTracker();
     }
     #endregion
+
+
 
     public AbstractCard(CardType cardType = null)
     {
@@ -226,10 +228,6 @@ public abstract class AbstractCard
 
     public bool Unplayable { get; set; }
 
-    public virtual void OnTookDamageWhileInHand()
-    {
-
-    }
 
     public string OwnerDisplayName()
     {
@@ -256,8 +254,13 @@ public abstract class AbstractCard
 
     public bool IsValidForClass(AbstractBattleUnit unit)
     {
-        return SpecificToClasses.IsEmpty() 
-            || SpecificToClasses.Select(item => item.Name()).Contains(unit.SoldierClass.Name());
+        if (unit == null)
+        {
+            return false;
+        }
+
+        return SoldierClassCardPools.IsEmpty() 
+            || SoldierClassCardPools.Contains(unit.SoldierClass.GetType());
     }
 
 

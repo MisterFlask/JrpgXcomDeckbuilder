@@ -5,6 +5,7 @@ public class Grenade : AbstractCard
 {
     public Grenade()
     {
+        SoldierClassCardPools.Add(typeof(RookieClass));
         this.BaseDamage = 5;
         TargetType = TargetType.ENEMY;
         CardType = CardType.AttackCard;

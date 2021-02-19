@@ -21,12 +21,10 @@ public class CardStickerHolder : MonoBehaviour
     {
         if (ParentCard == null)
         {
-            Debug.LogWarning("Parent card is null");
             return;
         }
         if (ParentCard.LogicalCard == null)
         {
-            Debug.LogWarning("Parent logical card is null");
             return;
         }
         var stickersThatShouldExist = ParentCard.LogicalCard.Stickers;

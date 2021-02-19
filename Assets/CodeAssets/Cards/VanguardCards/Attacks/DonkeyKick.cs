@@ -5,6 +5,7 @@ public class DonkeyKick : AbstractCard
 {
     public DonkeyKick()
     {
+        SoldierClassCardPools.Add(typeof(VanguardSoldierClass));
         Name = "Donkey Kick";
         BaseDamage = 14;
         TargetType = TargetType.ENEMY;
@@ -13,6 +14,11 @@ public class DonkeyKick : AbstractCard
 
     public override int BaseEnergyCost()
     {
+        if (Owner == null)
+        {
+            return 2;
+        }
+
         if (Owner.HasStatusEffect<AdvancedStatusEffect>())
         {
             return 1;

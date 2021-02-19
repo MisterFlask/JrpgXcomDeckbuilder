@@ -6,6 +6,7 @@ public class CoveringFire : AbstractCard
 
     public CoveringFire()
     {
+        SoldierClassCardPools.Add(typeof(RookieClass));
         this.BaseDamage = 2;
         TargetType = TargetType.ENEMY;
         CardType = CardType.AttackCard;

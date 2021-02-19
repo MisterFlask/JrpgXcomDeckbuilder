@@ -33,7 +33,22 @@ namespace Assets.CodeAssets.BattleScreen.BattleUi
         void Update()
         {
             var pile = GetPile(PileType);
-            Text.text = $"Discard\n{pile.Count}";
+
+            var text = "Other Pile";
+            if (PileType == PileType.DISCARD)
+            {
+                text = "Discard";
+            }
+            if (PileType == PileType.DRAW)
+            {
+                text = "Draw";
+            }
+            if (PileType == PileType.EXHAUST)
+            {
+                text = "Exhaust";   
+            }
+
+            Text.text = $"{text}\n{pile.Count}";
             
         }
 

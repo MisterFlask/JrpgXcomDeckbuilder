@@ -5,6 +5,7 @@ public class IneptShot : AbstractCard
 {
     public IneptShot()
     {
+        SoldierClassCardPools.Add(typeof(RookieClass));
         SetCommonCardAttributes("Inept Shot", Rarity.BASIC, TargetType.ENEMY, CardType.AttackCard, baseEnergyCost: 1, protoGameSprite: ProtoGameSprite.FromGameIcon("Sprites/bowman-sad"));
         BaseDamage = 4;
     }

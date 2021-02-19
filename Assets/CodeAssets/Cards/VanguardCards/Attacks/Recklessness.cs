@@ -5,6 +5,7 @@ public class Recklessness : AbstractCard
 {
     public Recklessness()
     {
+        SoldierClassCardPools.Add(typeof(VanguardSoldierClass));
         Name = "Recklessness";
         BaseDamage = 8;
         CardType = CardType.AttackCard;

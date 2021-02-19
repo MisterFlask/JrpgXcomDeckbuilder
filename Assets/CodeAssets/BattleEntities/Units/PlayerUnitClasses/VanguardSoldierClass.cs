@@ -15,18 +15,6 @@ public class VanguardSoldierClass : AbstractSoldierClass
         };
     }
 
-    public override List<AbstractCard> UniqueCardRewardPool()
-    {
-        return new List<AbstractCard>
-        {
-            new Recklessness(),
-            new DeathOrGlory(),
-            new Doubletap(),
-            new Recklessness(),
-            new RunAndGun(),
-            new Strafe()
-        };
-    }
     public override string Name()
     {
         return "Vanguard";

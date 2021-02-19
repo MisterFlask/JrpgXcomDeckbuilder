@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class Rage : AbstractCard
 {
-    Rage()
+    public Rage()
     {
         SetCommonCardAttributes("Rage", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
     }

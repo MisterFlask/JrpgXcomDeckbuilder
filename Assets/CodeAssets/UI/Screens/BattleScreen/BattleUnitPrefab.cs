@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.EventSystems;
 using System;
+using ModelShark;
+using Assets.CodeAssets.UI.Tooltips;
 
 public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -29,11 +31,17 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public AbstractBattleUnit UnderlyingEntity { get; private set; }
     public Image highlights;
 
+
+    public TooltipTriggerController TooltipController;
+    public TooltipTrigger TooltipTrigger;
+
     Color OriginalImageColor { get; set; }
     Color BrighterImageColor { get; set; }
 
+    public string NameOfCharacter;//Set for debugging
     public void Initialize(AbstractBattleUnit entity)
     {
+        NameOfCharacter = entity.CharacterFullName ?? entity.GetDisplayName(DisplayNameType.SHORT_NAME);
         SpriteImage.SetProtoSprite(entity.ProtoSprite);
         entity.CorrespondingPrefab = this;
         UnderlyingEntity = entity;
@@ -194,12 +202,24 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         Debug.Log("Entered battle unit prefab; setting battle unit moused over");
         BattleScreenPrefab.BattleUnitMousedOver = this.UnderlyingEntity;
         ExplainerPanel.ShowBattleUnitHelp(this);
+        if (UnderlyingEntity.IsAlly)
+        {
+            TooltipController.ShowTooltipForBattleUnitClass(this.UnderlyingEntity);
+            TooltipController.GetComponent<TooltipTrigger>().enabled = true;
+        }
+        else
+        {
+            TooltipController.GetComponent<TooltipTrigger>().enabled = false;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("Exited battle unit prefab; unsetting battle unit moused over");
-        BattleScreenPrefab.BattleUnitMousedOver = null;
+        if (BattleScreenPrefab.BattleUnitMousedOver == this.UnderlyingEntity)
+        {
+            BattleScreenPrefab.BattleUnitMousedOver = null;
+        }
         ExplainerPanel.Hide();
     }
 

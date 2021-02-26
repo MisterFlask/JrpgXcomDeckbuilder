@@ -68,8 +68,6 @@ namespace Assets.CodeAssets.UI.Subscreens
                 CardNotAvailableText.gameObject.SetActive(true);
                 CardNotAvailableText.text = $"NOT AVAILABLE FOR {UnitSelected.SoldierClass.Name().ToUpper()}"; 
                 SelectCardButton.interactable = false;
-
-
             }
         }
     }

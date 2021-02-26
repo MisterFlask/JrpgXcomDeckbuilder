@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 
 public class RookieClass : AbstractSoldierClass
 {
@@ -36,21 +37,17 @@ public class RookieClass : AbstractSoldierClass
         Log.Info("Added common cards to deck on promotion: 2 copies of " + commonCardToAdd.Name);
     }
 
-    List<AbstractSoldierClass> PromotionClasses = new List<AbstractSoldierClass>
-    {
-        new VanguardSoldierClass()
-    };
-
     private AbstractSoldierClass GetRandomNewClass()
     {
-        return PromotionClasses.PickRandom();
+        return GetClassesEligibleForPromotion().PickRandom();
     }
 
     public static List<AbstractSoldierClass> GetClassesEligibleForPromotion()
     {
         return new List<AbstractSoldierClass>
         {
-            new VanguardSoldierClass()
+            //new VanguardSoldierClass(),
+            new ArchonSoldierClass()
         };// todo
     }
 

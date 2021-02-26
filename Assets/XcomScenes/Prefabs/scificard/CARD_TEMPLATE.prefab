@@ -1244,7 +1244,7 @@ MonoBehaviour:
     isOn: 1
   isRemotelyActivated: 0
   backgroundTint: {r: 1, g: 1, b: 1, a: 1}
-  tipPosition: 0
+  tipPosition: 10
   minTextWidth: 100
   maxTextWidth: 200
   staysOpen: 0

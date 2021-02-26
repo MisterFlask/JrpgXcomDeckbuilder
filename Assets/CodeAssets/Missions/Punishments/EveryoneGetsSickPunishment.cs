@@ -29,7 +29,7 @@ public class SickenedSoldierPerk: SoldierPerk
 
     public override void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)
     {
-        soldierAffected.AddStatusEffect(new PowerStatusEffect(), -1 * Stacks);
+        soldierAffected.ApplyStatusEffect(new PowerStatusEffect(), -1 * Stacks);
     }
 
     public override string Name()

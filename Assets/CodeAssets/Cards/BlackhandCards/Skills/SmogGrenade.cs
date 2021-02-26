@@ -4,11 +4,11 @@ using System.Collections;
 /// <summary>
 /// Applies Weak to all enemies.
 /// </summary>
-public class  Smog : AbstractCard
+public class  SmogGrenade : AbstractCard
 {
-    public Smog()
+    public SmogGrenade()
     {
-        SetCommonCardAttributes("Smog", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);        
+        SetCommonCardAttributes("Smog Grenade", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);        
     }
 
     public override string Description()

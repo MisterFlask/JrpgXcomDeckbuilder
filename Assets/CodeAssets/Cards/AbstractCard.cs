@@ -6,6 +6,7 @@ using System.Linq;
 
 public abstract class AbstractCard
 {
+    public AbstractCard ReferencesAnotherCard { get; set; }
 
     /// <summary>
     /// if this is empty, any class can use it.
@@ -141,13 +142,18 @@ public abstract class AbstractCard
         }
 
         BattleRules.ProcessPlayingCardCost(this);
-        OnPlay(target);
-        
+        EvokeCardEffect(target);
+        BattleRules.RunOnPlayCardEffects(this, target);
         if (state().Deck.Hand.Contains(this))
         {
             state().Deck.MoveCardToPile(this, CardPosition.DISCARD);
             ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(this, assumedToExistInHand: true);
         }
+    }
+
+    public void EvokeCardEffect(AbstractBattleUnit target)
+    {
+        OnPlay(target);
     }
 
     public Card CreateHyperCard()

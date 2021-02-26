@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -179,6 +180,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1994978697643436944}
   - component: {fileID: 5384191643861412958}
+  - component: {fileID: 5554115877477388994}
+  - component: {fileID: 3845261962902900154}
+  - component: {fileID: 4299224840068963331}
   m_Layer: 0
   m_Name: BattleUnitAttribute
   m_TagString: Untagged
@@ -221,6 +225,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4255311435060025785}
   Text: {fileID: 3322649426825447344}
+--- !u!114 &5554115877477388994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226045241130033932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99a9e0f405bff84884c4884261df263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipStyle: {fileID: 3629725164422420754, guid: 19e4b2b15178ac64f9c60e0a04d659ac,
+    type: 3}
+  parameterizedTextFields:
+  - name: TitleText
+    placeholder: '%TitleText%'
+    value: 
+  - name: DescriptionText
+    placeholder: '%DescriptionText%'
+    value: 
+  dynamicImageFields: []
+  dynamicSectionFields:
+  - name: CardPrefab
+    isOn: 1
+  - name: DescriptionTextSection
+    isOn: 1
+  isRemotelyActivated: 0
+  backgroundTint: {r: 1, g: 1, b: 1, a: 1}
+  tipPosition: 0
+  minTextWidth: 100
+  maxTextWidth: 200
+  staysOpen: 0
+  neverRotate: 0
+  isBlocking: 0
+--- !u!114 &3845261962902900154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226045241130033932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b86cdecfd804e44284b879521c4d844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4299224840068963331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226045241130033932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0466047f3af8334f9da026da1d11198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StatusEffectPrefab: {fileID: 5384191643861412958}
 --- !u!1 &9045846568960077469
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +345,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

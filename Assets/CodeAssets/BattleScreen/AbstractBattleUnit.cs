@@ -21,6 +21,7 @@ public abstract class AbstractBattleUnit
     public int MaxHp { get; set; }
     public int NumberCardRewardsEligibleFor { get; set; } = 0;
 
+    public string Description { get; set; }
 
     public bool IsDead => CurrentHp <= 0;
     public int CurrentLevel { get; set; } = 1;
@@ -90,7 +91,7 @@ public abstract class AbstractBattleUnit
         AddCardsToPersistentDeck(StartingCardsInDeck);
     }
 
-    public void AddStatusEffect<T>(T effect, int stacks = 1) where T:AbstractStatusEffect
+    public void ApplyStatusEffect<T>(T effect, int stacks = 1) where T:AbstractStatusEffect
     {
         if (HasStatusEffect<T>() && !GetStatusEffect<T>().Stackable)
         {
@@ -118,6 +119,11 @@ public abstract class AbstractBattleUnit
             effect.Stacks = stacks;
             StatusEffects.Add(effect);
             BattleRules.ProcessHooksWhenStatusEffectAppliedToUnit(this, effect, stacks);
+        }
+
+        if (GetStatusEffect<T>().Stacks == 0)
+        {
+            RemoveStatusEffect<T>();
         }
     }
 
@@ -280,7 +286,10 @@ public abstract class AbstractBattleUnit
 
     }
 
-
+    public void TickDownStatusEffect<T>() where T:AbstractStatusEffect
+    {
+        RemoveStatusEffect<T>(1);
+    }
 
     /// <summary>
     /// If stacksToRemove is null, removes all stacks.
@@ -331,7 +340,7 @@ public abstract class AbstractBattleUnit
             throw new Exception("Initialized difficulty twice!");
         }
         difficultyInitialized = true;
-        AddStatusEffect(new PowerStatusEffect(), difficulty);
+        ApplyStatusEffect(new PowerStatusEffect(), difficulty);
     }
     #endregion
 
@@ -374,7 +383,6 @@ public abstract class AbstractBattleUnit
         }
         return CharacterFirstName;
     }
-
 
 }
 

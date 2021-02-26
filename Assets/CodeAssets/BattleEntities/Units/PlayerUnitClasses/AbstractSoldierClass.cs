@@ -35,6 +35,11 @@ public abstract class AbstractSoldierClass
         return takenCards;
     }
 
+    public virtual string Description()
+    {
+        return "[REDACTED]";
+    }
+
     public List<AbstractCard> GetCardRewardsOfSpecificRarity(Rarity rarity, int numRewards)
     {
         var takenCards = UniqueCardRewardPool()

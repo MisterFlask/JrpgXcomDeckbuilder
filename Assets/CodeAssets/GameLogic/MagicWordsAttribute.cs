@@ -10,16 +10,16 @@ namespace Assets.CodeAssets.GameLogic
     /// <summary>
     /// Refers to anything we want to manufacture tooltips on observing in a card description or something.
     /// </summary>
-    public class MagicWordsAttribute : Attribute
+    public class MagicWord
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public virtual string MagicWordTitle { get; }
+        public virtual string MagicWordDescription { get; }
 
-        private static List<MagicWordsAttribute> MagicWordsRegistered = new List<MagicWordsAttribute>();
+        private static List<MagicWord> MagicWordsRegistered = new List<MagicWord>();
 
-        public static void RegisterMagicWord(MagicWordsAttribute word)
+        private static void RegisterMagicWord(MagicWord word)
         {
-            if (MagicWordsRegistered.Any(item => item.Title == word.Title))
+            if (MagicWordsRegistered.Any(item => item.MagicWordTitle == word.MagicWordTitle))
             {
                 return;
             }
@@ -34,40 +34,42 @@ namespace Assets.CodeAssets.GameLogic
 
             foreach (var t in types)
             {
-                var registeredAttributes = t.GetCustomAttributes<MagicWordsAttribute>();
-                foreach (var registeredAttribute in registeredAttributes)
+                if (t.IsSubclassOf(typeof(MagicWord)) && !t.IsAbstract)
                 {
-                    RegisterMagicWord(registeredAttribute);
+                    RegisterMagicWord(Activator.CreateInstance(t) as MagicWord);
                 }
             }
         }
 
 
-        public string FormatMagicWords(List<MagicWordsAttribute> magicWords)
+        public static string FormatMagicWords(List<MagicWord> magicWords)
         {
             string value = "";
             foreach(var word in magicWords)
             {
-                value += $"<color=green>{word.Title}</color>: {word.Description}\n";
+                value += $"<color=green>{word.MagicWordTitle}</color>: {word.MagicWordDescription}\n";
             }
             return value;
         }
 
-        public static List<MagicWordsAttribute> GetApplicableMagicWordsForString(string stringToAnalyze)
+        public static List<MagicWord> GetApplicableMagicWordsForString(string stringToAnalyze)
         {
             var relevantMagicWords = MagicWordsRegistered
-                .Where(item => stringToAnalyze.Contains(item.Title));
+                .Where(item => stringToAnalyze.Contains(item.MagicWordTitle));
             return relevantMagicWords.ToList();
         }
-
-        public static List<MagicWordsAttribute> GetMagicWordsApplicableToCard(AbstractCard card)
+        public static List<MagicWord> GetMagicWordsApplicableToCard(AbstractCard card)
         {
             return GetApplicableMagicWordsForString(card.Description());
         }
 
-        public static List<MagicWordsAttribute> GetMagicWordsApplicableToStatusEffect(AbstractStatusEffect effect)
+        public static List<MagicWord> GetMagicWordsApplicableToStatusEffect(AbstractStatusEffect effect)
         {
             return GetApplicableMagicWordsForString(effect.Description);
+        }
+        public static string GetFormattedMagicWordsForCard(AbstractCard card)
+        {
+            return FormatMagicWords(GetMagicWordsApplicableToCard(card));
         }
 
     }

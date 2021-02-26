@@ -15,7 +15,7 @@ public class Greywing : AbstractEnemyUnit
         this.CharacterFullName = "Greywing";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/BlackBirdi", color: Color.white);
         this.MaxHp = 30;
-        this.AddStatusEffect(new GreywingWoundOnDeath(), stacks: 4);
+        this.ApplyStatusEffect(new GreywingWoundOnDeath(), stacks: 4);
     }
 
     public override List<AbstractIntent> GetNextIntents()
@@ -47,7 +47,7 @@ public class GreywingWoundOnDeath: AbstractStatusEffect
     {
         if (unitThatKilledMe != null)
         {
-            unitThatKilledMe.AddStatusEffect(new BurningStatusEffect(), stacks: Stacks);
+            unitThatKilledMe.ApplyStatusEffect(new BurningStatusEffect(), stacks: Stacks);
         }
     }
 }

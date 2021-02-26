@@ -11,7 +11,7 @@ public class DecayingEnemy : AbstractEnemyUnit
         this.CharacterFullName = "DecayingEnemy";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.white);
         this.MaxHp = 300;
-        this.AddStatusEffect(new MalfunctioningStatusEffect(), stacks: 1);
+        this.ApplyStatusEffect(new MalfunctioningStatusEffect(), stacks: 1);
     }
 
     public override List<AbstractIntent> GetNextIntents()

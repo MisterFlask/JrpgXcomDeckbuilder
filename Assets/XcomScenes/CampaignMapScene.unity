@@ -4431,6 +4431,9 @@ GameObject:
   - component: {fileID: 749538981}
   - component: {fileID: 749538983}
   - component: {fileID: 749538982}
+  - component: {fileID: 749538985}
+  - component: {fileID: 749538984}
+  - component: {fileID: 749538986}
   m_Layer: 5
   m_Name: CharacterDetails
   m_TagString: Untagged
@@ -4576,6 +4579,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749538980}
   m_CullTransparentMesh: 0
+--- !u!114 &749538984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749538980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99a9e0f405bff84884c4884261df263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipStyle: {fileID: 3629725164422420754, guid: 19e4b2b15178ac64f9c60e0a04d659ac,
+    type: 3}
+  parameterizedTextFields:
+  - name: TitleText
+    placeholder: '%TitleText%'
+    value: 
+  - name: DescriptionText
+    placeholder: '%DescriptionText%'
+    value: 
+  dynamicImageFields: []
+  dynamicSectionFields:
+  - name: CardPrefab
+    isOn: 1
+  - name: DescriptionTextSection
+    isOn: 1
+  isRemotelyActivated: 0
+  backgroundTint: {r: 1, g: 1, b: 1, a: 1}
+  tipPosition: 0
+  minTextWidth: 100
+  maxTextWidth: 200
+  staysOpen: 0
+  neverRotate: 0
+  isBlocking: 0
+--- !u!114 &749538985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749538980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b86cdecfd804e44284b879521c4d844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &749538986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749538980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ef1da564360a74d85f10785599499d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &782822697
 GameObject:
   m_ObjectHideFlags: 0
@@ -5432,7 +5494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 37.74325, y: 0}
+  m_AnchoredPosition: {x: 34.59384, y: 0}
   m_SizeDelta: {x: -333.4, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1086840023
@@ -7084,6 +7146,9 @@ GameObject:
   - component: {fileID: 1488296117}
   - component: {fileID: 1488296119}
   - component: {fileID: 1488296118}
+  - component: {fileID: 1488296122}
+  - component: {fileID: 1488296121}
+  - component: {fileID: 1488296120}
   m_Layer: 5
   m_Name: CharacterImage
   m_TagString: Untagged
@@ -7147,6 +7212,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488296116}
   m_CullTransparentMesh: 0
+--- !u!114 &1488296120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488296116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ef1da564360a74d85f10785599499d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1488296121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488296116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b86cdecfd804e44284b879521c4d844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1488296122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488296116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99a9e0f405bff84884c4884261df263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipStyle: {fileID: 3629725164422420754, guid: 19e4b2b15178ac64f9c60e0a04d659ac,
+    type: 3}
+  parameterizedTextFields:
+  - name: TitleText
+    placeholder: '%TitleText%'
+    value: 
+  - name: DescriptionText
+    placeholder: '%DescriptionText%'
+    value: 
+  dynamicImageFields: []
+  dynamicSectionFields:
+  - name: CardPrefab
+    isOn: 1
+  - name: DescriptionTextSection
+    isOn: 1
+  isRemotelyActivated: 0
+  backgroundTint: {r: 1, g: 1, b: 1, a: 1}
+  tipPosition: 0
+  minTextWidth: 100
+  maxTextWidth: 200
+  staysOpen: 0
+  neverRotate: 0
+  isBlocking: 0
 --- !u!1 &1490277814
 GameObject:
   m_ObjectHideFlags: 0
@@ -9526,6 +9650,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6762223245063805477, guid: abd0ec08a785fd347bb40743e6ba7606,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767654631914246554, guid: abd0ec08a785fd347bb40743e6ba7606,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767654631914246554, guid: abd0ec08a785fd347bb40743e6ba7606,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767654631914246554, guid: abd0ec08a785fd347bb40743e6ba7606,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767654631914246554, guid: abd0ec08a785fd347bb40743e6ba7606,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767654631914246554, guid: abd0ec08a785fd347bb40743e6ba7606,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767654631914246554, guid: abd0ec08a785fd347bb40743e6ba7606,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0

@@ -36,10 +36,19 @@ public class SelectableRosterCharacterPrefab : MonoBehaviour, IPointerClickHandl
         }
 
         CharacterImage.SetProtoSprite(Character.ProtoSprite);
-        Title.text = Character.CharacterFullName;
+        if (Character.IsDead)
+        {
+            Toggle.isOn = false;
+            Toggle.interactable = false;
+            Title.text = Character.CharacterFullName + "<color=red>"  + " [Deceased]" + "</color>";
+        }
+        else
+        {
+            Title.text = Character.CharacterFullName + $" [{Character.SoldierClass.Name()}]";
+        }
         if (CurrentlySelected == Character)
         {
-            Title.color = Color.red;
+            Title.color = Color.yellow;
         }
         else
         {

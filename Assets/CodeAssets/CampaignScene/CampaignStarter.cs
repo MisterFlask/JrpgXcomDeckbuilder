@@ -10,7 +10,7 @@ public class CampaignStarter : MonoBehaviour
 
     public void InitializeCampaign()
     {
-        MagicWordsAttribute.RegisterMagicWordsReflectively();
+        MagicWord.RegisterMagicWordsReflectively();
         CardRegistrar.InitCardsReflectively();
         InitializeSelectableMissions();
         InitializeRoster();

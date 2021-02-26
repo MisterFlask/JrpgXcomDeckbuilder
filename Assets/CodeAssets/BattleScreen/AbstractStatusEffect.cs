@@ -2,8 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Assets.CodeAssets.GameLogic;
 
-public abstract class AbstractStatusEffect
+public abstract class AbstractStatusEffect: MagicWord
 {
     #region convenience functions
     public ActionManager action()
@@ -25,6 +26,14 @@ public abstract class AbstractStatusEffect
         return ServiceLocator.GetGameStateTracker();
     }
     #endregion
+    public StatusLocalityType StatusLocalityType = StatusLocalityType.UNIT;
+
+    //This is used for keeping track of stuff like "how many cards have been played"
+    public int? InternalCounter = null;
+    public StatusPolarityType StatusPolarityType { get; set; } = StatusPolarityType.NEITHER; 
+    public AbstractCard ReferencedCard { get; set; }
+    public override string MagicWordTitle => this.Name;
+    public override string MagicWordDescription => this.Description;
 
     public bool AllowedToGoNegative = false;
     public string Name { get; set; }
@@ -32,6 +41,21 @@ public abstract class AbstractStatusEffect
     public AbstractBattleUnit OwnerUnit { get; set; }
     public bool Stackable { get; set; } = true;
     public int Stacks { get; set; } = 1;
+
+    public bool IsExample { get; set; }
+
+    public string DisplayedStacks()
+    {
+        if (IsExample)
+        {
+            return "[stacks]";
+        }
+        else
+        {
+            return $"{Stacks}";
+        }
+    }
+
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
 
     public AbstractStatusEffect()
@@ -119,12 +143,14 @@ public abstract class AbstractStatusEffect
 
     }
 
-    public virtual void OnAnyStatusEffectApplicationToOwner(StatusEffectChange increaseOrDecrease, AbstractStatusEffect statusEffectApplied)
+    // Returns the number of stacks that are to be applied, after processing.
+    public virtual int OnAnyStatusEffectApplicationToOwner(AbstractStatusEffect statusEffectApplied, int stacksAppliedOrDecremented)
     {
-
+        return stacksAppliedOrDecremented;
     }
 
-    public virtual void OnAnyCardPlayed(AbstractCard cardPlayed)
+
+    public virtual void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
     {
 
     }
@@ -146,4 +172,17 @@ public abstract class AbstractStatusEffect
 public enum StatusEffectChange
 {
     INCREASE,DECREASE
+}
+
+public enum StatusPolarityType
+{
+    BUFF,
+    DEBUFF,
+    NEITHER
+}
+
+public enum StatusLocalityType
+{
+    UNIT,
+    GLOBAL
 }

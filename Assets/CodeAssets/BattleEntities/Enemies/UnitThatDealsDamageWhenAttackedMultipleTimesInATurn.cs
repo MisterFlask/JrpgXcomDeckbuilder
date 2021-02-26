@@ -10,7 +10,7 @@ public class UnitThatDealsDamageWhenAttackedMultipleTimesInATurn : AbstractEnemy
         this.CharacterFullName = "UnitThatDealsDamageWhenAttackedMultipleTimesInATurn";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.white);
         this.MaxHp = 44;
-        this.AddStatusEffect(new DealsDamageOnAttackMultipleTimesInATurn(), stacks: 4);
+        this.ApplyStatusEffect(new DealsDamageOnAttackMultipleTimesInATurn(), stacks: 4);
     }
 
     public override List<AbstractIntent> GetNextIntents()
@@ -36,7 +36,7 @@ public class DealsDamageOnAttackMultipleTimesInATurn : AbstractStatusEffect
 
     public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
     {
-        this.OwnerUnit.AddStatusEffect<DealtDamageThisTurnMarker>(new DealtDamageThisTurnMarker(), 1);
+        this.OwnerUnit.ApplyStatusEffect<DealtDamageThisTurnMarker>(new DealtDamageThisTurnMarker(), 1);
 
         if (OwnerUnit.GetStatusEffect<DealtDamageThisTurnMarker>().Stacks == 3)
         {

@@ -4,6 +4,7 @@ using PathologicalGames;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public static class ExtensionMethods
@@ -23,6 +24,7 @@ public static class ExtensionMethods
         var ret = new Color(color.r, color.g, color.b, alpha);
         return ret;
     }
+
 
     #region collections
     public static bool In<T>(this T item, IEnumerable<T> coll)

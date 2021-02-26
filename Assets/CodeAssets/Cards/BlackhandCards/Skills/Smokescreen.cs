@@ -12,7 +12,7 @@ public class Smokescreen : AbstractCard
 
     public override string Description()
     {
-        return $"Apply {DisplayedDefense()} to all allied units.  All Ally units gain 2 Stress.";
+        return $"Apply 1 Evade to all allies.  All allies gain 3 Stress.";
     }
 
     protected override void OnPlay(AbstractBattleUnit target)
@@ -20,7 +20,7 @@ public class Smokescreen : AbstractCard
         foreach (var character in state().AllyUnitsInBattle)
         {
             action().ApplyDefense(character, Owner, BaseDefenseValue);
-            action().ApplyStatusEffect(target, new StressStatusEffect(), 2);
+            action().ApplyStatusEffect(target, new StressStatusEffect(), 3);
         }
     }
 }

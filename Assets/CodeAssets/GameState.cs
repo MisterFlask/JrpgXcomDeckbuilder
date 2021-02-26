@@ -43,6 +43,9 @@ public class GameState
         new PerkAugmentation(new AgilePerk())
     };
 
+
+    public List<AbstractStatusEffect> GlobalBattleStatusEffects = new List<AbstractStatusEffect>();
+
     public Card GetCardSelected()
     {
         return cardSelected;

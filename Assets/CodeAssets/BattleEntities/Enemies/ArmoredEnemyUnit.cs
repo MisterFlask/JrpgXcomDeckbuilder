@@ -9,7 +9,7 @@ public class ArmoredEnemyUnit : AbstractEnemyUnit
             this.CharacterFullName = "ArmoredEnemy";
             this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.blue);
             this.MaxHp = 30;
-            this.AddStatusEffect(new ArmoredStatusEffect(), stacks: 4);
+            this.ApplyStatusEffect(new ArmoredStatusEffect(), stacks: 4);
         }
 
     public override List<AbstractIntent> GetNextIntents()

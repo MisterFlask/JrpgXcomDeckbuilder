@@ -4,6 +4,11 @@ using System;
 
 public class PowerThroughIt : AbstractCard
 {
+    public PowerThroughIt()
+    {
+        
+    }
+
     public override string Description()
     {
         return "Whenever targeted ally loses HP, they recover up to 5 HP and 5 Stress.";

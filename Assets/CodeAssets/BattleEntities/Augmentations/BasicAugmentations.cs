@@ -39,7 +39,7 @@ namespace Assets.CodeAssets.BattleEntities.Augmentations
 
         public override void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)
         {
-            soldierAffected.AddStatusEffect(new DealsExtraDamageToBurningStatusEffect(), Stacks);
+            soldierAffected.ApplyStatusEffect(new DealsExtraDamageToBurningStatusEffect(), Stacks);
         }
     }
 

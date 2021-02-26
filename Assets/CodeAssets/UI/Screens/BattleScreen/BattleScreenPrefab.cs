@@ -116,7 +116,12 @@ public class BattleScreenPrefab : MonoBehaviour
         state.EnemyUnitsInBattle.ForEach(item => item.InitForBattle());
         state.AllyUnitsInBattle.ForEach(item => item.InitForBattle());
 
+
         BattleStarter.StartBattle(this);
+    }
+
+    public void Update()
+    {
     }
 }
 

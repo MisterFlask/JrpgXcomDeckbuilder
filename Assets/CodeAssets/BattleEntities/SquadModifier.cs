@@ -19,7 +19,7 @@ namespace Assets.CodeAssets.BattleEntities
         {
             foreach(var character in enemyCharacters)
             {
-                character.AddStatusEffect<PowerStatusEffect>(new PowerStatusEffect(), Stacks );
+                character.ApplyStatusEffect<PowerStatusEffect>(new PowerStatusEffect(), Stacks );
             }
         }
     }

@@ -85,7 +85,7 @@ public class GrantsStatusEffectPerk : SoldierPerk
 
     public override void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)
     {
-        soldierAffected.AddStatusEffect(Effect, Stacks);
+        soldierAffected.ApplyStatusEffect(Effect, Stacks);
     }
 
     public override string Name()

@@ -21,7 +21,14 @@ public class CharacterDetailsInRoster : MonoBehaviour
         if (BattleUnit != null)
         {
             CharacterImage.SetProtoSprite(BattleUnit.ProtoSprite);
-            Title.text = BattleUnit.CharacterFullName;
+            if (!BattleUnit.IsDead)
+            {
+                Title.text = BattleUnit.CharacterFullName;
+            }
+            else
+            {
+                Title.text = BattleUnit.CharacterFullName + "[DEAD]";
+            }
         }
     }
 

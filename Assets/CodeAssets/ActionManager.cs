@@ -97,8 +97,17 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            unit.AddStatusEffect(attribute, stacks);
+            unit.ApplyStatusEffect(attribute, stacks);
         });
+    }
+
+    public void TickDownStatusEffect<T>(AbstractBattleUnit unit) where T : AbstractStatusEffect
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            unit.TickDownStatusEffect<T>();
+        });
+
     }
 
 
@@ -236,6 +245,15 @@ public class ActionManager : MonoBehaviour
             // Animate: Card created in center of screen, wait for a second, and shrinks while going down to the deck.
             
         }, queueingType);
+    }
+
+    public void EvokeCardEffect(AbstractCard card, AbstractBattleUnit target, QueueingType queuingType = QueueingType.TO_BACK)
+    {
+            QueuedActions.ImmediateAction(() =>
+            {
+                card.EvokeCardEffect(target);
+            }
+        );
     }
 
     public void AttemptPlayCardFromHand(AbstractCard logicalCard, AbstractBattleUnit target, QueueingType queueingType = QueueingType.TO_BACK

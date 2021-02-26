@@ -9,7 +9,7 @@ public class UnitThatAppliesDazedWhenStruck : AbstractEnemyUnit
         this.CharacterFullName = "Drone";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/Charger1", color: Color.white);
         this.MaxHp = 30;
-        this.AddStatusEffect(new ApplyDazedOnHit(), stacks: 4);
+        this.ApplyStatusEffect(new ApplyDazedOnHit(), stacks: 4);
     }
 
     public override List<AbstractIntent> GetNextIntents()

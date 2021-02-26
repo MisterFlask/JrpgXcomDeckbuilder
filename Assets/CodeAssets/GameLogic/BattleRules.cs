@@ -29,7 +29,7 @@ public static class BattleRules
             }
             else
             {
-                status.OnAnyStatusEffectApplicationToOwner(incOrDec, effectApplied);
+                stacksAppliedOrDecremented = status.OnAnyStatusEffectApplicationToOwner(effectApplied, stacksAppliedOrDecremented);
             }
         }
 
@@ -124,6 +124,20 @@ public static class BattleRules
 
     }
 
+    internal static void RunOnPlayCardEffects(AbstractCard abstractCard, AbstractBattleUnit target)
+    {
+        var owner = abstractCard.Owner;
+        if (owner == null)
+        {
+            return;
+        }
+
+        foreach(var effect in owner.StatusEffects)
+        {
+            effect.OnAnyCardPlayed(abstractCard, target);
+        }
+    }
+
     public static void CheckAndRegisterDeath(AbstractBattleUnit unit, AbstractBattleUnit nullableUnitThatKilledMe)
     {
 
@@ -169,6 +183,7 @@ public static class BattleRules
 
         // first, go through the attacker's attributes
         float currentTotalDefense = baseDefense;
+
         foreach (var attribute in source.StatusEffects)
         {
             currentTotalDefense *= attribute.DefenseDealtMultiplier();
@@ -176,11 +191,14 @@ public static class BattleRules
         }
 
         // then, go through defender's attributes
-
-        foreach (var attribute in source.StatusEffects)
+        if (target != null) // this check is just there for card block calculations
         {
-            currentTotalDefense *= attribute.DefenseReceivedMultiplier();
-            currentTotalDefense += attribute.DefenseReceivedAddition();
+            foreach (var attribute in source.StatusEffects)
+            {
+                currentTotalDefense *= attribute.DefenseReceivedMultiplier();
+                currentTotalDefense += attribute.DefenseReceivedAddition();
+            }
+
         }
 
         return (int)currentTotalDefense;
@@ -190,19 +208,7 @@ public static class BattleRules
     {
         // first, go through the attacker's attributes
         float currentTotalDamage = baseDamage;
-        foreach (var attribute in source.StatusEffects)
-        {
-            currentTotalDamage *= attribute.DamageDealtMultiplier();
-            currentTotalDamage += attribute.DamageDealtAddition();
-        }
-
-        // then, go through defender's attributes
-
-        foreach (var attribute in target.StatusEffects)
-        {
-            currentTotalDamage *= attribute.DamageReceivedMultiplier();
-            currentTotalDamage += attribute.DamageReceivedAddition();
-        }
+        currentTotalDamage = CalculateTotalPreBlockDamage(source, target, currentTotalDamage);
 
         if (currentTotalDamage < 0)
         {
@@ -210,7 +216,28 @@ public static class BattleRules
         }
 
 
-        return (int) currentTotalDamage;
+        return (int)currentTotalDamage;
+    }
+
+    private static float CalculateTotalPreBlockDamage(AbstractBattleUnit source, AbstractBattleUnit target, float currentTotalDamage)
+    {
+        foreach (var attribute in source.StatusEffects)
+        {
+            currentTotalDamage *= attribute.DamageDealtMultiplier();
+            currentTotalDamage += attribute.DamageDealtAddition();
+        }
+
+        // then, go through defender's attributes
+        if (target != null)
+        {
+            foreach (var attribute in target.StatusEffects)
+            {
+                currentTotalDamage *= attribute.DamageReceivedMultiplier();
+                currentTotalDamage += attribute.DamageReceivedAddition();
+            }
+        }
+
+        return currentTotalDamage;
     }
 
     internal static bool CanFallBack(AbstractBattleUnit underlyingEntity)
@@ -245,15 +272,13 @@ public static class BattleRules
             return card.BaseDamage;
         }
 
+        var unitTargeted = BattleScreenPrefab.BattleUnitMousedOver;
+
         float baseDamage = card.BaseDamage;
 
-        foreach(var attribute in card.Owner.StatusEffects)
-        {
-            baseDamage *= attribute.DamageDealtMultiplier();
-            baseDamage += attribute.DamageDealtAddition();
-        }
+        var totalPreBlockDamage = CalculateTotalPreBlockDamage(card.Owner, unitTargeted, baseDamage);
 
-        return (int)baseDamage;
+        return (int)totalPreBlockDamage;
     }
     public static int GetDisplayedDefenseOnCard(AbstractCard card)
     {
@@ -263,14 +288,12 @@ public static class BattleRules
             return card.BaseDefenseValue;
         }
 
-        float baseDamage = card.BaseDefenseValue;
-        foreach (var attribute in card.Owner.StatusEffects)
-        {
-            baseDamage *= attribute.DefenseDealtMultiplier();
-            baseDamage += attribute.DefenseDealtAddition();
-        }
+        var unitTargeted = BattleScreenPrefab.BattleUnitMousedOver;
 
-        return (int)baseDamage;
+        float baseDefense = card.BaseDefenseValue;
+        int totalDefense = GetDefenseApplied(card.Owner, unitTargeted, baseDefense);
+
+        return (int)totalDefense;
     }
 
     public static void CheckIsBattleOverAndIfSoSwitchScenes()

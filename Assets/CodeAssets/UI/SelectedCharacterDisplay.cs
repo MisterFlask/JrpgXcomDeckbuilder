@@ -23,7 +23,15 @@ public class SelectedCharacterDisplay : MonoBehaviour
         {
             return;
         }
+        var deceased = SelectedCharacter.IsDead;
         image.SetProtoSprite(SelectedCharacter.ProtoSprite);
-        Text.text = $"{SelectedCharacter.CharacterFullName} [{SelectedCharacter.UnitClassName}]";
+        if (deceased)
+        {
+            Text.text = $"{SelectedCharacter.CharacterFullName} [DEAD]";
+        }
+        else
+        {
+            Text.text = $"{SelectedCharacter.CharacterFullName} [{SelectedCharacter.UnitClassName}]";
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
 
         public override string Description()
         {
-            return $"ALL allies gain 1 Dragoon's Mark";
+            return $"OTHER allies gain +1 strength per turn.";
         }
 
         protected override void OnPlay(AbstractBattleUnit target)

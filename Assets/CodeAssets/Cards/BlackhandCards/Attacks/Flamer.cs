@@ -5,6 +5,7 @@ public class Flamer : AbstractCard
 {
     public Flamer()
     {
+        this.SoldierClassCardPools.Add(typeof(Rarity));
         SetCommonCardAttributes("Flamer", Rarity.BASIC, TargetType.ENEMY, CardType.AttackCard, 0);
     }
 

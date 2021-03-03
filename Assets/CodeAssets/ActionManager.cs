@@ -160,6 +160,26 @@ public class ActionManager : MonoBehaviour
         });
     }
 
+    /// <summary>
+    ///  Rules for taunting:
+    ///  It is ONLY allowed on attacks that are NOT targeting the unit in question.
+    /// </summary>
+    public void TauntEnemy(AbstractBattleUnit target, AbstractBattleUnit source)
+    {
+        QueuedActions.ImmediateAction(() =>
+        {
+            // there has to be a single unit attack intent that is NOT targeting this character.
+            var eligibleAttackIntent = target.CurrentIntents.FirstOrDefault(item => item is SingleUnitAttackIntent 
+            && !item.UnitsTargeted.Contains(source));
+            if (eligibleAttackIntent != null)
+            {
+                // remove one unit from list, add source
+                eligibleAttackIntent.UnitsTargeted.RemoveAt(0);
+                eligibleAttackIntent.UnitsTargeted.Add(source);
+            }
+        });
+    }
+
 
     internal void PurgeCardFromDeck(AbstractCard card, QueueingType queueingType = QueueingType.TO_BACK)
     {

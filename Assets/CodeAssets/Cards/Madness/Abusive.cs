@@ -6,8 +6,7 @@ public class Abusive : AbstractCard
 {
     public override string Description()
     {
-        return "At end of turn, deals 5 damage to your highest-health ally if in your hand.";
-
+        return "At end of turn, deals 3 damage to your highest-health ally.  Leader: Deal 10 instead.";
     }
 
     protected override void OnPlay(AbstractBattleUnit target)

@@ -32,7 +32,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies
 
     public class ResonanceSensitivityStatusEffect : AbstractStatusEffect
     {
-        public override void OnAnyCardPlayed(AbstractCard cardPlayed)
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit target)
         {
             if (cardPlayed.BaseEnergyCost() == 3)
             {
@@ -52,9 +52,9 @@ namespace Assets.CodeAssets.BattleEntities.Enemies
 
         public override string Description => "Whenever a cost 1 card is played, grants +1 strength to a random other unit in party";
 
-        public override void OnAnyCardPlayed(AbstractCard card)
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
         {
-            if (card.BaseEnergyCost() == 1)
+            if (cardPlayed.BaseEnergyCost() == 1)
             {
                 var anotherUnitInEnemyParty = GameState.Instance
                     .EnemyUnitsInBattle

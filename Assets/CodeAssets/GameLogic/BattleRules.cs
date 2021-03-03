@@ -290,7 +290,7 @@ public static class BattleRules
 
         var unitTargeted = BattleScreenPrefab.BattleUnitMousedOver;
 
-        float baseDefense = card.BaseDefenseValue;
+        int baseDefense = card.BaseDefenseValue;
         int totalDefense = GetDefenseApplied(card.Owner, unitTargeted, baseDefense);
 
         return (int)totalDefense;

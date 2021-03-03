@@ -21,7 +21,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
 
         public override string Description()
         {
-            return $"If target is Advanced, remove Advanced.  Otherwise, apply Advanced.";
+            return $"Manuever.  Leadership: the target gains 1 strength and 1 dexterity.";
         }
 
         protected override void OnPlay(AbstractBattleUnit target)

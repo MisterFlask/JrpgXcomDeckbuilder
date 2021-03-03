@@ -13,7 +13,7 @@ public class  SmogGrenade : AbstractCard
 
     public override string Description()
     {
-        return $"Apply 1 Weak to all enemies";
+        return $"Apply 1 Weak to all enemies; apply 3 defense to all allies. Exhaust.";
     }
 
     protected override void OnPlay(AbstractBattleUnit target)

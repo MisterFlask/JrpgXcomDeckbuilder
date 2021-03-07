@@ -60,14 +60,11 @@ public abstract class AbstractBattleUnit
 
     public IEnumerable<AbstractCard> CardsInPersistentDeck => _CardsInPersistentDeck;
 
-    public List<AbstractAugmentation> Augmentations { get; } = new List<AbstractAugmentation>();
-
-
-    public void ApplyAugmentation(AbstractAugmentation aug)
+    public void ApplyAugmentation(SoldierPerk aug)
     {
         aug.Owner = this;
         aug.OnAssignment(this);        
-        Augmentations.Add(aug);
+        Perks.Add(aug);
     }
 
     public void RemoveCardsFromPersistentDeck(IEnumerable<AbstractCard> cardsToRemove)

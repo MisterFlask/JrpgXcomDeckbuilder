@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
 
 /// <summary>
 /// These represent PERSISTENT perks, as opposed to status effects, which are just for the combat.
@@ -13,6 +15,7 @@ public abstract class SoldierPerk
     public abstract string Description();
 
     public ProtoGameSprite Sprite { get; set; } = ProtoGameSprite.Default;
+    public AbstractBattleUnit Owner { get; internal set; }
 
     public virtual void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)
     {
@@ -63,6 +66,17 @@ public abstract class SoldierPerk
         effect,
         stacks);
     }
+
+    internal void OnAssignment(AbstractBattleUnit abstractBattleUnit)
+    {
+        throw new NotImplementedException();
+    }
+
+    public SoldierPerk Clone()
+    {
+        var copy = (SoldierPerk)this.MemberwiseClone();
+        return copy;
+    }
 }
 
 
@@ -71,6 +85,7 @@ public class GrantsStatusEffectPerk : SoldierPerk
     private string GivenName { get; set; }
     private string GivenDescription { get; set; }
     private AbstractStatusEffect Effect { get; set; }
+    private Rarity Rarity { get; set; }
     public GrantsStatusEffectPerk(
         string name,
         string description,
@@ -98,3 +113,4 @@ public class GrantsStatusEffectPerk : SoldierPerk
         return GivenDescription;
     }
 }
+

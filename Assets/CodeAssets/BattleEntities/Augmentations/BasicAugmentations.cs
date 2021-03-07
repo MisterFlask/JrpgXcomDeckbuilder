@@ -6,10 +6,9 @@ namespace Assets.CodeAssets.BattleEntities.Augmentations
 {
     public static class BasicAugmentations
     {
-        public static AbstractAugmentation GrantsPowerAugmentation = AbstractAugmentation.GrantsStatusEffectAugmentation("Power Fist", "Increases this soldier's Power by 1.", new PowerStatusEffect(), 1, Rarity.COMMON);
-        public static AbstractAugmentation GrantsAblativeArmorAugmentation = AbstractAugmentation.GrantsStatusEffectAugmentation("Ablative Armor", "Decreases ALL damage taken by 1", new ArmoredStatusEffect(), 1, Rarity.COMMON);
-        public static AbstractAugmentation GrantsNextCardDuplicatedTwicePerk = AbstractAugmentation.GrantsPerkAugmentation("Unsupervised Learning", "The next time you get a card, duplicate it TWICE.", new DuplicateNextCardTwicePerk(), 1,  Rarity.COMMON);
-        public static AbstractAugmentation IncreaseHpOnGettingNewCardsPerk = AbstractAugmentation.GrantsPerkAugmentation("Supervised Learning", "Whenever a card is added to your deck, increase your max HP by 3.", new HpGainOnCardAddedPerk(), 3, Rarity.COMMON);
+        public static SoldierPerk GrantsPowerAugmentation = new GrantsStatusEffectPerk("Power Fist", "Increases this soldier's Power by 1.", new PowerStatusEffect(), 1);
+        public static SoldierPerk GrantsAblativeArmorAugmentation = new GrantsStatusEffectPerk("Ablative Armor", "Decreases ALL damage taken by 1", new ArmoredStatusEffect(), 1);
+        public static SoldierPerk IncreaseHpOnGettingNewCardsPerk = new HpGainOnCardAddedPerk();
     }
 
     public class DealGreaterDamageToEnemiesWithStatusEffectPerk : SoldierPerk

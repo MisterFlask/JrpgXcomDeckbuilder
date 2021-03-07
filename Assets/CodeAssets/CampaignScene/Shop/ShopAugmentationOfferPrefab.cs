@@ -31,7 +31,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            ExplainerPanel.ShowRawTextHelp($"<color=white>{ShopOffer.Augmentation.Title}:  </color><color=grey>{ShopOffer.Augmentation.Description}</color>");
+            ExplainerPanel.ShowRawTextHelp($"<color=white>{ShopOffer.Augmentation.Name()}:  </color><color=grey>{ShopOffer.Augmentation.Description()}</color>");
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -47,7 +47,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
         public void Initialize(ShopAugmentationOffer offer)
         {
             ShopOffer = offer;
-            Image.sprite = offer.Augmentation.ProtoSprite.ToSprite();
+            Image.sprite = offer.Augmentation.Sprite.ToSprite();
         }
         // Update is called once per frame
         void Update()

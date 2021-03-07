@@ -252,6 +252,11 @@ public static class ExtensionMethods
             
     }
 
+    public static IEnumerable<T> DedupeAndReorder<T>(this IEnumerable<T> toDedupe)
+    {
+        return toDedupe.ToHashSet().ToList();
+    }
+
     #region object pools
     public static Transform Spawn(this GameObject transform)
     {

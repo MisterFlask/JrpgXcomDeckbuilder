@@ -38,9 +38,9 @@ public class GameState
         new Bayonet()
     };
 
-    public List<AbstractAugmentation> AugmentationInventory { get; set; } = new List<AbstractAugmentation>
+    public List<SoldierPerk> AugmentationInventory { get; set; } = new List<SoldierPerk>
     {
-        new PerkAugmentation(new AgilePerk())
+        new AgilePerk()
     };
 
 

@@ -32,7 +32,7 @@ public static class CampaignMapState
 
     public static ShopData shopData;
 
-    public static List<AbstractAugmentation> AugmentationsInventory { get; set; }
+    public static List<SoldierPerk> AugmentationsInventory { get; set; }
     public static List<AbstractCard> CardsInventory { get; set; }
 
     public static void InitializeCampaignScreen()
@@ -46,67 +46,7 @@ public class ShopData
 {
     public List<ShopCardOffer> CardOffers { get; set; }
     public List<ShopAugmentationOffer> AugmentationOffers { get; set; }
-}
 
-/// <summary>
-///  This represents an item that can be assigned from the Equipment Assignment screen.
-/// </summary>
-public abstract class AbstractAugmentation
-{
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public ProtoGameSprite ProtoSprite { get; set; } = GameIconProtoSprite.Default;
-
-    public AbstractBattleUnit Owner { get; set; }
-
-    public Rarity Rarity { get; set; }
-
-    public abstract void OnAssignment(AbstractBattleUnit battleUnit);
-
-
-
-    public static AbstractAugmentation GrantsPerkAugmentation(string name,
-        string description,
-        SoldierPerk perk,
-        int stacks = 1,
-        Rarity rarity = Rarity.COMMON)
-    {
-        var aug = new PerkAugmentation(perk, stacks);
-        aug.Title = name;
-        aug.Description = description;
-        aug.Rarity = rarity;
-        return aug;
-    }
-
-    public static AbstractAugmentation GrantsStatusEffectAugmentation(string name,
-        string description,
-        AbstractStatusEffect effect, 
-        int stacks,
-        Rarity rarity)
-    {
-        var aug = new PerkAugmentation(new GrantsStatusEffectPerk(name, description, effect, stacks));
-        aug.Rarity = rarity;
-        return aug;
-    }
-}
-
-public class PerkAugmentation : AbstractAugmentation
-{
-    SoldierPerk Perk;
-    public PerkAugmentation(SoldierPerk perk,
-        int stacks = 1
-        )
-    {
-        this.Perk = perk;
-        this.Description = perk.Description();
-        this.Title = perk.Name();
-        perk.Stacks = stacks;
-    }
-
-    public override void OnAssignment(AbstractBattleUnit battleUnit)
-    {
-        battleUnit.ApplySoldierPerk(Perk);
-    }
 }
 
 
@@ -121,9 +61,10 @@ public class ShopCardOffer: AbstractShopOffer
     }
 }
 
+
 public class ShopAugmentationOffer: AbstractShopOffer
 {
-    public AbstractAugmentation Augmentation { get; set; }
+    public SoldierPerk Augmentation { get; set; }
 
     protected override void InnerOnPurchase()
     {

@@ -1,5 +1,6 @@
 ﻿
 using Assets.CodeAssets.Cards;
+using Assets.CodeAssets.GameLogic;
 using HyperCard;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,8 @@ public abstract class AbstractCard
     public List<Type> SoldierClassCardPools { get; } = new List<Type>();
         
     public Guid OwnerGuid;
-
+    // TODO: Move to a more explicit magic-words system
+    public List<MagicWord> MagicWordsReferencedOnThisCard { get; set; } = new List<MagicWord>();
 
     /// <summary>
     ///  This is just a thing tracking the countdown on a card.

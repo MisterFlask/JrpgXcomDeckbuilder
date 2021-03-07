@@ -16,9 +16,9 @@ public class ExplainerPanel : MonoBehaviour
         // todo
     }
 
-    internal static void ShowAugmentationHelp(AbstractAugmentation augmentation)
+    internal static void ShowAugmentationHelp(SoldierPerk augmentation)
     {
-        TooltipToDisplay = augmentation.Title + ": " +augmentation.Description;
+        TooltipToDisplay = augmentation.Name() + ": " +augmentation.Description();
     }
 
     public static void ShowStatusEffectHelp(AbstractStatusEffect effect)

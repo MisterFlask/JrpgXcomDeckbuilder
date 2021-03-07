@@ -40,7 +40,7 @@ namespace Assets.CodeAssets.UI.Subscreens
             this.gameObject.SetActive(false);
         }
 
-        public void Init(List<AbstractAugmentation> augmentationsToDisplay)
+        public void Init(List<SoldierPerk> augmentationsToDisplay)
         {
             AugmentationDisplayParent.gameObject.PurgeChildren();
 

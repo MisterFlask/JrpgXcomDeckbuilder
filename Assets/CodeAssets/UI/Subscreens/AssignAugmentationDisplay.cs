@@ -13,7 +13,7 @@ namespace Assets.CodeAssets.UI.Subscreens
         private bool IsTaken { get; set; } = false;
 
         private AbstractBattleUnit BattleUnitSelected => GameState.Instance.CharacterSelected;
-        public AbstractAugmentation Augmentation { get; set; }
+        public SoldierPerk Augmentation { get; set; }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -59,7 +59,7 @@ namespace Assets.CodeAssets.UI.Subscreens
                 return;
             }
 
-            AugmentationImage.SetProtoSprite(Augmentation.ProtoSprite);
+            AugmentationImage.SetProtoSprite(Augmentation.Sprite);
             if (IsTaken)
             {
                 AssignmentButton.interactable = false;

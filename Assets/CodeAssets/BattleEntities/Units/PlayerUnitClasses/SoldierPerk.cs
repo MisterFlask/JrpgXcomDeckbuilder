@@ -67,9 +67,9 @@ public abstract class SoldierPerk
         stacks);
     }
 
-    internal void OnAssignment(AbstractBattleUnit abstractBattleUnit)
+    public virtual void OnAssignment(AbstractBattleUnit abstractBattleUnit)
     {
-        throw new NotImplementedException();
+
     }
 
     public SoldierPerk Clone()
@@ -90,12 +90,14 @@ public class GrantsStatusEffectPerk : SoldierPerk
         string name,
         string description,
         AbstractStatusEffect effect,
-        int stacks)
+        int stacks = 1,
+        Rarity rarity = Rarity.NOT_IN_POOL)
     {
         GivenName = name;
         GivenDescription = description;
         Stacks = stacks;
         Effect = effect;
+        Rarity = rarity;
     }
 
     public override void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)

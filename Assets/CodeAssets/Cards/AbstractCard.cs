@@ -387,7 +387,7 @@ public class DamageBlob
 
 public enum Rarity
 {
-    COMMON,UNCOMMON,RARE,BASIC,NOT_IN_CARD_POOL
+    COMMON,UNCOMMON,RARE,BASIC,NOT_IN_POOL
 }
 
 public class TargetType

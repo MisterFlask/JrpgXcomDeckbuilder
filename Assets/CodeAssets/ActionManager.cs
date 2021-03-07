@@ -283,17 +283,13 @@ public class ActionManager : MonoBehaviour
         {
             if (logicalCard != null)
             {
-                if (!logicalCard.CanAfford())
+                if (!logicalCard.CanPlay().Playable)
                 {
-                    Shout(logicalCard.Owner, "I don't have enough energy.");
-                }
-                else if (logicalCard.CanPlay())
-                {
-                    logicalCard.PlayCardFromHandIfAble(target);
+                    Shout(logicalCard.Owner, logicalCard.CanPlay().ReasonUnplayable);
                 }
                 else
                 {
-                    Shout(logicalCard.Owner, "I can't play this!");
+                    logicalCard.PlayCardFromHandIfAble_Action(target);
                 }
             }
             else
@@ -546,18 +542,26 @@ public class ActionManager : MonoBehaviour
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
 
-            BattleRules.ProcessDamageWithCalculatedModifiers(nullableSourceUnit, targetUnit, baseDamageDealt);
+            BattleRules.ProcessDamageWithCalculatedModifiers(nullableSourceUnit, targetUnit, baseDamageDealt, false);
 
         });
     }
 
-    public void DestroyUnit(AbstractBattleUnit unit)
+    public void DestroyUnitAndExhaustItsCards(AbstractBattleUnit unit)
     {
         Require.NotNull(unit);
         QueuedActions.ImmediateAction(() =>
         {
             // todo: Figure out approrpiate despawning logic.
             unit.CorrespondingPrefab.HideUnit();
+            foreach(var card in GameState.Instance.Deck.TotalDeckList)
+            {
+                if (card.Owner == unit)
+                {
+                    // we always exhaust all cards owned by dead people.
+                    ActionManager.Instance.ExhaustCard(card);
+                }
+            }
         });
     }
 

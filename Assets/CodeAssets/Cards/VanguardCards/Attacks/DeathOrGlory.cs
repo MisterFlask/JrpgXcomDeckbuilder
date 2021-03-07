@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class DeathOrGlory : AbstractCard
 {
@@ -12,11 +13,11 @@ public class DeathOrGlory : AbstractCard
         TargetType = TargetType.ENEMY;
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deal {DisplayedDamage()} damage.  Take {DisplayedDamage()/4} (1/4) damage.";
     }
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         ActionManager.Instance.AttackUnitForDamage(target, Owner, BaseDamage);
         ActionManager.Instance.AttackUnitForDamage(Owner, Owner, BaseDamage/4);

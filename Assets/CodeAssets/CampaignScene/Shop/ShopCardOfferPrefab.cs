@@ -32,7 +32,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            ExplainerPanel.ShowRawTextHelp($"<color=white>{Offer.Card.Name}:  </color><color=grey>{Offer.Card.Description()}</color>");
+            ExplainerPanel.ShowRawTextHelp($"<color=white>{Offer.Card.Name}:  </color><color=grey>{Offer.Card.DescriptionInner()}</color>");
         }
 
         public void OnPointerExit(PointerEventData eventData)

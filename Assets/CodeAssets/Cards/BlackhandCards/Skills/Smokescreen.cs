@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 // increases defense, increases stress
 public class Smokescreen : AbstractCard
@@ -10,12 +11,12 @@ public class Smokescreen : AbstractCard
         this.BaseDefenseValue = 8;
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Apply 1 Evade to all allies.  All allies gain 3 Stress.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         foreach (var character in state().AllyUnitsInBattle)
         {

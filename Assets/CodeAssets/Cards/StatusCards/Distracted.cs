@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class Distracted : AbstractCard
 {
@@ -11,7 +12,7 @@ public class Distracted : AbstractCard
         this.Name = "Distracted";
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Unplayable.  Exhaust at the end of your turn.";
     }
@@ -21,7 +22,7 @@ public class Distracted : AbstractCard
         ActionManager.Instance.ExhaustCard(this);
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
     }
 }

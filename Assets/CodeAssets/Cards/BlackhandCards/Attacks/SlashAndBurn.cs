@@ -10,12 +10,12 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
             SetCommonCardAttributes("Slash And Burn", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 0);
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"Deal 10 damage.  Manuever.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             ActionManager.Instance.ApplyStatusEffect(target, new BurningStatusEffect(), 3);
             this.EnergyCostMod += 1;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 /// <summary>
 /// Whenever you take damage, exhaust a random card in your discard or draw piles, and gain 1 Strength.
@@ -11,12 +12,12 @@ public class Rage : AbstractCard
         SetCommonCardAttributes("Rage", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Gain 1 Power whenever you take damage, then exhaust a card from your discard pile.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         action().ApplyStatusEffect(Owner, new PowerStatusEffect(), 1);
         var cardToExpend = state().Deck.DiscardPile.PickRandom();

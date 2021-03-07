@@ -7,16 +7,31 @@ public abstract class AbstractCardSticker : MonoBehaviour
     public CardStickerPrefab Prefab { get; set; }
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
 
-    public string Title { get; set; } = "Card Sticker Title";
+    public string Title_deprecated { get; set; } = "Card Sticker Title";
 
-    public string Description { get; set; } = "Card Sticker Description";
+    public string Description_deprecated { get; set; } = "Card Sticker Description";
+
+    /// <summary>
+    /// Added onto the end of the card description.
+    /// </summary>
+    public string CardDescriptionAddendum { get; set; } = "";
+
+    public virtual void OnAddedToCardInner(AbstractCard card)
+    {
+        // do stuff like change its attack damage or whatever
+    }
+
+    public void OnAddedToCard(AbstractCard card)
+    {
+        
+    }
 
     public AbstractCardSticker CopySticker()
     {
         return this.MemberwiseClone() as AbstractCardSticker;
     }
 
-    public virtual void OnCardPlayed(AbstractCard card)
+    public virtual void OnCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
 
     }

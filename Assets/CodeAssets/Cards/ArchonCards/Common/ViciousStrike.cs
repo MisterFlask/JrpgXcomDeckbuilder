@@ -19,12 +19,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
             this.BaseDamage = 5;
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"Deal {DisplayedDamage()} damage to a random enemy.  If I have >40 stress, do it again.  If I have >70 stress, do it again.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().AttackUnitForDamage(target, Owner, BaseDamage);
             if (Owner.CurrentStress > 40)

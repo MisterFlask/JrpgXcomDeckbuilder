@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class Firewall : AbstractCard
 {
@@ -12,12 +13,12 @@ public class Firewall : AbstractCard
         SetCommonCardAttributes("Firewall", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Apply {DisplayedDefense()} to ally.  Grant that ally {TemporaryThornsGranted} Temporary Thorns.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         action().ApplyDefense(target, Owner, BaseDefenseValue);
         action().ApplyStatusEffect(target, new TemporaryThorns(), TemporaryThornsGranted);

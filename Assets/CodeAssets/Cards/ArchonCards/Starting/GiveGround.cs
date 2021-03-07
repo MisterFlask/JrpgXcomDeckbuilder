@@ -21,12 +21,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
             this.BaseDefenseValue = 5;
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"Remove Advanced from an ally.  Apply {DisplayedDefense()} defense.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().RemoveStatusEffect<AdvancedStatusEffect>(target);
             action().ApplyDefense(target, Owner, BaseDefenseValue);

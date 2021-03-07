@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class Grenade : AbstractCard
 {
@@ -12,12 +13,12 @@ public class Grenade : AbstractCard
         Name = "Grenade";
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deals {displayedDamage()} damage to the target, then {displayedDamage()} damage to all enemies.  Expend.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         action().AttackUnitForDamage(target, this.Owner, BaseDamage);
 

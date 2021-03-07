@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class FlankingShot : AbstractCard
 {
@@ -17,12 +18,12 @@ public class FlankingShot : AbstractCard
         return 0;
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deal {displayedDamage()} damage.  Apply 1 Vulnerable.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         action().AttackUnitForDamage(target, Owner, BaseDamage);
         action().ApplyStatusEffect(target, new VulnerableStatusEffect(), 1);

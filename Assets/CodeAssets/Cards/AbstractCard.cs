@@ -1,4 +1,5 @@
 ﻿
+using Assets.CodeAssets.Cards;
 using HyperCard;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,8 @@ public abstract class AbstractCard
     public int BaseDamage { get; set; } = 0;
 
     public int BaseDefenseValue { get; set; } = 0;
+
+    public List<string> CardTags { get; set; } = new List<string>();
 
     /// <summary>
     /// Similar to focus; non-general-purpose and not applicable to all cards
@@ -86,39 +89,109 @@ public abstract class AbstractCard
         this.Name = this.GetType().Name;
     }
     int? StaticBaseEnergyCost = null;
+
+    /// <summary>
+    /// This represents the energy cost PHYSICALLY ON THE CARD
+    /// that means things like stickers can modify this.
+    /// </summary>
+    /// <returns></returns>
     public virtual int BaseEnergyCost()
     {
         return StaticBaseEnergyCost ?? 1;
+    }
+
+
+    /// <summary>
+    /// This represents the energy cost ACTUALLY PAID (e.g. via bloodprice)
+    /// </summary>
+    /// <returns></returns>
+    public virtual EnergyPaidInformation GetNetEnergyCost()
+    {
+        return new EnergyPaidInformation
+        {
+            EnergyCost = BaseEnergyCost()
+        };
     }
 
     public int EnergyCostMod = 0;
 
     public int EnergyCost => EnergyCostMod + BaseEnergyCost();
 
-    public abstract string Description();
+    public abstract string DescriptionInner();
 
+    public string Description()
+    {
+        var baseDescription = DescriptionInner();
+        foreach(var sticker in Stickers)
+        {
+            baseDescription += "\n" + sticker.CardDescriptionAddendum;
+        }
+        return baseDescription;
+    }
 
     public virtual bool CanAfford()
     {
-        return ServiceLocator.GetGameStateTracker().energy >= EnergyCost;
+        return ServiceLocator.GetGameStateTracker().energy >= GetNetEnergyCost().EnergyCost;
     }
 
-    public virtual bool CanPlay()
+    public virtual CanPlayCardQueryResult CanPlayInner()
+    {
+        return CanPlayCardQueryResult.CanPlay();
+    } 
+
+    public CanPlayCardQueryResult CanPlay()
     {
         if (Unplayable)
         {
-            return false;
+            return CanPlayCardQueryResult.CannotPlay("This card is unplayable.");
         }
 
-        return CanAfford();
+        if (!CanPlayInner().Playable)
+        {
+            return CanPlayInner();
+        }
+
+        if (CanAfford())
+        {
+            return CanPlayCardQueryResult.CanPlay();
+        }
+        else
+        {
+            return CanPlayCardQueryResult.CannotPlay("I don't have the energy for this.");
+        }
     }
 
-    public virtual void OnDraw()
+    public virtual void OnDrawInner()
     {
         
     }
+    
+    public void OnDraw()
+    {
+        OnDrawInner();
+        foreach(var sticker in Stickers)
+        {
+            sticker.OnCardDrawn(this);
+        }
+    }
 
-    protected abstract void OnPlay(AbstractBattleUnit target);
+    /// <summary>
+    ///  returns -1 if the card's not in hand.
+    /// </summary>
+    /// <returns></returns>
+    public int GetCardPosition()
+    {
+        var cardsInHand = state().Deck.Hand;
+        var index = cardsInHand.IndexOf(this);
+        return index;
+    }
+    
+    public virtual bool ShouldRetainCardInHandAtEndOfTurn()
+    {
+        return false;
+    }
+
+    public abstract void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid);
 
     public virtual void InHandAtEndOfTurnAction()
     {
@@ -134,26 +207,37 @@ public abstract class AbstractCard
         return BattleRules.GetDisplayedDamageOnCard(this);
     }
 
-    public void PlayCardFromHandIfAble(AbstractBattleUnit target)
+    public void PlayCardFromHandIfAble_Action(AbstractBattleUnit target)
     {
-        if (!CanPlay())
+        if (!CanPlay().Playable)
         {
             return;
         }
-
-        BattleRules.ProcessPlayingCardCost(this);
-        EvokeCardEffect(target);
-        BattleRules.RunOnPlayCardEffects(this, target);
+        var costPaid = BattleRules.ProcessPlayingCardCost(this);
+        EvokeCardEffect(target, costPaid);
+        BattleRules.RunOnPlayCardEffects(this, target, costPaid);
         if (state().Deck.Hand.Contains(this))
         {
             state().Deck.MoveCardToPile(this, CardPosition.DISCARD);
             ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(this, assumedToExistInHand: true);
         }
+        state().cardsPlayedThisTurn += 1;
     }
 
-    public void EvokeCardEffect(AbstractBattleUnit target)
+    public void EvokeCardEffect(AbstractBattleUnit target, EnergyPaidInformation costPaid = null)
     {
-        OnPlay(target);
+        if (costPaid == null)
+        {
+            costPaid = new EnergyPaidInformation
+            {
+                EnergyCost = 0
+            };
+        }
+        OnPlay(target, costPaid);
+        foreach(var sticker in Stickers)
+        {
+            sticker.OnCardPlayed(this, target);
+        }
     }
 
     public Card CreateHyperCard()
@@ -269,6 +353,16 @@ public abstract class AbstractCard
             || SoldierClassCardPools.Contains(unit.SoldierClass.GetType());
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public AbstractCard CorrespondingPermanentCard()
+    {
+        var persistentDeck = this.Owner.CardsInPersistentDeck;
+        var permanentCard = persistentDeck.First(item => item.Id == this.Id);
+        return permanentCard;
+    }
+
 
 }
 
@@ -289,4 +383,32 @@ public class TargetType
     public static TargetType NO_TARGET_OR_SELF = new TargetType();
     public static TargetType ENEMY = new TargetType();
     public static TargetType ALLY = new TargetType();
+}
+
+public class BattleCardTags
+{
+    public static string SWARM = "swarm";
+}
+
+public class CanPlayCardQueryResult
+{
+    public static CanPlayCardQueryResult CannotPlay(string reason)
+    {
+        return new CanPlayCardQueryResult
+        {
+            Playable = false,
+            ReasonUnplayable = reason
+        };
+    }
+
+    public static CanPlayCardQueryResult CanPlay()
+    {
+        return new CanPlayCardQueryResult
+        {
+            Playable = true
+        };
+    }
+
+    public string ReasonUnplayable { get; set; }
+    public bool Playable { get; set; }
 }

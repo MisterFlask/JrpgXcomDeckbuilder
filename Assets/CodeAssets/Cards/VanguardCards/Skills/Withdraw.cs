@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class Withdraw : AbstractCard
 {
@@ -11,12 +12,12 @@ public class Withdraw : AbstractCard
         TargetType = TargetType.ALLY;
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Apply {DisplayedDefense()} to an ally.  {OwnerDisplayName()} loses Advanced.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         ActionManager.Instance.ApplyDefense(target, Owner, BaseDefenseValue);
         ActionManager.Instance.RemoveStatusEffect<AdvancedStatusEffect>(Owner);

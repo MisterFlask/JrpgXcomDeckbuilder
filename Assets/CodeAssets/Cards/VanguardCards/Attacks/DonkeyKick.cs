@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class DonkeyKick : AbstractCard
 {
@@ -29,13 +30,13 @@ public class DonkeyKick : AbstractCard
         }
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         Require.NotNull(target);
         action().AttackUnitForDamage(target, Owner, BaseDamage);
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deals {displayedDamage()} damage to an enemy unit.  Costs 1 less if Advanced.";
     }

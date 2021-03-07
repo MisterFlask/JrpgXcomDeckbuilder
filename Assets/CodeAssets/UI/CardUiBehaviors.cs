@@ -116,28 +116,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
             var battleUnitMousedOver = element.GetComponent<BattleUnitPrefab>();
             var battleUnitTargeted = battleUnitMousedOver?.UnderlyingEntity;
 
-            if (battleUnitMousedOver != null 
-                && battleUnitMousedOver.UnderlyingEntity != null 
-                && logicalCard.TargetType != TargetType.NO_TARGET_OR_SELF)
-            {
-                if (logicalCard.TargetType == TargetType.ENEMY && battleUnitMousedOver.UnderlyingEntity.IsEnemy)
-                {
-                    ActionManager.Instance.AttemptPlayCardFromHand(this.logicalCard, battleUnitMousedOver.UnderlyingEntity);
-                }
-                if (logicalCard.TargetType == TargetType.ALLY && battleUnitMousedOver.UnderlyingEntity.IsAlly)
-                {
-                    ActionManager.Instance.AttemptPlayCardFromHand(this.logicalCard, battleUnitMousedOver.UnderlyingEntity);
-                }
-
-                if (logicalCard.TargetType == TargetType.ALLY && battleUnitMousedOver.UnderlyingEntity.IsEnemy)
-                {
-                    ActionManager.Instance.Shout(logicalCard.Owner, "This card can only be played on allies.");
-                }
-                if (logicalCard.TargetType == TargetType.ENEMY && battleUnitMousedOver.UnderlyingEntity.IsAlly)
-                {
-                    ActionManager.Instance.Shout(logicalCard.Owner, "This card can only be played on enemies.");
-                }
-            }
+            BattleRules.ProcessUiReleasingCardOverBattleUnit(logicalCard, battleUnitTargeted);
 
             if (element.GetComponent<CardPlayArea>() != null && logicalCard.TargetType == TargetType.NO_TARGET_OR_SELF)
             {

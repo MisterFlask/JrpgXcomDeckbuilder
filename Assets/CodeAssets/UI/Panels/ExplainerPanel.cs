@@ -38,7 +38,7 @@ public class ExplainerPanel : MonoBehaviour
         {
             return;
         }
-        TooltipToDisplay = card.Description() + "\n" + DebuggingInfo;
+        TooltipToDisplay = card.DescriptionInner() + "\n" + DebuggingInfo;
     }
 
     public CustomGuiText tooltipText;

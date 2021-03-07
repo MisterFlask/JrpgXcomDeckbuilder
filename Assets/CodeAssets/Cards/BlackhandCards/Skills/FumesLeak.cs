@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class FumesLeak : AbstractCard
 {
@@ -9,12 +10,12 @@ public class FumesLeak : AbstractCard
         BaseDefenseValue = 4;
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Adds 8 Fumes to targeted enemy.  Apply {BaseDefenseValue} defense and 2 Stress to all allies.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         action().ApplyStatusEffect(target, new FlammableStatusEffect(), 8);
         foreach(var ally in state().AllyUnitsInBattle)

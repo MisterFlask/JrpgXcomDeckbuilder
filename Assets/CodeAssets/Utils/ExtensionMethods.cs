@@ -313,7 +313,7 @@ public static class ExtensionMethods
         var ownerName = abstractCard.Owner?.CharacterFullName ?? "Communal";
         hyperCard.SetCardTopText($"{ownerName} | {abstractCard.CardType}");
 
-        hyperCard.SetCardEnergyCost(BattleRules.CalculateEnergyCost(abstractCard));
+        hyperCard.SetCardEnergyCost(abstractCard.BaseEnergyCost());
         hyperCard.LogicalCardId = abstractCard.Id;
         hyperCard.LogicalCard = abstractCard;
         
@@ -321,7 +321,7 @@ public static class ExtensionMethods
 
     private static string BuildTextBoxStringForCard(AbstractCard abstractCard)
     {
-        return abstractCard.Description();
+        return abstractCard.DescriptionInner();
     }
 
     public static T Spawn<T>(this T item) where T: MonoBehaviour

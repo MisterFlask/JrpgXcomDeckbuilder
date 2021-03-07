@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class IndiscriminateFire : AbstractCard
 {
@@ -14,12 +15,12 @@ public class IndiscriminateFire : AbstractCard
             1);
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deal {BaseDamage} damage to ALL enemies; deal 2 damage to ALL allies.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         foreach(var ally in state().AllyUnitsInBattle)
         {

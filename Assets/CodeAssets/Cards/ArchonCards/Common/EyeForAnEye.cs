@@ -22,12 +22,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
 
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"Apply {StacksOfRetaliateToApply} Thorns.  If the character has >40 stress, do it again.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new ThornsStatusEffect(), StacksOfRetaliateToApply);
         }

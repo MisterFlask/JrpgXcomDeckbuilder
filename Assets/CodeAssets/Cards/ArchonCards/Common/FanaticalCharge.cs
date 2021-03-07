@@ -19,12 +19,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
             this.BaseDamage = 5;
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"Deal {DisplayedDamage()} damage to a random enemy.  Advance target character.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().AttackUnitForDamage(CardTargeting.RandomTargetableEnemy(), Owner, BaseDamage);
             action().ApplyStatusEffect(target, new AdvancedStatusEffect(), 1);

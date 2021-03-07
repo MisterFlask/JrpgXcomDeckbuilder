@@ -60,7 +60,7 @@ namespace Assets.CodeAssets.GameLogic
         }
         public static List<MagicWord> GetMagicWordsApplicableToCard(AbstractCard card)
         {
-            return GetApplicableMagicWordsForString(card.Description());
+            return GetApplicableMagicWordsForString(card.DescriptionInner());
         }
 
         public static List<MagicWord> GetMagicWordsApplicableToStatusEffect(AbstractStatusEffect effect)

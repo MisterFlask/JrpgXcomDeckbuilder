@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class IneptShot : AbstractCard
 {
@@ -15,12 +16,12 @@ public class IneptShot : AbstractCard
         return 1;
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deal {DisplayedDamage()} damage";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         action().AttackUnitForDamage(target, this.Owner, BaseDamage);
     }

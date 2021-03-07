@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class Doubletap : AbstractCard
 {
@@ -12,11 +13,11 @@ public class Doubletap : AbstractCard
         TargetType = TargetType.ENEMY;
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deal {DisplayedDamage()}, twice.  Slay: Gain 1 Power.";
     }
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         ActionManager.Instance.AttackUnitForDamage(target, Owner, BaseDamage);
         if (target.IsDead)

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class Defend : AbstractCard
 {
@@ -11,11 +12,11 @@ public class Defend : AbstractCard
     }
 
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Applies {DisplayedDefense()} defense to target ally." ;
     }
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         action().ApplyDefense(target, this.Owner, this.BaseDefenseValue);
     }

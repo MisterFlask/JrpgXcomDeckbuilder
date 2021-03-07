@@ -19,12 +19,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
             this.BaseDamage = 5;
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"Manuever.  Leadership: the target gains 1 strength and 1 dexterity.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             if (target.HasStatusEffect<AdvancedStatusEffect>())
             {

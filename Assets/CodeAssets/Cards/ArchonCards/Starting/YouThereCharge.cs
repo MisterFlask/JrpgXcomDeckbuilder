@@ -16,12 +16,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards
                 );
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return "Advance an ally.  Apply 2 Temporary Strength to that ally.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new AdvancedStatusEffect());
         }

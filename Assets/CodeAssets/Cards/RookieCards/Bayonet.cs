@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using Assets.CodeAssets.Cards;
 
 public class Bayonet : AbstractCard
 {
@@ -32,7 +33,7 @@ public class Bayonet : AbstractCard
         }
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         Require.NotNull(target);
         action().AttackUnitForDamage(target, Owner, BaseDamage);
@@ -43,7 +44,7 @@ public class Bayonet : AbstractCard
         });
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deals {displayedDamage()} damage to an enemy unit.  Costs 1 less if Advanced.  Discard a card.";
     }

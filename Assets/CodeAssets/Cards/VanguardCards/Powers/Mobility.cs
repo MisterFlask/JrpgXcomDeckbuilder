@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class Mobility : AbstractCard
 {
@@ -10,12 +11,12 @@ public class Mobility : AbstractCard
         TargetType = TargetType.NO_TARGET_OR_SELF;
         Rarity = Rarity.UNCOMMON;
     }
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Whenever {Owner.CharacterFullName} gains or loses Advanced, add a Flanking Shot to your hand.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         action().ApplyStatusEffect(Owner, new MobilityStatusEffect(), 1);
     }

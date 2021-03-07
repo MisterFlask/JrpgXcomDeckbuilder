@@ -21,12 +21,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
             this.BaseDefenseValue = 5;
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"Flee the combat instantly.  ALL characters gain 10 stress.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             // todo
             // 

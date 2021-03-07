@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using Assets.CodeAssets.Cards;
 
 public class Abusive : AbstractCard
 {
-    public override string Description()
+    public override string DescriptionInner()
     {
         return "At end of turn, deals 3 damage to your highest-health ally.  Leader: Deal 10 instead.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         
     }

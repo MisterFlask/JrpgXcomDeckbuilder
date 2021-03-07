@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class Charge : AbstractCard
 {
@@ -13,7 +14,7 @@ public class Charge : AbstractCard
         TargetType = TargetType.ENEMY;
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deal {DisplayedDamage()} damage. Advance.  Add a Flanking Shot to your hand.";
     }
@@ -23,7 +24,7 @@ public class Charge : AbstractCard
         return 1;
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         ActionManager.Instance.AttackUnitForDamage(target, this.Owner, BaseDamage);
         if (!target.IsAdvanced)

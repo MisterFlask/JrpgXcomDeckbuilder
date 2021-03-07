@@ -22,12 +22,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
             BaseDamage = 5;
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"Deal {DisplayedDamage()}.  Apply Marked.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new MarkedStatusEffect());
             action().AttackUnitForDamage(target, Owner, BaseDamage);

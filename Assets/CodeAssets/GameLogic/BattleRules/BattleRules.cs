@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Linq;
+using Assets.CodeAssets.Cards;
 
 /// <summary>
 /// Responsible for going through all the combat hooks and such that play into how much damage is dealt, by whom, what attributes are applied or removed, and so on.
@@ -36,33 +37,18 @@ public static class BattleRules
 
     }
 
-    public static int CalculateEnergyCost(AbstractCard card)
+    public static EnergyPaidInformation CalculateEnergyCost(AbstractCard card)
     {
-        if (card.Owner == null)
-        {
-            return card.BaseEnergyCost();
-        }
-
-        var owner = card.Owner;
-        var ownerFatigue = owner.CurrentFatigue;
-        if (ownerFatigue < card.FatigueCost)
-        {
-            return card.EnergyCost + card.FatigueCost;
-        }
-        else
-        {
-            return card.EnergyCost;
-        }
+        return card.GetNetEnergyCost();
     }
 
-    public static void ProcessPlayingCardCost(AbstractCard card)
+    public static EnergyPaidInformation ProcessPlayingCardCost(AbstractCard card)
     {
-        ServiceLocator.GetGameStateTracker().energy -= CalculateEnergyCost(card);
+        var cost = CalculateEnergyCost(card);
+        ServiceLocator.GetGameStateTracker().energy -= cost.EnergyCost;
         EnergyIcon.Instance.Flash();
-        if (card.Owner.CurrentFatigue > card.FatigueCost)
-        {
-            card.Owner.CurrentFatigue -= card.FatigueCost;
-        }
+
+        return cost;
     }
 
     /// <summary>
@@ -124,7 +110,7 @@ public static class BattleRules
 
     }
 
-    internal static void RunOnPlayCardEffects(AbstractCard abstractCard, AbstractBattleUnit target)
+    internal static void RunOnPlayCardEffects(AbstractCard abstractCard, AbstractBattleUnit target, EnergyPaidInformation costPaid)
     {
         var owner = abstractCard.Owner;
         if (owner == null)
@@ -138,16 +124,41 @@ public static class BattleRules
         }
     }
 
+    public static void ProcessUiReleasingCardOverBattleUnit(AbstractCard logicalCard, AbstractBattleUnit battleUnitTargeted)
+    {
+        if (battleUnitTargeted != null
+            && logicalCard.TargetType != TargetType.NO_TARGET_OR_SELF)
+        {
+            if (logicalCard.TargetType == TargetType.ENEMY && battleUnitTargeted.IsEnemy)
+            {
+                ActionManager.Instance.AttemptPlayCardFromHand(logicalCard, battleUnitTargeted);
+            }
+            if (logicalCard.TargetType == TargetType.ALLY && battleUnitTargeted.IsAlly)
+            {
+                ActionManager.Instance.AttemptPlayCardFromHand(logicalCard, battleUnitTargeted);
+            }
+
+            if (logicalCard.TargetType == TargetType.ALLY && battleUnitTargeted.IsEnemy)
+            {
+                ActionManager.Instance.Shout(logicalCard.Owner, "This card can only be played on allies.");
+            }
+            if (logicalCard.TargetType == TargetType.ENEMY && battleUnitTargeted.IsAlly)
+            {
+                ActionManager.Instance.Shout(logicalCard.Owner, "This card can only be played on enemies.");
+            }
+        }
+    }
+
     public static void CheckAndRegisterDeath(AbstractBattleUnit unit, AbstractBattleUnit nullableUnitThatKilledMe)
     {
-
         if (unit.CurrentHp <= 0)
         {
             foreach (var effect in unit.StatusEffects)
             {
                 effect.OnDeath(nullableUnitThatKilledMe);
             }
-            ActionManager.Instance.DestroyUnit(unit);
+            ActionManager.Instance.DestroyUnitAndExhaustItsCards(unit);
+
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class MovingTarget : AbstractCard
 {
@@ -8,12 +9,12 @@ public class MovingTarget : AbstractCard
         SoldierClassCardPools.Add(typeof(VanguardSoldierClass));
         SetCommonCardAttributes("Moving Target", Rarity.BASIC, TargetType.ENEMY, CardType.AttackCard, 1);
     }
-    public override string Description()
+    public override string DescriptionInner()
     {
         return "if not advanced, apply advanced.  Otherwise, remove advanced.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         if (target.IsAdvanced)
         {

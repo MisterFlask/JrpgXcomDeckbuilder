@@ -23,12 +23,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
             
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"Apply 10 Stress Defense to ALL characters.  Apply {BaseDefenseValue} Defense to ALL characters.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             foreach(var character in GameState.Instance.AllyUnitsInBattle)
             {

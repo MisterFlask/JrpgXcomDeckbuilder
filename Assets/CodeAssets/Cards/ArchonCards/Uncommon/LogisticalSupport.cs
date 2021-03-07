@@ -19,12 +19,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
             this.BaseDamage = 5;
         }
 
-        public override string Description()
+        public override string DescriptionInner()
         {
             return $"The next time you play any card, play it again.";
         }
 
-        protected override void OnPlay(AbstractBattleUnit target)
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             
         }

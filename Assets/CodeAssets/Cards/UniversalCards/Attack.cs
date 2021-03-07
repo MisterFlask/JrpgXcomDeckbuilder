@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 public class Attack : AbstractCard
 {
@@ -9,12 +10,12 @@ public class Attack : AbstractCard
         this.SetCommonCardAttributes("Attack", Rarity.BASIC, TargetType.ENEMY, CardType.AttackCard, 1, protoGameSprite: ProtoGameSprite.FromGameIcon("Sprites/sword-wound"));
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Deal {DisplayedDamage()} damage";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         action().AttackUnitForDamage(target, this.Owner, BaseDamage);
     }

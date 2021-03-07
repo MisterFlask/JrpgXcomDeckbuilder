@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
 /// <summary>
 /// Applies Weak to all enemies.
@@ -11,12 +12,12 @@ public class  SmogGrenade : AbstractCard
         SetCommonCardAttributes("Smog Grenade", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);        
     }
 
-    public override string Description()
+    public override string DescriptionInner()
     {
         return $"Apply 1 Weak to all enemies; apply 3 defense to all allies. Exhaust.";
     }
 
-    protected override void OnPlay(AbstractBattleUnit target)
+    public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         foreach(var character in state().EnemyUnitsInBattle)
         {

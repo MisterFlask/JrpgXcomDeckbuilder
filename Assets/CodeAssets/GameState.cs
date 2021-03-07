@@ -76,6 +76,8 @@ public class GameState
 
     public ShopData ShopData { get; } = new ShopData();
 
+    public int cardsPlayedThisTurn = 0;
+
     #region UI State
     public AbstractBattleUnit CharacterSelected { get; set; }
     public int Day { get; set; }

@@ -26,7 +26,7 @@ public class DeployCardButton : MonoBehaviour
     void Update()
     { 
         var cardSelected = ServiceLocator.GetGameStateTracker().GetCardSelected();
-        var deployableCardSelected = cardSelected != null && cardSelected.LogicalCard.CanPlay();
+        var deployableCardSelected = cardSelected != null && cardSelected.LogicalCard.CanPlay().Playable;
         if (deployableCardSelected)
         {
             var button = this.GetComponent<Button>();

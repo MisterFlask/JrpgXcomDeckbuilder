@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: 3.7233}
+  m_SizeDelta: {x: 200, y: 97.87656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7361861751082720531
 CanvasRenderer:
@@ -64,7 +64,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New <color="red">Red</color> Text
+  m_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -92,11 +96,11 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30.2
+  m_fontSize: 9.7
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 8
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_textAlignment: 258
@@ -133,12 +137,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3274680008809042353}
-    characterCount: 12
+    characterCount: 334
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 51
+    wordCount: 52
     linkCount: 0
-    lineCount: 1
+    lineCount: 8
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1262,7 +1266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b86cdecfd804e44284b879521c4d844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardTooltipTrigger: {fileID: 38154029972463942}
 --- !u!1 &5338327048101167667
 GameObject:
   m_ObjectHideFlags: 0

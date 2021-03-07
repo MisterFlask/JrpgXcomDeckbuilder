@@ -16,6 +16,12 @@ public abstract class AbstractCard
         
     public Guid OwnerGuid;
 
+
+    /// <summary>
+    ///  This is just a thing tracking the countdown on a card.
+    /// </summary>
+    public int Countdown { get; set; } = -1;
+
     /// <summary>
     /// I just added this for debugging purposes
     /// </summary>
@@ -363,6 +369,10 @@ public abstract class AbstractCard
         return permanentCard;
     }
 
+    public virtual void IsNotExhaustedInDeckAtEndOfBattle()
+    {
+
+    }
 
 }
 
@@ -388,6 +398,7 @@ public class TargetType
 public class BattleCardTags
 {
     public static string SWARM = "swarm";
+    public static string VIGIL = "vigil";
 }
 
 public class CanPlayCardQueryResult

@@ -54,8 +54,12 @@ namespace Assets.CodeAssets.GameLogic
 
         public static List<MagicWord> GetApplicableMagicWordsForString(string stringToAnalyze)
         {
+            if (stringToAnalyze == null)
+            {
+                return new List<MagicWord>();
+            }
             var relevantMagicWords = MagicWordsRegistered
-                .Where(item => stringToAnalyze.Contains(item.MagicWordTitle));
+                .Where(item => item.MagicWordTitle != null && stringToAnalyze.Contains(item.MagicWordTitle));
             return relevantMagicWords.ToList();
         }
         public static List<MagicWord> GetMagicWordsApplicableToCard(AbstractCard card)

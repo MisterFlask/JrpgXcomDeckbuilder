@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.GameLogic.BattleRules
 {
-    public class SacrificeBattleRules : MonoBehaviour
+    public class SacrificeBattleRules
     {
         public static bool CanPlay(AbstractCard card)
         {

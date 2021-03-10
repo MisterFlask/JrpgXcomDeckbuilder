@@ -6,6 +6,8 @@ namespace Assets.CodeAssets.BattleEntities.Augmentations
 {
     public static class BasicAugmentations
     {
+
+
         public static SoldierPerk GrantsPowerAugmentation = new GrantsStatusEffectPerk("Power Fist", "Increases this soldier's Power by 1.", new PowerStatusEffect(), 1);
         public static SoldierPerk GrantsAblativeArmorAugmentation = new GrantsStatusEffectPerk("Ablative Armor", "Decreases ALL damage taken by 1", new ArmoredStatusEffect(), 1);
         public static SoldierPerk IncreaseHpOnGettingNewCardsPerk = new HpGainOnCardAddedPerk();

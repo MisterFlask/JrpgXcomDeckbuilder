@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// These represent PERSISTENT perks, as opposed to status effects, which are just for the combat.
@@ -13,9 +14,13 @@ public abstract class SoldierPerk
     public int Stacks { get; set; } = 1;
     public abstract string Name();
     public abstract string Description();
+    public Rarity Rarity { get; set; }
 
     public ProtoGameSprite Sprite { get; set; } = ProtoGameSprite.Default;
     public AbstractBattleUnit Owner { get; internal set; }
+
+    public List<string> CompatibleSoldierGuids = new List<string>();
+    public List<AbstractBattleUnit> CompatibleSoldiers => CompatibleSoldierGuids.ConvertGuidsToSoldiers();
 
     public virtual void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)
     {
@@ -60,16 +65,21 @@ public abstract class SoldierPerk
         AbstractStatusEffect effect,
         int stacks)
     {
-        return CreateGrantsStatusEffectPerk(
+        return new GrantsStatusEffectPerk(
         name,
         description,
         effect,
         stacks);
     }
 
+
     public virtual void OnAssignment(AbstractBattleUnit abstractBattleUnit)
     {
 
+    }
+    public virtual bool CanAssignToSoldier(AbstractBattleUnit soldier)
+    {
+        return true;
     }
 
     public SoldierPerk Clone()
@@ -80,12 +90,64 @@ public abstract class SoldierPerk
 }
 
 
+public class GrantsCardStickerPerk : SoldierPerk
+{
+    private string GivenName { get; set; }
+    private string GivenDescription { get; set; }
+    private AbstractCardSticker Effect { get; set; }
+    public GrantsCardStickerPerk(
+        string name,
+        string description,
+        AbstractCardSticker effect,
+        int stacks = 1,
+        Rarity rarity = Rarity.NOT_IN_POOL)
+    {
+        GivenName = name;
+        GivenDescription = description;
+        Stacks = stacks;
+        Rarity = rarity;
+        Effect = effect;
+    }
+
+    public override void OnAssignment(AbstractBattleUnit abstractBattleUnit)
+    {
+        ShowDeckScreen.ShowMandatorySelectCardFromCharacterDeckScreen((cardSelected) =>
+        {
+            cardSelected.AddSticker(this.Effect);
+
+        },
+        () =>
+        {
+            throw new Exception("Cannot select card");
+        }, 
+        (card) =>
+        {
+            return Effect.IsCardTagApplicable(card);
+        },
+        prompt: "Adds effect to card: " + Effect.CardDescriptionAddendum);
+    }
+
+    public override string Name()
+    {
+        return GivenName;
+    }
+
+    public override string Description()
+    {
+        return GivenDescription;
+    }
+
+    public override bool CanAssignToSoldier(AbstractBattleUnit soldier)
+    {
+        return soldier.CardsInPersistentDeck.Any(item => Effect.IsCardTagApplicable(item));
+    }
+}
+
 public class GrantsStatusEffectPerk : SoldierPerk
 {
     private string GivenName { get; set; }
     private string GivenDescription { get; set; }
-    private AbstractStatusEffect Effect { get; set; }
-    private Rarity Rarity { get; set; }
+    public AbstractStatusEffect Effect { get; set; }
     public GrantsStatusEffectPerk(
         string name,
         string description,
@@ -102,7 +164,7 @@ public class GrantsStatusEffectPerk : SoldierPerk
 
     public override void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)
     {
-        soldierAffected.ApplyStatusEffect(Effect, Stacks);
+        soldierAffected.ApplyStatusEffect(Effect.CloneStatusEffect(), Stacks);
     }
 
     public override string Name()

@@ -9,7 +9,7 @@ using Assets.CodeAssets.UI.Tooltips;
 
 namespace HyperCard
 {
-    public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         public TextMeshProUGUI description;
         public TextMeshProUGUI title;
@@ -88,6 +88,13 @@ namespace HyperCard
             ExplainerPanel.ShowCardHelp(this.LogicalCard);
             BattleScreenPrefab.CardMousedOver = this.LogicalCard;
         }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            ClickHandler?.Invoke(this.LogicalCard);
+        }
+
+        public static Action<AbstractCard> ClickHandler { get; set; }
     }
 
 }

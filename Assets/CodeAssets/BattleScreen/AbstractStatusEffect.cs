@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Assets.CodeAssets.GameLogic;
+using System;
 
 public abstract class AbstractStatusEffect: MagicWord
 {
@@ -131,6 +132,11 @@ public abstract class AbstractStatusEffect: MagicWord
             throw new System.Exception("Cannot reassign status effects.");
         }
         OwnerUnit = unit;
+    }
+
+    public AbstractStatusEffect CloneStatusEffect()
+    {
+        return (AbstractStatusEffect) this.MemberwiseClone();
     }
 
     public virtual void OnDealingUnblockedDamage()

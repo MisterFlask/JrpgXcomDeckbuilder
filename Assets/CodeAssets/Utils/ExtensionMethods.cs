@@ -10,6 +10,21 @@ using UnityEngine;
 public static class ExtensionMethods
 {
 
+    public static List<AbstractBattleUnit> ConvertGuidsToSoldiers(this IEnumerable<string> guids)
+    {
+        return guids
+         .Select(item => GameState.Instance.PersistentCharacterRoster
+         .Single(soldierInRoster => soldierInRoster.Guid == item))
+         .ToList();
+    }
+    public static List<AbstractCard> ConvertToCards(this IEnumerable<string> guids)
+    {
+        return guids
+         .Select(item => GameState.Instance.PersistentCharacterRoster.SelectMany(character => character.CardsInPersistentDeck)
+         .Single(card => card.Id == item))
+         .ToList();
+    }
+
     public static void AddTransientComponentAndPerformOperation<T>(this MonoBehaviour thisObject, Action<T> thingToDo, bool skipIfComponentExists = true) where T: MonoBehaviour
     {
         if (thisObject.gameObject.GetComponent<T>() != null && skipIfComponentExists)
@@ -252,9 +267,27 @@ public static class ExtensionMethods
             
     }
 
-    public static IEnumerable<T> DedupeAndReorder<T>(this IEnumerable<T> toDedupe)
+    public static List<T> DedupeAndReorder<T>(this IEnumerable<T> toDedupe)
     {
         return toDedupe.ToHashSet().ToList();
+    }
+
+
+    public static List<T> SelectRandomFraction<T>(this IEnumerable<T> source, float percentageAsFraction)
+    {
+        if (percentageAsFraction > 1 || percentageAsFraction < 0)
+        {
+            throw new Exception("Required to express random fraction as a number between 0 and 1");
+        }
+        var list = new List<T>();
+        foreach(var item in source)
+        {
+            if (UnityEngine.Random.value < percentageAsFraction)
+            {
+                list.Add(item);
+            }
+        }
+        return list;
     }
 
     #region object pools

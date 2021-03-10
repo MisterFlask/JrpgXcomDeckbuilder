@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ModelShark
 {
-    public static class ExtensionMethods
+    public static class ExtensionMethods_ModelShark
     {
+
+
         /// <summary>Fills a list with string names of parameterized text fields found within an array of Text UI fields.</summary>
         /// <param name="textFields">An array of Text UI fields to scan for the existence of parameterized fields within its text.</param>
         /// <param name="parameterizedTextFields">The list of parameterized text fields to fill. Passing by ref and filling is done for performance, to avoid GC Allocation.</param>

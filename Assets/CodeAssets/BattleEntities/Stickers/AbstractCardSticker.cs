@@ -45,4 +45,12 @@ public abstract class AbstractCardSticker : MonoBehaviour
     {
 
     }
+
+    /// <summary>
+    /// Return "false" if you want to avoid having this sticker attached to the card provided.
+    /// </summary>
+    public virtual bool IsCardTagApplicable(AbstractCard card)
+    {
+        return true;
+    }
 }

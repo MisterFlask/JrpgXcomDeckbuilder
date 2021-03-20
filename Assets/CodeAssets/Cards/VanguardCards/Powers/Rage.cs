@@ -19,7 +19,7 @@ public class Rage : AbstractCard
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        action().ApplyStatusEffect(Owner, new PowerStatusEffect(), 1);
+        action().ApplyStatusEffect(Owner, new StrengthStatusEffect(), 1);
         var cardToExpend = state().Deck.DiscardPile.PickRandom();
         action().ExhaustCard(cardToExpend);
     }

@@ -61,7 +61,7 @@ public class GameState
         this.cardSelected = null;
     }
 
-    public int money { get; set; } = 0;
+    public int Credits { get; set; } = 0;
     public int energy { get; set; } = 3;
     public int maxEnergy { get; set; } = 3;
     public List<AbstractBattleUnit> PersistentCharacterRoster { get; set; } = new List<AbstractBattleUnit>();

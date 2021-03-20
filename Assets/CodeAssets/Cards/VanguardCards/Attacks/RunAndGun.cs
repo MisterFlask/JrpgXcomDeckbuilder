@@ -24,7 +24,7 @@ public class RunAndGun : AbstractCard
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        ActionManager.Instance.AttackUnitForDamage(target, this.Owner, BaseDamage);
+        ActionManager.Instance.AttackUnitForDamage(target, this.Owner, BaseDamage, this);
         if (target.IsAdvanced)
         {
             ActionManager.Instance.RemoveStatusEffect<AdvancedStatusEffect>(Owner);

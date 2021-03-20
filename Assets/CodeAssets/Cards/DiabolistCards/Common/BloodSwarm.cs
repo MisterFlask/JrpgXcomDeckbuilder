@@ -17,7 +17,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
         public override string DescriptionInner()
         {
-            return "Deal 6 damage and gain 2 damage for the rest of the combat.  " +
+            return "Deal 6 damage.  " +
                 "Bloodprice.  " +
                 "Swarm. " +
                 "If bloodprice is paid, gains 1 damage PERMANENTLY.";
@@ -33,14 +33,13 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             if (energyPaid.ActionsToTake.Any(item => item is BloodpricePaidAction))
             {
                 this.CorrespondingPermanentCard().BaseDamage++;
-                this.BaseDamage++;
             }
-            action().AttackUnitForDamage(target, this.Owner, BaseDamage);
+            action().AttackUnitForDamage(target, this.Owner, BaseDamage, this);
         }
 
         public override void InHandAtEndOfTurnAction()
         {
-            SwarmBattleRules.RunSwarmBattleRules(this);
+            SwarmBattleRules.RunEndOfTurnRules(this);
         }
 
         // Deal 6 damage and gain 2 damage for the rest of the combat.  Bloodprice.  Swarm. If bloodprice is paid, 

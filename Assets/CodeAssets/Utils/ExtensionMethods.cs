@@ -10,6 +10,21 @@ using UnityEngine;
 public static class ExtensionMethods
 {
 
+    public static bool IsExhausted(this AbstractCard card)
+    {
+        return GameState.Instance.Deck.ExhaustPile.Contains(card);
+    }
+    public static bool IsInDrawPile(this AbstractCard card)
+    {
+        return GameState.Instance.Deck.DrawPile.Contains(card);
+    }
+    public static bool IsInDiscardPile(this AbstractCard card)
+    {
+        return GameState.Instance.Deck.DiscardPile.Contains(card);
+    }
+
+
+
     public static List<AbstractBattleUnit> ConvertGuidsToSoldiers(this IEnumerable<string> guids)
     {
         return guids

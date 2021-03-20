@@ -26,14 +26,14 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().AttackUnitForDamage(target, Owner, BaseDamage);
+            action().AttackUnitForDamage(target, Owner, BaseDamage, this);
             if (Owner.CurrentStress > 40)
             {
-                action().AttackUnitForDamage(target, Owner, BaseDamage);
+                action().AttackUnitForDamage(target, Owner, BaseDamage, this);
             }
             if (Owner.CurrentStress > 70)
             {
-                action().AttackUnitForDamage(target, Owner, BaseDamage);
+                action().AttackUnitForDamage(target, Owner, BaseDamage, this);
             }
         }
     }

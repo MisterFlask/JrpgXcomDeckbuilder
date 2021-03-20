@@ -11,7 +11,7 @@ public class FlammableStatusEffect : AbstractStatusEffect
     public override string Description => "Ticks down by half its stacks per turn.  " +
         "If Fuel is applied, removes all Flammable and adds that much Burning.";
 
-    public override void OnTurnStart()
+    public override void OnTurnEnd()
     {
         action().ApplyStatusEffect(this.OwnerUnit, new FlammableStatusEffect(), -1 * Stacks / 2);
     }

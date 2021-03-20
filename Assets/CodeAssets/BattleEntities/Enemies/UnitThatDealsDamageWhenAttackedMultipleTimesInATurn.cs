@@ -18,7 +18,7 @@ public class UnitThatDealsDamageWhenAttackedMultipleTimesInATurn : AbstractEnemy
         return new List<List<AbstractIntent>>
         {
             AttackMultipleIntent.AttackingAllAllies(this, 1, 1),
-            new BuffSelfIntent(this, new PowerStatusEffect(), 5).ToSingletonList<AbstractIntent>()
+            new BuffSelfIntent(this, new StrengthStatusEffect(), 5).ToSingletonList<AbstractIntent>()
         }
         .PickRandom();
     }
@@ -63,7 +63,7 @@ public class DealtDamageThisTurnMarker : AbstractStatusEffect
 
     public override string Description => "Increases when this unit is attacked.";
 
-    public override void OnTurnStart()
+    public override void OnTurnEnd()
     {
         this.Stacks = 0;
     }

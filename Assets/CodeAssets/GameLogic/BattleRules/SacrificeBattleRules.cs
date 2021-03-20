@@ -26,8 +26,9 @@ namespace Assets.CodeAssets.GameLogic.BattleRules
             {
                 return;
             }
-            ActionManager.Instance.ExhaustCard(otherCardsInHand.PickRandom());
-            ActionManager.Instance.ApplyStatusEffect(card.Owner, new StressStatusEffect(), 8);
+            var cardToExhaust = otherCardsInHand.PickRandom();
+            ActionManager.Instance.ExhaustCard(cardToExhaust);
+            ActionManager.Instance.ApplyStatusEffect(cardToExhaust.Owner, new StressStatusEffect(), 8);
         }
     }
 }

@@ -85,6 +85,11 @@ public class ActionManager : MonoBehaviour
         });
     }
 
+    public void ApplyStress(AbstractBattleUnit unit, int stressApplied)
+    {
+        this.ApplyStatusEffect(unit, new StressStatusEffect(), stressApplied);
+    }
+
     public void KillUnit(AbstractBattleUnit unit)
     {
         QueuedActions.ImmediateAction(() =>
@@ -208,7 +213,7 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    internal void AddCardToDrawPile(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
+    internal void CreateCardToBattleDeckDrawPile(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
         QueuedActions.ImmediateAction(() =>
@@ -216,7 +221,8 @@ public class ActionManager : MonoBehaviour
             ServiceLocator.GetGameStateTracker().Deck.DrawPile.Add(abstractCard);
         }, queueingType);
     }
-    internal void AddCardToHand(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
+
+    internal void CreateCardToHand(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
         QueuedActions.ImmediateAction(() =>
@@ -500,7 +506,7 @@ public class ActionManager : MonoBehaviour
         BattleScreenPrefab.INSTANCE.CreateNewEnemyAndRegisterWithGamestate(unit);
     }
 
-    public void HealUnit(AbstractBattleUnit unitHealed, int healedAmount, AbstractBattleUnit healer = null)
+    public void HealUnit(AbstractBattleUnit unitHealed, int healedAmount, AbstractBattleUnit healer = null, bool allowedToReviveTheDead = false)
     {
         unitHealed.CurrentHp += healedAmount;
         if (unitHealed.CurrentHp > unitHealed.MaxHp)
@@ -509,7 +515,7 @@ public class ActionManager : MonoBehaviour
         }
     }
 
-    public void AttackUnitForDamage(AbstractBattleUnit targetUnit, AbstractBattleUnit sourceUnit, int baseDamageDealt)
+    public void AttackUnitForDamage(AbstractBattleUnit targetUnit, AbstractBattleUnit sourceUnit, int baseDamageDealt, AbstractCard cardPlayed)
     {
         Require.NotNull(targetUnit);
         QueuedActions.DelayedActionWithCustomTrigger("ShakeUnit", () => {
@@ -523,7 +529,7 @@ public class ActionManager : MonoBehaviour
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
 
-            BattleRules.ProcessDamageWithCalculatedModifiers(sourceUnit, targetUnit, baseDamageDealt);
+            BattleRules.ProcessDamageWithCalculatedModifiers(sourceUnit, targetUnit, cardPlayed, baseDamageDealt);
 
         });
     }
@@ -542,12 +548,15 @@ public class ActionManager : MonoBehaviour
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
 
-            BattleRules.ProcessDamageWithCalculatedModifiers(nullableSourceUnit, targetUnit, baseDamageDealt, false);
+            BattleRules.ProcessDamageWithCalculatedModifiers(nullableSourceUnit, targetUnit, 
+                nullableCardPlayed: null,
+                baseDamage: baseDamageDealt,
+                isAttack: false);
 
         });
     }
 
-    public void DestroyUnitAndExhaustItsCards(AbstractBattleUnit unit)
+    public void DestroyUnit(AbstractBattleUnit unit)
     {
         Require.NotNull(unit);
         QueuedActions.ImmediateAction(() =>

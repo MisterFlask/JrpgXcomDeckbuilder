@@ -15,7 +15,7 @@ public class KeroseneSoakedAxe : AbstractCard
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        action().AttackUnitForDamage(target, this.Owner, BaseDamage);
+        action().AttackUnitForDamage(target, this.Owner, BaseDamage, this);
         action().ApplyStatusEffect(target, new FlammableStatusEffect(), 10);
     }
 }

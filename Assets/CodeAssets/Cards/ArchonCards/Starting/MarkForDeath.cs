@@ -30,7 +30,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new MarkedStatusEffect());
-            action().AttackUnitForDamage(target, Owner, BaseDamage);
+            action().AttackUnitForDamage(target, Owner, BaseDamage, this);
         }
     }
 }

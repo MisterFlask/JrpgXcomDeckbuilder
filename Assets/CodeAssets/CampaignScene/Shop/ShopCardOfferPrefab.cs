@@ -19,7 +19,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (GameState.Instance.money < this.Offer.Price)
+            if (GameState.Instance.Credits < this.Offer.Price)
             {
                 // TODO:  "You broke?"
                 return;
@@ -27,7 +27,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
 
             // purchase logic; I should move this elsewhere.
             GameState.Instance.CardInventory.Add(this.Card.LogicalCard);
-            GameState.Instance.money -= this.Offer.Price;
+            GameState.Instance.Credits -= this.Offer.Price;
         }
 
         public void OnPointerEnter(PointerEventData eventData)

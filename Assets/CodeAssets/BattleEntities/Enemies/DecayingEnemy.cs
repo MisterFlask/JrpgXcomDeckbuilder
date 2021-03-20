@@ -18,7 +18,7 @@ public class DecayingEnemy : AbstractEnemyUnit
     {
         return new List<AbstractIntent>
         {
-            new BuffSelfIntent(this, new PowerStatusEffect(), 5),
+            new BuffSelfIntent(this, new StrengthStatusEffect(), 5),
             SingleUnitAttackIntent.AttackRandomPc(this, 1, 1)
         }
         .PickRandom()

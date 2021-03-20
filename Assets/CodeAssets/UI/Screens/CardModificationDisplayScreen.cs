@@ -49,7 +49,7 @@ public class CardModificationDisplayScreen : MonoBehaviour
             ActionManager.Instance.UpgradeCard(beforeCard);
             if (goldCost != null)
             {
-                GameState.Instance.money -= goldCost.Value;
+                GameState.Instance.Credits -= goldCost.Value;
             }
         });
         CancelButton.onClick.AddListener(() =>

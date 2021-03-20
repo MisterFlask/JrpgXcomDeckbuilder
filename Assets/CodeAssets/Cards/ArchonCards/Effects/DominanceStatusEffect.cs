@@ -19,9 +19,9 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Effects
             return 2;
         }
 
-        public override void OnTurnStart()
+        public override void OnTurnEnd()
         {
-            action().ApplyStatusEffect(OwnerUnit, new PowerStatusEffect());
+            action().ApplyStatusEffect(OwnerUnit, new StrengthStatusEffect());
         }
     }
 }

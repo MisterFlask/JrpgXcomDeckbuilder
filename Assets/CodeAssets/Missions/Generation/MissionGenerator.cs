@@ -55,7 +55,7 @@ public class KillEnemiesMission: Mission
 
     public override void OnSuccess()
     {
-        GameState.Instance.money += MoneyReward;
+        GameState.Instance.Credits += MoneyReward;
     }
 }
 

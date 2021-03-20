@@ -19,5 +19,6 @@ public class CardType
     public static CardType SkillCard = new CardType("Skill");
     public static CardType PowerCard = new CardType("Power");
     public static CardType StatusCard = new CardType("Status");
+    public static CardType ErosionCard = new CardType("Erosion");
 
 }

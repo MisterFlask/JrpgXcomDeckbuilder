@@ -15,7 +15,7 @@ public class ArmoredEnemyUnit : AbstractEnemyUnit
     public override List<AbstractIntent> GetNextIntents()
     {
         return Intents.FixedRotation(
-            Intents.BuffSelfOrHeal(this, new PowerStatusEffect(), 5),
+            Intents.BuffSelfOrHeal(this, new StrengthStatusEffect(), 5),
             Intents.AttackRandomPc(this, 1, 1)
         );
 

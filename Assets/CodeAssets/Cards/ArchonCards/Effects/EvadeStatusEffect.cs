@@ -7,7 +7,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Effects
     {
         public override string Description => "Receive 33% less damage.";
 
-        public override float DefenseReceivedMultiplier()
+        public override float DefenseReceivedIncrementalMultiplier()
         {
             return 0.66f;
         }

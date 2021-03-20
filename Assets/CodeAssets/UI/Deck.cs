@@ -20,7 +20,6 @@ public class BattleDeck
 
     public List<AbstractCard> Hand { get; set; } = new List<AbstractCard>();
 
-
     public CardPosition GetCardPosition(string cardId)
     {
         if (Hand.Where(item => item.Id == cardId).Any())

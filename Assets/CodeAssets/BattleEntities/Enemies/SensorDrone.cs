@@ -61,7 +61,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies
                     .Shuffle()
                     .First(item => !item.IsDead);
 
-                ActionManager.Instance.ApplyStatusEffect(anotherUnitInEnemyParty, new PowerStatusEffect(), Stacks);
+                ActionManager.Instance.ApplyStatusEffect(anotherUnitInEnemyParty, new StrengthStatusEffect(), Stacks);
 
             }
         }

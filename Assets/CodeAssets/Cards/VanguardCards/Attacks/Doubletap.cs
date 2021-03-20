@@ -19,10 +19,10 @@ public class Doubletap : AbstractCard
     }
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        ActionManager.Instance.AttackUnitForDamage(target, Owner, BaseDamage);
+        ActionManager.Instance.AttackUnitForDamage(target, Owner, BaseDamage, this);
         if (target.IsDead)
         {
-            ActionManager.Instance.ApplyStatusEffect(Owner, new PowerStatusEffect(), 1);
+            ActionManager.Instance.ApplyStatusEffect(Owner, new StrengthStatusEffect(), 1);
         }
     }
 }

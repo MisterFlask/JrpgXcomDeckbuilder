@@ -14,7 +14,7 @@ public class Withdraw : AbstractCard
 
     public override string DescriptionInner()
     {
-        return $"Apply {DisplayedDefense()} to an ally.  {OwnerDisplayName()} loses Advanced.";
+        return $"Apply {DisplayedDefense()} to an ally.  {ownerDisplayString()} loses Advanced.";
     }
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

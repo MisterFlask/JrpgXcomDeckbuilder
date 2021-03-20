@@ -12,12 +12,12 @@ public class AdvancedStatusEffect : AbstractStatusEffect
 
     public override string Description => "Doubles damage both dealt and received.";
 
-    public override float DamageReceivedMultiplier()
+    public override float DamageReceivedIncrementalMultiplier()
     {
         return 2f;
     }
 
-    public override float DamageDealtMultiplier()
+    public override float DamageDealtIncrementalMultiplier()
     {
         return 2f;
     }

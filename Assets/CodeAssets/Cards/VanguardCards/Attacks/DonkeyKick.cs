@@ -33,7 +33,7 @@ public class DonkeyKick : AbstractCard
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         Require.NotNull(target);
-        action().AttackUnitForDamage(target, Owner, BaseDamage);
+        action().AttackUnitForDamage(target, Owner, BaseDamage, this);
     }
 
     public override string DescriptionInner()

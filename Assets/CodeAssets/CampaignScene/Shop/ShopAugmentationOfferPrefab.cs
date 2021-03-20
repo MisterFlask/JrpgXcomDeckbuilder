@@ -17,7 +17,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (GameState.Instance.money < this.ShopOffer.Price)
+            if (GameState.Instance.Credits < this.ShopOffer.Price)
             {
                 // TODO:  "You broke?"
                 return;
@@ -25,7 +25,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
 
             // purchase logic
             GameState.Instance.AugmentationInventory.Add(this.ShopOffer.Augmentation);
-            GameState.Instance.money -= this.ShopOffer.Price;
+            GameState.Instance.Credits -= this.ShopOffer.Price;
             GameState.Instance.ShopData.AugmentationOffers.Remove(this.ShopOffer);
         }
 

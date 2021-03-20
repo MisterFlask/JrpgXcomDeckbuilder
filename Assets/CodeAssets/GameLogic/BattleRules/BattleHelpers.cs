@@ -10,7 +10,7 @@ namespace Assets.CodeAssets.Cards
     {
         private static GameState state => GameState.Instance;
 
-        public static IEnumerable<AbstractCard> CardsInHand()
+        public static IEnumerable<AbstractCard> CardsInHandInOrder()
         {
             return state.Deck.Hand;
         }
@@ -47,7 +47,7 @@ namespace Assets.CodeAssets.Cards
 
         public static AbstractCard LeftmostCardInHandThat(Predicate<AbstractCard> pred)
         {
-            foreach(var card in CardsInHand())
+            foreach(var card in CardsInHandInOrder())
             {
                 if (pred(card))
                 {
@@ -56,5 +56,17 @@ namespace Assets.CodeAssets.Cards
             }
             return null;
         }
+        public static AbstractCard RandomCardInHandThat(Predicate<AbstractCard> pred)
+        {
+            foreach (var card in CardsInHandInOrder().Shuffle())
+            {
+                if (pred(card))
+                {
+                    return card;
+                }
+            }
+            return null;
+        }
+
     }
 }

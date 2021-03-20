@@ -23,7 +23,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies
 
 public class VacuumBotAbility : AbstractStatusEffect
 {
-    public override void OnTurnStart()
+    public override void OnTurnEnd()
     {
         var drawPile = GameState.Instance.Deck.DrawPile;
         var discardPile = GameState.Instance.Deck.DiscardPile;

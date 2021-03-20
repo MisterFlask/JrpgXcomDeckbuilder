@@ -21,7 +21,7 @@ public class Strafe : AbstractCard
     {
         CardActions.ActOnAllEnemies((enemy) =>
         {
-            ActionManager.Instance.AttackUnitForDamage(enemy, Owner, BaseDamage);
+            ActionManager.Instance.AttackUnitForDamage(enemy, Owner, BaseDamage, this);
         });
 
     }

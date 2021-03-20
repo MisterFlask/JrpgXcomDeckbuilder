@@ -25,7 +25,7 @@ public class FlankingShot : AbstractCard
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        action().AttackUnitForDamage(target, Owner, BaseDamage);
+        action().AttackUnitForDamage(target, Owner, BaseDamage, this);
         action().ApplyStatusEffect(target, new VulnerableStatusEffect(), 1);
         action().ExhaustCard(this);
     }

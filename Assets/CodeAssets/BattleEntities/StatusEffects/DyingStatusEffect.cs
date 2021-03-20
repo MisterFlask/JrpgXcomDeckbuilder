@@ -13,7 +13,7 @@ public class DyingStatusEffect : AbstractStatusEffect
 
     public override string Description => $"This unit will die in {Stacks} turns.";
 
-    public override void OnTurnStart()
+    public override void OnTurnEnd()
     {
         action().ApplyStatusEffect(OwnerUnit, new DyingStatusEffect(), -1);
 

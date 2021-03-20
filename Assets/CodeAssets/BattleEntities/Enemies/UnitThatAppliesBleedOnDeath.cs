@@ -22,7 +22,7 @@ public class Greywing : AbstractEnemyUnit
     {
         return new List<AbstractIntent>
         {
-            new BuffSelfIntent(this, new PowerStatusEffect()),
+            new BuffSelfIntent(this, new StrengthStatusEffect()),
             SingleUnitAttackIntent.AttackRandomPc(this, 1, 2)
         }
         .PickRandom()

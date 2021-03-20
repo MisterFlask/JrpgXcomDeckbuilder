@@ -23,6 +23,6 @@ public class IneptShot : AbstractCard
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        action().AttackUnitForDamage(target, this.Owner, BaseDamage);
+        action().AttackUnitForDamage(target, this.Owner, BaseDamage, this);
     }
 }

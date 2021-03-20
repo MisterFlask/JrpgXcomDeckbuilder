@@ -17,7 +17,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Effects
             return 2;
         }
 
-        public override void OnTurnStart()
+        public override void OnTurnEnd()
         {
             action().TickDownStatusEffect<MarkedStatusEffect>(OwnerUnit);
         }

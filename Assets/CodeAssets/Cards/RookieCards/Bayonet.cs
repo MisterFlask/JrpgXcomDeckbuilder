@@ -36,7 +36,7 @@ public class Bayonet : AbstractCard
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
         Require.NotNull(target);
-        action().AttackUnitForDamage(target, Owner, BaseDamage);
+        action().AttackUnitForDamage(target, Owner, BaseDamage, this);
         var cardDiscarded = action().PromptDiscardOfSingleCard();
         action().DoAThing(() =>
         {

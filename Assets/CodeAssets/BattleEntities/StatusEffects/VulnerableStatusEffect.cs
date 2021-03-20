@@ -11,7 +11,7 @@ public class VulnerableStatusEffect : AbstractStatusEffect
     
     public override string Description => $"increases damage received by 50%";
 
-    public override float DamageReceivedMultiplier()
+    public override float DamageReceivedIncrementalMultiplier()
     {
         return 1.5f;
     }

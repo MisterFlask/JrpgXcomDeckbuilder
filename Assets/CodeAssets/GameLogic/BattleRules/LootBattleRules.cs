@@ -9,7 +9,7 @@ namespace Assets.CodeAssets.GameLogic.BattleRules
 
         public static void TriggerLootEvent(int money)
         {
-            GameState.Instance.money += money;
+            GameState.Instance.Credits += money;
         }
     }
 }

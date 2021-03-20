@@ -28,7 +28,7 @@ public static class CampaignMapState
         return CampaignLog;
     }
 
-    public static int Money => ServiceLocator.GetGameStateTracker().money;
+    public static int Money => ServiceLocator.GetGameStateTracker().Credits;
 
     public static ShopData shopData;
 
@@ -87,7 +87,7 @@ public abstract class AbstractShopOffer
             return;
         }
         Purchased = true;
-        ServiceLocator.GetGameStateTracker().money -= Price;
+        ServiceLocator.GetGameStateTracker().Credits -= Price;
         MoneyIcon.Instance.Flash();
         InnerOnPurchase();
     }

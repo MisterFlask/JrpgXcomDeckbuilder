@@ -16,7 +16,7 @@ public class TemporaryThorns : AbstractStatusEffect
 
     public override string Description => "Deals damage to attackers equal to number of stacks.  Goes away at start of next turn.";
 
-    public override void OnTurnStart()
+    public override void OnTurnEnd()
     {
         action().RemoveStatusEffect<TemporaryThorns>(OwnerUnit);
     }

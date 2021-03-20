@@ -21,8 +21,8 @@ public class Recklessness : AbstractCard
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        ActionManager.Instance.AttackUnitForDamage(target, Owner, BaseDamage);
-        ActionManager.Instance.ApplyStatusEffect(Owner, new PowerStatusEffect(), 2);
+        ActionManager.Instance.AttackUnitForDamage(target, Owner, BaseDamage, this);
+        ActionManager.Instance.ApplyStatusEffect(Owner, new StrengthStatusEffect(), 2);
         ActionManager.Instance.ApplyStatusEffect(Owner, new DexterityStatusEffect(), -2);
     }
 }

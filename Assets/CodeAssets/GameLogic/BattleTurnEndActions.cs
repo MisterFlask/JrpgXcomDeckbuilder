@@ -10,6 +10,16 @@ public class BattleTurnEndActions
 
     internal void EndTurn()
     {
+        ActionManager.Instance.DoAThing(() => 
+        {
+            gameState.AllyUnitsInBattle.ForEach(item => item.OnTurnEnd());
+        });
+
+        ActionManager.Instance.DoAThing(() =>
+        {
+            gameState.EnemyUnitsInBattle.ForEach(item => item.OnTurnEnd());
+        });
+
         gameState.EnemyUnitsInBattle.ForEach(item => item.ExecuteOnIntentIfAvailable());
         actionManager.DiscardHand();
         StartNewTurn();

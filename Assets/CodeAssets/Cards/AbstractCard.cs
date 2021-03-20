@@ -10,11 +10,13 @@ public abstract class AbstractCard
 {
     public AbstractCard ReferencesAnotherCard { get; set; }
 
+    public bool WasCreated { get; set; } = false;
+
     /// <summary>
     /// if this is empty, any class can use it.
     /// </summary>
     public List<Type> SoldierClassCardPools { get; } = new List<Type>();
-        
+
     public Guid OwnerGuid;
     // TODO: Move to a more explicit magic-words system
     public List<MagicWord> MagicWordsReferencedOnThisCard { get; set; } = new List<MagicWord>();
@@ -69,6 +71,18 @@ public abstract class AbstractCard
         return BattleRules.GetDisplayedDamageOnCard(this);
     }
 
+    public string ownerDisplayString()
+    {
+        if (Owner == null)
+        {
+            return "Owner";
+        }
+        else
+        {
+            return Owner.GetDisplayName(DisplayNameType.SHORT_NAME);
+        }
+    }
+
     public ActionManager action()
     {
         return ServiceLocator.GetActionManager();
@@ -90,13 +104,15 @@ public abstract class AbstractCard
     #endregion
 
 
+    public List<DamageModifier> DamageModifiers = new List<DamageModifier>();
+
 
     public AbstractCard(CardType cardType = null)
     {
         this.CardType = cardType ?? CardType.SkillCard;
         this.Name = this.GetType().Name;
     }
-    int? StaticBaseEnergyCost = null;
+    private int? _staticBaseEnergyCost = null;
 
     /// <summary>
     /// This represents the energy cost PHYSICALLY ON THE CARD
@@ -130,10 +146,18 @@ public abstract class AbstractCard
     public string Description()
     {
         var baseDescription = DescriptionInner();
-        foreach(var sticker in Stickers)
+        foreach (var sticker in Stickers)
         {
             baseDescription += "\n" + sticker.CardDescriptionAddendum;
         }
+
+        if (!DamageModifiers.IsEmpty())
+        {
+            baseDescription += "\n<color=green>";
+            baseDescription += string.Join(",", DamageModifiers.Select(item => item.Name));
+            baseDescription += "</color>";
+        }
+
         return baseDescription;
     }
 
@@ -145,7 +169,7 @@ public abstract class AbstractCard
     public virtual CanPlayCardQueryResult CanPlayInner()
     {
         return CanPlayCardQueryResult.CanPlay();
-    } 
+    }
 
     public CanPlayCardQueryResult CanPlay()
     {
@@ -171,13 +195,13 @@ public abstract class AbstractCard
 
     public virtual void OnDrawInner()
     {
-        
+
     }
-    
+
     public void OnDraw()
     {
         OnDrawInner();
-        foreach(var sticker in Stickers)
+        foreach (var sticker in Stickers)
         {
             sticker.OnCardDrawn(this);
         }
@@ -193,7 +217,7 @@ public abstract class AbstractCard
         var index = cardsInHand.IndexOf(this);
         return index;
     }
-    
+
     public virtual bool ShouldRetainCardInHandAtEndOfTurn()
     {
         return false;
@@ -202,6 +226,11 @@ public abstract class AbstractCard
     public abstract void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid);
 
     public virtual void InHandAtEndOfTurnAction()
+    {
+
+    }
+
+    public virtual void OnStartup()
     {
 
     }
@@ -242,7 +271,7 @@ public abstract class AbstractCard
             };
         }
         OnPlay(target, costPaid);
-        foreach(var sticker in Stickers)
+        foreach (var sticker in Stickers)
         {
             sticker.OnCardPlayed(this, target);
         }
@@ -314,7 +343,7 @@ public abstract class AbstractCard
         Stickers.Add(sticker);
     }
 
-    public  void RemoveSticker<T>() where T: AbstractCardSticker
+    public void RemoveSticker<T>() where T : AbstractCardSticker
     {
         var sticker = Stickers.FirstOrDefault(item => item.GetType() == typeof(T));
         if (sticker == null)
@@ -325,13 +354,15 @@ public abstract class AbstractCard
     }
 
     public bool Unplayable { get; set; }
-
-
-    public string OwnerDisplayName()
-    {
-        return Owner.CharacterFullName;
+    public int? StaticBaseEnergyCost { get => _staticBaseEnergyCost; set
+        {
+            if (value < 0)
+            {
+                value = 0;
+            }
+            _staticBaseEnergyCost = value;
+        }
     }
-
     public void SetCommonCardAttributes(string name,
         Rarity rarity,
         TargetType targetType,
@@ -346,7 +377,7 @@ public abstract class AbstractCard
         this.StaticBaseEnergyCost = baseEnergyCost;
         if (protoGameSprite != null)
         {
-            this.ProtoSprite = protoGameSprite; 
+            this.ProtoSprite = protoGameSprite;
         }
     }
 
@@ -357,8 +388,13 @@ public abstract class AbstractCard
             return false;
         }
 
-        return SoldierClassCardPools.IsEmpty() 
+        return SoldierClassCardPools.IsEmpty()
             || SoldierClassCardPools.Contains(unit.SoldierClass.GetType());
+    }
+
+    public bool NameContains(string s)
+    {
+        return this.Name.ToLower().Contains(s.ToLower());
     }
 
     /// <summary>
@@ -376,6 +412,11 @@ public abstract class AbstractCard
 
     }
 
+
+    public virtual void OnProcWhileThisIsInDeck(AbstractProc proc)
+    {
+
+    }
 }
 
 public class DamageBlob

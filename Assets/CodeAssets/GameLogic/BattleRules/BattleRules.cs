@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Linq;
 using Assets.CodeAssets.Cards;
+using Assets.CodeAssets.Cards.ArchonCards.Effects;
 
 /// <summary>
 /// Responsible for going through all the combat hooks and such that play into how much damage is dealt, by whom, what attributes are applied or removed, and so on.
@@ -54,12 +55,19 @@ public static class BattleRules
     /// <summary>
     /// Source is allowed to be null in cases where isAttack is false. 
     /// </summary>
-    public static void ProcessDamageWithCalculatedModifiers(AbstractBattleUnit damageSource, AbstractBattleUnit target, int baseDamage, bool isAttack = true)
+    public static void ProcessDamageWithCalculatedModifiers(AbstractBattleUnit damageSource, 
+        AbstractBattleUnit target, 
+        AbstractCard nullableCardPlayed, 
+        int baseDamage,
+        bool isAttack = true)
     {
         int totalDamageAfterModifiers = baseDamage;
+
+        // todo: first, process card modifiers (stickers, really)
+
         if (isAttack)
         {
-            totalDamageAfterModifiers = GetAnticipatedDamageToUnit(damageSource, target, baseDamage, isAttack);
+            totalDamageAfterModifiers = GetAnticipatedDamageToUnit(damageSource, target, baseDamage, isAttack, nullableCardPlayed);
         }
 
 
@@ -93,12 +101,15 @@ public static class BattleRules
 
             target.CurrentHp -= damageBlob.Damage;
 
-            if (target.CurrentHp > 0 && isAttack)
+            if (target.CurrentHp > 0 && isAttack && damageBlob.Damage > 0)
             {
                 ProcessAttackDamageReceivedHooks(damageSource, target, damageBlob.Damage);
             }
 
-            ProcessHpLossHooks(damageSource, target, damageBlob.Damage);
+            if (damageBlob.Damage > 0)
+            {
+                ProcessHpLossHooks(damageSource, target, damageBlob.Damage);
+            }
 
             CheckAndRegisterDeath(target, damageSource);
         }
@@ -157,7 +168,9 @@ public static class BattleRules
             {
                 effect.OnDeath(nullableUnitThatKilledMe);
             }
-            ActionManager.Instance.DestroyUnitAndExhaustItsCards(unit);
+
+            BattleRules.ProcessProc(new CharacterDeathProc { CharacterDead = unit });
+            ActionManager.Instance.DestroyUnit(unit);
 
         }
     }
@@ -170,7 +183,7 @@ public static class BattleRules
         }
         foreach (var statusEffect in source.StatusEffects)
         {
-            statusEffect.OnStriking(source, damageAfterBlockingAndModifiers);
+            statusEffect.OnStriking(target, damageAfterBlockingAndModifiers);
         }
 
         ProcessSpecialDamagedRules(source, target, damageAfterBlockingAndModifiers);
@@ -197,7 +210,7 @@ public static class BattleRules
 
         foreach (var attribute in source.StatusEffects)
         {
-            currentTotalDefense *= attribute.DefenseDealtMultiplier();
+            currentTotalDefense *= attribute.DefenseDealtIncrementalMultiplier();
             currentTotalDefense += attribute.DefenseDealtAddition();
         }
 
@@ -206,7 +219,7 @@ public static class BattleRules
         {
             foreach (var attribute in source.StatusEffects)
             {
-                currentTotalDefense *= attribute.DefenseReceivedMultiplier();
+                currentTotalDefense *= attribute.DefenseReceivedIncrementalMultiplier();
                 currentTotalDefense += attribute.DefenseReceivedAddition();
             }
 
@@ -215,11 +228,15 @@ public static class BattleRules
         return (int)currentTotalDefense;
     }
 
-    public static int GetAnticipatedDamageToUnit(AbstractBattleUnit source, AbstractBattleUnit target, int baseDamage, bool isAttackDamage)
+    public static int GetAnticipatedDamageToUnit(AbstractBattleUnit source, AbstractBattleUnit target, int baseDamage, bool isAttackDamage, AbstractCard nullableCardPlayed)
     {
         // first, go through the attacker's attributes
         float currentTotalDamage = baseDamage;
-        currentTotalDamage = CalculateTotalPreBlockDamage(source, target, currentTotalDamage);
+        if (isAttackDamage)
+        { 
+            // modifiers are only used in attacks, not lose-life effects
+            currentTotalDamage = CalculateTotalPreBlockDamage(source, target, baseDamage, nullableCardPlayed);
+        }
 
         if (currentTotalDamage < 0)
         {
@@ -230,25 +247,42 @@ public static class BattleRules
         return (int)currentTotalDamage;
     }
 
-    private static float CalculateTotalPreBlockDamage(AbstractBattleUnit source, AbstractBattleUnit target, float currentTotalDamage)
+    private static float CalculateTotalPreBlockDamage(AbstractBattleUnit source, AbstractBattleUnit target, int currentTotalDamage, AbstractCard nullableCardPlayed)
     {
+        var totalDamageMultiplier = 1f;
+        var totalDamageAddition = 0;
+
         foreach (var attribute in source.StatusEffects)
         {
-            currentTotalDamage *= attribute.DamageDealtMultiplier();
-            currentTotalDamage += attribute.DamageDealtAddition();
+            totalDamageMultiplier += attribute.DamageDealtIncrementalMultiplier();
+            totalDamageAddition += attribute.DamageDealtAddition();
         }
 
-        // then, go through defender's attributes
+        // then, go through defender's attributes (assuming a target right now exists)
         if (target != null)
         {
             foreach (var attribute in target.StatusEffects)
             {
-                currentTotalDamage *= attribute.DamageReceivedMultiplier();
-                currentTotalDamage += attribute.DamageReceivedAddition();
+                totalDamageMultiplier += attribute.DamageReceivedIncrementalMultiplier();
+                totalDamageAddition += attribute.DamageReceivedAddition();
             }
         }
 
-        return currentTotalDamage;
+        //then, the damage mod effects on the card.
+        if (nullableCardPlayed != null)
+        {
+            foreach(var damageModifier in nullableCardPlayed.DamageModifiers)
+            {
+                if (damageModifier.TargetInvariant || target != null) // either a target exists, or we don't need one
+                {
+                    // target-invariant damage modifier effects DO NOT require a target.
+                    totalDamageAddition += damageModifier.GetIncrementalDamageAddition(currentTotalDamage, nullableCardPlayed, target);
+                    totalDamageMultiplier += damageModifier.GetIncrementalDamageMultiplier(currentTotalDamage, nullableCardPlayed, target);
+                }
+            }
+        }
+
+        return (currentTotalDamage + totalDamageAddition) * totalDamageMultiplier;
     }
 
     internal static bool CanFallBack(AbstractBattleUnit underlyingEntity)
@@ -285,9 +319,9 @@ public static class BattleRules
 
         var unitTargeted = BattleScreenPrefab.BattleUnitMousedOver;
 
-        float baseDamage = card.BaseDamage;
+        var baseDamage = card.BaseDamage;
 
-        var totalPreBlockDamage = CalculateTotalPreBlockDamage(card.Owner, unitTargeted, baseDamage);
+        var totalPreBlockDamage = CalculateTotalPreBlockDamage(card.Owner, unitTargeted, baseDamage, card);
 
         return (int)totalPreBlockDamage;
     }
@@ -368,8 +402,35 @@ public static class BattleRules
             character.LevelUp();
         }
     }
+
+    public static void ProcessProc(AbstractProc proc)
+    {
+        foreach(var unit in GameState.Instance.EnemyUnitsInBattle.Concat(GameState.Instance.AllyUnitsInBattle))
+        {
+            foreach(var statusEffect in unit.StatusEffects) 
+            {
+                statusEffect.ProcessProc(proc);
+            }
+        }
+
+        foreach (var card in GameState.Instance.Deck.TotalDeckList)
+        {
+            card.OnProcWhileThisIsInDeck(proc);
+        }
+    }
+
 }
 
+
+public abstract class AbstractProc
+{
+    public AbstractCard TriggeringCardIfAny { get; set; }
+}
+
+public class CharacterDeathProc: AbstractProc
+{
+    public AbstractBattleUnit CharacterDead { get; set; }
+}
 
 public class RetreatingStatusEffect : AbstractStatusEffect
 {
@@ -380,7 +441,7 @@ public class RetreatingStatusEffect : AbstractStatusEffect
 
     public override string Description => "Stacks decreaese by 1 every turn.  When it reaches zero stacks, flee combat.";
 
-    public override void OnTurnStart()
+    public override void OnTurnEnd()
     {
         Stacks--;
 
@@ -404,3 +465,4 @@ public class CombatResult
     public static CombatResult TPK = new CombatResult(false);
     public static CombatResult VICTORY = new CombatResult(true);
 }
+

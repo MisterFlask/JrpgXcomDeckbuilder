@@ -47,13 +47,13 @@ public class SingleUnitAttackIntent : AbstractIntent
     {
         for(int i = 0; i < NumberOfTimesStruck; i++)
         {
-            action.AttackUnitForDamage(Target, Source, BaseDamage);
+            action.AttackUnitForDamage(Target, Source, BaseDamage, null);
         }
     }
 
     public override string GetOverlayText()
     {
-        var totalDamageExpected = BattleRules.GetAnticipatedDamageToUnit(Source, Target, BaseDamage, true);
+        var totalDamageExpected = BattleRules.GetAnticipatedDamageToUnit(Source, Target, BaseDamage, true, null);
         return $"{totalDamageExpected}x{NumberOfTimesStruck}";
     }
 }

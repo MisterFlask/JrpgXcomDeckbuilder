@@ -6,7 +6,7 @@ public static class PerkRoulette
 {
     public static List<SoldierPerk> PossiblePerks => new List<SoldierPerk>
     {
-        new StrongPerk(),
+        new PowerfulPerk(),
         new ToughPerk(),
         new KindPerk(),
         new ViciousPerk(),
@@ -21,7 +21,7 @@ public static class PerkRoulette
 }
 
 
-public class StrongPerk : SoldierPerk
+public class PowerfulPerk : SoldierPerk
 {
     public override string Description()
     {

@@ -20,11 +20,11 @@ public class Grenade : AbstractCard
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        action().AttackUnitForDamage(target, this.Owner, BaseDamage);
+        action().AttackUnitForDamage(target, this.Owner, BaseDamage, this);
 
         foreach(var otherTarget in enemies())
         {
-            action().AttackUnitForDamage(otherTarget, this.Owner, BaseDamage);
+            action().AttackUnitForDamage(otherTarget, this.Owner, BaseDamage, this);
         }
         action().ExhaustCard(this);
     }

@@ -159,21 +159,33 @@ public abstract class AbstractBattleUnit
         CurrentHp = 0;
     }
 
+    /// <summary>
+    /// This happens AFTER all enemies have executed intents.
+    /// </summary>
     public void OnTurnStart()
     {
         ActionManager.Instance.DoAThing(() =>
         {
+
             CurrentBlock = 0;
             if (CurrentFatigue < MaxFatigue)
             {
                 this.CurrentFatigue += 1;
             }
-            foreach(var statusEffect in StatusEffects)
-            {
-                statusEffect.OnTurnStart();
-            }
         });
     }
+
+    /// <summary>
+    /// This occurs whenever the player hits the "end turn" button
+    /// </summary>
+    public void OnTurnEnd()
+    {
+        foreach (var statusEffect in StatusEffects)
+        {
+            statusEffect.OnTurnEnd();
+        }
+    }
+
 
     public void ExecuteOnIntentIfAvailable()
     {
@@ -337,7 +349,7 @@ public abstract class AbstractBattleUnit
             throw new Exception("Initialized difficulty twice!");
         }
         difficultyInitialized = true;
-        ApplyStatusEffect(new PowerStatusEffect(), difficulty);
+        ApplyStatusEffect(new StrengthStatusEffect(), difficulty);
     }
     #endregion
 

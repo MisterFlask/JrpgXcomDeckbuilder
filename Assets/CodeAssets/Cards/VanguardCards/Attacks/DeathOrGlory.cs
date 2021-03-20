@@ -19,8 +19,8 @@ public class DeathOrGlory : AbstractCard
     }
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        ActionManager.Instance.AttackUnitForDamage(target, Owner, BaseDamage);
-        ActionManager.Instance.AttackUnitForDamage(Owner, Owner, BaseDamage/4);
+        ActionManager.Instance.AttackUnitForDamage(target, Owner, BaseDamage, this);
+        ActionManager.Instance.AttackUnitForDamage(Owner, Owner, BaseDamage / 4, this);
 
     }
 }

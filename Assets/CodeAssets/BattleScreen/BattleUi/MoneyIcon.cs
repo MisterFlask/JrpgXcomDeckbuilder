@@ -18,7 +18,7 @@ public class MoneyIcon : MonoBehaviour
 
     public void Update()
     {
-        var currentMoney = GameState.Instance.money;
+        var currentMoney = GameState.Instance.Credits;
         if (lastKnownValue != currentMoney)
         {
             Flash();

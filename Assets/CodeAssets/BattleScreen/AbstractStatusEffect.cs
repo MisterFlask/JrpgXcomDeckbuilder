@@ -64,9 +64,9 @@ public abstract class AbstractStatusEffect: MagicWord
         Name = GetType().Name;
     }
 
-    public virtual void OnTurnStart()
+    public virtual void OnTurnEnd()
     {
-
+        
     }
 
     public virtual void OnDeath(AbstractBattleUnit unitThatKilledMe)
@@ -79,7 +79,7 @@ public abstract class AbstractStatusEffect: MagicWord
 
     }
 
-    public virtual void OnStriking(AbstractBattleUnit unitStriking, int totalDamageDealt)
+    public virtual void OnStriking(AbstractBattleUnit unitStruck, int totalDamageDealt)
     {
 
     }
@@ -94,14 +94,14 @@ public abstract class AbstractStatusEffect: MagicWord
         return 0;
     }
 
-    public virtual float DamageDealtMultiplier()
+    public virtual float DamageDealtIncrementalMultiplier()
     {
-        return 1;
+        return 0;
     }
 
-    public virtual float DamageReceivedMultiplier()
+    public virtual float DamageReceivedIncrementalMultiplier()
     {
-        return 1;
+        return 0;
     }
 
 
@@ -115,14 +115,14 @@ public abstract class AbstractStatusEffect: MagicWord
         return 0;
     }
 
-    public virtual float DefenseDealtMultiplier()
+    public virtual float DefenseDealtIncrementalMultiplier()
     {
-        return 1;
+        return 0;
     }
 
-    public virtual float DefenseReceivedMultiplier()
+    public virtual float DefenseReceivedIncrementalMultiplier()
     {
-        return 1;
+        return 0;
     }
 
     public void AssignOwner(AbstractBattleUnit unit)
@@ -160,6 +160,10 @@ public abstract class AbstractStatusEffect: MagicWord
     {
 
     }
+    public virtual void OnAnyCardDrawn(AbstractCard cardDrawn)
+    {
+
+    }
 
     public BattleUnitAttributePrefab CorrespondingPrefab { get; set; }
 
@@ -169,6 +173,11 @@ public abstract class AbstractStatusEffect: MagicWord
     /// </summary>
     /// <param name="damageBlob"></param>
     public virtual void ModifyPostBlockDamageTaken(DamageBlob damageBlob)
+    {
+
+    }
+
+    public virtual void ProcessProc(AbstractProc proc)
     {
 
     }

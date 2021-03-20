@@ -1,11 +1,39 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
+using Assets.CodeAssets.GameLogic;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 {
-    public class DarkOffering : MonoBehaviour
+    public class DarkOffering : AbstractCard
     {
-        //  Cost 0
-        //  Apply 8 block. Sacrifice.
+        public DarkOffering()
+        {
+            this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
+            this.SetCommonCardAttributes("Dark Offering", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
+            this.BaseDefenseValue = 8;
+        }
+
+        public override string DescriptionInner()
+        {
+            return $"Apply {BaseDefenseValue} block to target.  Sacrifice: Gain 1 energy and draw 1 card.";
+        }
+
+
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
+        {
+            action().ApplyDefense(target, this.Owner, BaseDefenseValue);
+            this.Sacrifice(() =>
+            {
+                action().DoAThing(() =>
+                {
+                    state().energy++;
+                });
+                action().DrawCards(1);
+            });
+        }
+
+
     }
 }

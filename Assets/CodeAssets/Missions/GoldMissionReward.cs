@@ -10,7 +10,7 @@ public class GoldMissionReward : AbstractMissionReward
     }
     public override void OnReward()
     {
-        GameState.Instance.money += MoneyEarned;
+        GameState.Instance.Credits += MoneyEarned;
     }
 
     public override string Description()

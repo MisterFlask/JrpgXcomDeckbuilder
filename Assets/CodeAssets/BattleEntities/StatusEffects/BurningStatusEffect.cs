@@ -10,9 +10,9 @@ public class BurningStatusEffect : AbstractStatusEffect
         ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/firewall", Color.red);
     }
 
-    public override void OnTurnStart()
+    public override void OnTurnEnd()
     {
-        ActionManager.Instance.AttackUnitForDamage(OwnerUnit, null, Stacks);
+        ActionManager.Instance.DamageUnitNonAttack(OwnerUnit, null, Stacks);
         Stacks -= 2;
     }
 

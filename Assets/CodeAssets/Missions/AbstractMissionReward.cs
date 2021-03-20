@@ -24,6 +24,6 @@ public class MoneyMissionReward : AbstractMissionReward
 
     public override void OnReward()
     {
-        GameState.Instance.money+=quantity;
+        GameState.Instance.Credits+=quantity;
     }
 }

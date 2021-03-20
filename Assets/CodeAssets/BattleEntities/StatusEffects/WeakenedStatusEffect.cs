@@ -11,7 +11,7 @@ public class WeakenedStatusEffect : AbstractStatusEffect
 
     public override string Description => "Reduces damage by 1/3.  On stack is removed per turn.";
 
-    public override float DamageDealtMultiplier()
+    public override float DamageDealtIncrementalMultiplier()
     {
         return .666f;
     }

@@ -16,8 +16,8 @@ public class UnitThatAppliesDazedWhenStruck : AbstractEnemyUnit
     {
         return new List<AbstractIntent>
         {
-            new BuffSelfIntent(this, new PowerStatusEffect()),
-            new BuffSelfIntent(this, new PowerStatusEffect()),
+            new BuffSelfIntent(this, new StrengthStatusEffect()),
+            new BuffSelfIntent(this, new StrengthStatusEffect()),
             SingleUnitAttackIntent.AttackRandomPc(this, 10, 1),
             SingleUnitAttackIntent.AttackRandomPc(this, 15, 1),
             SingleUnitAttackIntent.AttackRandomPc(this, 4, 2)
@@ -38,6 +38,6 @@ public class ApplyDazedOnHit : AbstractStatusEffect
 
     public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
     {
-        action().AddCardToDrawPile(new Distracted());
+        action().CreateCardToBattleDeckDrawPile(new Distracted());
     }
 }

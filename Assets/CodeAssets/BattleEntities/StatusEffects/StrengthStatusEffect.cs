@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PowerStatusEffect : AbstractStatusEffect
+public class StrengthStatusEffect : AbstractStatusEffect
 {
-    public PowerStatusEffect()
+    public StrengthStatusEffect()
     {
         this.Name = "Power";
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/weight-lifting-up");

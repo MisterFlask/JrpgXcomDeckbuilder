@@ -28,7 +28,7 @@ public class IndiscriminateFire : AbstractCard
         }
         foreach(var enemy in state().EnemyUnitsInBattle)
         {
-            action().AttackUnitForDamage(enemy, Owner, BaseDamage);
+            action().AttackUnitForDamage(enemy, Owner, BaseDamage, this);
         }
     }
 }

@@ -30,7 +30,7 @@ public class MobilityStatusEffect : AbstractStatusEffect
     {
         if (statusEffectApplied.GetType() == typeof(AdvancedStatusEffect))
         {
-            action().AddCardToHand(new FlankingShot());
+            action().CreateCardToHand(new FlankingShot());
         }
         return stacksAppliedOrDecremented;
     }

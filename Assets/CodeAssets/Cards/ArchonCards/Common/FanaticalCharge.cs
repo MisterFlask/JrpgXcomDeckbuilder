@@ -26,7 +26,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().AttackUnitForDamage(CardTargeting.RandomTargetableEnemy(), Owner, BaseDamage);
+            action().AttackUnitForDamage(CardTargeting.RandomTargetableEnemy(), Owner, BaseDamage, this);
             action().ApplyStatusEffect(target, new AdvancedStatusEffect(), 1);
         }
     }

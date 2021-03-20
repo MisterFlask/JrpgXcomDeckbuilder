@@ -5,6 +5,11 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 {
     public class HurtfulWordsAndGestures : MonoBehaviour
     {
-        // Taunt enemy. 
+        // Taunt enemy.   Cost 0.
+        public HurtfulWordsAndGestures()
+        {
+
+        }
+
     }
 }

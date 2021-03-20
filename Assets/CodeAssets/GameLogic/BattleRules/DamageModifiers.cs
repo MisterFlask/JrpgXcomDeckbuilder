@@ -113,7 +113,7 @@ public class AntiPersonnelDamageModifier : DamageModifier
 
     public override void OnStrike(AbstractCard damageSource, AbstractBattleUnit target)
     {
-        target.ApplyStatusEffect(new TerrorStatusEffect(), 5);
+        target.ApplyStatusEffect(new BindingStatusEffect(), 5);
     }
 }
 

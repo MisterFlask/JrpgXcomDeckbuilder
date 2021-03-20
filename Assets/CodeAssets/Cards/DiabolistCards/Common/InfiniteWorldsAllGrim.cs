@@ -31,7 +31,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             action().ApplyDefense(target, this.Owner, BaseDefenseValue);
             foreach(var enemy in state().EnemyUnitsInBattle)
             {
-                action().ApplyStatusEffect(enemy, new TerrorStatusEffect());
+                action().ApplyStatusEffect(enemy, new BindingStatusEffect());
             }
             action().DrawCards(2);
         }

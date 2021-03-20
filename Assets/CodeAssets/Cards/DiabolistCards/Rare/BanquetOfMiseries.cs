@@ -34,6 +34,8 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
         {
             // todo
             // this.Owner.ApplyAugmentation(new PowerfulPerk());
+
+            
             
         }
     }

@@ -31,7 +31,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().ApplyStatusEffect(target, new TerrorStatusEffect(), 20);
+            action().ApplyStatusEffect(target, new BindingStatusEffect(), 20);
             action().ApplyStatusEffect(target, new VulnerableStatusEffect(), 1);
         }
 

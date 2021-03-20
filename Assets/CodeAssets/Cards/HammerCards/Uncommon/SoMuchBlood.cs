@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
 {
-    public class Loquacious : MonoBehaviour
+    public class SoMuchBlood : MonoBehaviour
     {
-        // Whenever you Taunt an enemy, apply 1 Weak and 1 Vulnerable.
+        // Apply 5 defense, plus another 2 for each 4 missing HP.
     }
 }

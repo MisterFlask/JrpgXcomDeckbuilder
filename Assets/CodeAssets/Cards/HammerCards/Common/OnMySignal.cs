@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.HammerCards.Common
 {
-    public class PowerArmorUpgrade : MonoBehaviour
+    public class OnMySignal : MonoBehaviour
     {
-        // Gain 1 Dexterity.  Cost 1.
+        // Cost 0.  Apply 4 Marked.
     }
 }

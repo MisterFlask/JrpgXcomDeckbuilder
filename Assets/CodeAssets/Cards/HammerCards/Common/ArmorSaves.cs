@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.HammerCards
 {
-    public class FeelNoPain : MonoBehaviour
+    public class ArmorSaves : MonoBehaviour
     {
-        // Gain 5 Barricade. [damage resist, halves each turn]
+        // Apply 5 Barricade. [damage resist, halves each turn]
     }
 }

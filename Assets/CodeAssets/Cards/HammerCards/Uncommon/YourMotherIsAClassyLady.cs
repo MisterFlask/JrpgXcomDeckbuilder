@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
 {
     public class YourMotherIsAClassyLady : MonoBehaviour
     {
-        // Whenever you taunt an enemy, it takes 10 damage.
+        // Whenever you taunt an enemy, apply 2 Marked.
     }
 }

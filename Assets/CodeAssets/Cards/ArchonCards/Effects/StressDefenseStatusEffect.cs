@@ -6,6 +6,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Effects
 {
     public class StressDefenseStatusEffect : AbstractStatusEffect
     {
+
+        public StressDefenseStatusEffect()
+        {
+            Name = "Stress Defense";
+        }
+
         public override string Description => $"Absorbs then next {DisplayedStacks()} Stress this character would receive.";
 
         public override int OverrideStatusEffectApplicationToOwner(

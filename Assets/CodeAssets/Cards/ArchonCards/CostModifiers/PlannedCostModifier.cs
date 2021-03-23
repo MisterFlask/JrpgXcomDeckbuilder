@@ -5,6 +5,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Effects
 {
     public class PlannedCostModifier : AbstractCostModifier
     {
+
         public override int GetCostModifier()
         {
             if (BattleHelpers.DoesAnyEnemyHave<MarkedStatusEffect>())

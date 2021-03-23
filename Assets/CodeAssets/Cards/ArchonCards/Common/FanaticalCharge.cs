@@ -12,7 +12,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
             this.SetCommonCardAttributes(
                 "Fanatical Charge",
                 Rarity.COMMON,
-                TargetType.ALLY,
+                TargetType.NO_TARGET_OR_SELF,
                 CardType.AttackCard,
                 1
                 );
@@ -21,7 +21,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
 
         public override string DescriptionInner()
         {
-            return $"Deal {DisplayedDamage()} damage to a random enemy.  Advance target character.";
+            return $"Deal {DisplayedDamage()} damage to a random enemy. Add a Manuever to your hand.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

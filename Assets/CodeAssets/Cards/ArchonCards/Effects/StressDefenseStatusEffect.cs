@@ -8,7 +8,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Effects
     {
         public override string Description => $"Absorbs then next {DisplayedStacks()} Stress this character would receive.";
 
-        public override int OnAnyStatusEffectApplicationToOwner(
+        public override int OverrideStatusEffectApplicationToOwner(
             AbstractStatusEffect statusEffectApplied,
             int numStacksApplied)
         {

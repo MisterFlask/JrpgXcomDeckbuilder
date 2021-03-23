@@ -10,6 +10,11 @@ public abstract class AbstractCard
 {
     public AbstractCard ReferencesAnotherCard { get; set; }
 
+
+    public int SingleTurnCostModifier { get; set; } = 0;
+
+    public List<AbstractCostModifier> PersistentCostModifiers = new List<AbstractCostModifier>();
+
     public bool WasCreated { get; set; } = false;
 
     /// <summary>
@@ -121,7 +126,7 @@ public abstract class AbstractCard
     /// <returns></returns>
     public virtual int BaseEnergyCost()
     {
-        return StaticBaseEnergyCost ?? 1;
+        return (StaticBaseEnergyCost ?? 1) + SingleTurnCostModifier;
     }
 
 
@@ -465,4 +470,9 @@ public class CanPlayCardQueryResult
 
     public string ReasonUnplayable { get; set; }
     public bool Playable { get; set; }
+}
+
+public abstract class AbstractCostModifier
+{
+    public abstract int GetCostModifier();
 }

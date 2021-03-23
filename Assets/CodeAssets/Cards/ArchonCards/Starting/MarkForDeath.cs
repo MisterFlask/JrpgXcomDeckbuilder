@@ -19,17 +19,17 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
                 1
                 );
 
-            BaseDamage = 5;
+            BaseDamage = 3;
         }
 
         public override string DescriptionInner()
         {
-            return $"Deal {DisplayedDamage()}.  Apply Marked.";
+            return $"Deal {DisplayedDamage()}.  Apply 2 Marked.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().ApplyStatusEffect(target, new MarkedStatusEffect());
+            action().ApplyStatusEffect(target, new MarkedStatusEffect(), 2);
             action().AttackUnitForDamage(target, Owner, BaseDamage, this);
         }
     }

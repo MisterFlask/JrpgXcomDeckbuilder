@@ -7,6 +7,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
     {
         // Technocannibalize:  Gain 1 energy.
         // Increase the damage and block of ALL created cards in your deck by 2.  Add one Ontological Waste to your discard pile.
+        // Inferno: Then do it again.
         // Cost 0.
     }
 }

@@ -165,6 +165,16 @@ public class ActionManager : MonoBehaviour
         });
     }
 
+    public void ApplyDefenseFromCard(AbstractCard cardPlayed, AbstractBattleUnit target)
+    {
+        ApplyDefense(target, cardPlayed.Owner, cardPlayed.BaseDefenseValue);
+    }
+
+    public void AttackWithCard(AbstractCard cardPlayed, AbstractBattleUnit target)
+    {
+        AttackUnitForDamage(target, cardPlayed.Owner, cardPlayed.BaseDamage, cardPlayed);
+    }
+
     /// <summary>
     ///  Rules for taunting:
     ///  It is ONLY allowed on attacks that are NOT targeting the unit in question.

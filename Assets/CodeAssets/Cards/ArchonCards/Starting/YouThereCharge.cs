@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.BattleEntities.StatusEffects;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.ArchonCards
@@ -8,7 +9,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards
         public GiveGround()
         {
             this.SetCommonCardAttributes(
-                "You there!  Charge!",
+                "Give ground",
                 Rarity.COMMON,
                 TargetType.ALLY,
                 CardType.SkillCard,
@@ -18,12 +19,13 @@ namespace Assets.CodeAssets.Cards.ArchonCards
 
         public override string DescriptionInner()
         {
-            return "Advance an ally.  Apply 2 Temporary Strength to that ally.";
+            return "Apply Advanced to an ally.  That ally gains +1 Temporary Strength.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new AdvancedStatusEffect());
+            action().ApplyStatusEffect(target, new TemporaryStrengthStatusEffect());
         }
     }
 }

@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.ArchonCards.Effects
 {
-    public class DominanceStatusEffect : AbstractStatusEffect
+    public class AscendanceStatusEffect : AbstractStatusEffect
     {
-        public static string NAME = "Dominance";
+        public static string NAME = "Ascendance";
 
-        public DominanceStatusEffect()
+        public AscendanceStatusEffect()
         {
-            this.Name = "Dominance";
+            this.Name = "Ascendance";
         }
 
         public override string Description => $"This character gains {DisplayedStacks()} Power each turn.";

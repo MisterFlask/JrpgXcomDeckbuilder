@@ -150,7 +150,7 @@ public abstract class AbstractStatusEffect: MagicWord
     }
 
     // Returns the number of stacks that are to be applied, after processing.
-    public virtual int OnAnyStatusEffectApplicationToOwner(AbstractStatusEffect statusEffectApplied, int stacksAppliedOrDecremented)
+    public virtual int OverrideStatusEffectApplicationToOwner(AbstractStatusEffect statusEffectApplied, int stacksAppliedOrDecremented)
     {
         return stacksAppliedOrDecremented;
     }

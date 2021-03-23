@@ -21,7 +21,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
 
         public override string DescriptionInner()
         {
-            return $"The next time you play any card, play it again.";
+            return $"The next time you play ANY card, play it again.  Planned.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
@@ -29,5 +29,26 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
             
         }
         /// duplicate the next card played by anyone
+    }
+
+
+    public class LogisticalSupportStatusEffect: AbstractStatusEffect
+    {
+        public LogisticalSupportStatusEffect()
+        {
+            Name = "Logistical Support";
+        }
+
+        public override string Description => "Duplicates the next card played by ANY character.";
+
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
+        {
+            var target = targetOfCard;
+            if (target.IsDead)
+            {
+                target = CardTargeting.RandomTargetableEnemy();
+            }
+            cardPlayed.EvokeCardEffect(target, new EnergyPaidInformation());
+        }
     }
 }

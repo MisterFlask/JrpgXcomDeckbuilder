@@ -25,7 +25,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
 
         public override string DescriptionInner()
         {
-            return $"Apply 10 Stress Defense to ALL characters.  Apply {BaseDefenseValue} Defense to ALL characters.";
+            return $"Apply 10 Stress Defense to ALL characters.  Apply {DisplayedDefense()} Defense to ALL characters.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
@@ -33,7 +33,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
             foreach(var character in GameState.Instance.AllyUnitsInBattle)
             {
                 action().ApplyStatusEffect(character, new StressDefenseStatusEffect(), 10);
-                action().ApplyDefense(character, Owner, BaseDefenseValue);
+                action().ApplyDefenseFromCard(this, character);
             }
         }
     }

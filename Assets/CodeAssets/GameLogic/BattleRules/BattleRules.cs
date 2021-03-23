@@ -31,7 +31,7 @@ public static class BattleRules
             }
             else
             {
-                stacksAppliedOrDecremented = status.OnAnyStatusEffectApplicationToOwner(effectApplied, stacksAppliedOrDecremented);
+                stacksAppliedOrDecremented = status.OverrideStatusEffectApplicationToOwner(effectApplied, stacksAppliedOrDecremented);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
+using Assets.CodeAssets.Cards.ArchonCards.Effects;
 using System.Collections;
 using UnityEngine;
 
@@ -14,14 +15,15 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
                 Rarity.UNCOMMON,
                 TargetType.ALLY,
                 CardType.PowerCard,
-                2
+                3
                 );
-            this.BaseDamage = 5;
+            this.PersistentCostModifiers.Add(new PlannedCostModifier());
         }
+
 
         public override string DescriptionInner()
         {
-            return $"OTHER allies gain +1 strength per turn.";
+            return $"OTHER allies gain +1 strength per turn.  Planned.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

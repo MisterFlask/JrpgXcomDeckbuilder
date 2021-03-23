@@ -6,7 +6,6 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
 {
     public class EyeForAnEye : AbstractCard
     {
-        private int StacksOfRetaliateToApply = 2;
 
         public EyeForAnEye()
         {
@@ -15,21 +14,22 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
                 "Eye for an Eye",
                 Rarity.COMMON,
                 TargetType.ALLY,
-                CardType.PowerCard,
-                0
+                CardType.SkillCard,
+                1
                 );
-
-
         }
+
+        private int StacksOfRetaliateToApply = 3;
 
         public override string DescriptionInner()
         {
-            return $"Apply {StacksOfRetaliateToApply} Thorns.  If the character has >40 stress, do it again.";
+            return $"Apply {StacksOfRetaliateToApply} Retaliate. Exhaust.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new ThornsStatusEffect(), StacksOfRetaliateToApply);
+            this.ExhaustAsAction();
         }
     }
 }

@@ -5,7 +5,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Effects
 {
     public class TemporaryHpStatusEffect : AbstractStatusEffect
     {
-        public override string Description => "Temporary HP";
+
+        public TemporaryHpStatusEffect()
+        {
+            Name = "Temporary HP";
+        }
+        public override string Description => "If you would lose HP, lose this instead.";
 
         public override void ModifyPostBlockDamageTaken(DamageBlob damageBlob)
         {

@@ -29,7 +29,6 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             // todo
-            // 
         }
     }
 }

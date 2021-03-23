@@ -3,8 +3,25 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.ArchonCards.Rare
 {
-    public class OffscreenArtillery : MonoBehaviour
+    public class OffscreenArtillery : AbstractCard
     {
-        // Deal 10 damage to a random enemy 3 times.  Buster.
+        public OffscreenArtillery()
+        {
+            DamageModifiers.Add(new BusterDamageModifier());
+            SetCommonCardAttributes("Offscreen Artillery", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.AttackCard, 3);
+            this.BaseDamage = 13;
+        }
+
+        public override string DescriptionInner()
+        {
+            return $"Deal {DisplayedDamage()} damage to a random enemy 3 times.  Buster.";
+        }
+
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
+        {
+            action().AttackWithCard(this, CardTargeting.RandomTargetableEnemy());
+            action().AttackWithCard(this, CardTargeting.RandomTargetableEnemy());
+            action().AttackWithCard(this, CardTargeting.RandomTargetableEnemy());
+        }
     }
 }

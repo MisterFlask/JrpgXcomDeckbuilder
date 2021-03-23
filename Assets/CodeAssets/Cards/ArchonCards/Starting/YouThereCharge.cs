@@ -10,7 +10,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards
         {
             this.SetCommonCardAttributes(
                 "Give ground",
-                Rarity.COMMON,
+                Rarity.BASIC,
                 TargetType.ALLY,
                 CardType.SkillCard,
                 1

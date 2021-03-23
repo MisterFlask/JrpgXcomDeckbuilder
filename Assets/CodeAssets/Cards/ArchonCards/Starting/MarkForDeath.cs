@@ -13,7 +13,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
             this.SoldierClassCardPools.Add(typeof(ArchonSoldierClass)); //todo: remove, this is a starting card
             this.SetCommonCardAttributes(
                 "Mark For Death",
-                Rarity.COMMON,
+                Rarity.BASIC,
                 TargetType.ENEMY,
                 CardType.AttackCard,
                 1

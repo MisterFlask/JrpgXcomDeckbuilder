@@ -12,7 +12,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Back To The Pit", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 3);
 
-            this.DamageModifiers.Add(new SlayRule("Relieve 10 stress for ALL allies.", (killedUnit) =>
+            this.DamageModifiers.Add(new LethalTriggerDamageModifier("Relieve 10 stress for ALL allies.", (killedUnit) =>
             {
                 foreach(var ally in state().AllyUnitsInBattle)
                 {

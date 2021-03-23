@@ -1,4 +1,5 @@
-﻿using Assets.CodeAssets.Cards.ArchonCards.Effects;
+﻿using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
+using Assets.CodeAssets.Cards.ArchonCards.Effects;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
     {
         public DefensivePerimeter()
         {
+            this.SoldierClassCardPools.Add(typeof(ArchonSoldierClass));
             SetCommonCardAttributes("Defensive Perimeter", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
         }
 

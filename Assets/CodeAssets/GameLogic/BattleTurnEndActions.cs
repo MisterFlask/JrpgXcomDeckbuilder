@@ -10,6 +10,7 @@ public class BattleTurnEndActions
 
     internal void EndTurn()
     {
+        actionManager.DiscardHand();
         ActionManager.Instance.DoAThing(() => 
         {
             gameState.AllyUnitsInBattle.ForEach(item => item.OnTurnEnd());
@@ -21,7 +22,12 @@ public class BattleTurnEndActions
         });
 
         gameState.EnemyUnitsInBattle.ForEach(item => item.ExecuteOnIntentIfAvailable());
-        actionManager.DiscardHand();
+
+        foreach(var card in GameState.Instance.Deck.TotalDeckList)
+        {
+            card.TemporaryCostMod = 0; // these get reset to 0 at the beginning of each turn.
+        }
+
         StartNewTurn();
     }
 

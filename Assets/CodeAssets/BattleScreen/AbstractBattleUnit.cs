@@ -53,6 +53,10 @@ public abstract class AbstractBattleUnit
 
     public bool IsEnemy { get => !IsAlly;  }
 
+    public bool IsElite { get; set; } = false;
+
+    public bool IsBoss { get; set; } = false;
+
     // Expected to be empty for enemies
     public List<AbstractCard> StartingCardsInDeck { get; set; } = new List<AbstractCard>();
 

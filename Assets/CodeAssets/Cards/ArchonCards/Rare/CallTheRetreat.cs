@@ -28,7 +28,12 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            // todo
+            foreach(var ally in state().AllyUnitsInBattle)
+            {
+                action().ApplyStress(ally, 10);
+            }
+
+            action().FleeCombat();
         }
     }
 }

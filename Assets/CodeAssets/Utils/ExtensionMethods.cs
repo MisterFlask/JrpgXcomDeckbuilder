@@ -366,7 +366,7 @@ public static class ExtensionMethods
         var ownerName = abstractCard.Owner?.CharacterFullName ?? "Communal";
         hyperCard.SetCardTopText($"{ownerName} | {abstractCard.CardType}");
 
-        hyperCard.SetCardEnergyCost(abstractCard.BaseEnergyCost());
+        hyperCard.SetCardEnergyCost(abstractCard.GetDisplayedEnergyCost());
         hyperCard.LogicalCardId = abstractCard.Id;
         hyperCard.LogicalCard = abstractCard;
         

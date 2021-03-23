@@ -18,7 +18,6 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
                 CardType.SkillCard,
                 2
                 );
-
             this.BaseDefenseValue = 10;
             
         }

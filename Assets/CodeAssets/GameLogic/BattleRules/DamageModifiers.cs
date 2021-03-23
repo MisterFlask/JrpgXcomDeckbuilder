@@ -135,13 +135,13 @@ public class StrengthScalingDamageModifier : DamageModifier
 
 }
 
-public class SlayRule: DamageModifier
+public class LethalTriggerDamageModifier: DamageModifier
 {
     private Action<AbstractBattleUnit> actToPerform;
-    public SlayRule(string actionDescription, Action<AbstractBattleUnit> action)
+    public LethalTriggerDamageModifier(string actionDescription, Action<AbstractBattleUnit> action)
     {
         this.actToPerform = action;
-        this.Name = "Slay";
+        this.Name = "Lethal";
         this.Description = actionDescription;
         
     }

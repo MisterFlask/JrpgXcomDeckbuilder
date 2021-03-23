@@ -11,7 +11,7 @@ public abstract class AbstractCard
     public AbstractCard ReferencesAnotherCard { get; set; }
 
 
-    public int SingleTurnCostModifier { get; set; } = 0;
+    public int TemporaryCostMod { get; set; } = 0;
 
     public List<AbstractCostModifier> PersistentCostModifiers = new List<AbstractCostModifier>();
 
@@ -126,9 +126,17 @@ public abstract class AbstractCard
     /// <returns></returns>
     public virtual int BaseEnergyCost()
     {
-        return (StaticBaseEnergyCost ?? 1) + SingleTurnCostModifier;
+        return (StaticBaseEnergyCost ?? 1);
     }
 
+    public int GetDisplayedEnergyCost()
+    {
+        return BaseEnergyCost()
+            + TemporaryCostMod
+            + PersistentCostModifiers
+                .Select(item => item.GetCostModifier())
+                .Sum();
+    }
 
     /// <summary>
     /// This represents the energy cost ACTUALLY PAID (e.g. via bloodprice)
@@ -136,15 +144,18 @@ public abstract class AbstractCard
     /// <returns></returns>
     public virtual EnergyPaidInformation GetNetEnergyCost()
     {
+        var cost = BaseEnergyCost() 
+            + TemporaryCostMod 
+            + PersistentCostModifiers
+                .Select(item => item.GetCostModifier())
+                .Sum();
+
         return new EnergyPaidInformation
         {
-            EnergyCost = BaseEnergyCost()
+            EnergyCost = cost
         };
     }
 
-    public int EnergyCostMod = 0;
-
-    public int EnergyCost => EnergyCostMod + BaseEnergyCost();
 
     public abstract string DescriptionInner();
 

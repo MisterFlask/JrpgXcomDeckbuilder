@@ -214,12 +214,16 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    public void DrawCards(int n = 1, QueueingType queueingType = QueueingType.TO_BACK)
+    public void DrawCards(int n = 1, QueueingType queueingType = QueueingType.TO_BACK, Action<List<AbstractCard>> performOnCards = null)
     {
         QueuedActions.ImmediateAction(() =>
         {
-            var hand = deck.DrawNextNCards(n);
-            ServiceLocator.GetCardAnimationManager().AddHypercardsToHand(hand.Select(item => item.CreateHyperCard()).ToList());
+            var cardsToPutInHand = deck.DrawNextNCards(n);
+            ServiceLocator.GetCardAnimationManager().AddHypercardsToHand(cardsToPutInHand.Select(item => item.CreateHyperCard()).ToList());
+            if (performOnCards != null)
+            {
+                performOnCards(cardsToPutInHand);
+            }
         }, queueingType);
     }
 

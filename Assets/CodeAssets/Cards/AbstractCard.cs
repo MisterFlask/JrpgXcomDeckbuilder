@@ -10,7 +10,7 @@ public abstract class AbstractCard
 {
     public AbstractCard ReferencesAnotherCard { get; set; }
 
-
+    public int MagicNumber { get; set; }
     public int TemporaryCostMod { get; set; } = 0;
 
     public List<AbstractCostModifier> PersistentCostModifiers = new List<AbstractCostModifier>();
@@ -486,4 +486,17 @@ public class CanPlayCardQueryResult
 public abstract class AbstractCostModifier
 {
     public abstract int GetCostModifier();
+}
+
+public class RestOfCombatCostModifier : AbstractCostModifier
+{
+    int modifier = 0;
+    public RestOfCombatCostModifier(int mod)
+    {
+        this.modifier = mod;
+    }
+    public override int GetCostModifier()
+    {
+        return modifier;
+    }
 }

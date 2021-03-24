@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 {
     public class ChaosEngineer : MonoBehaviour
     {
-        // Cards you own gain Inferno: Draw a card.
+        // Whenever you play a card that targets an enemy, apply 2 Burning to that enemy.
     }
 }

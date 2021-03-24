@@ -20,7 +20,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
                 }
             }));
 
-            this.DamageModifiers.Add(new AntiTitanDamageModifier());
+            this.DamageModifiers.Add(new SlayerDamageModifier());
         }
 
         public override string DescriptionInner()

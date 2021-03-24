@@ -22,6 +22,8 @@ public abstract class SoldierPerk
     public List<string> CompatibleSoldierGuids = new List<string>();
     public List<AbstractBattleUnit> CompatibleSoldiers => CompatibleSoldierGuids.ConvertGuidsToSoldiers();
 
+    public List<DamageModifier> DamageModifiers = new List<DamageModifier>();
+
     public virtual void PerformAtBeginningOfCombat(AbstractBattleUnit soldierAffected)
     {
 

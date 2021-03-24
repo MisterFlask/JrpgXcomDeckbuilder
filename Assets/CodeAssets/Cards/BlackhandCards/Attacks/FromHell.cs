@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
 {
     public class FromHell : MonoBehaviour
     {
-        // Deal 2 damage, and apply that much burning. When exahusted, add it back into your hand and it gains 2 damage.
+        // Deal 2 damage.  Inferno: ALL copies of this card deal 4 more damage for the rest of combat.
     }
 }

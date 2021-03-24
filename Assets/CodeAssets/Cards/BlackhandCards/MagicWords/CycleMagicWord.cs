@@ -9,6 +9,6 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.MagicWords
 
         public override string MagicWordTitle => "Cycle";
 
-        public override string MagicWordDescription => "Discard a card, then draw a card.";
+        public override string MagicWordDescription => "Discard this card, then draw a card.";
     }
 }

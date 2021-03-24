@@ -18,11 +18,11 @@ public class BurningStatusEffect : AbstractStatusEffect
 
     public override void OnApplicationOrIncrease()
     {
-        var stacksOfFlammable = OwnerUnit.GetStatusEffect<FlammableStatusEffect>();
+        var stacksOfFlammable = OwnerUnit.GetStatusEffect<FumesStatusEffect>();
         if (stacksOfFlammable != null)
         {
             var stacks = stacksOfFlammable.Stacks;
-            ActionManager.Instance.RemoveStatusEffect<FlammableStatusEffect>(OwnerUnit);
+            ActionManager.Instance.RemoveStatusEffect<FumesStatusEffect>(OwnerUnit);
             ActionManager.Instance.ApplyStatusEffect(OwnerUnit, new BurningStatusEffect(), stacks);
         }
     }

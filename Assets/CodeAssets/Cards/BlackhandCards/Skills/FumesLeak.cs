@@ -17,7 +17,7 @@ public class FumesLeak : AbstractCard
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
     {
-        action().ApplyStatusEffect(target, new FlammableStatusEffect(), 8);
+        action().ApplyStatusEffect(target, new FumesStatusEffect(), 8);
         foreach(var ally in state().AllyUnitsInBattle)
         {
             action().ApplyDefense(ally, Owner, BaseDefenseValue);

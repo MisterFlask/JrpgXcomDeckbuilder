@@ -82,9 +82,9 @@ public class PrecisionDamageModifier : DamageModifier
     }
 }
 
-public class AntiTitanDamageModifier : DamageModifier
+public class SlayerDamageModifier : DamageModifier
 {
-    public AntiTitanDamageModifier()
+    public SlayerDamageModifier()
     {
         this.Name = "Anti-Titan";
         this.Description = "Deals +50% damage to targets with >300 maximum hit points.";
@@ -98,9 +98,9 @@ public class AntiTitanDamageModifier : DamageModifier
         return 0;
     }
 }
-public class AntiPersonnelDamageModifier : DamageModifier
+public class SweeperDamageModifier : DamageModifier
 {
-    public AntiPersonnelDamageModifier()
+    public SweeperDamageModifier()
     {
         this.Name = "Anti-Personnel";
         this.Description = "Applies 5 Terror on hit.  Deal +50% damage against enemies with the Horde characteristic.";

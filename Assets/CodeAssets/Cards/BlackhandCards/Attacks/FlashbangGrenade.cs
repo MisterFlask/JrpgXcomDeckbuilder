@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
 {
     public class FlashbangGrenade : MonoBehaviour
     {
-        // AoE Vulnerable to all enemies, and 2 damage.  Exhaust.
+        // Apply 1 Vulnerable to all enemies.  Ambush: Gain 1 energy.  Exhaust.  Cost 0.
     }
 }

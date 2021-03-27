@@ -5,7 +5,10 @@ namespace Assets.CodeAssets.BattleEntities.StatusEffects
 {
     public class TemporaryStrengthStatusEffect : AbstractStatusEffect
     {
-        public override string Description => $"Deal {DisplayedStacks()} more damage with attacks.";
+        public TemporaryStrengthStatusEffect()
+        {
+            this.Name = "Temporary Strength";
+        }
 
         public override int DamageDealtAddition()
         {
@@ -14,7 +17,9 @@ namespace Assets.CodeAssets.BattleEntities.StatusEffects
 
         public override void OnTurnEnd()
         {
-            this.Stacks = 0;
+            Stacks = 0;
         }
+
+        public override string Description => $"Deal {DisplayedStacks()} additional damage with attacks.  Lose it at end of turn.";
     }
 }

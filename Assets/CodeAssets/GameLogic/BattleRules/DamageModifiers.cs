@@ -1,6 +1,8 @@
-﻿using Assets.CodeAssets.Cards.ArchonCards.Effects;
+﻿using Assets.CodeAssets.BattleEntities.StatusEffects;
+using Assets.CodeAssets.Cards.ArchonCards.Effects;
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public abstract class DamageModifier
@@ -23,7 +25,7 @@ public abstract class DamageModifier
 
     }
 
-    public virtual void OnStrike(AbstractCard damageSource, AbstractBattleUnit target)
+    public virtual void OnStrike(AbstractCard damageSource, AbstractBattleUnit target, int totalDamageAfterModifiers)
     {
     }
 
@@ -102,18 +104,19 @@ public class SweeperDamageModifier : DamageModifier
 {
     public SweeperDamageModifier()
     {
-        this.Name = "Anti-Personnel";
-        this.Description = "Applies 5 Terror on hit.  Deal +50% damage against enemies with the Horde characteristic.";
-    }
-    public override float GetIncrementalDamageMultiplier(int currentBaseDamage, AbstractCard damageSource, AbstractBattleUnit target)
-    {
-        //todo
-        return 0;
+        this.Name = "Sweeper";
+        this.Description = "Deals 30% inflicted damage to up to 2 other random targets.  (Does not proc on-hits.)";
     }
 
-    public override void OnStrike(AbstractCard damageSource, AbstractBattleUnit target)
+    public override void OnStrike(AbstractCard damageSource, AbstractBattleUnit target, int preBlockDamage)
     {
-        target.ApplyStatusEffect(new BindingStatusEffect(), 5);
+        var otherPossibleTargets = GameState.Instance.EnemyUnitsInBattle
+            .Where(item => item != target)
+            .Where(item => item.IsTargetable())
+            .Shuffle()
+            .TakeUpTo(2)
+            .ToList();
+        ActionManager.Instance.DamageUnitNonAttack(target, damageSource.Owner, (int)(.3f * preBlockDamage));
     }
 }
 

@@ -12,10 +12,9 @@ public class RookieClass : AbstractSoldierClass
         return new List<AbstractCard>
         {
             new Defend(),
-            new IneptShot(),
-            new IneptShot(),
-            new Defend(),
-            new Bayonet()
+            new Attack(),
+            new Grenade(),
+            new CoveringFire()
         };
     }
 

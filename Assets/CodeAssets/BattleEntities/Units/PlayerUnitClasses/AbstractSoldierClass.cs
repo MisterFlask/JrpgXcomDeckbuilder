@@ -13,7 +13,27 @@ public abstract class AbstractSoldierClass
     /// <summary>
     /// Starting cards are held by ALL members of a class
     /// </summary>
-    public abstract List<AbstractCard> StartingCards();
+    public virtual List<AbstractCard> StartingCards()
+    {
+        return new List<AbstractCard>
+        {
+            new Attack(),
+            new Defend(),
+            GetRandomCardOfRarity(Rarity.COMMON)
+        };
+            
+    }
+
+    public AbstractCard GetRandomCardOfRarity(Rarity rarity)
+    {
+        var possibilities=  UniqueCardRewardPool().Where(item => item.Rarity.Equals(rarity));
+        if (possibilities.IsEmpty())
+        {
+            return null;
+        }
+
+        return possibilities.PickRandom().CopyCard();
+    }
 
     public virtual List<AbstractCard> UniqueCardRewardPool()
     {

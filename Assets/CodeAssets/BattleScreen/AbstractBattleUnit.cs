@@ -128,6 +128,11 @@ public abstract class AbstractBattleUnit
         }
     }
 
+    internal bool IsTargetable()
+    {
+        return !IsDead;
+    }
+
     public AbstractStatusEffect GetStatusEffect<T>()
     {
         return this.StatusEffects.Where(item => item is T).FirstOrDefault();

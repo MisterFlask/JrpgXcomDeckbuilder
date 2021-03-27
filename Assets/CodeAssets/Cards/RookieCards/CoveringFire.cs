@@ -8,7 +8,7 @@ public class CoveringFire : AbstractCard
     public CoveringFire()
     {
         SoldierClassCardPools.Add(typeof(RookieClass));
-        this.BaseDamage = 2;
+        this.BaseDamage = 4;
         TargetType = TargetType.ENEMY;
         CardType = CardType.AttackCard;
         Name = "Covering Fire";
@@ -16,7 +16,7 @@ public class CoveringFire : AbstractCard
 
     public override int BaseEnergyCost()
     {
-        return 0;
+        return 1;
     }
 
     public override string DescriptionInner()

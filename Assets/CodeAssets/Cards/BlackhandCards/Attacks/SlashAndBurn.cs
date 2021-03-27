@@ -12,7 +12,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
 
         public override string DescriptionInner()
         {
-            return $"Deal 10 damage.  Inferno: Draw a card.  Ambush: Then deal another 5 damage.";
+            return $"Deal {DisplayedDamage()} damage.  Inferno: Draw a card.  Ambush: Then deal another {DisplayedDamage()}.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
@@ -22,6 +22,11 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
             {
                 action().DrawCards(1);
             });
+            CardAbilityProcs.Ambush(this, () =>
+            {
+                action().AttackWithCard(this, target);
+            });
+            
         }
     }
 }

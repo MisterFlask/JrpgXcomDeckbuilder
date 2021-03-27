@@ -23,7 +23,11 @@ public static class ExtensionMethods
         return GameState.Instance.Deck.DiscardPile.Contains(card);
     }
 
-
+    public static IEnumerable<T> TakeUpTo<T>(this IEnumerable<T> list, int num)
+    {
+        var count = list.Count();
+        return list.Take(count);
+    }
 
     public static List<AbstractBattleUnit> ConvertGuidsToSoldiers(this IEnumerable<string> guids)
     {

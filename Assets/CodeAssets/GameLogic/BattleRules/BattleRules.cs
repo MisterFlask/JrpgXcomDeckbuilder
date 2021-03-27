@@ -70,6 +70,10 @@ public static class BattleRules
             totalDamageAfterModifiers = GetAnticipatedDamageToUnit(damageSource, target, baseDamage, isAttack, nullableCardPlayed);
         }
 
+        foreach(var damageMod in nullableCardPlayed.DamageModifiers)
+        {
+            damageMod.OnStrike(nullableCardPlayed, target, totalDamageAfterModifiers);
+        }
 
         var damageDealtAfterBlocking = totalDamageAfterModifiers;
         if (target.CurrentBlock >= totalDamageAfterModifiers)

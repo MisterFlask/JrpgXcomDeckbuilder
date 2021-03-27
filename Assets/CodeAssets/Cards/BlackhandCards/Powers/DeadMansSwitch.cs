@@ -5,7 +5,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 {
     public class DeadMansSwitch : MonoBehaviour
     {
-        // At the beginning of your turn, apply 2 Fumes to a random enemy.
+        // At the beginning of your turn, apply 2 Fumes to a random enemy.  Cost 0.
         // If this character dies, apply 40 burning to ALL enemies.
     }
 }

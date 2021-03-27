@@ -89,6 +89,14 @@ namespace Assets.CodeAssets.Cards
                 BattleRules.ProcessProc(new SacrificeProc { TriggeringCardIfAny = card });
             }
         }
+
+        public static void Ambush(this AbstractCard card, Action thingToDo)
+        {
+            if (GameState.Instance.BattleTurn <= 3)
+            {
+                thingToDo();
+            }
+        }
     }
 
 

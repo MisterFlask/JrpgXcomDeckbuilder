@@ -64,9 +64,20 @@ public abstract class AbstractStatusEffect: MagicWord
         Name = GetType().Name;
     }
 
+    /// <summary>
+    ///  This should happen mostly on damage effects on the enemy.
+    /// </summary>
     public virtual void OnTurnEnd()
     {
         
+    }
+
+    /// <summary>
+    ///  This should happen mostly on debuff effects on the enemy.
+    /// </summary>
+    public virtual void OnTurnStart()
+    {
+
     }
 
     public virtual void OnDeath(AbstractBattleUnit unitThatKilledMe)

@@ -13,12 +13,13 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 
         public override string DescriptionInner()
         {
-            return "Whenever you play a card that targets an enemy, apply 2 Burning to that enemy.";
+            return "Whenever you play a card that targets an enemy, apply 2 Burning to that enemy.  Exhaust.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new ChaosEngineerStatusEffect(), 2);
+            this.ExhaustAsAction();
         }
     }
 

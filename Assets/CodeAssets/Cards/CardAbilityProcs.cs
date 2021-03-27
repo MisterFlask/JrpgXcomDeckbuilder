@@ -87,6 +87,7 @@ namespace Assets.CodeAssets.Cards
                 sacrificableCard.ExhaustAsAction();
                 action.ApplyStress(sacrificableCard.Owner, 6);
                 BattleRules.ProcessProc(new SacrificeProc { TriggeringCardIfAny = card });
+                thingToDo();
             }
         }
 

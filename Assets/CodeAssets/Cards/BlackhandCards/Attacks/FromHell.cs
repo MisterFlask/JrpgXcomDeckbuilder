@@ -3,8 +3,27 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
 {
-    public class FromHell : MonoBehaviour
+    public class FromHell : AbstractCard
     {
-        // Deal 2 damage.  Inferno: ALL copies of this card deal 4 more damage for the rest of combat.
+        public FromHell()
+        {
+            SetCommonCardAttributes("From Hell", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 0);
+            this.BaseDamage = 2;
+        }
+
+        public override string DescriptionInner()
+        {
+            return $"Deal {BaseDamage} damage.  Inferno: This card deals 8 more damage for the rest of combat.";
+        }
+
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
+        {
+            action().AttackWithCard(this, target);
+            action().DoAThing( () =>
+            {
+                this.BaseDamage += 8;
+            });
+        }
+
     }
 }

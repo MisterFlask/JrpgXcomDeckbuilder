@@ -3,8 +3,40 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 {
-    public class ChaosEngineer : MonoBehaviour
+    public class ChaosEngineer : AbstractCard
     {
         // Whenever you play a card that targets an enemy, apply 2 Burning to that enemy.
+        public ChaosEngineer()
+        {
+            SetCommonCardAttributes("Chaos Engineer", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
+        }
+
+        public override string DescriptionInner()
+        {
+            return "Whenever you play a card that targets an enemy, apply 2 Burning to that enemy.";
+        }
+
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
+        {
+            action().ApplyStatusEffect(target, new ChaosEngineerStatusEffect(), 2);
+        }
+    }
+
+    public class ChaosEngineerStatusEffect : AbstractStatusEffect
+    {
+        public ChaosEngineerStatusEffect()
+        {
+            this.Name = "Chaos Engineer";
+        }
+
+        public override string Description => $"Whenever a card is played targeting an enemy, apply {DisplayedStacks()} Burning to it.";
+
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
+        {
+            if (targetOfCard != null && targetOfCard.IsEnemy)
+            {
+                action().ApplyStatusEffect(targetOfCard, new BurningStatusEffect(), Stacks);
+            }
+        }
     }
 }

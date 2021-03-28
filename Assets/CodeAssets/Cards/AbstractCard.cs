@@ -384,6 +384,7 @@ public abstract class AbstractCard
         TargetType targetType,
         CardType cardType,
         int baseEnergyCost,
+        Type soldierClassType = null,
         ProtoGameSprite protoGameSprite = null)
     {
         this.Name = name;
@@ -391,6 +392,7 @@ public abstract class AbstractCard
         this.TargetType = targetType;
         this.CardType = cardType;
         this.StaticBaseEnergyCost = baseEnergyCost;
+        this.SoldierClassCardPools.Add(soldierClassType);
         if (protoGameSprite != null)
         {
             this.ProtoSprite = protoGameSprite;

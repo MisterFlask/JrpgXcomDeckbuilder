@@ -29,6 +29,17 @@ public static class ExtensionMethods
         return list.Take(count);
     }
 
+    public static void InsertIntoBeginning<T>(this List<T> list, T item)
+    {
+        list.Insert(0, item);
+    }
+
+    public static void InsertIntoRandomLocation<T>(this List<T> list, T item)
+    {
+        var randomIndex = UnityEngine.Random.Range(0, list.Count);
+        list.Insert(randomIndex, item);
+    }
+
     public static List<AbstractBattleUnit> ConvertGuidsToSoldiers(this IEnumerable<string> guids)
     {
         return guids

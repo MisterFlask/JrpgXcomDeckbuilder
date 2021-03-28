@@ -227,15 +227,46 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    internal void CreateCardToBattleDeckDrawPile(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
+    internal void CreateCardToBattleDeckDrawPile(AbstractCard abstractCard, CardCreationLocation location, QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
         QueuedActions.ImmediateAction(() =>
         {
-            ServiceLocator.GetGameStateTracker().Deck.DrawPile.Add(abstractCard);
+            if (location == CardCreationLocation.BOTTOM)
+            {
+                ServiceLocator.GetGameStateTracker().Deck.DrawPile.Add(abstractCard);
+            }
+            else if (location == CardCreationLocation.TOP)
+            {
+                ServiceLocator.GetGameStateTracker().Deck.DrawPile.AddToFront(abstractCard);
+            }
+            else
+            {
+                ServiceLocator.GetGameStateTracker().Deck.DrawPile.InsertIntoRandomLocation(abstractCard);
+            }
         }, queueingType);
     }
 
+    internal void CreateCardToBattleDeckDiscardPile(AbstractCard abstractCard, CardCreationLocation location, QueueingType queueingType = QueueingType.TO_BACK)
+    {
+        Require.NotNull(abstractCard);
+        QueuedActions.ImmediateAction(() =>
+        {
+
+            if (location == CardCreationLocation.BOTTOM)
+            {
+                ServiceLocator.GetGameStateTracker().Deck.DiscardPile.Add(abstractCard);
+            }
+            else if (location == CardCreationLocation.TOP)
+            {
+                ServiceLocator.GetGameStateTracker().Deck.DiscardPile.AddToFront(abstractCard);
+            }
+            else
+            {
+                ServiceLocator.GetGameStateTracker().Deck.DiscardPile.InsertIntoRandomLocation(abstractCard);
+            }
+        }, queueingType);
+    }
     internal void CreateCardToHand(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
@@ -360,6 +391,7 @@ public class ActionManager : MonoBehaviour
         {
             gameState.Deck.MoveCardToPile(protoCard, CardPosition.EXPENDED);
             ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(protoCard, assumedToExistInHand: false);
+            BattleRules.ProcessProc(new ExhaustedCardProc { TriggeringCardIfAny = protoCard });
         }, queueingType);
     }
 
@@ -618,4 +650,16 @@ public class ActionManager : MonoBehaviour
 public enum ModifyType
 {
     SET, ADD_VALUE
+}
+
+public class ExhaustedCardProc: AbstractProc
+{
+
+}
+
+public enum CardCreationLocation
+{
+    TOP,
+    SHUFFLE,
+    BOTTOM
 }

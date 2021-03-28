@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using Assets.CodeAssets.Cards.BlackhandCards.Attacks;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 {
-    public class ArmamentsRequisition : MonoBehaviour
+    public class ArmamentsRequisition : AbstractCard
     {
         // At the beginning of each turn, put a random grenade into your discard pile.
         public ArmamentsRequisition()
         {
-            this.SetCommonCardAttributes("Armaments Requisition", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+            this.SetCommonCardAttributes("Armaments Requisition", 
+                Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
         }
 
         public override string DescriptionInner()
@@ -32,8 +35,11 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 
         public override void OnTurnEnd()
         {
-            var grenade = GetRandomGrenadeCard();
-            action().CreateCardToBattleDeckDrawPile(grenade);
+            for(int i = 0; i < Stacks; i++)
+            {
+                var grenade = GetRandomGrenadeCard();
+                action().CreateCardToBattleDeckDrawPile(grenade);
+            }
         }
 
         private AbstractCard GetRandomGrenadeCard()

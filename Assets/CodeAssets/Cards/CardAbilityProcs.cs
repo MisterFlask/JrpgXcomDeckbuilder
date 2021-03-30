@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Assets.CodeAssets.BattleEntities.StatusEffects;
+using Assets.CodeAssets.Cards.BlackhandCards.Powers;
+using Assets.CodeAssets.Cards.HammerCards.Common;
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -21,6 +24,22 @@ namespace Assets.CodeAssets.Cards
             }
         }
 
+        public static void GainEnergy(AbstractCard card, int amount = 1)
+        {
+            ActionManager.Instance.DoAThing(() =>
+            {
+                GameState.Instance.energy += amount;
+            });
+        }
+
+        public static void Refund(AbstractCard card, int amount = 1)
+        {
+            ActionManager.Instance.DoAThing(() =>
+            {
+                GameState.Instance.energy+=amount;
+            });
+        }
+
         public static void Sly(this AbstractCard card, Action thingToDo)
         {
             if (state.Deck.Hand.Count < 3)
@@ -29,6 +48,14 @@ namespace Assets.CodeAssets.Cards
                 BattleRules.ProcessProc(new SlyProc { TriggeringCardIfAny = card });
 
             }
+        }
+
+        // If ANY ally is Empowered, decrement it by 1 and activate this effect.
+        public static void Energized(AbstractCard abstractCard, Action action)
+        {
+            var characterWithEmpowered =  GameState.Instance.AllyUnitsInBattle.First(item => item.HasStatusEffect<EmpoweredStatusEffect>());
+            ActionManager.Instance.ApplyStatusEffect(characterWithEmpowered, new EmpoweredStatusEffect(), -1);
+            action();
         }
 
         public static void Liquidate(this AbstractCard card, Action thingToDo)

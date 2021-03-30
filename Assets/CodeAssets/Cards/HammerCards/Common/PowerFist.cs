@@ -5,7 +5,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 {
     public class PowerFist : MonoBehaviour
     {
-        // Scales with rage three times.
+        // Gains 3 damage per stack of strength.
         // Deal 5 damage, twice.
     }
 }

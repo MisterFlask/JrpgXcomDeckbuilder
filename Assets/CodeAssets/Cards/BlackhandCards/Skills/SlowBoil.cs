@@ -20,7 +20,14 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Skills
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().CreateCardToBattleDeckDrawPile
+            for(int i = 0; i < 3; i++)
+            {
+                action().CreateCardToBattleDeckDrawPile(new SmogGrenade(), CardCreationLocation.SHUFFLE);
+            }
+            foreach(var ally in state().AllyUnitsInBattle)
+            {
+                action().ApplyDefense(ally, this.Owner, BaseDefenseValue);
+            }
         }
     }
 }

@@ -142,17 +142,6 @@ public class ActionManager : MonoBehaviour
         //todo
     }
 
-    public void Taunt(AbstractBattleUnit target, AbstractBattleUnit tauntingCharacter)
-    {
-        //todo
-    }
-
-    public void ReverseTaunt(AbstractBattleUnit target, AbstractBattleUnit tauntingCharacter)
-    {
-        //todo
-    }
-
-
     public void ApplyDefense(AbstractBattleUnit target, AbstractBattleUnit source, int baseQuantity)
     {
         QueuedActions.ImmediateAction(() =>
@@ -240,9 +229,12 @@ public class ActionManager : MonoBehaviour
             {
                 ServiceLocator.GetGameStateTracker().Deck.DrawPile.AddToFront(abstractCard);
             }
-            else
+            else if (location == CardCreationLocation.SHUFFLE)
             {
                 ServiceLocator.GetGameStateTracker().Deck.DrawPile.InsertIntoRandomLocation(abstractCard);
+            }else
+            {
+                throw new Exception("gotta select a location");
             }
         }, queueingType);
     }
@@ -261,9 +253,13 @@ public class ActionManager : MonoBehaviour
             {
                 ServiceLocator.GetGameStateTracker().Deck.DiscardPile.AddToFront(abstractCard);
             }
-            else
+            else if (location == CardCreationLocation.SHUFFLE)
             {
                 ServiceLocator.GetGameStateTracker().Deck.DiscardPile.InsertIntoRandomLocation(abstractCard);
+            }
+            else
+            {
+                throw new Exception("gotta select a location");
             }
         }, queueingType);
     }

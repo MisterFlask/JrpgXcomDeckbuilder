@@ -251,7 +251,7 @@ public static class BattleRules
         return (int)currentTotalDamage;
     }
 
-    private static float CalculateTotalPreBlockDamage(AbstractBattleUnit source, AbstractBattleUnit target, int currentTotalDamage, AbstractCard nullableCardPlayed)
+    private static float CalculateTotalPreBlockDamage(AbstractBattleUnit source, AbstractBattleUnit nullableTarget, int currentTotalDamage, AbstractCard nullableCardPlayed)
     {
         var totalDamageMultiplier = 1f;
         var totalDamageAddition = 0;
@@ -263,9 +263,9 @@ public static class BattleRules
         }
 
         // then, go through defender's attributes (assuming a target right now exists)
-        if (target != null)
+        if (nullableTarget != null)
         {
-            foreach (var attribute in target.StatusEffects)
+            foreach (var attribute in nullableTarget.StatusEffects)
             {
                 totalDamageMultiplier += attribute.DamageReceivedIncrementalMultiplier();
                 totalDamageAddition += attribute.DamageReceivedAddition();
@@ -277,11 +277,11 @@ public static class BattleRules
         {
             foreach(var damageModifier in nullableCardPlayed.DamageModifiers)
             {
-                if (damageModifier.TargetInvariant || target != null) // either a target exists, or we don't need one
+                if (damageModifier.TargetInvariant || nullableTarget != null) // either a target exists, or we don't need one
                 {
                     // target-invariant damage modifier effects DO NOT require a target.
-                    totalDamageAddition += damageModifier.GetIncrementalDamageAddition(currentTotalDamage, nullableCardPlayed, target);
-                    totalDamageMultiplier += damageModifier.GetIncrementalDamageMultiplier(currentTotalDamage, nullableCardPlayed, target);
+                    totalDamageAddition += damageModifier.GetIncrementalDamageAddition(currentTotalDamage, nullableCardPlayed, nullableTarget);
+                    totalDamageMultiplier += damageModifier.GetIncrementalDamageMultiplier(currentTotalDamage, nullableCardPlayed, nullableTarget);
                 }
             }
         }
@@ -421,6 +421,13 @@ public static class BattleRules
         {
             card.OnProcWhileThisIsInDeck(proc);
         }
+    }
+
+    public static bool IsEnemyEligibleForTaunting(AbstractBattleUnit target, AbstractBattleUnit taunter)
+    {
+        var eligibleAttackIntent = target.CurrentIntents.FirstOrDefault(
+            item => item is SingleUnitAttackIntent && !item.UnitsTargeted.Contains(taunter);
+        return eligibleAttackIntent != null;
     }
 
 }

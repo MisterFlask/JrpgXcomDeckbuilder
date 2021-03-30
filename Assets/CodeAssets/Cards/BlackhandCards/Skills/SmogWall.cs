@@ -6,7 +6,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Skills
 {
     public class SmogWall : AbstractCard
     {
-        // Apply 8 defense to an ally.  Apply an amount of fumes equal to that character's defense to a random enemy.
+        // Apply 8 block to an ally.  Apply an amount of fumes equal to that character's block to a random enemy.
 
         public SmogWall()
         {

@@ -182,21 +182,21 @@ public abstract class AbstractCard
         return ServiceLocator.GetGameStateTracker().energy >= GetNetEnergyCost().EnergyCost;
     }
 
-    public virtual CanPlayCardQueryResult CanPlayInner()
+    public virtual CanPlayCardQueryResult CanPlayInner(AbstractBattleUnit target)
     {
         return CanPlayCardQueryResult.CanPlay();
     }
 
-    public CanPlayCardQueryResult CanPlay()
+    public CanPlayCardQueryResult CanPlay(AbstractBattleUnit target)
     {
         if (Unplayable)
         {
             return CanPlayCardQueryResult.CannotPlay("This card is unplayable.");
         }
 
-        if (!CanPlayInner().Playable)
+        if (!CanPlayInner(target).Playable)
         {
-            return CanPlayInner();
+            return CanPlayInner(target);
         }
 
         if (CanAfford())
@@ -262,7 +262,7 @@ public abstract class AbstractCard
 
     public void PlayCardFromHandIfAble_Action(AbstractBattleUnit target)
     {
-        if (!CanPlay().Playable)
+        if (!CanPlay(target).Playable)
         {
             return;
         }
@@ -435,6 +435,30 @@ public abstract class AbstractCard
     {
 
     }
+
+    protected int GetStacksOf<T>() where T: AbstractStatusEffect
+    {
+        return Owner.GetStatusEffect<T>()?.Stacks ?? 0;
+    }
+
+    protected void Action_ApplyStatusEffectToOwner(AbstractStatusEffect effect, int stacks)
+    {
+        action().ApplyStatusEffect(this.Owner, effect, stacks);
+    }
+
+    protected void Action_ApplyStatusEffectToTarget(AbstractStatusEffect effect, int stacks, AbstractBattleUnit target)
+    {
+        action().ApplyStatusEffect(target, effect, stacks);
+    }
+    protected void Action_ApplyDefenseToTarget(AbstractBattleUnit target, int? block = null)
+    {
+        action().ApplyDefense(target, this.Owner, block ?? BaseDefenseValue);
+    }
+    protected void Action_AttackTarget(AbstractBattleUnit target)
+    {
+        action().AttackWithCard(this, target);
+    }
+
 }
 
 public class DamageBlob

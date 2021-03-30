@@ -193,6 +193,36 @@ public abstract class AbstractStatusEffect: MagicWord
 
     }
 
+    public void HalveStacks()
+    {
+        if (Stacks % 2 ==1)
+        {
+            Stacks -= 1;
+        }
+        Stacks = Stacks / 2;
+    }
+
+    public void DecrementStacks()
+    {
+        Stacks--;
+    }
+    public void Action_HalveStacks()
+    {
+        ActionManager.Instance.DoAThing(() =>
+        {
+            HalveStacks();
+        });
+    }
+
+
+    public void Action_DecrementStacks()
+    {
+        ActionManager.Instance.DoAThing(() =>
+        {
+            DecrementStacks();
+        });
+    }
+
 }
 
 public enum StatusEffectChange

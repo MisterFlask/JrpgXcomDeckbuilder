@@ -9,7 +9,8 @@ public class  SmogGrenade : AbstractCard
 {
     public SmogGrenade()
     {
-        SetCommonCardAttributes("Smog Grenade", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);        
+        SetCommonCardAttributes("Smog Grenade", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
+        BaseDefenseValue = 3;
     }
 
     public override string DescriptionInner()
@@ -22,6 +23,10 @@ public class  SmogGrenade : AbstractCard
         foreach(var character in state().EnemyUnitsInBattle)
         {
             action().ApplyStatusEffect(character, new WeakenedStatusEffect(), 1);
+        }
+        foreach(var ally in state().AllyUnitsInBattle)
+        {
+            action().ApplyDefense(ally, this.Owner, BaseDefenseValue);
         }
     }
 }

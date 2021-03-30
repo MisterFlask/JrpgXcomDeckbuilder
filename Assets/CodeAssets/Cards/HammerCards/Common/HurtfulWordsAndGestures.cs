@@ -24,13 +24,14 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
             }
             else
             {
-                return CanPlayCardQueryResult.CannotPlay("Taunted units must be attacking exactly one target who is not the taunting character.");
+                return CanPlayCardQueryResult.CannotPlay("Taunted units must be attacking exactly one" +
+                    " target who is not the taunting character.");
             }
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            throw new System.NotImplementedException();
+            action().TauntEnemy(target, this.Owner);
         }
     }
 }

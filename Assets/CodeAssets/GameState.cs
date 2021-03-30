@@ -19,7 +19,7 @@ public class GameState
         Instance = this;
         var totalDeck = new List<AbstractCard>
         {
-        }; 
+        };
         var deck = Deck;
         totalDeck.ForEach(item => deck.AddNewCardToDiscardPile(item));
 
@@ -81,6 +81,28 @@ public class GameState
     #region UI State
     public AbstractBattleUnit CharacterSelected { get; set; }
     public int Day { get; set; }
+    #endregion
+
+    #region Convenience
+    public List<AbstractBattleUnit> GetUnitsAttackingUnit(AbstractBattleUnit target)
+    {
+        var enemiesAttackingTarget = EnemyUnitsInBattle.Where(enemy => enemy.CurrentIntents.Any(intent => IsIntentAttackingMe(intent, target)));
+        return enemiesAttackingTarget.ToList();
+    }
+
+    private bool IsIntentAttackingMe(AbstractIntent intent, AbstractBattleUnit unitBeingAttacked)
+    {
+        if (intent is SingleUnitAttackIntent)
+        {
+            var singleUnitAttack = intent as SingleUnitAttackIntent;
+            if (singleUnitAttack.Target == unitBeingAttacked)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     #endregion
 }
 

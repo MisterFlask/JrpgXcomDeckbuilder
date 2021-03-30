@@ -8,6 +8,7 @@ namespace Assets.CodeAssets.BattleEntities.StatusEffects
         public TemporaryStrengthStatusEffect()
         {
             this.Name = "Temporary Strength";
+            this.AllowedToGoNegative = true;
         }
 
         public override int DamageDealtAddition()

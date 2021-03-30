@@ -15,7 +15,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 
         public override string DescriptionInner()
         {
-            return $"Deal 10 damage and 2 Vulnerable.  Brute: Gain 1 energy.";
+            return $"Deal {DisplayedDamage()} damage and 2 Vulnerable.  Brute: Gain 1 energy.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

@@ -6,7 +6,7 @@ using System.Linq;
 public class BattleTurnEndActions
 {
     ActionManager actionManager => ServiceLocator.GetActionManager();
-    GameState gameState => ServiceLocator.GetGameStateTracker();
+    GameState gameState => ServiceLocator.GameState();
 
     internal void EndTurn()
     {
@@ -33,7 +33,8 @@ public class BattleTurnEndActions
 
     private void StartNewTurn()
     {
-        ServiceLocator.GetGameStateTracker().BattleTurn++;
+        GameState.Instance.NumCardsPlayedThisTurn = 0;
+        ServiceLocator.GameState().BattleTurn++;
 
         ServiceLocator.GetActionManager().DoAThing(() =>
         {
@@ -46,7 +47,7 @@ public class BattleTurnEndActions
         actionManager.DrawCards(5);
         ServiceLocator.GetActionManager().DoAThing(() =>
         {
-            ServiceLocator.GetGameStateTracker().energy = ServiceLocator.GetGameStateTracker().maxEnergy;
+            ServiceLocator.GameState().energy = ServiceLocator.GameState().maxEnergy;
         });
         ActionManager.Instance.CheckIsBattleOver();
     }

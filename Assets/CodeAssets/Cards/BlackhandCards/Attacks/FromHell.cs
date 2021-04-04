@@ -8,7 +8,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         public FromHell()
         {
             SetCommonCardAttributes("From Hell", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 0);
-            this.BaseDamage = 2;
+            this.BaseDamage = 10;
         }
 
         public override string DescriptionInner()

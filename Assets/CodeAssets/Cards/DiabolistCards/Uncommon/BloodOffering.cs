@@ -30,7 +30,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Uncommon
             {
                 action().ApplyStatusEffect(ally, new TemporaryHpStatusEffect(), 20);
             }
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 }

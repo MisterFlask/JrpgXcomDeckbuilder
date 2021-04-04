@@ -7,7 +7,7 @@ namespace Assets.CodeAssets.UI.Screens.CampaignScreen
 {
     public class PerkDisplayPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        public SoldierPerk Perk { get; set; }
+        public AbstractSoldierPerk Perk { get; set; }
         public Image PerkImage;
         public TMPro.TextMeshProUGUI Text;
         // Use this for initialization

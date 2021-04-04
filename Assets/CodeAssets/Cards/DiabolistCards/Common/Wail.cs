@@ -22,7 +22,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(this.Owner, new StressStatusEffect(), -3);
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 }

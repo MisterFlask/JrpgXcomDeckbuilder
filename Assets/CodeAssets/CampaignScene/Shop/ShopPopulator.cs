@@ -7,7 +7,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
     public class ShopPopulator : MonoBehaviour
     {
 
-        public static List<SoldierPerk> AugmeticsForSale = new List<SoldierPerk>
+        public static List<AbstractSoldierPerk> AugmeticsForSale = new List<AbstractSoldierPerk>
         {
 
         };

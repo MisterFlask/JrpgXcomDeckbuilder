@@ -20,7 +20,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
         {
             action().ApplyStatusEffect(this.Owner, new GentleDiscouragementStatusEffect(), 7);
             action().ApplyStatusEffect(this.Owner, new RetaliateStatusEffect());
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 }

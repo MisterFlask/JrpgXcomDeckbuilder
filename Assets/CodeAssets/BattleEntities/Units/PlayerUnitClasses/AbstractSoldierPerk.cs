@@ -9,7 +9,7 @@ using System.Linq;
 /// Also corresponds to status effects.
 /// Mostly stackable.
 /// </summary>
-public abstract class SoldierPerk
+public abstract class AbstractSoldierPerk
 {
     public int Stacks { get; set; } = 1;
     public abstract string Name();
@@ -37,7 +37,7 @@ public abstract class SoldierPerk
     /// <summary>
     ///  This is run on the deck after the perk is gained, and also on every card as it enters the deck.
     /// </summary>
-    public virtual void ModifyCardsUponAcquisition(AbstractCard card, AbstractBattleUnit soldierAffecte)
+    public virtual void ModifyCardsUponAcquisition(AbstractCard card, AbstractBattleUnit soldierAffected, bool wasCardJustAdded)
     {
 
     }
@@ -61,7 +61,7 @@ public abstract class SoldierPerk
     }
 
 
-    public static SoldierPerk CreateGrantsStatusEffectPerk(
+    public static AbstractSoldierPerk CreateGrantsStatusEffectPerk(
         string name,
         string description,
         AbstractStatusEffect effect,
@@ -84,15 +84,15 @@ public abstract class SoldierPerk
         return true;
     }
 
-    public SoldierPerk Clone()
+    public AbstractSoldierPerk Clone()
     {
-        var copy = (SoldierPerk)this.MemberwiseClone();
+        var copy = (AbstractSoldierPerk)this.MemberwiseClone();
         return copy;
     }
 }
 
 
-public class GrantsCardStickerPerk : SoldierPerk
+public class GrantsCardStickerPerk : AbstractSoldierPerk
 {
     private string GivenName { get; set; }
     private string GivenDescription { get; set; }
@@ -145,7 +145,7 @@ public class GrantsCardStickerPerk : SoldierPerk
     }
 }
 
-public class GrantsStatusEffectPerk : SoldierPerk
+public class GrantsStatusEffectPerk : AbstractSoldierPerk
 {
     private string GivenName { get; set; }
     private string GivenDescription { get; set; }

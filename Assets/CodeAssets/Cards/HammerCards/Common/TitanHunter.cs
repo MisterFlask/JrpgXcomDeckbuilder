@@ -5,13 +5,12 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 {
     public class TitanHunter : AbstractCard
     {
-        // Gain 1 strength.  Deal 10 damage.  Slayer.  Cost 2.
+        // Gain 1 strength.  Deal 10 damage.  Cost 2.
 
         public TitanHunter()
         {
             SetCommonCardAttributes("Titan Hunter", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 2);
             BaseDamage = 10;
-            DamageModifiers.Add(new SlayerDamageModifier());
         }
 
         public override string DescriptionInner()

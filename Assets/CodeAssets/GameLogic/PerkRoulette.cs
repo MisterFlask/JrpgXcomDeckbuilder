@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public static class PerkRoulette
 {
-    public static List<SoldierPerk> PossiblePerks => new List<SoldierPerk>
+    public static List<AbstractSoldierPerk> PossiblePerks => new List<AbstractSoldierPerk>
     {
         new PowerfulPerk(),
         new ToughPerk(),
@@ -14,14 +14,14 @@ public static class PerkRoulette
         new ResilientPerk()
     };
 
-    public static SoldierPerk GetRandomPerk()
+    public static AbstractSoldierPerk GetRandomPerk()
     {
         return PossiblePerks.PickRandom();
     }
 }
 
 
-public class PowerfulPerk : SoldierPerk
+public class PowerfulPerk : AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -34,7 +34,7 @@ public class PowerfulPerk : SoldierPerk
     }
 }
 
-public class ToughPerk : SoldierPerk
+public class ToughPerk : AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -47,7 +47,7 @@ public class ToughPerk : SoldierPerk
     }
 }
 
-public class KindPerk: SoldierPerk
+public class KindPerk: AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -60,7 +60,7 @@ public class KindPerk: SoldierPerk
     }
 }
 
-public class ViciousPerk: SoldierPerk
+public class ViciousPerk: AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -72,7 +72,7 @@ public class ViciousPerk: SoldierPerk
         return "Vicious";
     }
 }
-public class SadisticPerk : SoldierPerk
+public class SadisticPerk : AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -85,7 +85,7 @@ public class SadisticPerk : SoldierPerk
     }
 }
 
-public class ResilientPerk : SoldierPerk
+public class ResilientPerk : AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -99,7 +99,7 @@ public class ResilientPerk : SoldierPerk
 }
 
 
-public class ResourcefulPerk : SoldierPerk
+public class ResourcefulPerk : AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -111,7 +111,7 @@ public class ResourcefulPerk : SoldierPerk
         return "Resourceful";
     }
 }
-public class IngenuityPerk : SoldierPerk
+public class IngenuityPerk : AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -124,7 +124,7 @@ public class IngenuityPerk : SoldierPerk
     }
 }
 
-public class SturdyPerk: SoldierPerk
+public class SturdyPerk: AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -138,7 +138,7 @@ public class SturdyPerk: SoldierPerk
 }
 
 
-public class CaringPerk: SoldierPerk
+public class CaringPerk: AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -153,7 +153,7 @@ public class CaringPerk: SoldierPerk
 }
 
 
-public class TinkerPerk: SoldierPerk
+public class TinkerPerk: AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -166,7 +166,7 @@ public class TinkerPerk: SoldierPerk
     }
 }
 
-public class AgilePerk: SoldierPerk
+public class AgilePerk: AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -180,7 +180,7 @@ public class AgilePerk: SoldierPerk
 }
 
 
-public class CheerfulPerk : SoldierPerk
+public class CheerfulPerk : AbstractSoldierPerk
 {
     public override string Description()
     {
@@ -193,7 +193,7 @@ public class CheerfulPerk : SoldierPerk
     }
 }
 
-public class NeuroticPerk : SoldierPerk
+public class NeuroticPerk : AbstractSoldierPerk
 {
     public override string Description()
     {

@@ -29,7 +29,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new RetaliateStatusEffect(), StacksOfRetaliateToApply);
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 }

@@ -28,11 +28,11 @@ public static class CampaignMapState
         return CampaignLog;
     }
 
-    public static int Money => ServiceLocator.GetGameStateTracker().Credits;
+    public static int Money => ServiceLocator.GameState().Credits;
 
     public static ShopData shopData;
 
-    public static List<SoldierPerk> AugmentationsInventory { get; set; }
+    public static List<AbstractSoldierPerk> AugmentationsInventory { get; set; }
     public static List<AbstractCard> CardsInventory { get; set; }
 
     public static void InitializeCampaignScreen()
@@ -64,7 +64,7 @@ public class ShopCardOffer: AbstractShopOffer
 
 public class ShopAugmentationOffer: AbstractShopOffer
 {
-    public SoldierPerk Augmentation { get; set; }
+    public AbstractSoldierPerk Augmentation { get; set; }
 
     protected override void InnerOnPurchase()
     {
@@ -87,7 +87,7 @@ public abstract class AbstractShopOffer
             return;
         }
         Purchased = true;
-        ServiceLocator.GetGameStateTracker().Credits -= Price;
+        ServiceLocator.GameState().Credits -= Price;
         MoneyIcon.Instance.Flash();
         InnerOnPurchase();
     }

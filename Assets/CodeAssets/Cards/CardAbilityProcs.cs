@@ -71,7 +71,7 @@ namespace Assets.CodeAssets.Cards
             }
         }
 
-        public static void ExhaustAsAction(this AbstractCard card)
+        public static void Action_Exhaust(this AbstractCard card)
         {
             action.ExhaustCard(card);
         }
@@ -111,18 +111,37 @@ namespace Assets.CodeAssets.Cards
             var sacrificableCard = state.Deck.Hand.FirstOrDefault(item => item != card);
             if (sacrificableCard != null)
             {
-                sacrificableCard.ExhaustAsAction();
+                sacrificableCard.Action_Exhaust();
                 action.ApplyStress(sacrificableCard.Owner, 6);
                 BattleRules.ProcessProc(new SacrificeProc { TriggeringCardIfAny = card });
                 thingToDo();
             }
         }
 
-        public static void Ambush(this AbstractCard card, Action thingToDo)
+        public static bool Ambush(this AbstractCard card, Action thingToDo)
         {
             if (GameState.Instance.BattleTurn <= 3)
             {
                 thingToDo();
+                return true;
+            }
+            return false;
+        }
+
+        public static void Patient(this AbstractCard card, Action thingToDo)
+        {
+            if (GameState.Instance.cardsPlayedThisTurn > 2)
+            {
+                thingToDo();
+            }
+        }
+
+        internal static void ChangeMoney(int v)
+        {
+            GameState.Instance.Credits += v;
+            if (GameState.Instance.Credits < 0)
+            {
+                GameState.Instance.Credits = 0;
             }
         }
     }

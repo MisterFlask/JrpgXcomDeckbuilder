@@ -20,7 +20,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new DarkComedyStatusEffect());
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 

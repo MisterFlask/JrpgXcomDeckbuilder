@@ -1,4 +1,5 @@
 ﻿using Assets.CodeAssets.BattleEntities.StatusEffects;
+using Assets.CodeAssets.Cards;
 using Assets.CodeAssets.Cards.ArchonCards.Effects;
 using System;
 using System.Collections;
@@ -41,6 +42,11 @@ public abstract class DamageModifier
     public virtual float GetIncrementalDamageMultiplier(int currentBaseDamage, AbstractCard damageSource, AbstractBattleUnit target)
     {
         // note: can get owner from damageSource if necessary
+        return 0;
+    }
+
+    public virtual int GetIncrementalBlockAddition(int currentBaseBlock, AbstractCard blockSource, AbstractBattleUnit target)
+    {
         return 0;
     }
 }
@@ -146,11 +152,59 @@ public class LethalTriggerDamageModifier: DamageModifier
         this.actToPerform = action;
         this.Name = "Lethal";
         this.Description = actionDescription;
-        
     }
 
     public override void Slay(AbstractCard damageSource, AbstractBattleUnit target)
     {
         actToPerform(target);
+        BattleRules.ProcessProc(new LethalTriggerProc());
     }
+}
+
+public class LethalTriggerProc: AbstractProc
+{
+}
+
+public static class BountyDamageModifier
+{
+    public static LethalTriggerDamageModifier GetBountyDamageModifier()
+    {
+        return new LethalTriggerDamageModifier("If this unit kills a:  Boss -> 20 credits, Elite -> 10 credits, other non-minion -> 5 credits.", (deadEnemy) =>
+        {
+            if (deadEnemy.IsBoss)
+            {
+                CardAbilityProcs.ChangeMoney(20);
+            }
+            if (deadEnemy.IsElite)
+            {
+                CardAbilityProcs.ChangeMoney(10);
+            }
+            else
+            {
+                // todo: Minion exclusion
+                CardAbilityProcs.ChangeMoney(5);
+            }
+        });
+    }
+}
+
+// If this targets the owner of the card, it applies +4 defense.
+public class SelfishDefenseModifier: DamageModifier
+{
+    public override int GetIncrementalBlockAddition(int currentBaseBlock, AbstractCard blockSource, AbstractBattleUnit target)
+    {
+        if (blockSource.Owner == target)
+        {
+            return 4;
+        }
+        return 0;
+    }
+}
+
+/// <summary>
+/// If I have less Might [todo: Might is just the net damage increase] than the target, apply +50% defense.
+/// </summary>
+public class ProtectorDefenseModifier: DamageModifier
+{
+    //todo
 }

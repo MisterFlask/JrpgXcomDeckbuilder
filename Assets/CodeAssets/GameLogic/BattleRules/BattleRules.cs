@@ -46,7 +46,7 @@ public static class BattleRules
     public static EnergyPaidInformation ProcessPlayingCardCost(AbstractCard card)
     {
         var cost = CalculateEnergyCost(card);
-        ServiceLocator.GetGameStateTracker().energy -= cost.EnergyCost;
+        ServiceLocator.GameState().energy -= cost.EnergyCost;
         EnergyIcon.Instance.Flash();
 
         return cost;
@@ -137,6 +137,8 @@ public static class BattleRules
         {
             effect.OnAnyCardPlayed(abstractCard, target);
         }
+
+        GameState.Instance.NumCardsPlayedThisTurn++;
     }
 
     public static void ProcessUiReleasingCardOverBattleUnit(AbstractCard logicalCard, AbstractBattleUnit battleUnitTargeted)
@@ -425,9 +427,9 @@ public static class BattleRules
 
     public static bool IsEnemyEligibleForTaunting(AbstractBattleUnit target, AbstractBattleUnit taunter)
     {
-        var eligibleAttackIntent = target.CurrentIntents.FirstOrDefault(
-            item => item is SingleUnitAttackIntent && !item.UnitsTargeted.Contains(taunter);
-        return eligibleAttackIntent != null;
+        var eligibleAttackIntent = target.CurrentIntents.Any(
+            item => item is SingleUnitAttackIntent);
+        return eligibleAttackIntent;
     }
 
 }
@@ -462,6 +464,12 @@ public class RetreatingStatusEffect : AbstractStatusEffect
         }
     }
 
+}
+
+public class TauntProc: AbstractProc
+{
+    public AbstractBattleUnit Tauntee { get; set; }
+    public AbstractBattleUnit Taunter { get; set; }
 }
 
 public class CombatResult

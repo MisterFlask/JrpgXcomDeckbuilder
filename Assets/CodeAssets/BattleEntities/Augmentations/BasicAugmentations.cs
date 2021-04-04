@@ -8,12 +8,12 @@ namespace Assets.CodeAssets.BattleEntities.Augmentations
     {
 
 
-        public static SoldierPerk GrantsPowerAugmentation = new GrantsStatusEffectPerk("Power Fist", "Increases this soldier's Power by 1.", new StrengthStatusEffect(), 1);
-        public static SoldierPerk GrantsAblativeArmorAugmentation = new GrantsStatusEffectPerk("Ablative Armor", "Decreases ALL damage taken by 1", new ArmoredStatusEffect(), 1);
-        public static SoldierPerk IncreaseHpOnGettingNewCardsPerk = new HpGainOnCardAddedPerk();
+        public static AbstractSoldierPerk GrantsPowerAugmentation = new GrantsStatusEffectPerk("Power Fist", "Increases this soldier's Power by 1.", new StrengthStatusEffect(), 1);
+        public static AbstractSoldierPerk GrantsAblativeArmorAugmentation = new GrantsStatusEffectPerk("Ablative Armor", "Decreases ALL damage taken by 1", new ArmoredStatusEffect(), 1);
+        public static AbstractSoldierPerk IncreaseHpOnGettingNewCardsPerk = new HpGainOnCardAddedPerk();
     }
 
-    public class DealGreaterDamageToEnemiesWithStatusEffectPerk : SoldierPerk
+    public class DealGreaterDamageToEnemiesWithStatusEffectPerk : AbstractSoldierPerk
     {
         int DamageChange { get; set; }
         AbstractStatusEffect TargetEffect { get; set; }
@@ -68,7 +68,7 @@ namespace Assets.CodeAssets.BattleEntities.Augmentations
 
     }
 
-    public class DuplicateNextCardTwicePerk : SoldierPerk
+    public class DuplicateNextCardTwicePerk : AbstractSoldierPerk
     {
         public DuplicateNextCardTwicePerk()
         {
@@ -97,7 +97,7 @@ namespace Assets.CodeAssets.BattleEntities.Augmentations
         }
     }
 
-    public class HpGainOnCardAddedPerk : SoldierPerk
+    public class HpGainOnCardAddedPerk : AbstractSoldierPerk
     {
         public HpGainOnCardAddedPerk()
         {

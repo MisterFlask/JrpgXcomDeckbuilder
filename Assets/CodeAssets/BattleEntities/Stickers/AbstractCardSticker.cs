@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.CodeAssets.Cards;
 
+/// <summary>
+/// These are used for card "passives"
+/// </summary>
 public abstract class AbstractCardSticker : MonoBehaviour
 {
-
+    public AbstractCard CardAttachedTo { get; set; }
+    public AbstractCard card => CardAttachedTo;
     public CardStickerPrefab Prefab { get; set; }
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
 
@@ -14,7 +19,10 @@ public abstract class AbstractCardSticker : MonoBehaviour
     /// <summary>
     /// Added onto the end of the card description.
     /// </summary>
-    public string CardDescriptionAddendum { get; set; } = "";
+    public virtual string CardDescriptionAddendum()
+    {
+        return "";
+    }
 
     public virtual void OnAddedToCardInner(AbstractCard card)
     {
@@ -31,17 +39,22 @@ public abstract class AbstractCardSticker : MonoBehaviour
         return this.MemberwiseClone() as AbstractCardSticker;
     }
 
-    public virtual void OnCardPlayed(AbstractCard card, AbstractBattleUnit target)
+
+    public virtual void OnThisCardPlayed(AbstractBattleUnit target)
     {
 
     }
 
-    public virtual void OnCardDrawn(AbstractCard card)
+    public virtual void OnCardDrawnPassive(AbstractCard card)
+    {
+
+    }
+    public virtual void EndOfBattlePassiveTrigger()
     {
 
     }
 
-    public virtual void OnEndOfTurn(AbstractCard card)
+    public virtual void OnEndOfTurn()
     {
 
     }
@@ -52,5 +65,138 @@ public abstract class AbstractCardSticker : MonoBehaviour
     public virtual bool IsCardTagApplicable(AbstractCard card)
     {
         return true;
+    }
+
+}
+
+
+
+public class GildedCardSticker: AbstractCardSticker
+{
+
+    public GildedCardSticker(int initialValue)
+    {
+        this.GildedValue = initialValue;
+    }
+    public override string CardDescriptionAddendum()
+    {
+        return $"Stash {GildedValue}";
+    }
+
+    public int GildedValue { get; set; }
+    public override void EndOfBattlePassiveTrigger()
+    {
+        if (!this.CardAttachedTo.IsExhausted())
+        {
+            CardAbilityProcs.ChangeMoney(GildedValue);
+        }
+    }
+
+    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    {
+        if (card.Id == CardAttachedTo.Id)
+        {
+            GildedValue -= 2;
+            if (GildedValue < 0)
+            {
+                GildedValue = 2;
+            }
+        }
+    }
+}
+
+public class ExhaustCardSticker : AbstractCardSticker
+{
+    public override string CardDescriptionAddendum()
+    {
+        return "Exhaust.";
+    }
+
+    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    {
+        card.Action_Exhaust();
+    }
+}
+
+public class BasicAttackTargetSticker: AbstractCardSticker
+{
+    public override string CardDescriptionAddendum()
+    {
+        return $"Deal {card.DisplayedDamage()} to target.";
+    }
+
+    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    {
+        ActionManager.Instance.AttackWithCard(card, target);
+    }
+}
+
+public class BasicDefendTargetSticker : AbstractCardSticker
+{
+    public override string CardDescriptionAddendum()
+    {
+        return $"Apply {card.DisplayedDefense()} block to target.";
+    }
+
+    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    {
+        ActionManager.Instance.ApplyDefenseFromCard(card, target);
+    }
+}
+public class BasicDefendSelfSticker : AbstractCardSticker
+{
+    public override string CardDescriptionAddendum()
+    {
+        return $"Apply {card.DisplayedDefense()} block to self.";
+    }
+
+    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    {
+        ActionManager.Instance.ApplyDefenseFromCard(card, card.Owner);
+    }
+}
+public class BasicApplyStatusEffectToTargetSticker : AbstractCardSticker
+{
+
+    public BasicApplyStatusEffectToTargetSticker(AbstractStatusEffect effect, int stacks)
+    {
+        Effect = effect;
+        Stacks = stacks;
+    }
+
+    public AbstractStatusEffect Effect { get; }
+    public int Stacks { get; }
+
+    public override string CardDescriptionAddendum()
+    {
+        return $"Apply {Stacks} {Effect.Name} to target.";
+    }
+
+    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    {
+        ActionManager.Instance.ApplyStatusEffect(target, Effect, Stacks);
+    }
+}
+
+public class BasicApplyStatusEffectToSelfSticker : AbstractCardSticker
+{
+
+    public BasicApplyStatusEffectToSelfSticker(AbstractStatusEffect effect, int stacks)
+    {
+        Effect = effect;
+        Stacks = stacks;
+    }
+
+    public AbstractStatusEffect Effect { get; }
+    public int Stacks { get; }
+
+    public override string CardDescriptionAddendum()
+    {
+        return $"Apply {Stacks} {Effect.Name} to self.";
+    }
+
+    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    {
+        ActionManager.Instance.ApplyStatusEffect(card.Owner, Effect, Stacks);
     }
 }

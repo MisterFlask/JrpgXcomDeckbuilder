@@ -22,7 +22,7 @@ namespace Assets.CodeAssets.Cards.HammerCards
         {
             Action_ApplyStatusEffectToTarget(new BarricadeStatusEffect(), 5, target);
             action().DrawCards(1);
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 }

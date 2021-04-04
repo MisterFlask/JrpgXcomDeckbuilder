@@ -71,6 +71,20 @@ public abstract class AbstractCard
 
     #region convenience functions
 
+    public T GetStickerOfType<T>() where T : AbstractCardSticker
+    {
+        return Stickers.FirstOrDefault(item => item.GetType() == typeof(T)) as T;
+    }
+    public List<T> GetStickersOfType<T>() where T : AbstractCardSticker
+    {
+        return Stickers.Where(item => item.GetType() == typeof(T)).Select(item => item as T).ToList();
+    }
+
+    public T GetDamageModifierOfType<T>() where T: DamageModifier
+    {
+        return DamageModifiers.FirstOrDefault(item => item is T) as T;
+    }
+
     public int displayedDamage()
     {
         return BattleRules.GetDisplayedDamageOnCard(this);
@@ -95,17 +109,19 @@ public abstract class AbstractCard
 
     public List<AbstractBattleUnit> enemies()
     {
-        return ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle;
+        return ServiceLocator.GameState().EnemyUnitsInBattle;
     }
     public List<AbstractBattleUnit> allies()
     {
-        return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle;
+        return ServiceLocator.GameState().AllyUnitsInBattle;
     }
 
     public GameState state()
     {
-        return ServiceLocator.GetGameStateTracker();
+        return ServiceLocator.GameState();
     }
+
+    public List<AbstractCard> CardsInHand => state().Deck.Hand;
     #endregion
 
 
@@ -164,7 +180,7 @@ public abstract class AbstractCard
         var baseDescription = DescriptionInner();
         foreach (var sticker in Stickers)
         {
-            baseDescription += "\n" + sticker.CardDescriptionAddendum;
+            baseDescription += "\n" + sticker.CardDescriptionAddendum();
         }
 
         if (!DamageModifiers.IsEmpty())
@@ -179,7 +195,7 @@ public abstract class AbstractCard
 
     public virtual bool CanAfford()
     {
-        return ServiceLocator.GetGameStateTracker().energy >= GetNetEnergyCost().EnergyCost;
+        return ServiceLocator.GameState().energy >= GetNetEnergyCost().EnergyCost;
     }
 
     public virtual CanPlayCardQueryResult CanPlayInner(AbstractBattleUnit target)
@@ -219,7 +235,7 @@ public abstract class AbstractCard
         OnDrawInner();
         foreach (var sticker in Stickers)
         {
-            sticker.OnCardDrawn(this);
+            sticker.OnCardDrawnPassive(this);
         }
     }
 
@@ -289,7 +305,7 @@ public abstract class AbstractCard
         OnPlay(target, costPaid);
         foreach (var sticker in Stickers)
         {
-            sticker.OnCardPlayed(this, target);
+            sticker.OnThisCardPlayed(target);
         }
     }
 
@@ -357,6 +373,11 @@ public abstract class AbstractCard
     public void AddSticker(AbstractCardSticker sticker)
     {
         Stickers.Add(sticker);
+    }
+
+    public bool HasSticker<T>() where T: AbstractCardSticker
+    {
+        return Stickers.Any(item => item is T);
     }
 
     public void RemoveSticker<T>() where T : AbstractCardSticker
@@ -458,7 +479,10 @@ public abstract class AbstractCard
     {
         action().AttackWithCard(this, target);
     }
-
+    protected void Action_Exhaust()
+    {
+        action().ExhaustCard(this);
+    }
 }
 
 public class DamageBlob

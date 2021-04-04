@@ -23,7 +23,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
         public override string DescriptionInner()
         {
-            return $"Apply {DisplayedDefense()} defense.  Apply 5 Terror to ALL enemies.  Draw two cards.";
+            return $"Apply {DisplayedDefense()} defense.  Apply 5 Binding to ALL enemies.  Draw two cards.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

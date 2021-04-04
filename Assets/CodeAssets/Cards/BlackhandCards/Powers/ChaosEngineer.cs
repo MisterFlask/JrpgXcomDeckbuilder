@@ -19,7 +19,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new ChaosEngineerStatusEffect(), 2);
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 

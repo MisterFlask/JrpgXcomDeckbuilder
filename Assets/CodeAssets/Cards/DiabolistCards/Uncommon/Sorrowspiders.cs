@@ -6,8 +6,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Uncommon
     public class Sorrowspiders : MonoBehaviour
     {
         // cost 1
-        // Startup: gains 3 damage for every Erosion in your deck.
-        // Deal 5 damage to ALL enemies.  Anti-personnel.
+        // Startup: gains 3 damage for every card in your deck with 'Weakness' in the description.
         public Sorrowspiders()
         {
 

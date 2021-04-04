@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class BattleStarter
 {
-    private static GameState state => ServiceLocator.GetGameStateTracker();
+    private static GameState state => ServiceLocator.GameState();
     public static void StartBattle(BattleScreenPrefab battleScreen)
     {
         foreach(var character in state.AllyUnitsInBattle)

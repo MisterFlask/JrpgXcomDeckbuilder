@@ -64,7 +64,7 @@ public abstract class AbstractBattleUnit
 
     public IEnumerable<AbstractCard> CardsInPersistentDeck => _CardsInPersistentDeck;
 
-    public void ApplyAugmentation(SoldierPerk aug)
+    public void ApplyAugmentation(AbstractSoldierPerk aug)
     {
         aug.Owner = this;
         aug.OnAssignment(this);        
@@ -84,7 +84,7 @@ public abstract class AbstractBattleUnit
 
     public List<AbstractCard> BattleDeck { get; set; } = new List<AbstractCard>();
 
-    public List<SoldierPerk> Perks { get; } = new List<SoldierPerk>();
+    public List<AbstractSoldierPerk> Perks { get; } = new List<AbstractSoldierPerk>();
 
     public void InitializePersistentDeck()
     {
@@ -254,16 +254,16 @@ public abstract class AbstractBattleUnit
 
     protected List<AbstractBattleUnit> enemies()
     {
-        return ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle;
+        return ServiceLocator.GameState().EnemyUnitsInBattle;
     }
     protected List<AbstractBattleUnit> allAlliedUnits()
     {
-        return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle;
+        return ServiceLocator.GameState().AllyUnitsInBattle;
     }
 
     protected GameState state()
     {
-        return ServiceLocator.GetGameStateTracker();
+        return ServiceLocator.GameState();
     }
 
     /// <summary>
@@ -330,12 +330,12 @@ public abstract class AbstractBattleUnit
         }
     }
 
-    public void ApplySoldierPerk(SoldierPerk perk, int stacks = 1)
+    public void ApplySoldierPerk(AbstractSoldierPerk perk, int stacks = 1)
     {
         perk.Stacks = stacks;
         Perks.Add(perk);
     }
-    public void RemoveSoldierPerk<T>() where T : SoldierPerk
+    public void RemoveSoldierPerk<T>() where T : AbstractSoldierPerk
     {
         Perks.RemoveAll(item => item.GetType() == typeof(T));
     }

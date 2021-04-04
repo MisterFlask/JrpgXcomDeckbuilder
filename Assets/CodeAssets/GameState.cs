@@ -38,11 +38,12 @@ public class GameState
         new Bayonet()
     };
 
-    public List<SoldierPerk> AugmentationInventory { get; set; } = new List<SoldierPerk>
+    public List<AbstractSoldierPerk> AugmentationInventory { get; set; } = new List<AbstractSoldierPerk>
     {
         new AgilePerk()
     };
 
+    public int NumCardsPlayedThisTurn { get; set;  } = 0;
 
     public List<AbstractStatusEffect> GlobalBattleStatusEffects = new List<AbstractStatusEffect>();
 

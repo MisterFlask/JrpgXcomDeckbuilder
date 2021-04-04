@@ -16,7 +16,7 @@ public class ExplainerPanel : MonoBehaviour
         // todo
     }
 
-    internal static void ShowAugmentationHelp(SoldierPerk augmentation)
+    internal static void ShowAugmentationHelp(AbstractSoldierPerk augmentation)
     {
         TooltipToDisplay = augmentation.Name() + ": " +augmentation.Description();
     }
@@ -54,7 +54,7 @@ public class ExplainerPanel : MonoBehaviour
         SetAndShowTooltip(description: TooltipToDisplay);
     }
 
-    internal static void ShowPerkHelp(SoldierPerk perk)
+    internal static void ShowPerkHelp(AbstractSoldierPerk perk)
     {
         TooltipToDisplay = $"<color=green>{perk.Name()}</color>: {perk.Description()}";
     }

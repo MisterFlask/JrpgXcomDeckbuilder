@@ -25,7 +25,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
         public override string DescriptionInner()
         {
-            return "Apply 20 Terror and 1 Vulnerable to the enemy.  Bloodprice.";
+            return "Apply 20 Binding and 1 Vulnerable to the enemy.  Bloodprice.";
         }
 
 

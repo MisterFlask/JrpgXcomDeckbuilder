@@ -20,7 +20,7 @@ public class EveryoneGetsSickPunishment : MissionFailurePunishment
 
 }
 
-public class SickenedSoldierPerk: SoldierPerk
+public class SickenedSoldierPerk: AbstractSoldierPerk
 {
     public override void PerformAtBeginningOfNewDay(AbstractBattleUnit soldierAffected)
     {

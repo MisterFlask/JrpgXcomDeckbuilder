@@ -16,7 +16,7 @@ namespace Assets.CodeAssets.UI.Screens.CampaignScreen
         }
 
         public PerkDisplayPrefab PerkPrefabTemplate;
-        public List<SoldierPerk> PerksWeHaveRepresented = new List<SoldierPerk>();
+        public List<AbstractSoldierPerk> PerksWeHaveRepresented = new List<AbstractSoldierPerk>();
         private List<PerkDisplayPrefab> PerksManaged  = new List<PerkDisplayPrefab>();
 
         public AbstractBattleUnit SoldierWhosePerksToDisplay => GameState.Instance.CharacterSelected;

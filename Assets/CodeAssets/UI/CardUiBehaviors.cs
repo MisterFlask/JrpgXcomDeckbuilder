@@ -54,7 +54,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerDown(PointerEventData data)
     {
         //handleToOriginVector = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        ServiceLocator.GetGameStateTracker().SetCardSelected(this.GetComponent<Card>());
+        ServiceLocator.GameState().SetCardSelected(this.GetComponent<Card>());
         //arrowController.SetVisible(true);
         //arrowController.SetStart(this.transform.position);
         isDragging = true;
@@ -70,7 +70,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
         handManager.MoveCardToAppropriateLocation(movement.GetComponent<Card>(), false);
 
         SendMessageToFirstValidMouseButtonUpHandler(Input.mousePosition);
-        ServiceLocator.GetGameStateTracker().SetCardSelected(null);
+        ServiceLocator.GameState().SetCardSelected(null);
     }
 
     protected void SendMessageToFirstValidMouseButtonUpHandler(Vector2 position)
@@ -125,7 +125,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
         }
 
-        ServiceLocator.GetGameStateTracker().UnselectCard();
+        ServiceLocator.GameState().UnselectCard();
     }
 
     /// <summary>

@@ -13,7 +13,7 @@ namespace Assets.CodeAssets.UI.Subscreens
         private bool IsTaken { get; set; } = false;
 
         private AbstractBattleUnit BattleUnitSelected => GameState.Instance.CharacterSelected;
-        public SoldierPerk Augmentation { get; set; }
+        public AbstractSoldierPerk Augmentation { get; set; }
 
         public void OnPointerEnter(PointerEventData eventData)
         {

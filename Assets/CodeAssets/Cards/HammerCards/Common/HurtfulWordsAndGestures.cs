@@ -13,7 +13,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 
         public override string DescriptionInner()
         {
-            return "Taunt target enemy.";
+            return "Taunt target enemy.  Exhaust.";
         }
 
         public override CanPlayCardQueryResult CanPlayInner(AbstractBattleUnit target)
@@ -32,6 +32,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().TauntEnemy(target, this.Owner);
+            Action_Exhaust();
         }
     }
 }

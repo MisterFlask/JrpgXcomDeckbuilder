@@ -29,7 +29,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
         {
             action().ApplyStatusEffect(target, new VulnerableStatusEffect(), 1);
             action().DrawCards(1);
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 }

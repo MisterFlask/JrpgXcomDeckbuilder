@@ -23,7 +23,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
             {
                 action().ApplyStatusEffect(enemy, new BurningStatusEffect(), 6);
             }
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 }

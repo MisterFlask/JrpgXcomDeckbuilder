@@ -19,7 +19,7 @@ public class ClickableTile : MonoBehaviour
         var effect = gameObject.GetComponent<HighlightEffect2D>();
         TurnOffOnTopEffects(gameObject);
 
-        var gameState = ServiceLocator.GetGameStateTracker();
+        var gameState = ServiceLocator.GameState();
     }
     private static void TurnOffOnTopEffects(GameObject g)
     {

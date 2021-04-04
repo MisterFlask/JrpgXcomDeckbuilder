@@ -22,15 +22,15 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
         public override string DescriptionInner()
         {
-            return "A random swarm card in your hand costs 1 less to play this combat.  If there is none, create a Hellish Swarm in your deck.";
+            return "A random Swarm card in your hand costs 1 less to play this combat.  If there is none, create a Hellish Swarm in your deck.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            var randomCard = BattleHelpers.RandomCardInHandThat(item => item.CardTags.Contains(BattleCardTags.SWARM) && item.EnergyCost > 0);
+            var randomCard = BattleHelpers.RandomCardInHandThat(item => item.CardTags.Contains(BattleCardTags.SWARM) && item.GetDisplayedEnergyCost() > 0);
             if (randomCard == null)
             {
-                action().CreateCardToBattleDeckDrawPile(new HellishSwarm());
+                action().CreateCardToBattleDeckDrawPile(new HellishSwarm(), CardCreationLocation.SHUFFLE);
             }
             else
             {

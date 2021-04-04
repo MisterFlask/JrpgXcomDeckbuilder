@@ -71,9 +71,9 @@ public static class ServiceLocator
         return UtilityObjectHolder.CardAnimationManager;
     }
 
-    public static GameState GetGameStateTracker()
+    public static GameState GameState()
     {
-        return GameState.Instance;
+        return global::GameState.Instance;
     }
 
     public static Transform GetUnitFolder()

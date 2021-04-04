@@ -5,7 +5,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
 {
     public class AdaptiveTargetingAi : MonoBehaviour
     {
-        // Gain 1 strength.
-        // Whenever you play an autosentry, draw a card.
+        // Add an Autosentry to your hand.
+        // The first time you play an autosentry each turn, draw a card.
     }
 }

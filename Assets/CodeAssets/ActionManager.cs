@@ -17,9 +17,9 @@ public class ActionManager : MonoBehaviour
         Instance = this;
     }
 
-    private BattleDeck deck => ServiceLocator.GetGameStateTracker().Deck;
+    private BattleDeck deck => ServiceLocator.GameState().Deck;
 
-    GameState gameState => ServiceLocator.GetGameStateTracker();
+    GameState gameState => ServiceLocator.GameState();
 
     // Used to end the current action/start the next delayed action
     public bool IsCurrentActionFinished { get; set; }
@@ -166,20 +166,18 @@ public class ActionManager : MonoBehaviour
 
     /// <summary>
     ///  Rules for taunting:
-    ///  It is ONLY allowed on attacks that are NOT targeting the unit in question.
+    ///  It sets all attacks getting made to the taunter.
     /// </summary>
     public void TauntEnemy(AbstractBattleUnit target, AbstractBattleUnit source)
     {
         QueuedActions.ImmediateAction(() =>
         {
-            // there has to be a single unit attack intent that is NOT targeting this character.
-            var eligibleAttackIntent = target.CurrentIntents.FirstOrDefault(item => item is SingleUnitAttackIntent 
-            && !item.UnitsTargeted.Contains(source));
-            if (eligibleAttackIntent != null)
+            var eligibleAttackIntents = target.CurrentIntents.Where(item => item is SingleUnitAttackIntent );
+            foreach(var intent in eligibleAttackIntents)
             {
-                // remove one unit from list, add source
-                eligibleAttackIntent.UnitsTargeted.RemoveAt(0);
-                eligibleAttackIntent.UnitsTargeted.Add(source);
+                // remove one unit from list (which should be all of them, since these are single-unit-attack-intents), add source
+                intent.UnitsTargeted.RemoveAt(0);
+                intent.UnitsTargeted.Add(source);
             }
         });
     }
@@ -223,15 +221,15 @@ public class ActionManager : MonoBehaviour
         {
             if (location == CardCreationLocation.BOTTOM)
             {
-                ServiceLocator.GetGameStateTracker().Deck.DrawPile.Add(abstractCard);
+                ServiceLocator.GameState().Deck.DrawPile.Add(abstractCard);
             }
             else if (location == CardCreationLocation.TOP)
             {
-                ServiceLocator.GetGameStateTracker().Deck.DrawPile.AddToFront(abstractCard);
+                ServiceLocator.GameState().Deck.DrawPile.AddToFront(abstractCard);
             }
             else if (location == CardCreationLocation.SHUFFLE)
             {
-                ServiceLocator.GetGameStateTracker().Deck.DrawPile.InsertIntoRandomLocation(abstractCard);
+                ServiceLocator.GameState().Deck.DrawPile.InsertIntoRandomLocation(abstractCard);
             }else
             {
                 throw new Exception("gotta select a location");
@@ -247,15 +245,15 @@ public class ActionManager : MonoBehaviour
 
             if (location == CardCreationLocation.BOTTOM)
             {
-                ServiceLocator.GetGameStateTracker().Deck.DiscardPile.Add(abstractCard);
+                ServiceLocator.GameState().Deck.DiscardPile.Add(abstractCard);
             }
             else if (location == CardCreationLocation.TOP)
             {
-                ServiceLocator.GetGameStateTracker().Deck.DiscardPile.AddToFront(abstractCard);
+                ServiceLocator.GameState().Deck.DiscardPile.AddToFront(abstractCard);
             }
             else if (location == CardCreationLocation.SHUFFLE)
             {
-                ServiceLocator.GetGameStateTracker().Deck.DiscardPile.InsertIntoRandomLocation(abstractCard);
+                ServiceLocator.GameState().Deck.DiscardPile.InsertIntoRandomLocation(abstractCard);
             }
             else
             {
@@ -268,7 +266,7 @@ public class ActionManager : MonoBehaviour
         Require.NotNull(abstractCard);
         QueuedActions.ImmediateAction(() =>
         {
-            ServiceLocator.GetGameStateTracker().Deck.Hand.Add(abstractCard);
+            ServiceLocator.GameState().Deck.Hand.Add(abstractCard);
             ServiceLocator.GetCardAnimationManager().AddHypercardsToHand(new List<Card> { abstractCard.CreateHyperCard() });
         },queueingType);
     }
@@ -395,7 +393,7 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            var hand = ServiceLocator.GetGameStateTracker().Deck.Hand.ToList();
+            var hand = ServiceLocator.GameState().Deck.Hand.ToList();
             foreach (var card in hand)
             {
                 DiscardCard(card);

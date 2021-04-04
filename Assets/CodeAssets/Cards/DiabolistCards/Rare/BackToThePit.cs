@@ -20,19 +20,21 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
                 }
             }));
 
+            BaseDamage = 30;
+
             this.DamageModifiers.Add(new SlayerDamageModifier());
         }
 
         public override string DescriptionInner()
         {
-            return $"Deal 30 damage. Draw 3 cards. Lethal: Relieve 4 Stress for ALL allies.  " +
+            return $"Deal {BaseDamage} damage. Draw 3 cards. Lethal: Relieve 4 Stress for ALL allies.  " +
                 $"Slayer.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(this.Owner, new StressStatusEffect(), -3);
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
     

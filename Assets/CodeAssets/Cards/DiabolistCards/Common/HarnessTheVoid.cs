@@ -28,7 +28,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
             this.Sacrifice(() =>
             {
-                this.ExhaustAsAction();
+                this.Action_Exhaust();
                 foreach (var ally in state().AllyUnitsInBattle)
                 {
                     action().ApplyStatusEffect(target, new StrengthStatusEffect(), 1);

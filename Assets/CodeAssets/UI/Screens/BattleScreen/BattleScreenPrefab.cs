@@ -12,7 +12,7 @@ public class BattleScreenPrefab : MonoBehaviour
         INSTANCE = this;
     }
 
-    private GameState state => ServiceLocator.GetGameStateTracker();
+    private GameState state => ServiceLocator.GameState();
     private ActionManager action => ServiceLocator.GetActionManager();
 
     private List<BattleUnitPrefab> PotentialBattleEntityEnemySpots;
@@ -108,7 +108,7 @@ public class BattleScreenPrefab : MonoBehaviour
         action.DrawCards(5);
 
         /// END TODO
-        Setup(ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle, ServiceLocator.GetGameStateTracker().AllyUnitsInBattle);
+        Setup(ServiceLocator.GameState().EnemyUnitsInBattle, ServiceLocator.GameState().AllyUnitsInBattle);
 
         PotentialBattleEntityAllySpots.ForEach(item => item.HideOrShowAsAppropriate());
         PotentialBattleEntityEnemySpots.ForEach(item => item.HideOrShowAsAppropriate());

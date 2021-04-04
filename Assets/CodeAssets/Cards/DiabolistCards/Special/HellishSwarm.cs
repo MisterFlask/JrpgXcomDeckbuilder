@@ -25,7 +25,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Special
         {
             action().ApplyStatusEffect(target, new VulnerableStatusEffect(), 1);
             action().DrawCards(1);
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 }

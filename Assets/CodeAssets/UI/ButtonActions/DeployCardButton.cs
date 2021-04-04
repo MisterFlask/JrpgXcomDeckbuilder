@@ -25,7 +25,7 @@ public class DeployCardButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        var cardSelected = ServiceLocator.GetGameStateTracker().GetCardSelected();
+        var cardSelected = ServiceLocator.GameState().GetCardSelected();
         var deployableCardSelected = cardSelected != null && cardSelected.LogicalCard.CanPlay().Playable;
         if (deployableCardSelected)
         {

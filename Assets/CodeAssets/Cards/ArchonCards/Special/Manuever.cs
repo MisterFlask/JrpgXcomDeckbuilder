@@ -26,7 +26,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Special
             {
                 action().RemoveStatusEffect<AdvancedStatusEffect>(target);
             }
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 }

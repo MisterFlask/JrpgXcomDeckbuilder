@@ -1,0 +1,24 @@
+﻿using System.Collections;
+using UnityEngine;
+
+namespace Assets.CodeAssets.Cards.SifterCards.Common
+{
+    public class LootCrate : AbstractCard
+    {
+        // Does nothing.  Gilded 5.
+        public LootCrate()
+        {
+            SetCommonCardAttributes("Loot Crate", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 10);
+            Stickers.Add(new GildedCardSticker(5));
+        }
+
+        public override string DescriptionInner()
+        {
+            return "Does nothing.";
+        }
+
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
+        {
+        }
+    }
+}

@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.SifterCards.Uncommon
 {
-    public class Antiquarian : MonoBehaviour
+    public class WouldYouLikeToMakeAContract : MonoBehaviour
     {
-        // Whenever you trigger Bounty, gain 15 credits.  Cost 0.
+        // Apply 20 binding.  Cost 2.
     }
 }

@@ -15,16 +15,16 @@ public abstract class AbstractStatusEffect: MagicWord
 
     public List<AbstractBattleUnit> enemies()
     {
-        return ServiceLocator.GetGameStateTracker().EnemyUnitsInBattle;
+        return ServiceLocator.GameState().EnemyUnitsInBattle;
     }
     public List<AbstractBattleUnit> allies()
     {
-        return ServiceLocator.GetGameStateTracker().AllyUnitsInBattle;
+        return ServiceLocator.GameState().AllyUnitsInBattle;
     }
 
     public GameState state()
     {
-        return ServiceLocator.GetGameStateTracker();
+        return ServiceLocator.GameState();
     }
     #endregion
     public StatusLocalityType StatusLocalityType = StatusLocalityType.UNIT;

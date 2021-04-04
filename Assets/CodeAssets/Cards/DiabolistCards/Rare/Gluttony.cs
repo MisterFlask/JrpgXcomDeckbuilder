@@ -25,7 +25,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
         {
             action().AttackUnitForDamage(target, this.Owner, BaseDamage, this);
             action().ApplyStatusEffect(Owner, new VampiricStatusEffect(), 3);
-            this.ExhaustAsAction();
+            this.Action_Exhaust();
         }
     }
 

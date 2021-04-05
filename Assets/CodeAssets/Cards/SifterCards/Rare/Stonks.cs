@@ -11,14 +11,7 @@ namespace Assets.CodeAssets.Cards.SifterCards.Rare
         public Stonks()
         {
             SetCommonCardAttributes("Stonks!", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 1);
-            DamageModifiers.Add(new LethalTriggerDamageModifier("Lethal: Increase this card's Hoard value by 2 PERMANENTLY.", (unitKilled) =>
-            {
-                var gildedCard = this.CorrespondingPermanentCard().GetStickerOfType<GildedCardSticker>();
-                if (gildedCard != null)
-                {
-                    gildedCard.GildedValue += 2;
-                }
-            }));
+            DamageModifiers.Add(new StonksDamageModifier());
             Stickers.Add(new BasicAttackTargetSticker());
             Stickers.Add(new GildedCardSticker(2));
             BaseDamage = 10;
@@ -26,11 +19,25 @@ namespace Assets.CodeAssets.Cards.SifterCards.Rare
 
         public override string DescriptionInner()
         {
-            return "";
+            return "Lethal: Increase this card's Hoard value by 2 PERMANENTLY.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
+
+        }
+    }
+
+    public class StonksDamageModifier: DamageModifier
+    {
+        public override bool SlayInner(AbstractCard damageSource, AbstractBattleUnit target)
+        {
+            var gildedCard = damageSource.CorrespondingPermanentCard().GetStickerOfType<GildedCardSticker>();
+            if (gildedCard != null)
+            {
+                gildedCard.GildedValue += 2;
+            }
+            return true;
         }
     }
 }

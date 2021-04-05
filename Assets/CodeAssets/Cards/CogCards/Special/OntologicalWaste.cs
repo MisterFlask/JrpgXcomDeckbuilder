@@ -9,7 +9,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
         public OntologicalWaste()
         {
             SetCommonCardAttributes("Ontological Waste", Rarity.NOT_IN_POOL, TargetType.NO_TARGET_OR_SELF, CardType.StatusCard, 1);
-            this.NonmodifiableStickers.Add(new ExhaustCardSticker());
+            this.Stickers.Add(new ExhaustCardSticker());
         }
 
         public override string DescriptionInner()

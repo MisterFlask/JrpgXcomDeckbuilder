@@ -38,7 +38,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
             for(int i = 0; i < Stacks; i++)
             {
                 var grenade = GetRandomGrenadeCard();
-                action().CreateCardToBattleDeckDrawPile(grenade);
+                action().CreateCardToBattleDeckDrawPile(grenade, CardCreationLocation.TOP);
             }
         }
 

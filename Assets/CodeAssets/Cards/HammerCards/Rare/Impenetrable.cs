@@ -14,8 +14,13 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
         {
             SetCommonCardAttributes("Impenetrable", Rarity.RARE, TargetType.ENEMY, CardType.SkillCard, 2);
             BaseDefenseValue = 15;
+            Stickers.Add(new BasicDefendSelfSticker());
         }
 
+        public override string DescriptionInner()
+        {
+            return "Taunt target enemy.  It gains Weak this turn.  Brute: Taunt ALL enemies.";
+        }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {

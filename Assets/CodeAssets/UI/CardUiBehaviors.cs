@@ -105,14 +105,6 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 return;
             }
 
-            if (element.GetComponent<DeployCardButton>() != null)
-            {
-                Debug.Log("First UI element observed: " + element);
-                var component = element.GetComponent<DeployCardButton>();
-                component.HandleOnMouseButtonUpEvent();
-                break;
-            }
-
             var battleUnitMousedOver = element.GetComponent<BattleUnitPrefab>();
             var battleUnitTargeted = battleUnitMousedOver?.UnderlyingEntity;
 

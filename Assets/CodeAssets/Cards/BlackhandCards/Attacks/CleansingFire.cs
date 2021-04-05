@@ -11,10 +11,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         {
             SetCommonCardAttributes("Cleansing Fire", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 2);
             this.DamageModifiers.Add(new SweeperDamageModifier());
-            this.DamageModifiers.Add(new LethalTriggerDamageModifier("Relieve 8 stress.", (killedEnemy) =>
-            {
-                action().ApplyStress(this.Owner, -8);
-            }));
+            this.DamageModifiers.Add(new CleansingFireLethalTrigger());
             this.BaseDamage = 8;
         }
 
@@ -26,6 +23,15 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().AttackWithCard(this, target);
+        }
+    }
+
+    public class CleansingFireLethalTrigger : DamageModifier
+    {
+        public override bool SlayInner(AbstractCard damageSource, AbstractBattleUnit target)
+        {
+            action().ApplyStress(damageSource.Owner, -8);
+            return true;
         }
     }
 }

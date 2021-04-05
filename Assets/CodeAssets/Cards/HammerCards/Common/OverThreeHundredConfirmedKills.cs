@@ -16,10 +16,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
             SetCommonCardAttributes("Over Three Hundred Confirmed Kills", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 1, typeof(HammerSoldierClass));
             BaseDamage = 5;
             BaseDefenseValue = 2;
-            DamageModifiers.Add(new LethalTriggerDamageModifier("ALL copies of this card owned by this character gain 1 defense and 1 attack PERMANENTLY.", (character) =>
-            {
-                // todo: get all persistent copies of card, increase damage etc etc
-            }));
+            DamageModifiers.Add(new OverThreeHundredConfirmedKillsLethalDamageModifier());
         }
 
         public override string DescriptionInner()
@@ -32,5 +29,22 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
             Action_AttackTarget(target);
             Action_ApplyDefenseToTarget(Owner);
         }
+
+
+    }
+
+    public class OverThreeHundredConfirmedKillsLethalDamageModifier: DamageModifier
+    {
+        public OverThreeHundredConfirmedKillsLethalDamageModifier()
+        {
+            Description = "Lethal: ALL copies of this card owned by this character gain 1 defense and 1 attack PERMANENTLY.";            
+        }
+
+        public override bool SlayInner(AbstractCard damageSource, AbstractBattleUnit target)
+        {
+            //todo
+            return true;
+        }
+
     }
 }

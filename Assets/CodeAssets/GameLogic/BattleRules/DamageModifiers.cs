@@ -8,6 +8,10 @@ using UnityEngine;
 
 public abstract class DamageModifier
 {
+    public GameState state() => GameState.Instance;
+    public ActionManager action() => ActionManager.Instance;
+
+
     public bool IgnoresDefense { get; set; } = false;
 
     public bool IgnoresRetaliation { get; set; } = false;
@@ -21,9 +25,21 @@ public abstract class DamageModifier
 
     public string Description { get; set; } = "Tooltip Text";
 
-    public virtual void Slay(AbstractCard damageSource, AbstractBattleUnit target)
+    /// <summary>
+    /// Return "True" if this procs the slay trigger.
+    /// </summary>
+    public virtual bool SlayInner(AbstractCard damageSource, AbstractBattleUnit target)
     {
+        return false;
+    }
 
+    public void Slay(AbstractCard damageSource, AbstractBattleUnit target)
+    {
+        var slew = SlayInner(damageSource, target);
+        if (slew)
+        {
+            BattleRules.ProcessProc(new LethalTriggerProc());
+        }
     }
 
     public virtual void OnStrike(AbstractCard damageSource, AbstractBattleUnit target, int totalDamageAfterModifiers)
@@ -49,6 +65,11 @@ public abstract class DamageModifier
     {
         return 0;
     }
+}
+
+public class LethalTriggerProc: AbstractProc
+{
+
 }
 
 public class BusterDamageModifier : DamageModifier
@@ -144,47 +165,40 @@ public class StrengthScalingDamageModifier : DamageModifier
 
 }
 
-public class LethalTriggerDamageModifier: DamageModifier
+
+public class BountyDamageModifier: DamageModifier
 {
-    private Action<AbstractBattleUnit> actToPerform;
-    public LethalTriggerDamageModifier(string actionDescription, Action<AbstractBattleUnit> action)
+    public static BountyDamageModifier Create()
     {
-        this.actToPerform = action;
-        this.Name = "Lethal";
-        this.Description = actionDescription;
+        return new BountyDamageModifier();
+    }
+    public static BountyDamageModifier GetBountyDamageModifier()
+    {
+        return new BountyDamageModifier();
     }
 
-    public override void Slay(AbstractCard damageSource, AbstractBattleUnit target)
+    public BountyDamageModifier()
     {
-        actToPerform(target);
-        BattleRules.ProcessProc(new LethalTriggerProc());
+        Name = "Bounty";
+        Description = "If this unit kills a:  Boss -> 20 credits, Elite -> 10 credits, other non-minion -> 5 credits.";
     }
-}
 
-public class LethalTriggerProc: AbstractProc
-{
-}
-
-public static class BountyDamageModifier
-{
-    public static LethalTriggerDamageModifier GetBountyDamageModifier()
+    public override bool SlayInner(AbstractCard damageSource, AbstractBattleUnit target)
     {
-        return new LethalTriggerDamageModifier("If this unit kills a:  Boss -> 20 credits, Elite -> 10 credits, other non-minion -> 5 credits.", (deadEnemy) =>
+        if (target.IsBoss)
         {
-            if (deadEnemy.IsBoss)
-            {
-                CardAbilityProcs.ChangeMoney(20);
-            }
-            if (deadEnemy.IsElite)
-            {
-                CardAbilityProcs.ChangeMoney(10);
-            }
-            else
-            {
-                // todo: Minion exclusion
-                CardAbilityProcs.ChangeMoney(5);
-            }
-        });
+            CardAbilityProcs.ChangeMoney(20);
+        }
+        if (target.IsElite)
+        {
+            CardAbilityProcs.ChangeMoney(10);
+        }
+        else
+        {
+            //todo: Minion exclusion
+            CardAbilityProcs.ChangeMoney(5);
+        }
+        return true;
     }
 }
 

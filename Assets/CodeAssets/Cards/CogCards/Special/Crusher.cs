@@ -10,11 +10,11 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
         public Crusher()
         {
             SetCommonCardAttributes("Crusher", Rarity.NOT_IN_POOL, TargetType.ENEMY, CardType.AttackCard, 0);
-            NonmodifiableStickers.Add(new BasicAttackTargetSticker());
-            NonmodifiableStickers.Add(new BasicDefendSelfSticker());
+            Stickers.Add(new BasicAttackTargetSticker());
+            Stickers.Add(new BasicDefendSelfSticker());
             BaseDamage = 6;
             BaseDefenseValue = 4;
-            FlexibleDamageModifiers.Add(new SweeperDamageModifier());
+            DamageModifiers.Add(new SweeperDamageModifier());
         }
 
         public override string DescriptionInner()

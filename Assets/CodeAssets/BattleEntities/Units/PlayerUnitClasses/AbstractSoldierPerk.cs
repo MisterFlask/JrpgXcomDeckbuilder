@@ -35,9 +35,9 @@ public abstract class AbstractSoldierPerk
     }
 
     /// <summary>
-    ///  This is run on the deck after the perk is gained, and also on every card as it enters the deck.
+    ///  This is run on cards added to the deck after perk is gained
     /// </summary>
-    public virtual void ModifyCardsUponAcquisition(AbstractCard card, AbstractBattleUnit soldierAffected, bool wasCardJustAdded)
+    public virtual void ModifyCardsUponAcquisition(AbstractCard card, AbstractBattleUnit soldierAffected)
     {
 
     }
@@ -126,7 +126,7 @@ public class GrantsCardStickerPerk : AbstractSoldierPerk
         {
             return Effect.IsCardTagApplicable(card);
         },
-        prompt: "Adds effect to card: " + Effect.CardDescriptionAddendum);
+        prompt: "Adds effect to card: " + Effect.CardDescriptionAddendum());
     }
 
     public override string Name()

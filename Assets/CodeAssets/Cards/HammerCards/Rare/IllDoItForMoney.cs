@@ -7,13 +7,13 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
     {
         public IllDoItForMoney()
         {
-            SetCommonCardAttributes("I'll Do It For Money", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, )
+            SetCommonCardAttributes("I'll Do It For Money", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1)
         }
 
         // Lose 5 credits and 20 stress.  Exhaust.  Cost 0.
         public override string DescriptionInner()
         {
-            return "Lose 5 credits and relieve 20 stress.  If you have a card with Hoard in hand, lose no credits instead.  Exhaust.";
+            return "Lose 5 credits and relieve 20 stress.  Exhaust.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

@@ -10,9 +10,9 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
         public AutocannonSentry()
         {
             SetCommonCardAttributes("Autocannon Sentry", Rarity.NOT_IN_POOL, TargetType.ENEMY, CardType.AttackCard, 0);
-            NonmodifiableStickers.Add(new BasicAttackTargetSticker());
+            Stickers.Add(new BasicAttackTargetSticker());
             BaseDamage = 4;
-            FlexibleDamageModifiers.Add(new PrecisionDamageModifier());
+            DamageModifiers.Add(new PrecisionDamageModifier());
         }
 
         public override string DescriptionInner()

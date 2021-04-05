@@ -12,7 +12,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
 
         };
 
-        public List<AbstractCard> CardRewardPool => EntityRegistrations.AllClassCards;
+        public List<AbstractCard> CardRewardPool => new List<AbstractCard>();
 
 
     }

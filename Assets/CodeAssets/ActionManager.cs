@@ -237,7 +237,7 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    internal void CreateCardToBattleDeckDiscardPile(AbstractCard abstractCard, CardCreationLocation location, QueueingType queueingType = QueueingType.TO_BACK)
+    internal void CreateCardToBattleDeckDiscardPile(AbstractCard abstractCard, CardCreationLocation location = CardCreationLocation.SHUFFLE, QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
         QueuedActions.ImmediateAction(() =>
@@ -328,9 +328,9 @@ public class ActionManager : MonoBehaviour
         {
             if (logicalCard != null)
             {
-                if (!logicalCard.CanPlay().Playable)
+                if (!logicalCard.CanPlay(target).Playable)
                 {
-                    Shout(logicalCard.Owner, logicalCard.CanPlay().ReasonUnplayable);
+                    Shout(logicalCard.Owner, logicalCard.CanPlay(target).ReasonUnplayable);
                 }
                 else
                 {

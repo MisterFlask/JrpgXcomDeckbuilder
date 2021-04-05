@@ -13,7 +13,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Effects
 
         public override float DefenseReceivedIncrementalMultiplier()
         {
-            return -.33;
+            return -.33f;
         }
     }
 }

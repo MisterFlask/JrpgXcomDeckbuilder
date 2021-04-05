@@ -7,7 +7,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
     {
         public IllDoItForMoney()
         {
-            SetCommonCardAttributes("I'll Do It For Money", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1)
+            SetCommonCardAttributes("I'll Do It For Money", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
         }
 
         // Lose 5 credits and 20 stress.  Exhaust.  Cost 0.

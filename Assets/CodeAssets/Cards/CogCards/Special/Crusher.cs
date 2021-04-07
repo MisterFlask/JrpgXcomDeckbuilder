@@ -5,16 +5,15 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
 {
     public class Crusher : AbstractCard
     {
-        // Deal 4 damage.  Precision.  Exhaust.  Cost 0.
-
         public Crusher()
         {
-            SetCommonCardAttributes("Crusher", Rarity.NOT_IN_POOL, TargetType.ENEMY, CardType.AttackCard, 0);
+            SetCommonCardAttributes("Crusher", Rarity.NOT_IN_POOL, TargetType.ENEMY, CardType.AttackCard, 2);
             Stickers.Add(new BasicAttackTargetSticker());
             Stickers.Add(new BasicDefendSelfSticker());
-            BaseDamage = 6;
-            BaseDefenseValue = 4;
+            BaseDamage = 15;
+            BaseDefenseValue = 8;
             DamageModifiers.Add(new SweeperDamageModifier());
+            Stickers.Add(new ExhaustCardSticker());
         }
 
         public override string DescriptionInner()

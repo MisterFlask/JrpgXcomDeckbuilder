@@ -432,6 +432,10 @@ public static class BattleRules
         return eligibleAttackIntent;
     }
 
+    public static void MarkCreatedCard(AbstractCard card)
+    {
+        card.WasCreated = true;
+    }
 }
 
 

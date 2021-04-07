@@ -42,7 +42,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
         public DamnYouAllDamageModifier()
         {
             this.TargetInvariant = true;
-            this.Description = "+3 damage for each soldier died.";
+            this.TooltipDescription = "+3 damage for each soldier died.";
         }
 
         private int GetNumDeadSoldiers()

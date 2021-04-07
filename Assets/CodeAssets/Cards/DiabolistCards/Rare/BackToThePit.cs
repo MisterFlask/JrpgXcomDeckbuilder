@@ -35,7 +35,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
     {
         public BackToThePitLethalDamageRule()
         {
-            Description = "Lethal: Relieve 4 Stress for ALL allies.";
+            TooltipDescription = "Lethal: Relieve 4 Stress for ALL allies.";
         }
 
         public override bool SlayInner(AbstractCard damageSource, AbstractBattleUnit target)

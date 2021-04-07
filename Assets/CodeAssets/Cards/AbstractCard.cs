@@ -26,6 +26,11 @@ public abstract class AbstractCard
     // TODO: Move to a more explicit magic-words system
     public List<MagicWord> MagicWordsReferencedOnThisCard { get; set; } = new List<MagicWord>();
 
+    public bool HasDamageModifier<T>() where T:DamageModifier
+    {
+        return DamageModifiers.Any(item => item is T);
+    }
+
     /// <summary>
     ///  This is just a thing tracking the countdown on a card.
     /// </summary>
@@ -186,7 +191,7 @@ public abstract class AbstractCard
         if (!DamageModifiers.IsEmpty())
         {
             baseDescription += "\n<color=green>";
-            baseDescription += string.Join(",", DamageModifiers.Select(item => item.Name));
+            baseDescription += string.Join(",", DamageModifiers.Select(item => item.CardDescriptionAddendum));
             baseDescription += "</color>";
         }
 

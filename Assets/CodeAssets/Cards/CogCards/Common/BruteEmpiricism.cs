@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.CogCards.Common
 {
-    public class Upgrade : MonoBehaviour
+    public class BruteEmpiricism : MonoBehaviour
     {
-        // Gain 2 data points.
+        // gain 1 Data Point.  Exhaust.  Cost 0.
     }
 }

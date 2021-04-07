@@ -21,9 +21,9 @@ public abstract class DamageModifier
     /// </summary>
     public bool TargetInvariant { get; set; } = false;
 
-    public string Name { get; set; } = "Sample";
+    public string CardDescriptionAddendum { get; set; } = "Sample";
 
-    public string Description { get; set; } = "Tooltip Text";
+    public string TooltipDescription { get; set; } = "Tooltip Text";
 
     /// <summary>
     /// Return "True" if this procs the slay trigger.
@@ -43,6 +43,9 @@ public abstract class DamageModifier
     }
 
     public virtual void OnStrike(AbstractCard damageSource, AbstractBattleUnit target, int totalDamageAfterModifiers)
+    {
+    }
+    public virtual void OnPlay(AbstractCard damageSource, AbstractBattleUnit target)
     {
     }
 
@@ -76,8 +79,8 @@ public class BusterDamageModifier : DamageModifier
 {
     public BusterDamageModifier()
     {
-        this.Name = "Buster";
-        this.Description = "Deal +50% damage to targets with Block.";
+        this.CardDescriptionAddendum = "Buster";
+        this.TooltipDescription = "Deal +50% damage to targets with Block.";
     }
 
     public override float GetIncrementalDamageMultiplier(int currentBaseDamage, AbstractCard damageSource, AbstractBattleUnit target)
@@ -96,8 +99,8 @@ public class PrecisionDamageModifier : DamageModifier
 
     public PrecisionDamageModifier()
     {
-        this.Name = "Precision";
-        this.Description = "Ignores Block.  If attacking a Marked target, gain +50% damage.";
+        this.CardDescriptionAddendum = "Precision";
+        this.TooltipDescription = "Ignores Block.  If attacking a Marked target, gain +50% damage.";
         IgnoresDefense = true;
     }
 
@@ -115,8 +118,8 @@ public class SlayerDamageModifier : DamageModifier
 {
     public SlayerDamageModifier()
     {
-        this.Name = "Anti-Titan";
-        this.Description = "Deals +50% damage to targets with >300 maximum hit points.";
+        this.CardDescriptionAddendum = "Anti-Titan";
+        this.TooltipDescription = "Deals +50% damage to targets with >300 maximum hit points.";
     }
     public override float GetIncrementalDamageMultiplier(int currentBaseDamage, AbstractCard damageSource, AbstractBattleUnit target)
     {
@@ -131,11 +134,11 @@ public class SweeperDamageModifier : DamageModifier
 {
     public SweeperDamageModifier()
     {
-        this.Name = "Sweeper";
-        this.Description = "Deals 30% inflicted damage to up to 2 other random targets.  (Does not proc on-hits.)";
+        this.CardDescriptionAddendum = "Sweeper";
+        this.TooltipDescription = "Attack also deals 25% pre-modifier damage to up to 2 other random targets.";
     }
 
-    public override void OnStrike(AbstractCard damageSource, AbstractBattleUnit target, int preBlockDamage)
+    public override void OnPlay(AbstractCard damageSource, AbstractBattleUnit target)
     {
         var otherPossibleTargets = GameState.Instance.EnemyUnitsInBattle
             .Where(item => item != target)
@@ -143,7 +146,7 @@ public class SweeperDamageModifier : DamageModifier
             .Shuffle()
             .TakeUpTo(2)
             .ToList();
-        ActionManager.Instance.DamageUnitNonAttack(target, damageSource.Owner, (int)(.3f * preBlockDamage));
+        ActionManager.Instance.AttackUnitForDamage(target, damageSource.Owner, damageSource.BaseDamage / 4, damageSource);
     }
 }
 
@@ -152,8 +155,8 @@ public class StrengthScalingDamageModifier : DamageModifier
     private int additionalScaling = 0;
     public StrengthScalingDamageModifier(int additionalStrengthScaling)
     {
-        this.Name = "Additional Strength Scaling";
-        this.Description = $"This attack gains {1 + additionalStrengthScaling}x damage from strength";
+        this.CardDescriptionAddendum = "Additional Strength Scaling";
+        this.TooltipDescription = $"This attack gains {1 + additionalStrengthScaling}x damage from strength";
         this.additionalScaling = additionalStrengthScaling;
         this.TargetInvariant = true;
     }
@@ -179,8 +182,8 @@ public class BountyDamageModifier: DamageModifier
 
     public BountyDamageModifier()
     {
-        Name = "Bounty";
-        Description = "If this unit kills a:  Boss -> 20 credits, Elite -> 10 credits, other non-minion -> 5 credits.";
+        CardDescriptionAddendum = "Bounty";
+        TooltipDescription = "If this unit kills a:  Boss -> 20 credits, Elite -> 10 credits, other non-minion -> 5 credits.";
     }
 
     public override bool SlayInner(AbstractCard damageSource, AbstractBattleUnit target)

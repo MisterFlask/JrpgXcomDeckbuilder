@@ -144,6 +144,23 @@ namespace Assets.CodeAssets.Cards
                 GameState.Instance.Credits = 0;
             }
         }
+
+
+        public static void Technocannibalize(AbstractCard cardUsed, Action actToPerform)
+        {
+            var cardsToExhaust = GameState.Instance.Deck.Hand.Where(item => item.WasCreated);
+            int exhaustedCards = 0;
+            foreach(var cardToExhaust in cardsToExhaust)
+            {
+                cardToExhaust.Action_Exhaust();
+                exhaustedCards++;
+            }
+            for (int i = 0; i< exhaustedCards; i++)
+            {
+                actToPerform();
+            }
+
+        }
     }
 
 

@@ -13,6 +13,7 @@ public class IndiscriminateFire : AbstractCard
             TargetType.NO_TARGET_OR_SELF, 
             CardType.AttackCard,
             1);
+        DamageModifiers.Add(new SweeperDamageModifier());
     }
 
     public override string DescriptionInner()

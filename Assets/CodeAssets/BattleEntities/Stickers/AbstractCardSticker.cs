@@ -24,6 +24,11 @@ public abstract class AbstractCardSticker : MonoBehaviour
         return "";
     }
 
+    public virtual string GetCardTooltipIfAny()
+    {
+        return null;
+    }
+
     public virtual void OnAddedToCardInner(AbstractCard card)
     {
         // do stuff like change its attack damage or whatever
@@ -54,9 +59,9 @@ public abstract class AbstractCardSticker : MonoBehaviour
 
     }
 
-    public virtual void OnEndOfTurn()
+    public virtual void OnEndOfTurnWhileInHand(AbstractCard card)
     {
-
+        
     }
 
     /// <summary>
@@ -143,6 +148,7 @@ public class BasicDefendTargetSticker : AbstractCardSticker
         ActionManager.Instance.ApplyDefenseFromCard(card, target);
     }
 }
+
 public class BasicDefendSelfSticker : AbstractCardSticker
 {
     public override string CardDescriptionAddendum()

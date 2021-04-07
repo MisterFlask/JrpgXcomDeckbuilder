@@ -37,7 +37,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
     {
         public OverThreeHundredConfirmedKillsLethalDamageModifier()
         {
-            Description = "Lethal: ALL copies of this card owned by this character gain 1 defense and 1 attack PERMANENTLY.";            
+            TooltipDescription = "Lethal: ALL copies of this card owned by this character gain 1 defense and 1 attack PERMANENTLY.";            
         }
 
         public override bool SlayInner(AbstractCard damageSource, AbstractBattleUnit target)

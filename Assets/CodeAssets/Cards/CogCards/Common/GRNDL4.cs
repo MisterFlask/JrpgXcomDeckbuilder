@@ -1,11 +1,35 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.BattleEntities.StatusEffects;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.CogCards.Common
 {
-    public class GRNDL4 : MonoBehaviour
+    public class GRNDL4 : AbstractCard
     {
-        // Apply 1 strength.  Exhaust.
+        public GRNDL4()
+        {
+            SetCommonCardAttributes("GRNDL XL", Rarity.COMMON, TargetType.ALLY, CardType.AttackCard, 1);
+            BaseDamage = 4;
+        }
+
+        // Apply 2 Empowered to target ally.  Exhaust.
         // Technocannibalize:  Then, deal 4 damage and 4 Fumes to ALL enemies.
+        public override string DescriptionInner()
+        {
+            return $"Apply 2 Empowered to target ally.  Technocannibalize: Then, deal {DisplayedDamage()} damage and 4 Fumes to ALL enemies.  ";
+        }
+
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
+        {
+            action().ApplyStatusEffect(target, new EmpoweredStatusEffect(), 2);
+            CardAbilityProcs.Technocannibalize(this, () =>
+            {
+                foreach(var enemy in state().EnemyUnitsInBattle)
+                {
+                    action().ApplyStatusEffect(enemy, new FumesStatusEffect(), 4);
+                    action().AttackWithCard(this, enemy);
+                }
+            });
+        }
     }
 }

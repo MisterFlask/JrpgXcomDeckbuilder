@@ -217,6 +217,7 @@ public class ActionManager : MonoBehaviour
     internal void CreateCardToBattleDeckDrawPile(AbstractCard abstractCard, CardCreationLocation location, QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
+        BattleRules.MarkCreatedCard(abstractCard);
         QueuedActions.ImmediateAction(() =>
         {
             if (location == CardCreationLocation.BOTTOM)
@@ -243,6 +244,7 @@ public class ActionManager : MonoBehaviour
         QueuedActions.ImmediateAction(() =>
         {
 
+            BattleRules.MarkCreatedCard(abstractCard);
             if (location == CardCreationLocation.BOTTOM)
             {
                 ServiceLocator.GameState().Deck.DiscardPile.Add(abstractCard);
@@ -266,6 +268,7 @@ public class ActionManager : MonoBehaviour
         Require.NotNull(abstractCard);
         QueuedActions.ImmediateAction(() =>
         {
+            BattleRules.MarkCreatedCard(abstractCard);
             ServiceLocator.GameState().Deck.Hand.Add(abstractCard);
             ServiceLocator.GetCardAnimationManager().AddHypercardsToHand(new List<Card> { abstractCard.CreateHyperCard() });
         },queueingType);
@@ -576,7 +579,10 @@ public class ActionManager : MonoBehaviour
 
     public void DamageUnitNonAttack(AbstractBattleUnit targetUnit, AbstractBattleUnit nullableSourceUnit, int baseDamageDealt)
     {
-        Require.NotNull(targetUnit);
+        if (targetUnit == null)
+        {
+            return;
+        }
         QueuedActions.DelayedActionWithCustomTrigger("ShakeUnit", () => {
             if (targetUnit.IsDead)
             {

@@ -50,7 +50,7 @@ public abstract class AbstractCardSticker : MonoBehaviour
 
     }
 
-    public virtual void OnCardDrawnPassive(AbstractCard card)
+    public virtual void OnCardDrawn(AbstractCard card)
     {
 
     }
@@ -58,6 +58,11 @@ public abstract class AbstractCardSticker : MonoBehaviour
     {
 
     }
+    public virtual void OnTurnStart(AbstractCard card)
+    {
+
+    }
+
 
     public virtual void OnEndOfTurnWhileInHand(AbstractCard card)
     {

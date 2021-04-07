@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.Cards.Stickers;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.CogCards.Special
@@ -9,8 +10,9 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
 
         public ShieldDrone()
         {
-            SetCommonCardAttributes("Shield Drone", Rarity.NOT_IN_POOL, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
-            BaseDefenseValue = 3;
+            SetCommonCardAttributes("Shield Drone", Rarity.NOT_IN_POOL, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
+            BaseDefenseValue = 6;
+            AddSticker(new LightCardSticker());
         }
 
         public override string DescriptionInner()

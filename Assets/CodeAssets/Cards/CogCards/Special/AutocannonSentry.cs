@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.Cards.Stickers;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.CogCards.Special
@@ -9,19 +10,21 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
 
         public AutocannonSentry()
         {
-            SetCommonCardAttributes("Autocannon Sentry", Rarity.NOT_IN_POOL, TargetType.ENEMY, CardType.AttackCard, 0);
-            Stickers.Add(new BasicAttackTargetSticker());
+            SetCommonCardAttributes("Autocannon Sentry", Rarity.NOT_IN_POOL, TargetType.ENEMY, CardType.AttackCard, 1);
             BaseDamage = 4;
             DamageModifiers.Add(new PrecisionDamageModifier());
+            AddSticker(new LightCardSticker());
         }
 
         public override string DescriptionInner()
         {
-            return "";
+            return $"Deal {DisplayedDamage()} to the target, twice.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
+            Action_AttackTarget(target);
+            Action_AttackTarget(target);
         }
     }
 }

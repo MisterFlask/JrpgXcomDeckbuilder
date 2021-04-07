@@ -7,7 +7,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
     {
         // Gain 4 stress.
         // Gain 1 energy over the next 4 turns.
-        // Inferno:  Gain 1 energy over the next 100 turns.
-        // Cost 1.
+        // Inferno:  Gain 1 energy over the next 100 turns instead.
+        // Cost 2.
     }
 }

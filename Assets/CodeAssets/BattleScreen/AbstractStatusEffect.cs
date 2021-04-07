@@ -193,6 +193,11 @@ public abstract class AbstractStatusEffect: MagicWord
 
     }
 
+    public virtual int CardCostModifier(AbstractCard card)
+    {
+        return 0;
+    }
+
     public void HalveStacks()
     {
         if (Stacks % 2 ==1)

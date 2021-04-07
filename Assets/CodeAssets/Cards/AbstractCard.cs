@@ -240,7 +240,7 @@ public abstract class AbstractCard
         OnDrawInner();
         foreach (var sticker in Stickers)
         {
-            sticker.OnCardDrawnPassive(this);
+            sticker.OnCardDrawn(this);
         }
     }
 

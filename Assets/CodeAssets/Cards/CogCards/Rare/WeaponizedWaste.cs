@@ -5,7 +5,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
 {
     public class WeaponizedWaste : MonoBehaviour
     {
-        // Whenever you draw an Erosion or Hazard card, deal 10 damage to ALL enemies.
+        // All Hazardous cards in your hand cost 10 less and gain "deal 20 damage to a random enemy.";
         // Cost 3, refund 2.
     }
 }

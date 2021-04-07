@@ -13,7 +13,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
             BaseDamage = 15;
             BaseDefenseValue = 8;
             DamageModifiers.Add(new SweeperDamageModifier());
-            Stickers.Add(new ExhaustCardSticker());
+            Stickers.Add(new ExhaustCardSticker()); 
+
         }
 
         public override string DescriptionInner()

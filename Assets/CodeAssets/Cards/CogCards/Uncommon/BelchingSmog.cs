@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.CogCards.Uncommon
 {
     public class BelchingSmog : MonoBehaviour
     {
-        // Apply 4 Fumes to target.  Gain 4 defense.  Cost 0.
+        // Sacrifice: Apply 8 Fumes to target and 4 defense to ALL allies.  Cost 0.
     }
 }

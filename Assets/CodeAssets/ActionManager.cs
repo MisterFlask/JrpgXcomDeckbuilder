@@ -214,9 +214,14 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    internal void CreateCardToBattleDeckDrawPile(AbstractCard abstractCard, CardCreationLocation location, QueueingType queueingType = QueueingType.TO_BACK)
+    internal void CreateCardToBattleDeckDrawPile(
+        AbstractCard abstractCard, 
+        CardCreationLocation location, 
+        AbstractBattleUnit owner = null,
+        QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
+        abstractCard.Owner = owner;
         BattleRules.MarkCreatedCard(abstractCard);
         QueuedActions.ImmediateAction(() =>
         {
@@ -238,9 +243,13 @@ public class ActionManager : MonoBehaviour
         }, queueingType);
     }
 
-    internal void CreateCardToBattleDeckDiscardPile(AbstractCard abstractCard, CardCreationLocation location = CardCreationLocation.SHUFFLE, QueueingType queueingType = QueueingType.TO_BACK)
+    internal void CreateCardToBattleDeckDiscardPile(AbstractCard abstractCard,
+        AbstractBattleUnit owner = null,
+        CardCreationLocation location = CardCreationLocation.SHUFFLE,
+        QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
+        abstractCard.Owner = owner;
         QueuedActions.ImmediateAction(() =>
         {
 
@@ -263,9 +272,12 @@ public class ActionManager : MonoBehaviour
             }
         }, queueingType);
     }
-    internal void CreateCardToHand(AbstractCard abstractCard, QueueingType queueingType = QueueingType.TO_BACK)
+    internal void CreateCardToHand(AbstractCard abstractCard,
+        AbstractBattleUnit owner = null,
+        QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(abstractCard);
+        abstractCard.Owner = owner;
         QueuedActions.ImmediateAction(() =>
         {
             BattleRules.MarkCreatedCard(abstractCard);

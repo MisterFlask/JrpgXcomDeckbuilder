@@ -484,6 +484,20 @@ public abstract class AbstractCard
     {
         action().AttackWithCard(this, target);
     }
+    protected void Action_AttackAllEnemies()
+    {
+        foreach (var enemy in GameState.Instance.EnemyUnitsInBattle)
+        {
+            action().AttackWithCard(this, enemy);
+        }
+    }
+    protected void Action_DefendAllAllies()
+    {
+        foreach(var ally in GameState.Instance.AllyUnitsInBattle)
+        {
+            action().ApplyDefenseFromCard(this, ally);
+        }
+    }
     protected void Action_Exhaust()
     {
         action().ExhaustCard(this);

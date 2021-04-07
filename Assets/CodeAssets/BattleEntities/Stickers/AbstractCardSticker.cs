@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.CodeAssets.Cards;
+using System;
 
 /// <summary>
 /// These are used for card "passives"
 /// </summary>
-public abstract class AbstractCardSticker : MonoBehaviour
+public abstract class AbstractCardSticker: MonoBehaviour
 {
     public AbstractCard CardAttachedTo { get; set; }
     public AbstractCard card => CardAttachedTo;
@@ -133,6 +134,19 @@ public class BasicAttackTargetSticker: AbstractCardSticker
     public override string CardDescriptionAddendum()
     {
         return $"Deal {card.DisplayedDamage()} to target.";
+    }
+
+    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    {
+        ActionManager.Instance.AttackWithCard(card, target);
+    }
+}
+
+public class BasicAttackRandomEnemySticker: AbstractCardSticker
+{
+    public override string CardDescriptionAddendum()
+    {
+        return $"Deal {card.DisplayedDamage()} to a random enemy.";
     }
 
     public override void OnThisCardPlayed(AbstractBattleUnit target)

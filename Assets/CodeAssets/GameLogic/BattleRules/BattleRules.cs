@@ -315,7 +315,7 @@ public static class BattleRules
         return "Can't Move";
     }
 
-    public static int GetDisplayedDamageOnCard(AbstractCard card)
+    public static int GetDisplayedDamageOnCard(AbstractCard card, int? baseDamageOverride = null)
     {
         if (card.Owner == null)
         {
@@ -323,9 +323,15 @@ public static class BattleRules
             return card.BaseDamage;
         }
 
+        var baseDamage = card.BaseDamage;
+
+        if (baseDamageOverride != null)
+        {
+            baseDamage = baseDamageOverride.Value;
+        }
+
         var unitTargeted = BattleScreenPrefab.BattleUnitMousedOver;
 
-        var baseDamage = card.BaseDamage;
 
         var totalPreBlockDamage = CalculateTotalPreBlockDamage(card.Owner, unitTargeted, baseDamage, card);
 

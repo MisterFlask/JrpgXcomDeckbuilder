@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.Cards.CogCards.Special;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.CogCards.Rare
@@ -23,7 +24,10 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         {
             foreach(var cardInHand in state().Deck.Hand)
             {
-                cardInHand.AddSticker(new BasicAttackRandomEnemySticker());
+                cardInHand.AddSticker(new BasicAttackRandomEnemyForSpecificDamageSticker
+                {
+                    Damage = 5
+                });
             }
             action().CreateCardToBattleDeckDiscardPile(new OntologicalWaste());
         }

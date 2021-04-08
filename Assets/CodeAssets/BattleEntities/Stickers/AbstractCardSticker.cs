@@ -142,6 +142,20 @@ public class BasicAttackTargetSticker: AbstractCardSticker
     }
 }
 
+public class BasicAttackRandomEnemyForSpecificDamageSticker : AbstractCardSticker
+{
+    public int Damage { get; set; } = 0;
+    public override string CardDescriptionAddendum()
+    {
+        return $"Deal {card.DisplayedDamage(Damage)} to a random enemy.";
+    }
+
+    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    {
+        ActionManager.Instance.AttackUnitForDamage(target, card.Owner, Damage, card);
+    }
+}
+
 public class BasicAttackRandomEnemySticker: AbstractCardSticker
 {
     public override string CardDescriptionAddendum()

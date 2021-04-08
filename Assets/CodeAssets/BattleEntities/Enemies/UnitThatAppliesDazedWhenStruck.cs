@@ -38,6 +38,6 @@ public class ApplyDazedOnHit : AbstractStatusEffect
 
     public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
     {
-        action().CreateCardToBattleDeckDiscardPile(new Distracted(), CardCreationLocation.SHUFFLE);
+        action().CreateCardToBattleDeckDiscardPile(new Distracted(), location: CardCreationLocation.SHUFFLE);
     }
 }

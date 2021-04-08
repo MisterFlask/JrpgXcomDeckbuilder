@@ -276,9 +276,9 @@ public abstract class AbstractCard
     {
         return BattleRules.GetDisplayedDefenseOnCard(this);
     }
-    public int DisplayedDamage()
+    public int DisplayedDamage(int? baseDamageOverride =null)
     {
-        return BattleRules.GetDisplayedDamageOnCard(this);
+        return BattleRules.GetDisplayedDamageOnCard(this, baseDamageOverride);
     }
 
     public void PlayCardFromHandIfAble_Action(AbstractBattleUnit target)
@@ -377,6 +377,7 @@ public abstract class AbstractCard
 
     public void AddSticker(AbstractCardSticker sticker)
     {
+        sticker.CardAttachedTo = this;
         Stickers.Add(sticker);
     }
 

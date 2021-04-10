@@ -162,7 +162,7 @@ namespace Assets.CodeAssets.Cards
 
         }
 
-        public static void GainDataPoint(AbstractCard cardUsed)
+        public static void GainDataPoints(AbstractCard cardUsed, int numberDataPoints)
         {
 
         }

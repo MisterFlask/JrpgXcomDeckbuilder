@@ -127,15 +127,15 @@ public static class BattleRules
 
     internal static void RunOnPlayCardEffects(AbstractCard abstractCard, AbstractBattleUnit target, EnergyPaidInformation costPaid)
     {
-        var owner = abstractCard.Owner;
-        if (owner == null)
+        var cardOwner = abstractCard.Owner;
+        if (cardOwner == null)
         {
             return;
         }
-
-        foreach(var effect in owner.StatusEffects)
+        
+        foreach(var effect in GameState.Instance.AllAlliedStatusEffects)
         {
-            effect.OnAnyCardPlayed(abstractCard, target);
+            effect.OnAnyCardPlayed(abstractCard, target, effect.OwnerUnit == cardOwner);
         }
 
         GameState.Instance.NumCardsPlayedThisTurn++;
@@ -438,12 +438,23 @@ public static class BattleRules
         return eligibleAttackIntent;
     }
 
-    public static void MarkCreatedCard(AbstractCard card)
+    public static void MarkCreatedCard(AbstractCard card, AbstractBattleUnit owner)
     {
         card.WasCreated = true;
+        card.Owner = owner;
+        // now, iterate over each character's On Card Created attributes
+
+        foreach(var effect in GameState.Instance.AllAlliedStatusEffects)
+        {
+            effect.ProcessProc(new CardCreatedProc { TriggeringCardIfAny = card});
+        }
     }
 }
 
+public class CardCreatedProc: AbstractProc
+{
+
+}
 
 public abstract class AbstractProc
 {

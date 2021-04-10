@@ -35,7 +35,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
 
         private int numberCreatedCardsPlayedThisTurn = 0;
 
-        public override int CardCostModifier(AbstractCard card)
+        public override int CardCostModifier(AbstractCard card, bool ownedByMe)
         {
             if (card.WasCreated && numberCreatedCardsPlayedThisTurn < Stacks)
             {
@@ -44,7 +44,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
             return 0;
         }
 
-        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard, bool cardIsOwnedByMe)
         {
             if (cardPlayed.WasCreated)
             {

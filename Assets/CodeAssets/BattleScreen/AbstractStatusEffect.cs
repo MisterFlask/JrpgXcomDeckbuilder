@@ -167,11 +167,11 @@ public abstract class AbstractStatusEffect: MagicWord
     }
 
 
-    public virtual void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
+    public virtual void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard, bool cardIsOwnedByMe)
     {
 
     }
-    public virtual void OnAnyCardDrawn(AbstractCard cardDrawn)
+    public virtual void OnAnyCardDrawn(AbstractCard cardDrawn, bool cardIsOwnedByMe)
     {
 
     }
@@ -193,7 +193,7 @@ public abstract class AbstractStatusEffect: MagicWord
 
     }
 
-    public virtual int CardCostModifier(AbstractCard card)
+    public virtual int CardCostModifier(AbstractCard card, bool ownedByMe)
     {
         return 0;
     }

@@ -222,7 +222,7 @@ public class ActionManager : MonoBehaviour
     {
         Require.NotNull(abstractCard);
         abstractCard.Owner = owner;
-        BattleRules.MarkCreatedCard(abstractCard);
+        BattleRules.MarkCreatedCard(abstractCard, owner);
         QueuedActions.ImmediateAction(() =>
         {
             if (location == CardCreationLocation.BOTTOM)
@@ -253,7 +253,7 @@ public class ActionManager : MonoBehaviour
         QueuedActions.ImmediateAction(() =>
         {
 
-            BattleRules.MarkCreatedCard(abstractCard);
+            BattleRules.MarkCreatedCard(abstractCard, owner);
             if (location == CardCreationLocation.BOTTOM)
             {
                 ServiceLocator.GameState().Deck.DiscardPile.Add(abstractCard);
@@ -280,7 +280,7 @@ public class ActionManager : MonoBehaviour
         abstractCard.Owner = owner;
         QueuedActions.ImmediateAction(() =>
         {
-            BattleRules.MarkCreatedCard(abstractCard);
+            BattleRules.MarkCreatedCard(abstractCard, owner);
             ServiceLocator.GameState().Deck.Hand.Add(abstractCard);
             ServiceLocator.GetCardAnimationManager().AddHypercardsToHand(new List<Card> { abstractCard.CreateHyperCard() });
         },queueingType);

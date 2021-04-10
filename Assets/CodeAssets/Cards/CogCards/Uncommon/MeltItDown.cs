@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.CogCards.Common
 {
-    public class EnergyWell : AbstractCard
+    public class MeltItDown : AbstractCard
     {
-        public EnergyWell()
+        public MeltItDown()
         {
-
+            SetCommonCardAttributes("Melt It Down", Rarity.UNCOMMON, TargetingType.Ally, CardType.SkillCard, 0);
         }
 
         // Technocannibalize:  Gain 1 energy and 1 Empowered.

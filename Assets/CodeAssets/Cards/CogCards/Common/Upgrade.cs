@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
 {
     public class Upgrade : MonoBehaviour
     {
-        // Gain 2 data points.
+        // Gain 2 data points and 10 stress.
     }
 }

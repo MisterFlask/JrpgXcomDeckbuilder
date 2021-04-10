@@ -8,7 +8,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
     {
         public MeltItDown()
         {
-            SetCommonCardAttributes("Melt It Down", Rarity.UNCOMMON, TargetingType.Ally, CardType.SkillCard, 0);
+            SetCommonCardAttributes("Melt It Down", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
         }
 
         // Technocannibalize:  Gain 1 energy and 1 Empowered.

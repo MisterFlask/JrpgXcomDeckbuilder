@@ -100,6 +100,11 @@ public class ActionManager : MonoBehaviour
 
     public void ApplyStatusEffect(AbstractBattleUnit unit, AbstractStatusEffect attribute, int stacks = 1)
     {
+        if (stacks == 0)
+        {
+            return;
+        }
+
         QueuedActions.ImmediateAction(() =>
         {
             unit.ApplyStatusEffect(attribute, stacks);

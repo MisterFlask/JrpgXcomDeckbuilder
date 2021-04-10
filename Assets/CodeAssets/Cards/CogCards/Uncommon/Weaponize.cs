@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.CogCards.Uncommon
 {
     public class Weaponize : MonoBehaviour
     {
-        // All skills in your hand gain "Then, deal 5 damage to a random enemy."
+        // Add an Autocannon Sentry to your hand.  The leftmost card in your hand gains "Add an Autocannon Sentry to your hand".
     }
 }

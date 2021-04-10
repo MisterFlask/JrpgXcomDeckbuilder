@@ -16,7 +16,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         // Technocannibalize:  Then, deal 4 damage and 4 Fumes to ALL enemies.
         public override string DescriptionInner()
         {
-            return $"Apply 2 Empowered to target ally.  Technocannibalize: Then, deal {DisplayedDamage()} damage and 4 Fumes to ALL enemies.  ";
+            return $"Apply 2 Empowered to target ally.  Technocannibalize: Then, deal {DisplayedDamage()} damage and 4 Fumes to ALL enemies.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

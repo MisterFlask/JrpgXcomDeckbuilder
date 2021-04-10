@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
 {
     public class BruteEmpiricism : MonoBehaviour
     {
-        // gain 2 Data Points.  Exhaust.  Cost 1.
+        // gain 1 Data Point.  Shuffle two Autocannons into your draw pile.  Exhaust.  Cost 1.
     }
 }

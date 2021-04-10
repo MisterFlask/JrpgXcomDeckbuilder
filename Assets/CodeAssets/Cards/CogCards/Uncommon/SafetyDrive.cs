@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
 {
     public class SafetyDrive : MonoBehaviour
     {
-        // ALL skills in your hand gain "Then, gain 5 block."  Exhaust. 
+        // Add a shield drone to your hand.  The leftmost attack card in your hand gains "Then, add a Shield Drone to your hand.";
     }
 }

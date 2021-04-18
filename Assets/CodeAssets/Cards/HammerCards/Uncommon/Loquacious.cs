@@ -1,10 +1,17 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
 {
     public class Loquacious : AbstractCard
     {
+        public Loquacious()
+        {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+            SetCommonCardAttributes("Loquacious", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+        }
+
         // Whenever you Taunt an enemy, apply 1 Weak and 1 Vulnerable.
         public override string DescriptionInner()
         {
@@ -24,7 +31,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
             this.Name = "Loquacious";
         }
 
-        public override string Description => $"Whenever you taunt an enemy, apply {DisplayedStacks()} weakened and vulnerable.";
+        public override string Description => $"Whenever an ally taunts an enemy, apply {DisplayedStacks()} weakened and vulnerable.";
 
         public override void ProcessProc(AbstractProc proc)
         {

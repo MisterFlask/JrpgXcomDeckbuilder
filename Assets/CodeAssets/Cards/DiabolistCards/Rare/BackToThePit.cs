@@ -9,8 +9,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
 
         public BackToThePit()
         {
-            this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
-            this.SetCommonCardAttributes("Back To The Pit", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 3);
+            this.SetCommonCardAttributes("Back To The Pit", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 3, typeof(DiabolistSoldierClass));
 
             this.DamageModifiers.Add(new BackToThePitLethalDamageRule());
 

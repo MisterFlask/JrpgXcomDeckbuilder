@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.HammerCards.Common
@@ -9,13 +10,15 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
         // Brute: Gain 1 energy.
         public BeatSenseless()
         {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+
             SetCommonCardAttributes("Beat Senseless", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 2);
             BaseDamage = 10;
         }
 
         public override string DescriptionInner()
         {
-            return $"Deal {DisplayedDamage()} damage and 2 Vulnerable.  Brute: Gain 1 energy.";
+            return $"Deal {DisplayedDamage()} damage and 2 Vulnerable.  Exert.  Brute: Gain 1 energy.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

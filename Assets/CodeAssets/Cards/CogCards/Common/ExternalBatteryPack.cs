@@ -6,7 +6,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
 {
     public class ExternalBatteryPack : AbstractCard
     {
-        // apply 3 Empowered to an ally.
+        // apply 3 Charged to an ally.
 
         public ExternalBatteryPack()
         {
@@ -15,12 +15,12 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
 
         public override string DescriptionInner()
         {
-            return "Apply 3 Empowered to an ally.";
+            return "Apply 3 Charged to an ally.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().ApplyStatusEffect(target, new EmpoweredStatusEffect(), 3);
+            action().ApplyStatusEffect(target, new ChargedStatusEffect(), 3);
         }
     }
 }

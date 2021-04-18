@@ -1,4 +1,5 @@
 ﻿using Assets.CodeAssets.BattleEntities.StatusEffects;
+using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 using Assets.CodeAssets.Cards.HammerCards.Common;
 using System.Collections;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
 
         public Insensitive()
         {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+
             SetCommonCardAttributes("Insensitive", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 2);
         }
 

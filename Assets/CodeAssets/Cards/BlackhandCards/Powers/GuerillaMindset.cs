@@ -30,7 +30,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 
         public override string Description => $"Whenever you play a smog card, gain {Stacks} energy";
 
-        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard, bool ownedByMe)
         {
             if (cardPlayed.NameContains("smog"))
             {

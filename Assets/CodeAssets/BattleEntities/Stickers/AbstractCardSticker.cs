@@ -46,7 +46,7 @@ public abstract class AbstractCardSticker: MonoBehaviour
     }
 
 
-    public virtual void OnThisCardPlayed(AbstractBattleUnit target)
+    public virtual void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
 
     }
@@ -65,6 +65,11 @@ public abstract class AbstractCardSticker: MonoBehaviour
     }
 
 
+    public virtual void OnManualDiscard(AbstractCard card)
+    {
+
+    }
+
     public virtual void OnEndOfTurnWhileInHand(AbstractCard card)
     {
         
@@ -80,7 +85,21 @@ public abstract class AbstractCardSticker: MonoBehaviour
 
 }
 
+public class NascentCardSticker: AbstractCardSticker
+{
+    public override void OnManualDiscard(AbstractCard card)
+    {
+        CardAbilityProcs.ProcNascent(card);
+    }
+}
 
+public class ExertCardSticker: AbstractCardSticker
+{
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
+    {
+        CardAbilityProcs.ProcExert(card);
+    }
+}
 
 public class GildedCardSticker: AbstractCardSticker
 {
@@ -103,7 +122,7 @@ public class GildedCardSticker: AbstractCardSticker
         }
     }
 
-    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
         if (card.Id == CardAttachedTo.Id)
         {
@@ -123,7 +142,7 @@ public class ExhaustCardSticker : AbstractCardSticker
         return "Exhaust.";
     }
 
-    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
         card.Action_Exhaust();
     }
@@ -136,7 +155,7 @@ public class BasicAttackTargetSticker: AbstractCardSticker
         return $"Deal {card.DisplayedDamage()} to target.";
     }
 
-    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
         ActionManager.Instance.AttackWithCard(card, target);
     }
@@ -150,7 +169,7 @@ public class BasicAttackRandomEnemyForSpecificDamageSticker : AbstractCardSticke
         return $"Deal {card.DisplayedDamage(Damage)} to a random enemy.";
     }
 
-    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
         ActionManager.Instance.AttackUnitForDamage(target, card.Owner, Damage, card);
     }
@@ -163,7 +182,7 @@ public class BasicAttackRandomEnemySticker: AbstractCardSticker
         return $"Deal {card.DisplayedDamage()} to a random enemy.";
     }
 
-    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
         ActionManager.Instance.AttackWithCard(card, target);
     }
@@ -176,7 +195,7 @@ public class BasicDefendTargetSticker : AbstractCardSticker
         return $"Apply {card.DisplayedDefense()} block to target.";
     }
 
-    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
         ActionManager.Instance.ApplyDefenseFromCard(card, target);
     }
@@ -189,7 +208,7 @@ public class BasicDefendSelfSticker : AbstractCardSticker
         return $"Apply {card.DisplayedDefense()} block to self.";
     }
 
-    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
         ActionManager.Instance.ApplyDefenseFromCard(card, card.Owner);
     }
@@ -211,7 +230,7 @@ public class BasicApplyStatusEffectToTargetSticker : AbstractCardSticker
         return $"Apply {Stacks} {Effect.Name} to target.";
     }
 
-    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
         ActionManager.Instance.ApplyStatusEffect(target, Effect, Stacks);
     }
@@ -234,7 +253,7 @@ public class BasicApplyStatusEffectToSelfSticker : AbstractCardSticker
         return $"Apply {Stacks} {Effect.Name} to self.";
     }
 
-    public override void OnThisCardPlayed(AbstractBattleUnit target)
+    public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
     {
         ActionManager.Instance.ApplyStatusEffect(card.Owner, Effect, Stacks);
     }

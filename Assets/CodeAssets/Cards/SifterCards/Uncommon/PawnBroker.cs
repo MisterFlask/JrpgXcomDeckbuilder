@@ -6,10 +6,10 @@ namespace Assets.CodeAssets.Cards.SifterCards.Uncommon
 {
     public class PawnBroker : AbstractCard
     {
-        // Gain 5 block.  Whenever you trigger Sacrifice, ALL characters gain 1 Empowered.  Cost 1.
+        // Gain 5 block.  Whenever you trigger Sacrifice, ALL characters gain 1 Charged.  Cost 1.
         public override string DescriptionInner()
         {
-            return "Gain 5 block.  Whenever you trigger sacrifice, ALL allies gain 1 Empowered.  Exhaust.";
+            return "Gain 5 block.  Whenever you trigger sacrifice, ALL allies gain 1 Charged.  Exhaust.";
 
         }
 
@@ -28,7 +28,7 @@ namespace Assets.CodeAssets.Cards.SifterCards.Uncommon
             Name = "Pawn Broker";
         }
 
-        public override string Description => $"Whenever you trigger Sacrifice, ALL allies gain {DisplayedStacks()} Empowered.";
+        public override string Description => $"Whenever you trigger Sacrifice, ALL allies gain {DisplayedStacks()} Charged.";
 
 
         public override void ProcessProc(AbstractProc proc)
@@ -37,7 +37,7 @@ namespace Assets.CodeAssets.Cards.SifterCards.Uncommon
             {
                 foreach(var ally in state().AllyUnitsInBattle)
                 {
-                    action().ApplyStatusEffect(ally, new EmpoweredStatusEffect(), Stacks);
+                    action().ApplyStatusEffect(ally, new ChargedStatusEffect(), Stacks);
                 }
             }
         }

@@ -6,7 +6,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 {
     public class PowerArmor : AbstractCard
     {
-        // Gain 3 Empowered.  Cost 1.
+        // Gain 3 Charged.  Cost 1.
 
         public PowerArmor()
         {
@@ -15,12 +15,12 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 
         public override string DescriptionInner()
         {
-            return $"Gain 3 Empowered.";
+            return $"Gain 3 Charged.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            Action_ApplyStatusEffectToOwner(new EmpoweredStatusEffect(), 3);
+            Action_ApplyStatusEffectToOwner(new ChargedStatusEffect(), 3);
         }
     }
 }

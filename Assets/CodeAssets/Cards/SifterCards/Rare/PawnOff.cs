@@ -5,6 +5,6 @@ namespace Assets.CodeAssets.Cards.SifterCards.Rare
 {
     public class PawnOff : MonoBehaviour
     {
-        // Sacrifice:  ALL allies gain 2 Empowered.
+        // Sacrifice:  ALL allies gain 2 Charged.
     }
 }

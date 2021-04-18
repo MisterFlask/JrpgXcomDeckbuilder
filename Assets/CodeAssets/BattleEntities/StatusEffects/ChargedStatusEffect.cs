@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.BattleEntities.StatusEffects
 {
-    public class EmpoweredStatusEffect : AbstractStatusEffect
+    public class ChargedStatusEffect : AbstractStatusEffect
     {
         public override string Description => $"For the next {DisplayedStacks()} turns, this character deals 2 additional damage and applies 2 additional defense.";
 
         // For the next [stacks] turns, this character deals 2 additional damage and applies 2 additional defense.
 
-        public EmpoweredStatusEffect()
+        public ChargedStatusEffect()
         {
-            Name = "Empowered";
+            Name = "Charged";
         }
 
 

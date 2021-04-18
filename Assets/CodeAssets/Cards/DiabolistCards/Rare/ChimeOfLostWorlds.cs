@@ -12,8 +12,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
 
         public ChimeOfLostWorlds()
         {
-            this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
-            this.SetCommonCardAttributes("Wail", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.AttackCard, 1);
+            this.SetCommonCardAttributes("Wail", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.AttackCard, 1, typeof(DiabolistSoldierClass));
             this.BaseDamage = 2;
         }
 

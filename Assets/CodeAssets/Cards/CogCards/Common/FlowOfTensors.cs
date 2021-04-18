@@ -25,7 +25,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
 
             CardAbilityProcs.Energized(this, () =>
             {
-                CardAbilityProcs.GainDataPoint(this);
+                CardAbilityProcs.GainDataPoints(this, 1);
                 Action_Exhaust();
             });
         }

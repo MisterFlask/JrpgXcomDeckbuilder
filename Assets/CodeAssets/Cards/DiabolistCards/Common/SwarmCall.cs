@@ -16,13 +16,12 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Swarm Barrier", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
             BaseDefenseValue = 2; 
-            this.CardTags.Add(BattleCardTags.SWARM);
 
         }
 
         public override string DescriptionInner()
         {
-            return "A random Swarm card in your hand costs 1 less to play this combat.  If there is none, create a Hellish Swarm in your deck.";
+            return "A random Swarm card in your hand costs 1 less to play this combat.  If there is none, create a Hellish Swarm in your draw pile.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

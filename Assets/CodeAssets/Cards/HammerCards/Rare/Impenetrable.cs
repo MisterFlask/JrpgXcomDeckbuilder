@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 
 namespace Assets.CodeAssets.Cards.HammerCards.Rare
 {
@@ -12,6 +13,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
 
         public Impenetrable()
         {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+
             SetCommonCardAttributes("Impenetrable", Rarity.RARE, TargetType.ENEMY, CardType.SkillCard, 2);
             BaseDefenseValue = 15;
             Stickers.Add(new BasicDefendSelfSticker());

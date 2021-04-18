@@ -1,5 +1,6 @@
 ﻿using Assets.CodeAssets.BattleEntities.StatusEffects;
 using System.Collections;
+using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.HammerCards.Rare
@@ -10,6 +11,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
 
         public Bastion()
         {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+
             SetCommonCardAttributes("Bastion", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 3);
         }
 

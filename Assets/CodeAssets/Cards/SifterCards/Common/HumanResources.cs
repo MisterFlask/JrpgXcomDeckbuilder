@@ -11,15 +11,15 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
             SetCommonCardAttributes("Human Resources", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
         }
 
-        // apply 2 Empowered to an ally.  Hoard 5.
+        // apply 2 Charged to an ally.  Hoard 5.
         public override string DescriptionInner()
         {
-            return $"Apply 2 Empowered to an ally.";
+            return $"Apply 2 Charged to an ally.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            Action_ApplyStatusEffectToTarget(new EmpoweredStatusEffect(), 2, target);
+            Action_ApplyStatusEffectToTarget(new ChargedStatusEffect(), 2, target);
         }
     }
 }

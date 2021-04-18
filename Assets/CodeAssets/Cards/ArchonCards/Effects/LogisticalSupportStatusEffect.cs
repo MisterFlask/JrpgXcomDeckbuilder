@@ -17,7 +17,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Effects
 
         public override string Description => $"The next {DisplayedStacks()} times that you play a card, play it again.";
 
-        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit target)
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit target, bool ownedByMe)
         {
             action().EvokeCardEffect(cardPlayed, target);
 

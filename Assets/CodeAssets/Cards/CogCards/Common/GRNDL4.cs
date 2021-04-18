@@ -12,16 +12,16 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
             BaseDamage = 4;
         }
 
-        // Apply 2 Empowered to target ally.  Exhaust.
+        // Apply 2 Charged to target ally.  Exhaust.
         // Technocannibalize:  Then, deal 4 damage and 4 Fumes to ALL enemies.
         public override string DescriptionInner()
         {
-            return $"Apply 2 Empowered to target ally.  Technocannibalize: Then, deal {DisplayedDamage()} damage and 4 Fumes to ALL enemies.";
+            return $"Apply 2 Charged to target ally.  Technocannibalize: Then, deal {DisplayedDamage()} damage and 4 Fumes to ALL enemies.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().ApplyStatusEffect(target, new EmpoweredStatusEffect(), 2);
+            action().ApplyStatusEffect(target, new ChargedStatusEffect(), 2);
             CardAbilityProcs.Technocannibalize(this, () =>
             {
                 foreach(var enemy in state().EnemyUnitsInBattle)

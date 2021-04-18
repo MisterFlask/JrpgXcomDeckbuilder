@@ -20,7 +20,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Uncommon
 
         public override string DescriptionInner()
         {
-            return $"Apply 2 Weak and 2 Vulnerable to an enemy.  If {Owner.GetDisplayName(DisplayNameType.SHORT_NAME)} dies while this is in your deck, deal 40 damage to ALL enemies.  Sacrifice.";
+            return $"Apply 2 Weak and 2 Vulnerable to an enemy.  If {Owner?.GetDisplayName(DisplayNameType.SHORT_NAME)} dies while this is in your deck, deal 40 damage to ALL enemies.  Sacrifice.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
-
+using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 namespace Assets.CodeAssets.Cards.HammerCards.Rare
 {
     public class IllDoItForMoney : AbstractCard
     {
         public IllDoItForMoney()
         {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+
             SetCommonCardAttributes("I'll Do It For Money", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
         }
 

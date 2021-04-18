@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 
 namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
 {
@@ -7,6 +8,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
     {
         public GentleDiscouragement()
         {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+
             SetCommonCardAttributes("Gentle Discouragement", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
         }
 

@@ -19,7 +19,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
         public override string DescriptionInner()
         {
-            return "Apply 12 block to target.  If a Swarm is in your hand, grant 3 temporary HP.";
+            return $"Apply {DisplayedDefense()} block to target.  If a Swarm is in your hand, grant 3 temporary HP.";
         }
 
 

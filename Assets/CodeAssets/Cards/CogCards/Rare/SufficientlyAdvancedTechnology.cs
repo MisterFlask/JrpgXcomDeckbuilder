@@ -14,7 +14,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
 
         public override string DescriptionInner()
         {
-            return $"Whenever a card is created this combat, give it 'Deal 10 damage to ALL enemies.'  Gain 1 data point."
+            return $"Whenever a card is created this combat, give it 'Deal 10 damage to ALL enemies.'  Gain 1 data point.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
@@ -55,7 +55,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
             return $"Then, deal {card.DisplayedDamage(Stacks)} damage to ALL enemies.";
         }
 
-        public override void OnThisCardPlayed(AbstractBattleUnit target)
+        public override void OnThisCardPlayed(AbstractCard card, AbstractBattleUnit target)
         {
             foreach(var enemy in GameState.Instance.EnemyUnitsInBattle)
             {

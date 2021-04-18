@@ -41,7 +41,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
 
         public override string Description => "Duplicates the next card played by ANY character.";
 
-        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard, bool isMine)
         {
             var target = targetOfCard;
             if (target.IsDead)

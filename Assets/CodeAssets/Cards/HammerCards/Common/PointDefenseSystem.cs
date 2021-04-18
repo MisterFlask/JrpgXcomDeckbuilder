@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 
 namespace Assets.CodeAssets.Cards.HammerCards.Common
 {
@@ -9,6 +10,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 
         public PointDefenseSystem()
         {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+
             SetCommonCardAttributes("Point Defense System", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 0);
             BaseDefenseValue = 5;
         }

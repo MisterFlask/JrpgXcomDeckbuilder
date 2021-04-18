@@ -17,7 +17,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
         public override string DescriptionInner()
         {
-            return $"Apply {BaseDefenseValue} block to target.  Sacrifice: Gain 1 energy and draw 1 card.";
+            return $"Apply {DisplayedDefense()} block to target.  Sacrifice: Gain 1 energy and draw 1 card.";
         }
 
 

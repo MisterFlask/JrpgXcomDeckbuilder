@@ -11,8 +11,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
 
         public Gluttony()
         {
-            this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
-            this.SetCommonCardAttributes("Gluttony", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 1);
+            this.SetCommonCardAttributes("Gluttony", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 1, typeof(DiabolistSoldierClass));
             this.BaseDamage = 12;
         }
 

@@ -5,6 +5,7 @@ using HyperCard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public abstract class AbstractCard
 {
@@ -14,6 +15,17 @@ public abstract class AbstractCard
     public int TemporaryCostMod { get; set; } = 0;
 
     public List<AbstractCostModifier> PersistentCostModifiers = new List<AbstractCostModifier>();
+
+    protected Color GetDefaultColoration(string cardName)
+    {
+        var hashcodeOfName = cardName.GetHashCode();
+        var g = hashcodeOfName % 255;
+        hashcodeOfName = hashcodeOfName / 255;
+        var r = hashcodeOfName % 255;
+        hashcodeOfName = hashcodeOfName / 255;
+        var b = hashcodeOfName % 255;
+        return new Color(r, g, b);
+    }
 
     public bool WasCreated { get; set; } = false;
 
@@ -298,6 +310,11 @@ public abstract class AbstractCard
         state().cardsPlayedThisTurn += 1;
     }
 
+    public virtual void OnManualDiscard()
+    {
+
+    }
+
     public void EvokeCardEffect(AbstractBattleUnit target, EnergyPaidInformation costPaid = null)
     {
         if (costPaid == null)
@@ -310,7 +327,7 @@ public abstract class AbstractCard
         OnPlay(target, costPaid);
         foreach (var sticker in Stickers)
         {
-            sticker.OnThisCardPlayed(target);
+            sticker.OnThisCardPlayed(this, target);
         }
     }
 
@@ -424,7 +441,13 @@ public abstract class AbstractCard
         {
             this.ProtoSprite = protoGameSprite;
         }
+        else
+        {
+            var color = GetDefaultColoration(Name);
+            ProtoSprite = ProtoGameSprite.FromGameIcon(color: color);
+        }
     }
+
 
     public bool IsValidForClass(AbstractBattleUnit unit)
     {

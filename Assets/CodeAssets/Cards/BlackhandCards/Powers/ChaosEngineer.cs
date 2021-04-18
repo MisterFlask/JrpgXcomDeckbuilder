@@ -32,7 +32,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 
         public override string Description => $"Whenever a card is played targeting an enemy, apply {DisplayedStacks()} Burning to it.";
 
-        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard, bool isMine)
         {
             if (targetOfCard != null && targetOfCard.IsEnemy)
             {

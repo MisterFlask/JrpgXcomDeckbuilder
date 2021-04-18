@@ -12,11 +12,11 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
             BaseDefenseValue = 4;
         }
 
-        // Apply 6 block and 1 Empowered to target ally.
+        // Apply 6 block and 1 Charged to target ally.
         // Discard all cards with Hazardous.
         public override string DescriptionInner()
         {
-            return $"Apply {DisplayedDefense()} block and 1 Empowered to target ally.  Discard all cards with Hazardous.";
+            return $"Apply {DisplayedDefense()} block and 1 Charged to target ally.  Discard all cards with Hazardous.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

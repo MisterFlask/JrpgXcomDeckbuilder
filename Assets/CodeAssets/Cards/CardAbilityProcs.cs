@@ -50,11 +50,11 @@ namespace Assets.CodeAssets.Cards
             }
         }
 
-        // If ANY ally is Empowered, decrement it by 1 and activate this effect.
+        // If ANY ally is Charged, decrement it by 1 and activate this effect.
         public static void Energized(AbstractCard abstractCard, Action action)
         {
-            var characterWithEmpowered =  GameState.Instance.AllyUnitsInBattle.First(item => item.HasStatusEffect<EmpoweredStatusEffect>());
-            ActionManager.Instance.ApplyStatusEffect(characterWithEmpowered, new EmpoweredStatusEffect(), -1);
+            var characterWithCharged =  GameState.Instance.AllyUnitsInBattle.First(item => item.HasStatusEffect<ChargedStatusEffect>());
+            ActionManager.Instance.ApplyStatusEffect(characterWithCharged, new ChargedStatusEffect(), -1);
             action();
         }
 
@@ -68,6 +68,35 @@ namespace Assets.CodeAssets.Cards
                 action.ExhaustCard(firstRareCard); 
                 BattleRules.ProcessProc(new LiquidateProc { TriggeringCardIfAny = card });
 
+            }
+        }
+
+        public static void ProcExert(this AbstractCard card)
+        {
+            var leftmostTwoCards = state.Deck
+                .Hand
+                .Where(item => item != card)
+                .Take(2);
+
+            foreach(var cardToDiscard in leftmostTwoCards)
+            {
+                action.DiscardCard(card);
+            }
+        }
+
+        /// <summary>
+        /// Nascent: When discarded, increase this card's defense and damage values by 2.
+        /// </summary>
+        public static void ProcNascent(this AbstractCard card)
+        {
+            if (card.BaseDamage != 0)
+            {
+                card.BaseDamage += 2;
+            }
+
+            if (card.BaseDefenseValue != 0)
+            {
+                card.BaseDefenseValue += 2;
             }
         }
 

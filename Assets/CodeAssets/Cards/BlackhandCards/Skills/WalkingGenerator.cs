@@ -6,7 +6,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 {
     public class WalkingGenerator : AbstractCard
     {
-        // Apply 12 block to target ally.  Empowered: Refund 1 energy.  cost 1.
+        // Apply 12 block to target ally.  Charged: Refund 1 energy.  cost 1.
 
         public WalkingGenerator()
         {

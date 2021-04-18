@@ -13,14 +13,16 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Bloodswarm", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 1);
             this.CardTags.Add(BattleCardTags.SWARM);
+            BaseDamage = 6;
+
         }
 
         public override string DescriptionInner()
         {
-            return "Deal 6 damage.  " +
+            return $"Deal {DisplayedDamage()} damage.  " +
                 "Bloodprice.  " +
                 "Swarm. " +
-                "If bloodprice is paid, gains 1 damage PERMANENTLY.";
+                "If bloodprice is paid, gains 1 damage PERMANENTLY.  Nascent.";
         }
 
         public override EnergyPaidInformation GetNetEnergyCost()
@@ -39,7 +41,11 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
         public override void InHandAtEndOfTurnAction()
         {
-            SwarmBattleRules.RunEndOfTurnRules(this);
+        }
+
+        public override void OnManualDiscard()
+        {
+            CardAbilityProcs.ProcNascent(this);
         }
 
         // Deal 6 damage and gain 2 damage for the rest of the combat.  Bloodprice.  Swarm. If bloodprice is paid, 

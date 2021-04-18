@@ -11,6 +11,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
         {
             SetCommonCardAttributes("Titan Hunter", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 2);
             BaseDamage = 10;
+            Stickers.Add(new ExertCardSticker());
+            DamageModifiers.Add(new SlayerDamageModifier());
         }
 
         public override string DescriptionInner()

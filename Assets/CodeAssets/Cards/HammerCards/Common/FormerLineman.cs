@@ -11,6 +11,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 
         public FormerLineman()
         {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+
             SetCommonCardAttributes("Former Lineman", Rarity.COMMON, TargetType.ALLY, CardType.AttackCard, 2, typeof(HammerSoldierClass));
             BaseDamage = 7;
             BaseDefenseValue = 8;
@@ -18,7 +20,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 
         public override string DescriptionInner()
         {
-            return $"Apply {DisplayedDefense()} defense to an ally.  Deal {DisplayedDamage()} damage to all enemies attacking that ally; each gets -1 temporary strength.";
+            return $"Apply {DisplayedDefense()} defense to an ally.  Deal {DisplayedDamage()} damage to all enemies attacking that ally; each gets -1 temporary strength.  Exert.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

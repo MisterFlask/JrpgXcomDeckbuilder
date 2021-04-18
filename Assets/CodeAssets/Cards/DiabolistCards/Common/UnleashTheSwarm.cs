@@ -12,7 +12,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
         public UnleashTheSwarm()
         {
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
-            this.SetCommonCardAttributes("Hellish Swarm", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 3);
+            this.SetCommonCardAttributes("Unleash The Swarm", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 3);
             this.CardTags.Add(BattleCardTags.SWARM);
             this.BaseDamage = 4;
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.IO;
 
 public class ImageUtils
 {
@@ -88,4 +89,36 @@ public class GameIconProtoSprite: ProtoGameSprite
             Sprite = loaded
         };
     }
+
+    public static List<string> GetImagesPathsInFolderRecursively(String folderName)
+    {
+
+        DirectoryInfo Folder;
+        FileInfo[] Images;
+        var files = new List<string>();
+
+        Folder = new DirectoryInfo(folderName);
+        Images = Folder.GetFiles();
+
+        foreach(var file in Folder.GetFiles())
+        {
+            // if file ends with jpg, add it to list
+        }
+
+        // foreach folder, get images paths
+
+
+        var imagesList = new List<string>();
+
+        for (int i = 0; i < Images.Length; i++)
+        {
+            imagesList.Add(string.Format(@"{0}/{1}", folderName, Images[i].Name));
+        }
+
+        return imagesList;
+    }
+
+
+    
+
 }

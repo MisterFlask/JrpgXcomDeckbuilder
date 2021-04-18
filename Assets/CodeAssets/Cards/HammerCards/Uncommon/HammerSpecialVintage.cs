@@ -10,6 +10,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
 
         public HammerSpecialVintage()
         {
+            this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+
             SetCommonCardAttributes("Heavy Drinker", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, 
                 CardType.SkillCard, 1, typeof(HammerSoldierClass));
         }

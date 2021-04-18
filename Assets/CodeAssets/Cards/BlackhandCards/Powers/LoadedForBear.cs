@@ -32,7 +32,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Skills
 
         public override string Description => $"Whenever you play a grenade card, copy it {DisplayedStacks()} times";
 
-        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard)
+        public override void OnAnyCardPlayed(AbstractCard cardPlayed, AbstractBattleUnit targetOfCard, bool ownedByMe)
         {
             if (cardPlayed.NameContains("grenade"))
             {

@@ -11,8 +11,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
         
         public BanquetOfMiseries()
         {
-            this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
-            this.SetCommonCardAttributes("Banquet of Miseries", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 1);
+            this.SetCommonCardAttributes("Banquet of Miseries", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 1, typeof(DiabolistSoldierClass));
 
         }
 

@@ -51,7 +51,7 @@ namespace Assets.CodeAssets.Cards
         }
 
         // If ANY ally is Charged, decrement it by 1 and activate this effect.
-        public static void Energized(AbstractCard abstractCard, Action action)
+        public static void Discharge(AbstractCard abstractCard, Action action)
         {
             var characterWithCharged =  GameState.Instance.AllyUnitsInBattle.First(item => item.HasStatusEffect<ChargedStatusEffect>());
             ActionManager.Instance.ApplyStatusEffect(characterWithCharged, new ChargedStatusEffect(), -1);

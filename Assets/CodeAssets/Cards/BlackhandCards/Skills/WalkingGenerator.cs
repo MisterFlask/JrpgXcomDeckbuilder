@@ -15,13 +15,13 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
 
         public override string DescriptionInner()
         {
-            return $"Apply {DisplayedDefense()} block to target ally.  Energized: Refund 1 energy.";
+            return $"Apply {DisplayedDefense()} block to target ally.  Discharge: Refund 1 energy.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyDefense(target, this.Owner, BaseDefenseValue);
-            CardAbilityProcs.Energized(this, () =>
+            CardAbilityProcs.Discharge(this, () =>
             {
                 state().energy++;
             });

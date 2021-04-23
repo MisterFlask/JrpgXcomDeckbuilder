@@ -8,10 +8,11 @@ public class KeroseneSoakedAxe : AbstractCard
     {
         SetCommonCardAttributes("Kerosene-Soaked Axe", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 2);
         this.DamageModifiers.Add(new SlayerDamageModifier());
+        BaseDamage = 14;
     }
     public override string DescriptionInner()
     {
-        return $"Deal 14 damage to an enemy.  Apply 10 Fumes.  Slayer.";
+        return $"Deal {DisplayedDamage()} damage to an enemy.  Apply 10 Fumes.  Slayer.";
     }
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

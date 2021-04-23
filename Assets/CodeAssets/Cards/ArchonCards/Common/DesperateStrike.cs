@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.ArchonCards.Common
 {
-    public class ViciousStrike : AbstractCard
+    public class DesperateStrike : AbstractCard
     {
-        public ViciousStrike()
+        public DesperateStrike()
         {
             this.SoldierClassCardPools.Add(typeof(ArchonSoldierClass));
             this.SetCommonCardAttributes(
@@ -21,7 +21,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
 
         public override string DescriptionInner()
         {
-            return $"Deal {DisplayedDamage()} damage to a random enemy.  If I have >40 stress, do it again.  If I have >70 stress, do it again.";
+            return $"Deal {DisplayedDamage()} damage to a random enemy.  If I have >40 stress, do it again.  If I have >70 stress, do it again.  Exert.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
@@ -35,6 +35,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
             {
                 action().AttackUnitForDamage(target, Owner, BaseDamage, this);
             }
+            CardAbilityProcs.ProcExert(this);
         }
     }
 }

@@ -20,8 +20,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
         // 
         public override string DescriptionInner()
         {
-            return $"Deals {DisplayedDamage()} damage to each of 3 different targets at random.  [This card gains 3 damage " +
-                $"for EVERY Soldier that has died this campaign; {GetNumDeadSoldiers()} soldiers have died].";
+            return $"Deals {DisplayedDamage()} damage to each of 3 different targets at random.  This card gains 3 damage " +
+                $"for EVERY Soldier that has died this campaign [{GetNumDeadSoldiers()} soldiers have died].  Exert.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
@@ -29,6 +29,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
             action().AttackWithCard(this, CardTargeting.RandomTargetableEnemy());
             action().AttackWithCard(this, CardTargeting.RandomTargetableEnemy());
             action().AttackWithCard(this, CardTargeting.RandomTargetableEnemy());
+            CardAbilityProcs.ProcExert(this);
         }
 
         private int GetNumDeadSoldiers()

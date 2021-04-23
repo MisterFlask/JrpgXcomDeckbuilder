@@ -21,12 +21,13 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
 
         public override string DescriptionInner()
         {
-            return $"Deal {DisplayedDamage()} damage to a random enemy. Add a Manuever to your hand.";
+            return $"Deal {DisplayedDamage()} damage to a random enemy.  Exert. Add a Manuever to your hand.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().AttackUnitForDamage(CardTargeting.RandomTargetableEnemy(), Owner, BaseDamage, this);
+            CardAbilityProcs.ProcExert(this);
             action().ApplyStatusEffect(target, new AdvancedStatusEffect(), 1);
         }
     }

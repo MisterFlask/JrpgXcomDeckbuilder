@@ -9,7 +9,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
         {
             DamageModifiers.Add(new BusterDamageModifier());
             SetCommonCardAttributes("Offscreen Artillery", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.AttackCard, 3);
-            this.BaseDamage = 13;
+            this.BaseDamage = 11;
         }
 
         public override string DescriptionInner()

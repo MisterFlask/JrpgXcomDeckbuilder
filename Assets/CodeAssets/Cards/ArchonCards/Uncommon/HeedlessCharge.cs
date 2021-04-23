@@ -1,10 +1,40 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.BattleEntities.StatusEffects;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
 {
-    public class HeedlessCharge : MonoBehaviour
+    public class HeedlessCharge : AbstractCard
     {
-        // deal 12 damage. Gain 1 Vulnerable.  ALL enemies gain 2 Vulnerable.  Leadership:  All allies gain +2 Temporary Strength.  Cost 2.
+        // deal 12 damage. ALL enemies gain 2 Vulnerable.  All allies gain +2 Temporary Strength.  Exert.  Cost 2.
+
+
+        public HeedlessCharge()
+        {
+            SetCommonCardAttributes("Heedless Charge", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 2);
+            BaseDamage = 12;
+        }
+
+        public override string DescriptionInner()
+        {
+            return $"Deal {DisplayedDamage()} damage. ALL enemies gain 2 Vulnerable.  ALL allies gain 2 temporary strength. Exert.";
+        }
+
+        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
+        {
+            Action_AttackTarget(target);
+            foreach(var ally in state().AllyUnitsInBattle)
+            {
+                action().ApplyStatusEffect(ally, new TemporaryStrengthStatusEffect(), 2);
+                
+            }
+
+            foreach(var enemy in state().EnemyUnitsInBattle)
+            {
+                action().ApplyStatusEffect(enemy, new VulnerableStatusEffect(), 2);
+            }
+
+            CardAbilityProcs.ProcExert(this);
+        }
     }
 }

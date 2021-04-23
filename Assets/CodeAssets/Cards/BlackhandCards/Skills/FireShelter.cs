@@ -11,18 +11,21 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Skills
 
         public FireShelter()
         {
-            SetCommonCardAttributes("Fire Shelter", Rarity.UNCOMMON, TargetType.ALLY, CardType.SkillCard, 2, typeof(BlackhandSoldierClass));
+            SetCommonCardAttributes("Fire Shelter", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 2, typeof(BlackhandSoldierClass));
         }
 
         public override string DescriptionInner()
         {
-            return $"Apply 4 Temporary Thorns and {DisplayedDefense()} defense to the target";
+            return $"Apply 4 Temporary Thorns and {DisplayedDefense()} defense to ALL allies.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().ApplyStatusEffect(target, new TemporaryThorns(), 4);
-            action().ApplyDefense(target, this.Owner, BaseDefenseValue);
+            foreach(var ally in state().AllyUnitsInBattle)
+            {
+                action().ApplyStatusEffect(ally, new TemporaryThorns(), 4);
+                action().ApplyDefense(ally, this.Owner, BaseDefenseValue);
+            }
         }
     }
 }

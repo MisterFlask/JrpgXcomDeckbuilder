@@ -10,7 +10,7 @@ public class Firewall : AbstractCard
     {
 
         BaseDefenseValue = 10;
-        SetCommonCardAttributes("Firewall", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
+        SetCommonCardAttributes("Firewall", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 2);
     }
 
     public override string DescriptionInner()

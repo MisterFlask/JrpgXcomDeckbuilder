@@ -18,7 +18,7 @@ public class IndiscriminateFire : AbstractCard
 
     public override string DescriptionInner()
     {
-        return $"Deal {BaseDamage} damage and apply 4 Burning to ALL enemies; apply 2 Burning to ALL allies.";
+        return $"Deal {DisplayedDamage()} damage and apply 4 Burning to ALL enemies; apply 2 Burning to ALL allies.";
     }
 
     public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

@@ -4,39 +4,37 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
 {
-    public class LogisticalSupport : AbstractCard
+    public class BrutalEfficiency : AbstractCard
     {
-        public LogisticalSupport()
+        public BrutalEfficiency()
         {
             this.SoldierClassCardPools.Add(typeof(ArchonSoldierClass));
             this.SetCommonCardAttributes(
-                "Logistical Support",
+                "Brutal Efficiency",
                 Rarity.UNCOMMON,
                 TargetType.ALLY,
                 CardType.SkillCard,
                 1
                 );
-            this.BaseDamage = 5;
         }
 
         public override string DescriptionInner()
         {
-            return $"The next time you play ANY card, play it again.  Planned.";
+            return $"The next time you play ANY card, play it again.  Apply 8 stress to all other allies.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            
+            Action_ApplyStatusEffectToOwner(new DuplicateNextCardPlayed(), 1);
         }
-        /// duplicate the next card played by anyone
     }
 
 
-    public class LogisticalSupportStatusEffect: AbstractStatusEffect
+    public class DuplicateNextCardPlayed: AbstractStatusEffect
     {
-        public LogisticalSupportStatusEffect()
+        public DuplicateNextCardPlayed()
         {
-            Name = "Logistical Support";
+            Name = "Duplicate Next Card Played";
         }
 
         public override string Description => "Duplicates the next card played by ANY character.";
@@ -49,6 +47,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
                 target = CardTargeting.RandomTargetableEnemy();
             }
             cardPlayed.EvokeCardEffect(target, new EnergyPaidInformation());
+            Stacks--;
         }
     }
 }

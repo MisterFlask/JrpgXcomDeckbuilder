@@ -25,7 +25,7 @@ public class BattleTurnEndActions
 
         foreach(var card in GameState.Instance.Deck.TotalDeckList)
         {
-            card.TemporaryCostMod = 0; // these get reset to 0 at the beginning of each turn.
+            card.RestOfTurnCostMod = 0; // these get reset to 0 at the beginning of each turn.
         }
 
         StartNewTurn();

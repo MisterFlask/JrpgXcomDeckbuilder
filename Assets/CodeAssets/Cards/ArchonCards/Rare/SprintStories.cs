@@ -23,7 +23,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
             {
                 foreach(var card in cards)
                 {
-                    card.TemporaryCostMod += -1;
+                    card.RestOfTurnCostMod += -1;
                 }
             });
         }

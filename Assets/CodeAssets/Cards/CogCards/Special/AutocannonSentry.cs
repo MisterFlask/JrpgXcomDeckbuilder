@@ -6,7 +6,6 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
 {
     public class AutocannonSentry : AbstractCard
     {
-        // Deal 4 damage.  Precision.  Exhaust.  Cost 0.
 
         public AutocannonSentry()
         {

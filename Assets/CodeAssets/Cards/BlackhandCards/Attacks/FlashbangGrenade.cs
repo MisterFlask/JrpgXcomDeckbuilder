@@ -10,6 +10,8 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         public FlashbangGrenade()
         {
             SetCommonCardAttributes("Flashbang", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
+            BaseDamage = 1;
+            Stickers.Add(new BasicAttackTargetSticker());
         }
 
         public override string DescriptionInner()

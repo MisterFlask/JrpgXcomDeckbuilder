@@ -12,7 +12,7 @@ public abstract class AbstractCard
     public AbstractCard ReferencesAnotherCard { get; set; }
 
     public int MagicNumber { get; set; }
-    public int TemporaryCostMod { get; set; } = 0;
+    public int RestOfTurnCostMod { get; set; } = 0;
 
     public List<AbstractCostModifier> PersistentCostModifiers = new List<AbstractCostModifier>();
 
@@ -165,7 +165,7 @@ public abstract class AbstractCard
     public int GetDisplayedEnergyCost()
     {
         return BaseEnergyCost()
-            + TemporaryCostMod
+            + RestOfTurnCostMod
             + PersistentCostModifiers
                 .Select(item => item.GetCostModifier())
                 .Sum();
@@ -178,7 +178,7 @@ public abstract class AbstractCard
     public virtual EnergyPaidInformation GetNetEnergyCost()
     {
         var cost = BaseEnergyCost() 
-            + TemporaryCostMod 
+            + RestOfTurnCostMod 
             + PersistentCostModifiers
                 .Select(item => item.GetCostModifier())
                 .Sum();

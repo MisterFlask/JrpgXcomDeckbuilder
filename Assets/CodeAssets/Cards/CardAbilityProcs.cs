@@ -67,7 +67,6 @@ namespace Assets.CodeAssets.Cards
 
                 action.ExhaustCard(firstRareCard); 
                 BattleRules.ProcessProc(new LiquidateProc { TriggeringCardIfAny = card });
-
             }
         }
 

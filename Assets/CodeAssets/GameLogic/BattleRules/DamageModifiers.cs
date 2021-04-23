@@ -42,6 +42,11 @@ public abstract class DamageModifier
         }
     }
 
+    public virtual string GetDescriptionAddendum()
+    {
+        return CardDescriptionAddendum;
+    }
+
     public virtual void OnStrike(AbstractCard damageSource, AbstractBattleUnit target, int totalDamageAfterModifiers)
     {
     }
@@ -155,10 +160,14 @@ public class StrengthScalingDamageModifier : DamageModifier
     private int additionalScaling = 0;
     public StrengthScalingDamageModifier(int additionalStrengthScaling)
     {
-        this.CardDescriptionAddendum = "Additional Strength Scaling";
         this.TooltipDescription = $"This attack gains {1 + additionalStrengthScaling}x damage from strength";
         this.additionalScaling = additionalStrengthScaling;
         this.TargetInvariant = true;
+    }
+
+    public override string GetDescriptionAddendum()
+    {
+        return "Additional Strength Scaling : " + additionalScaling;
     }
 
     public override int GetIncrementalDamageAddition(int currentBaseDamage, AbstractCard damageSource, AbstractBattleUnit target)
@@ -215,6 +224,26 @@ public class SelfishDefenseModifier: DamageModifier
             return 4;
         }
         return 0;
+    }
+}
+
+public class GainDataPointsOnSlayDamageModifier : DamageModifier
+{
+
+    public GainDataPointsOnSlayDamageModifier()
+    {
+    }
+
+    public int DataPointsToAcquire { get; set; } = 1;
+    public override bool SlayInner(AbstractCard damageSource, AbstractBattleUnit target)
+    {
+        CardAbilityProcs.GainDataPoints(damageSource, DataPointsToAcquire);
+        return true;
+    }
+
+    public override string GetDescriptionAddendum()
+    {
+        return $"Slay: Gain {DataPointsToAcquire} data points.";
     }
 }
 

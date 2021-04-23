@@ -10,11 +10,13 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         public NapalmGrenade()
         {
             SetCommonCardAttributes("Napalm Grenade", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
+            Stickers.Add(new BasicAttackRandomEnemySticker());
+            BaseDamage = 2;
         }
 
         public override string DescriptionInner()
         {
-            return $"Apply 6 burning to ALL enemies.  Exhaust.";
+            return $"Deal Apply 6 burning to ALL enemies.  Exhaust.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

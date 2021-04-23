@@ -1,5 +1,6 @@
 ﻿using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 using Assets.CodeAssets.Cards.ArchonCards.Effects;
+using Assets.CodeAssets.Cards.ArchonCards.Special;
 using System.Collections;
 using UnityEngine;
 
@@ -15,19 +16,22 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
                 Rarity.UNCOMMON,
                 TargetType.ALLY,
                 CardType.SkillCard,
-                0
+                1
                 );
             this.BaseDamage = 5;
         }
 
         public override string DescriptionInner()
         {
-            return $"Manuever the target.  Leadership: the target gains 1 strength and 1 dexterity.";
+            return $"Deal {DisplayedDamage()} damage.  Add a Manuever to your hand.  Gain 1 Dexterity.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            ArchonBattleRules.Manuever(target);
+            Action_AttackTarget(target);
+            action().CreateCardToHand(new Manuever());
+            Action_ApplyStatusEffectToOwner(new DexterityStatusEffect(), 1);
+
         }
     }
 }

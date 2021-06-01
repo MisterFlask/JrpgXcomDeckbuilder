@@ -17,6 +17,6 @@ public class BasicEnemyUnit : AbstractEnemyUnit
 
     public override List<AbstractIntent> GetNextIntents()
     {
-        return Intents.AttackRandomPc(this, 5);
+        return IntentsFromBaseDamage.AttackRandomPc(this, 5);
     }
 }

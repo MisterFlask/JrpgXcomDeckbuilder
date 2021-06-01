@@ -116,7 +116,7 @@ namespace Assets.CodeAssets.Cards
 
         public static void Brute(this AbstractCard card, Action thingToDo)
         {
-            var cost3Card = state.Deck.Hand.FirstOrDefault(card => card.BaseEnergyCost() == 3);
+            var cost3Card = state.Deck.Hand.FirstOrDefault(c => c.BaseEnergyCost() == 3);
             if (cost3Card != null)
             {
                 thingToDo();

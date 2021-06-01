@@ -27,8 +27,88 @@ public abstract class SimpleIntent : AbstractIntent
 }
 
 
-public static class Intents
+
+
+public static class IntentsFromPercent
 {
+    public static List<AbstractIntent> AttackRandomPc(
+        AbstractBattleUnit source,
+        int percentDamage, int numHits = 1)
+    {
+        int damagePerHit = GameState.Instance.DoomCounter.GetAdjustedDamage(percentDamage);
+        return SingleUnitAttackIntent.AttackRandomPc(source, damagePerHit, numHits)
+            .ToSingletonList<AbstractIntent>();
+    }
+
+    public static List<AbstractIntent> AttackSetOfPcs(AbstractBattleUnit source,
+        int percentDamage, int numHits, int numEnemies)
+    {
+        int damagePerHit = GameState.Instance.DoomCounter.GetAdjustedDamage(percentDamage);
+
+        var enemiesToHit = GameState.Instance.AllyUnitsInBattle
+            .Where(item => !item.IsDead)
+            .PickRandom(numEnemies);
+        return enemiesToHit
+            .Select(target => new SingleUnitAttackIntent(source, target, damagePerHit, numHits))
+            .ToList<AbstractIntent>();
+    }
+
+    public static List<AbstractIntent> AttackAllPcs(AbstractBattleUnit source,
+        int percentDamage, int numHits)
+    {
+        int damagePerHit = GameState.Instance.DoomCounter.GetAdjustedDamage(percentDamage);
+        return AttackSetOfPcs(source, damagePerHit, numHits, 20); //20 arbitrarily chosen; will hit everyone
+    }
+
+    public static List<AbstractIntent> BuffSelf(AbstractBattleUnit self,
+        AbstractStatusEffect statusEffect,
+        int stacks = 1)
+    {
+        return new BuffSelfIntent(self, statusEffect, stacks)
+            .ToSingletonList<AbstractIntent>();
+    }
+}
+public static class IntentRotation
+{
+    public static List<AbstractIntent> RandomIntent(params List<AbstractIntent>[] possibilities)
+    {
+        return possibilities.ToList().PickRandom();
+    }
+
+    public static List<AbstractIntent> FixedRotation(params List<AbstractIntent>[] possibilities)
+    {
+        var turnModNumOptions = GameState.Instance.BattleTurn % possibilities.Count();
+        return possibilities.ToList()[turnModNumOptions];
+    }
+
+    public static List<AbstractIntent> LeadupAndRepeatLastOneForever(
+        params List<AbstractIntent>[] leadup)
+    {
+        var turnOrLast = Math.Min(GameState.Instance.BattleTurn, leadup.Count() - 1);
+        return leadup[turnOrLast];
+    }
+
+    public static List<AbstractIntent> LeadupAndThenGenerateIntentsFromFunction(
+        Func<int, List<AbstractIntent>> generateLastAction,
+        params List<AbstractIntent>[] leadup)
+    {
+        var turn = GameState.Instance.BattleTurn;
+
+        if (turn <= leadup.Count() - 1)
+        {
+            return leadup[turn];
+        }
+
+        return generateLastAction(GameState.Instance.BattleTurn);
+    }
+
+}
+
+#region obsolete
+[Obsolete]
+public static class IntentsFromBaseDamage
+{
+    [Obsolete]
     public static List<AbstractIntent> AttackRandomPc(
         AbstractBattleUnit source, 
         int damagePerHit, int numHits = 1)
@@ -47,19 +127,21 @@ public static class Intents
             .Select(target => new SingleUnitAttackIntent(source, target, damagePerHit, numHits))
             .ToList<AbstractIntent>();
     }
+
     public static List<AbstractIntent> AttackAllPcs(AbstractBattleUnit source,
         int damagePerHit, int numHits)
     {
         return AttackSetOfPcs(source, damagePerHit, numHits, 20); //20 arbitrarily chosen; will hit everyone
     }
 
-    public static List<AbstractIntent> BuffSelfOrHeal(AbstractBattleUnit self,
+    public static List<AbstractIntent> BuffSelf(AbstractBattleUnit self,
         AbstractStatusEffect statusEffect,
         int stacks = 1)
     {
         return new BuffSelfIntent(self, statusEffect, stacks)
             .ToSingletonList<AbstractIntent>();
     }
+
 
     public static List<AbstractIntent> RandomIntent(params List<AbstractIntent>[] possibilities)
     {
@@ -93,3 +175,4 @@ public static class Intents
         return generateLastAction(GameState.Instance.BattleTurn);
     }
 }
+#endregion

@@ -79,6 +79,8 @@ public class GameState
 
     public ShopData ShopData { get; } = new ShopData();
 
+    public DoomCounter DoomCounter { get; } = new DoomCounter();
+
     public int cardsPlayedThisTurn = 0;
 
     #region UI State
@@ -126,4 +128,95 @@ public abstract class AbstractGlobalBattleMechanic
     { 
     
     }
+}
+
+
+public class DoomCounter
+{
+    public void AdvanceDoomCounterForDay()
+    {
+        CurrentDoomCounter += 2;
+    }
+
+    /// <summary>
+    /// This works similarly to how risk of rain represents character damage.  There's a base level dictated by the Doom Counter, and this is multiplied by whatever percentage to 
+    /// get the actual damage for the creature this combat enocounter.
+    /// </summary>
+    public int GetAdjustedDamage(int percent)
+    {
+        var perc = (float)percent;
+        perc = perc / 100;
+        return (int) (perc * GetCurrentDoomLevel().BaseDamage);
+    }
+
+    /// <summary>
+    /// This works similarly to how risk of rain represents character damage.  There's a base level dictated by the Doom Counter, and this is multiplied by whatever percentage to 
+    /// get the actual hp for the creature this combat enocounter.
+    /// </summary>
+    public int GetAdjustedHp(int percent)
+    {
+        var perc = (float)percent;
+        perc = perc / 100;
+        return (int)(perc * GetCurrentDoomLevel().BaseDamage);
+    }
+
+    public int CurrentDoomCounter { get; set; } = 0;
+
+    public DoomLevel GetCurrentDoomLevel()
+    {
+        if (CurrentDoomCounter < 20)
+        {
+            return DoomLevel.EASY;
+        }else if (CurrentDoomCounter < 40)
+        {
+            return DoomLevel.MEDIUM;
+        }else if (CurrentDoomCounter < 60)
+        {
+            return DoomLevel.HARD;
+        }else if (CurrentDoomCounter < 80)
+        {
+            return DoomLevel.VERY_HARD;
+        }else if (CurrentDoomCounter < 100)
+        {
+            return DoomLevel.OH_NO;
+        }
+        return DoomLevel.DATA_EXPUNGED;
+    }
+}
+
+public class DoomLevel
+{
+    public int BaseHealth { get; set; }
+    public int BaseDamage { get; set; }
+
+    public static DoomLevel EASY = new DoomLevel
+    {
+        BaseHealth = 40,
+        BaseDamage = 10
+    };
+    public static DoomLevel MEDIUM = new DoomLevel
+    {
+        BaseHealth = 50,
+        BaseDamage = 12
+    };
+    public static DoomLevel HARD = new DoomLevel
+    {
+        BaseHealth = 60,
+        BaseDamage = 14
+    };
+    public static DoomLevel VERY_HARD = new DoomLevel
+    {
+        BaseHealth = 70,
+        BaseDamage = 16
+    };
+    public static DoomLevel OH_NO = new DoomLevel
+    {
+        BaseHealth = 80,
+        BaseDamage = 20
+    };
+    public static DoomLevel DATA_EXPUNGED = new DoomLevel
+    {
+        BaseHealth = 90,
+        BaseDamage = 25
+    };
 }

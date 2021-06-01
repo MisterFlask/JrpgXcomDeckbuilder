@@ -24,12 +24,12 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
             CardAbilityProcs.Technocannibalize(this, () =>
             {
                 CardAbilityProcs.GainEnergy(this, 1);
-                action().ApplyStatusEffect(target, new EmpoweredStatusEffect());
+                action().ApplyStatusEffect(target, new ChargedStatusEffect());
             });
             CardAbilityProcs.Inferno(this, () =>
             {
                 CardAbilityProcs.GainEnergy(this, 1);
-                action().ApplyStatusEffect(target, new EmpoweredStatusEffect());
+                action().ApplyStatusEffect(target, new ChargedStatusEffect());
             });
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEditor;
+using Assets.CodeAssets.BattleEntities.Enemies;
 
 public abstract class AbstractBattleUnit
 {
@@ -70,6 +71,10 @@ public abstract class AbstractBattleUnit
         aug.OnAssignment(this);        
         Perks.Add(aug);
     }
+
+    public EnemyFaction EnemyFaction { get; set; } = EnemyFaction.NONE;
+
+    public EnemySquadRole SquadRole { get; set; } = EnemySquadRole.REGULAR;
 
     public void RemoveCardsFromPersistentDeck(IEnumerable<AbstractCard> cardsToRemove)
     {

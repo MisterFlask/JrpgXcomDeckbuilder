@@ -27,8 +27,17 @@ public class CardRegistrar
                 var cardType = t; 
                 var card = Activator.CreateInstance(cardType) as AbstractCard;
 
+                if (card.SoldierClassCardPools == null)
+                {
+                    continue;
+                }
+
                 foreach (var soldierClass in card.SoldierClassCardPools)
                 {
+                    if (soldierClass == null || soldierClass.Name == null)
+                    {
+                        continue;
+                    }
                     if (!ReflectiveCardCache.ContainsKey(soldierClass.Name))
                     {
                         ReflectiveCardCache[soldierClass.Name] = new List<AbstractCard>();
@@ -36,7 +45,7 @@ public class CardRegistrar
 
                     ReflectiveCardCache[soldierClass.Name].Add(card);
                 }
-                Debug.Log($"Registered card {t.Name} with soldier classes {card.SoldierClassCardPools.AsString(item => item.Name)}");
+                Debug.Log($"Registered card {t?.Name} with soldier classes {card?.SoldierClassCardPools?.AsString(item => item?.Name)}");
             }
         }
         foreach (var clazz in ReflectiveCardCache.Keys)

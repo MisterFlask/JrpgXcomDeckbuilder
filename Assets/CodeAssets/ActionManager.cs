@@ -21,6 +21,11 @@ public class ActionManager : MonoBehaviour
 
     GameState gameState => ServiceLocator.GameState();
 
+    internal void IncrementDoomCounter(int v)
+    {
+        throw new NotImplementedException();
+    }
+
     // Used to end the current action/start the next delayed action
     public bool IsCurrentActionFinished { get; set; }
 
@@ -560,10 +565,14 @@ public class ActionManager : MonoBehaviour
     /// Spawns a new enemy in battle, if there's room.
     /// </summary>
     /// <param name="unit"></param>
-    public void CreateMinionInBattle(AbstractBattleUnit unit)
+    public void CreateEnemyMinionInBattle(AbstractBattleUnit unit, Action toPerformAfterSummoning = null)
     {
         var clone = unit.CloneUnit();
-        BattleScreenPrefab.INSTANCE.CreateNewEnemyAndRegisterWithGamestate(unit);
+        BattleScreenPrefab.INSTANCE.CreateNewEnemyAndRegisterWithGamestate(clone);
+        if (toPerformAfterSummoning != null)
+        {
+            toPerformAfterSummoning();
+        }
     }
 
     public void HealUnit(AbstractBattleUnit unitHealed, int healedAmount, AbstractBattleUnit healer = null, bool allowedToReviveTheDead = false)

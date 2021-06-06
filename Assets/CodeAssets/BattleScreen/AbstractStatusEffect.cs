@@ -43,6 +43,9 @@ public abstract class AbstractStatusEffect: MagicWord
     public bool Stackable { get; set; } = true;
     public int Stacks { get; set; } = 1;
 
+    // Secondary indicator, for use in (e.g.) counting during a turn
+    public int SecondaryStacks { get; set; }
+
     public bool IsExample { get; set; }
 
     public string DisplayedStacks()
@@ -64,6 +67,11 @@ public abstract class AbstractStatusEffect: MagicWord
         Name = GetType().Name;
     }
 
+    public virtual void OnRemoval()
+    {
+
+    }
+
     /// <summary>
     ///  This should happen mostly on damage effects on the enemy.
     /// </summary>
@@ -80,17 +88,17 @@ public abstract class AbstractStatusEffect: MagicWord
 
     }
 
-    public virtual void OnDeath(AbstractBattleUnit unitThatKilledMe)
+    public virtual void OnDeath(AbstractBattleUnit unitThatKilledMe, AbstractCard cardUsedIfAny)
     {
 
     }
 
-    public virtual void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
+    public virtual void OnStruck(AbstractBattleUnit unitStriking, AbstractCard cardUsedIfAny, int totalDamageTaken)
     {
 
     }
 
-    public virtual void OnStriking(AbstractBattleUnit unitStruck, int totalDamageDealt)
+    public virtual void OnStriking(AbstractBattleUnit unitStruck, AbstractCard cardUsedIfAny, int damageAfterBlockingAndModifiers)
     {
 
     }
@@ -226,6 +234,19 @@ public abstract class AbstractStatusEffect: MagicWord
         {
             DecrementStacks();
         });
+    }
+
+    public virtual void OnTargetedByCard(AbstractCard sourceCard)
+    {
+
+    }
+
+    /// <summary>
+    /// Returns how much more or less it costs to target this character with this card.
+    /// </summary>
+    public virtual int GetTargetedCostModifier(AbstractCard card)
+    {
+        return 0;
     }
 
 }

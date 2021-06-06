@@ -105,7 +105,7 @@ public static class BattleRules
 
             target.CurrentHp -= damageBlob.Damage;
 
-            if (target.CurrentHp > 0 && isAttack && damageBlob.Damage > 0)
+            if (target.CurrentHp > 0 && isAttack)
             {
                 ProcessAttackDamageReceivedHooks(damageSource, target, damageBlob.Damage);
             }
@@ -119,7 +119,7 @@ public static class BattleRules
         }
     }
 
-    private static void ProcessHpLossHooks(AbstractBattleUnit damageSource, AbstractBattleUnit target, object damage)
+    private static void ProcessHpLossHooks(AbstractBattleUnit damageSource, AbstractBattleUnit target, int damage)
     {
         //todo
 

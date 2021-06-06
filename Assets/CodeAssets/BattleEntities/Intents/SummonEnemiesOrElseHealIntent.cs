@@ -29,7 +29,7 @@ namespace Assets.CodeAssets.BattleEntities.Intents
         {
             if (CurrentlyAvailableForUsage())
             {
-                ActionManager.Instance.CreateMinionInBattle(MinionToCreate);
+                ActionManager.Instance.CreateEnemyMinionInBattle(MinionToCreate);
             }
             else 
             {

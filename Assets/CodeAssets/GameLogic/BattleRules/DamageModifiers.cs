@@ -38,7 +38,7 @@ public abstract class DamageModifier
         var slew = SlayInner(damageSource, target);
         if (slew)
         {
-            BattleRules.ProcessProc(new LethalTriggerProc());
+            BattleRules.TriggerProc(new LethalTriggerProc());
         }
     }
 

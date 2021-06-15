@@ -107,7 +107,7 @@ public static class BattleRules
 
             if (target.CurrentHp > 0 && isAttack)
             {
-                ProcessAttackDamageReceivedHooks(damageSource, target, damageBlob.Damage);
+                ProcessAttackDamageReceivedHooks(damageSource, target, nullableCardPlayed, damageBlob.Damage);
             }
 
             if (damageBlob.Damage > 0)
@@ -115,7 +115,7 @@ public static class BattleRules
                 ProcessHpLossHooks(damageSource, target, damageBlob.Damage);
             }
 
-            CheckAndRegisterDeath(target, damageSource);
+            CheckAndRegisterDeath(target, damageSource, nullableCardPlayed);
         }
     }
 
@@ -166,31 +166,38 @@ public static class BattleRules
         }
     }
 
-    public static void CheckAndRegisterDeath(AbstractBattleUnit unit, AbstractBattleUnit nullableUnitThatKilledMe)
+    public static void CheckAndRegisterDeath(AbstractBattleUnit unit, AbstractBattleUnit nullableUnitThatKilledMe, AbstractCard cardUsedIfAny)
     {
         if (unit.CurrentHp <= 0)
         {
             foreach (var effect in unit.StatusEffects)
             {
-                effect.OnDeath(nullableUnitThatKilledMe);
+                effect.OnDeath(nullableUnitThatKilledMe, cardUsedIfAny);
             }
 
-            BattleRules.ProcessProc(new CharacterDeathProc { CharacterDead = unit });
+            BattleRules.TriggerProc(new CharacterDeathProc { CharacterDead = unit });
             ActionManager.Instance.DestroyUnit(unit);
 
         }
     }
 
-    private static void ProcessAttackDamageReceivedHooks(AbstractBattleUnit source, AbstractBattleUnit target, int damageAfterBlockingAndModifiers)
+    private static void ProcessAttackDamageReceivedHooks(AbstractBattleUnit source, AbstractBattleUnit target, AbstractCard cardUsedIfAny, int damageAfterBlockingAndModifiers)
     {
         foreach (var statusEffect in target.StatusEffects)
         {
-            statusEffect.OnStruck(source, damageAfterBlockingAndModifiers);
+            statusEffect.OnStruck(source, cardUsedIfAny, damageAfterBlockingAndModifiers);
         }
         foreach (var statusEffect in source.StatusEffects)
         {
-            statusEffect.OnStriking(target, damageAfterBlockingAndModifiers);
+            statusEffect.OnStriking(target, cardUsedIfAny, damageAfterBlockingAndModifiers);
         }
+
+        TriggerProc(new CharacterDamagedProc { 
+            TriggeringCardIfAny = cardUsedIfAny,
+            CharacterDamaged = target, 
+            CharacterInflictingDamage = source,
+            DamageInflicted = damageAfterBlockingAndModifiers
+        });
 
         ProcessSpecialDamagedRules(source, target, damageAfterBlockingAndModifiers);
     }
@@ -201,11 +208,12 @@ public static class BattleRules
 
     private static void ProcessSpecialDamagedRules(AbstractBattleUnit source, AbstractBattleUnit target, int damageAfterBlockingAndModifiers)
     {
-        if (damageAfterBlockingAndModifiers > 0)
+        if (damageAfterBlockingAndModifiers > 0 && target.IsAlly)
         {
             // characters take 2 stress after taking damage.
             ActionManager.Instance.ApplyStatusEffect(target, new StressStatusEffect(), 2);
         }
+       
     }
 
     public static int GetDefenseApplied(AbstractBattleUnit source, AbstractBattleUnit target, int baseDefense)
@@ -415,7 +423,7 @@ public static class BattleRules
         }
     }
 
-    public static void ProcessProc(AbstractProc proc)
+    public static void TriggerProc(AbstractProc proc)
     {
         foreach(var unit in GameState.Instance.EnemyUnitsInBattle.Concat(GameState.Instance.AllyUnitsInBattle))
         {
@@ -465,6 +473,13 @@ public class CharacterDeathProc: AbstractProc
 {
     public AbstractBattleUnit CharacterDead { get; set; }
 }
+public class CharacterDamagedProc : AbstractProc
+{
+    public AbstractBattleUnit CharacterDamaged { get; set; }
+
+    public AbstractBattleUnit CharacterInflictingDamage { get; set; }
+    public int DamageInflicted { get; set; }
+}
 
 public class RetreatingStatusEffect : AbstractStatusEffect
 {
@@ -486,6 +501,8 @@ public class RetreatingStatusEffect : AbstractStatusEffect
     }
 
 }
+
+
 
 public class TauntProc: AbstractProc
 {

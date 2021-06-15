@@ -43,7 +43,7 @@ public class GreywingWoundOnDeath: AbstractStatusEffect
     }
     public override string Description => $"This applies Burning to whoever killed it equal to number of stacks.";
 
-    public override void OnDeath(AbstractBattleUnit unitThatKilledMe)
+    public override void OnDeath(AbstractBattleUnit unitThatKilledMe, AbstractCard cardPlayedIfAny)
     {
         if (unitThatKilledMe != null)
         {

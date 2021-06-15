@@ -75,6 +75,11 @@ public abstract class AbstractCardSticker: MonoBehaviour
         
     }
 
+    public virtual bool MeetsAdditionalRequirementToBePlayed(AbstractCard card)
+    {
+        return true;
+    }
+
     /// <summary>
     /// Return "false" if you want to avoid having this sticker attached to the card provided.
     /// </summary>

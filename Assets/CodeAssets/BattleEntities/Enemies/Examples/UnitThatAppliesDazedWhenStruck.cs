@@ -36,7 +36,7 @@ public class ApplyDazedOnHit : AbstractStatusEffect
 
     public override string Description => "Adds a Distracted to your discard pile when damaged.";
 
-    public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
+    public override void OnStruck(AbstractBattleUnit unitStriking, AbstractCard cardUsedIfAny, int totalDamageTaken)
     {
         action().CreateCardToBattleDeckDiscardPile(new Distracted(), location: CardCreationLocation.SHUFFLE);
     }

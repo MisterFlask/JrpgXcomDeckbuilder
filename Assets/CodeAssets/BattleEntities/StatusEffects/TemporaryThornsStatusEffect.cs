@@ -9,7 +9,7 @@ public class TemporaryThorns : AbstractStatusEffect
         ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/thorny-vine", Color.yellow);
     }
 
-    public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
+    public override void OnStruck(AbstractBattleUnit unitStriking, AbstractCard cardUsedIfAny, int totalDamageTaken)
     {
         action().DamageUnitNonAttack(unitStriking, null, Stacks);
     }

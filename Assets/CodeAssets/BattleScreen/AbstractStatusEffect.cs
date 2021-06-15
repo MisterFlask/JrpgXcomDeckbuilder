@@ -249,6 +249,11 @@ public abstract class AbstractStatusEffect: MagicWord
         return 0;
     }
 
+    public virtual void Init()
+    {
+
+    }
+
 }
 
 public enum StatusEffectChange

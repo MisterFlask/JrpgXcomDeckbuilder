@@ -50,7 +50,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         }
 
 
-        public override void OnDeath(AbstractBattleUnit unitThatKilledMe)
+        public override void OnDeath(AbstractBattleUnit unitThatKilledMe, AbstractCard cardPlayedIfAny)
         {
             foreach(var enemy in GameState.Instance.EnemyUnitsInBattle)
             {

@@ -25,5 +25,10 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.EnemyPassiveAbilities
                 Stacks = 0;
             }
         }
+
+        public override void OnDeath(AbstractBattleUnit unitThatKilledMe, AbstractCard cardUsedIfAny)
+        {
+            ActionManager.Instance.AddAugmentToInventory(PerkAndAugmentationRegistrar.GetRandomAugmentation(Rarity.COMMON));
+        }
     }
 }

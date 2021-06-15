@@ -29,7 +29,7 @@ public abstract class SimpleIntent : AbstractIntent
 
 
 
-public static class IntentsFromPercent
+public static class IntentsFromPercentBase
 {
     public static List<AbstractIntent> AttackRandomPc(
         AbstractBattleUnit source,
@@ -67,6 +67,15 @@ public static class IntentsFromPercent
         return new BuffSelfIntent(self, statusEffect, stacks)
             .ToSingletonList<AbstractIntent>();
     }
+    public static List<AbstractIntent> DefendSelf(AbstractBattleUnit self,
+        int shieldPercent)
+    {
+        return new DefendSelfIntent(self, 
+            GameState.Instance.DoomCounter.GetAdjustedDamage(shieldPercent))
+            .ToSingletonList<AbstractIntent>();
+    }
+
+
 }
 public static class IntentRotation
 {

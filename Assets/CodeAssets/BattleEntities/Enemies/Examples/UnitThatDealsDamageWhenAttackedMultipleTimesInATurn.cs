@@ -34,7 +34,7 @@ public class DealsDamageOnAttackMultipleTimesInATurn : AbstractStatusEffect
     }
     public override string Description => "When attacked for the third time in a turn, deals [stacks] damage to ALL characters.";
 
-    public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
+    public override void OnStruck(AbstractBattleUnit unitStriking, AbstractCard cardUsedIfAny, int totalDamageTaken)
     {
         this.OwnerUnit.ApplyStatusEffect<DealtDamageThisTurnMarker>(new DealtDamageThisTurnMarker(), 1);
 

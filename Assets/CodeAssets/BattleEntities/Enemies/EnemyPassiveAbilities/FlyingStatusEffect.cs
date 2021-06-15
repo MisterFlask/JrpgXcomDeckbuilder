@@ -3,23 +3,36 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.BattleEntities.Enemies.EnemyPassiveAbilities
 {
-    public class FlightStatusEffect : AbstractStatusEffect
+    public class FlyingStatusEffect : AbstractStatusEffect
     {
-        public FlightStatusEffect()
+        public FlyingStatusEffect()
         {
             Name = "Flying";
         }
 
         public override string Description => "Deals [stacks] extra damage.  Remove Flight after being hit three times in a turn.";
 
-        public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
+        public override void Init()
         {
-            Stacks--;
+            SecondaryStacks = Stacks;
+        }
+
+        public override void OnStruck(AbstractBattleUnit unitStriking, AbstractCard cardUsedIfAny, int totalDamageTaken)
+        {
+            SecondaryStacks--;
+            if (SecondaryStacks == 0)
+            {
+                Stacks = 0;
+            }
+        }
+        public override int DamageDealtAddition()
+        {
+            return Stacks;
         }
 
         public override void OnTurnStart()
         {
-            Stacks = 3;
+            SecondaryStacks = Stacks;
             OwnerUnit.RemoveStatusEffect<FlightEffectOnFirstHitTakenThisTurn>();
             OwnerUnit.ApplyStatusEffect(new FlightEffectOnFirstHitTakenThisTurn(), 1);
         }

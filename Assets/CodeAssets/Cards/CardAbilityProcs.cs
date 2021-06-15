@@ -45,7 +45,7 @@ namespace Assets.CodeAssets.Cards
             if (state.Deck.Hand.Count < 3)
             {
                 thingToDo();
-                BattleRules.ProcessProc(new SlyProc { TriggeringCardIfAny = card });
+                BattleRules.TriggerProc(new SlyProc { TriggeringCardIfAny = card });
 
             }
         }
@@ -66,7 +66,7 @@ namespace Assets.CodeAssets.Cards
                 thingToDo(); 
 
                 action.ExhaustCard(firstRareCard); 
-                BattleRules.ProcessProc(new LiquidateProc { TriggeringCardIfAny = card });
+                BattleRules.TriggerProc(new LiquidateProc { TriggeringCardIfAny = card });
             }
         }
 
@@ -120,7 +120,7 @@ namespace Assets.CodeAssets.Cards
             if (cost3Card != null)
             {
                 thingToDo();
-                BattleRules.ProcessProc(new BruteProc { TriggeringCardIfAny = card });
+                BattleRules.TriggerProc(new BruteProc { TriggeringCardIfAny = card });
 
             }
         } 
@@ -130,7 +130,7 @@ namespace Assets.CodeAssets.Cards
             var burningEnemy = state.EnemyUnitsInBattle.Any(enemy => !enemy.IsDead && enemy.HasStatusEffect<BurningStatusEffect>());
             {
                 thingToDo();
-                BattleRules.ProcessProc(new InfernoProc { TriggeringCardIfAny = card });
+                BattleRules.TriggerProc(new InfernoProc { TriggeringCardIfAny = card });
             }
         }
 
@@ -141,7 +141,7 @@ namespace Assets.CodeAssets.Cards
             {
                 sacrificableCard.Action_Exhaust();
                 action.ApplyStress(sacrificableCard.Owner, 6);
-                BattleRules.ProcessProc(new SacrificeProc { TriggeringCardIfAny = card });
+                BattleRules.TriggerProc(new SacrificeProc { TriggeringCardIfAny = card });
                 thingToDo();
             }
         }

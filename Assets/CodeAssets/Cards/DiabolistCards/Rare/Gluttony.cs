@@ -34,7 +34,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
         public override string Description => $"Ticks down at the start of each turn.  " +
             $"When this character strikes an enemy, it gains {DisplayedStacks()} HP.";
 
-        public override void OnStriking(AbstractBattleUnit unitStruck, int totalDamageDealt)
+        public override void OnStriking(AbstractBattleUnit unitStruck, AbstractCard cardPlayedIfAny, int totalDamageDealt)
         {
             action().ApplyStatusEffect(unitStruck, new VampiricStatusEffect(), 3);
         }

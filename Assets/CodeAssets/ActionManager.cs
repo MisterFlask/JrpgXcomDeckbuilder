@@ -38,6 +38,11 @@ public class ActionManager : MonoBehaviour
 
     }
 
+    internal void AddAugmentToInventory(AbstractSoldierPerk abstractSoldierPerk)
+    {
+        throw new NotImplementedException();
+    }
+
     public void AddToFront(BasicDelayedAction action)
     {
         QueuedActions.DelayedActionWithCustomTrigger(action.ActionId, action.onStart, queueingType: QueueingType.TO_FRONT);
@@ -410,7 +415,7 @@ public class ActionManager : MonoBehaviour
         {
             gameState.Deck.MoveCardToPile(protoCard, CardPosition.EXPENDED);
             ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(protoCard, assumedToExistInHand: false);
-            BattleRules.ProcessProc(new ExhaustedCardProc { TriggeringCardIfAny = protoCard });
+            BattleRules.TriggerProc(new ExhaustedCardProc { TriggeringCardIfAny = protoCard });
         }, queueingType);
     }
 

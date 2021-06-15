@@ -12,7 +12,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.EnemyPassiveAbilities
 
         public override string Description => $"At the end of turn, if this hasn't been attacked in the turn, increment the Doom Counter by 1.";
 
-        public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
+        public override void OnStruck(AbstractBattleUnit unitStriking, AbstractCard card, int totalDamageTaken)
         {
             SecondaryStacks++;
         }

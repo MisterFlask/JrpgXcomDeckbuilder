@@ -283,7 +283,7 @@ public abstract class AbstractBattleUnit
                 StatusEffects.Remove(effect);
             }
         }
-        BattleRules.CheckAndRegisterDeath(this, null);
+        BattleRules.CheckAndRegisterDeath(this, null, null);
 
         // kind of a hack, but should be fine
         foreach(var statusEffect in StatusEffects.ToList())
@@ -406,6 +406,11 @@ public abstract class AbstractBattleUnit
         }
         return CharacterFirstName;
     }
+
+    public virtual void AssignStatusEffectsOnCombatStart()
+    {
+
+    } 
 
 }
 

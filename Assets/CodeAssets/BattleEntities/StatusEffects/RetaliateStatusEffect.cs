@@ -9,7 +9,7 @@ public class RetaliateStatusEffect : AbstractStatusEffect
         ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/thorny-vine", Color.red);
     }
 
-    public override void OnStruck(AbstractBattleUnit unitStriking, int totalDamageTaken)
+    public override void OnStruck(AbstractBattleUnit unitStriking, AbstractCard cardUsedIfAny, int totalDamageTaken)
     {
         if (Stacks <= 0) return;
         var damageToReturn = BattleRules.GetAnticipatedDamageToUnit(OwnerUnit, unitStriking, 5, true, null);

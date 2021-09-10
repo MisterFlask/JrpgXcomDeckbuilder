@@ -44,7 +44,7 @@ public abstract class AbstractBattleUnit
     public string UnitClassName => SoldierClass.Name();
     public string CharacterFullName { get; set; } = "";
 
-    public string CharacterNickname { get; set; } = "";
+    public string CharacterNicknameOrEnemyName { get; set; } = "";
 
     public List<AbstractStatusEffect> StatusEffects { get; set; } = new List<AbstractStatusEffect>();
 
@@ -246,7 +246,7 @@ public abstract class AbstractBattleUnit
         copy.CharacterFirstName = newName.FirstName;
         copy.CharacterLastName = newName.LastName;
         copy.CharacterFullName = newName.FirstName + " " + newName.LastName;
-        copy.CharacterNickname = newName.Nickname;
+        copy.CharacterNicknameOrEnemyName = newName.Nickname;
         return copy;
     }
 
@@ -385,7 +385,7 @@ public abstract class AbstractBattleUnit
         {
             if (CurrentLevel > 1)
             {
-                return $"{CharacterFirstName} \"{CharacterNickname}\" {CharacterLastName}";
+                return $"{CharacterFirstName} \"{CharacterNicknameOrEnemyName}\" {CharacterLastName}";
             }
             else
             {
@@ -397,7 +397,7 @@ public abstract class AbstractBattleUnit
         {
             if (CurrentLevel > 1)
             {
-                return CharacterNickname;
+                return CharacterNicknameOrEnemyName;
             }
             else
             {

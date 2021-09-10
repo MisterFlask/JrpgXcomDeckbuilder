@@ -8,9 +8,9 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.BadCards
     {
         private int Damage;
 
-        public Bleeding(int damage = 3)
+        public Bleeding()
         {
-            Damage = damage;
+            Damage = 3;
             AddSticker(new ExhaustCardSticker());
         }
 

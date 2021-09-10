@@ -5,7 +5,10 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Columbal
 {
     public class ColumbalOfficer : MonoBehaviour
     {
+        public ColumbalOfficer()
+        {
 
+        }
         // Use this for initialization
         void Start()
         {

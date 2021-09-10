@@ -9,6 +9,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Columbal
     {
         public ColumbalConscripts()
         {
+            CharacterNicknameOrEnemyName = "Conscripts";
             EnemyFaction = EnemyFaction.COLUMBAL;
             SquadRole = EnemySquadRole.SMALL;
         }

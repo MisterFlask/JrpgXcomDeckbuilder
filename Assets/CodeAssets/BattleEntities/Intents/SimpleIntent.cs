@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Assets.CodeAssets.BattleEntities.Enemies.Efficiency;
 
 public abstract class SimpleIntent : AbstractIntent
 {
@@ -38,6 +39,44 @@ public static class IntentsFromPercentBase
         int damagePerHit = GameState.Instance.DoomCounter.GetAdjustedDamage(percentDamage);
         return SingleUnitAttackIntent.AttackRandomPc(source, damagePerHit, numHits)
             .ToSingletonList<AbstractIntent>();
+    }
+    public static List<AbstractIntent> AttackRandomPcWithDebuff(
+        AbstractStatusEffect debuff_requiresSetStacks,
+        AbstractBattleUnit source,
+        int percentDamage,
+        int numHits = 1)
+    {
+        int damagePerHit = GameState.Instance.DoomCounter.GetAdjustedDamage(percentDamage);
+
+        var attackIntent = SingleUnitAttackIntent.AttackRandomPc(source, damagePerHit, numHits);
+        return new List<AbstractIntent>
+        {
+            attackIntent,
+            DebuffOtherIntent.StatusEffect(source, attackIntent.Target, debuff_requiresSetStacks.CloneStatusEffect())
+        };
+    }
+
+    public static List<AbstractIntent> TargetRandomNpcWithMagic(AbstractBattleUnit source, 
+        Action action)
+    {
+        return new List<AbstractIntent>();
+    }
+
+
+    public static List<AbstractIntent> AttackRandomPcWithCardToDiscardPile(
+        AbstractCard card,
+        AbstractBattleUnit source,
+        int percentDamage,
+        int numHits = 1)
+    {
+        int damagePerHit = GameState.Instance.DoomCounter.GetAdjustedDamage(percentDamage);
+
+        var attackIntent = SingleUnitAttackIntent.AttackRandomPc(source, damagePerHit, numHits);
+        return new List<AbstractIntent>
+        {
+            attackIntent,
+            DebuffOtherIntent.AddCardToDiscardPile(source, attackIntent.Target, card)
+        };
     }
 
     public static List<AbstractIntent> AttackSetOfPcs(AbstractBattleUnit source,
@@ -75,7 +114,10 @@ public static class IntentsFromPercentBase
             .ToSingletonList<AbstractIntent>();
     }
 
-
+    public static List<AbstractIntent> Charging(AbstractBattleUnit unit)
+    {
+        return new List<AbstractIntent>();
+    }
 }
 public static class IntentRotation
 {

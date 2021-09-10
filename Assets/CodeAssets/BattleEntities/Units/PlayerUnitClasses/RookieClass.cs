@@ -24,6 +24,8 @@ public class RookieClass : AbstractSoldierClass
         me.RemoveCardsFromPersistentDeckByType<Bayonet>();
         me.RemoveCardsFromPersistentDeckByType<Defend>();
         me.RemoveCardsFromPersistentDeckByType<IneptShot>();
+        me.RemoveCardsFromPersistentDeckByType<Attack>();
+        me.RemoveCardsFromPersistentDeckByType<CoveringFire>();
         me.ChangeClass(GetRandomNewClass());
 
         var newClass = me.SoldierClass;
@@ -45,7 +47,10 @@ public class RookieClass : AbstractSoldierClass
     {
         return new List<AbstractSoldierClass>
         {
-            //new VanguardSoldierClass(),
+            new HammerSoldierClass(),
+            new DiabolistSoldierClass(),
+            new CogSoldierClass(),
+            new BlackhandSoldierClass(),
             new ArchonSoldierClass()
         };// todo
     }

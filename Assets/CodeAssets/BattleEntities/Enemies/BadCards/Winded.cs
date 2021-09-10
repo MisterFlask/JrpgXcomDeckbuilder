@@ -9,11 +9,12 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.BadCards
         public Winded()
         {
             /// bog-standard unplayable
+            StaticBaseEnergyCost = 0;
         }
 
         public override string DescriptionInner()
         {
-            return "Unplayable";
+            return "Does nothing.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

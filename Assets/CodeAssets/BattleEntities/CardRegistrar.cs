@@ -66,6 +66,11 @@ public class CardRegistrar
         {
             throw new Exception($"Can't get card pool for non-soldier-class {soldierClass.Name}");
         }
+
+        if (ReflectiveCardCache[soldierClass.Name] == null){
+            ReflectiveCardCache[soldierClass.Name] = new List<AbstractCard>();
+        }
+
         return ReflectiveCardCache[soldierClass.Name];
     }
 }

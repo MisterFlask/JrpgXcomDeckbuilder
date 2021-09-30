@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
-public abstract class Mission 
+public abstract class AbstractMission 
 {
+
+    public List<MissionModifier> MissionModifiers { get; set; }
 
     public static string GenerateMissionName()
     {
@@ -19,12 +22,14 @@ public abstract class Mission
             start += Environment.NewLine + "*" + reward.Description();
         }
 
+        var enemiesText = this.EnemySquad.Description;
 
-        start += Environment.NewLine + "Foes: TBD";
+        start += Environment.NewLine + $"Foes: {enemiesText}\n";
         start += Environment.NewLine + "Days left: " + DaysUntilExpiration;
         return start;
     }
 
+    public bool IsGateMission => Rewards.Any(item => item is GateBypassMissionReward);
     public string Name { get; set; }
     public int Difficulty { get; set; } // 1 to 5
 
@@ -40,7 +45,10 @@ public abstract class Mission
 
     public virtual void OnSuccess()
     {
-
+        foreach (var reward in Rewards)
+        {
+            reward.OnReward();
+        }
     }
 
     public virtual bool IsFailed()
@@ -63,4 +71,3 @@ public abstract class Mission
     public ProtoGameSprite BattleBackground { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Backgrounds/Battleback1");
 
 }
-

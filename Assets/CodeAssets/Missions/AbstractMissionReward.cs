@@ -27,3 +27,20 @@ public class MoneyMissionReward : AbstractMissionReward
         GameState.Instance.Credits+=quantity;
     }
 }
+
+public class GateBypassMissionReward : AbstractMissionReward
+{
+    public GateBypassMissionReward()
+    {
+    }
+
+    public override string Description()
+    {
+        return $"Travel to the next Circle.";
+    }
+
+    public override void OnReward()
+    {
+        GameState.Instance.NextRegionUnlocked = true;
+    }
+}

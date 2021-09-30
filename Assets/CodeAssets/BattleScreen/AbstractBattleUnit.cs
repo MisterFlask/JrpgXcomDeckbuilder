@@ -19,7 +19,7 @@ public abstract class AbstractBattleUnit
     public int CombatsParticipatedIn = 0;
     public bool PromotionAvailable => this.SoldierClass is RookieClass && CombatsParticipatedIn > 0;
 
-    public int MaxHp { get; set; }
+    public int MaxHp { get; set; } = 10;
     public int NumberCardRewardsEligibleFor { get; set; } = 0;
 
     public string Description { get; set; }
@@ -246,7 +246,10 @@ public abstract class AbstractBattleUnit
         copy.CharacterFirstName = newName.FirstName;
         copy.CharacterLastName = newName.LastName;
         copy.CharacterFullName = newName.FirstName + " " + newName.LastName;
-        copy.CharacterNicknameOrEnemyName = newName.Nickname;
+        if (!(this is AbstractEnemyUnit))
+        {
+            copy.CharacterNicknameOrEnemyName = newName.Nickname;
+        }
         return copy;
     }
 
@@ -381,6 +384,11 @@ public abstract class AbstractBattleUnit
 
     public string GetDisplayName(DisplayNameType type)
     {
+        if (this is AbstractEnemyUnit)
+        {
+            return CharacterNicknameOrEnemyName;
+        }
+
         if (type == DisplayNameType.FULL_NAME)
         {
             if (CurrentLevel > 1)

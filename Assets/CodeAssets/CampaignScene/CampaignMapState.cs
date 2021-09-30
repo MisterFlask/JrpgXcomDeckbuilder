@@ -15,7 +15,7 @@ public static class CampaignMapState
     public static List<AbstractBattleUnit> Roster;
     public static List<AbstractBattleUnit> CurrentSelectedParty;
 
-    public static List<Mission> MissionsActive= new List<Mission>();
+    public static List<AbstractMission> MissionsActive= new List<AbstractMission>();
 
     private static string CampaignLog = "";
     public static void AppendLogMessage(string msg)

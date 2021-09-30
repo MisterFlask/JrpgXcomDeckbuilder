@@ -19,8 +19,11 @@ public class DayBeginsActions : MonoBehaviour
         //now remove them from the active missions list.
         CampaignMapState.MissionsActive.RemoveAll(item => item.DaysUntilExpiration <= 0);
 
-        var newMissions = MissionGenerator.GenerateAllMissionsForDay();
-        CampaignMapState.MissionsActive.AddRange(newMissions);
+        if (CampaignMapState.MissionsActive.IsEmpty())
+        {
+            var newMissions = MissionGenerator.GenerateAllMissionsForRegion();
+            CampaignMapState.MissionsActive.AddRange(newMissions);
+        }
     }
 
     public static void ApplyTriggers()

@@ -11,7 +11,7 @@ public class SelectableMissionPrefab : MonoBehaviour, IPointerClickHandler
     public TMPro.TextMeshProUGUI Title;
     public Image MissionImage;
 
-    public Mission Mission { get; set; }
+    public AbstractMission Mission { get; set; }
     public static SelectableMissionPrefab CurrentlySelected = null;
 
     public void OnPointerClick(PointerEventData eventData)
@@ -32,7 +32,12 @@ public class SelectableMissionPrefab : MonoBehaviour, IPointerClickHandler
         {
             return;
         }
-        Title.text = Mission.Name + $"[{Mission.DaysUntilExpiration} days remain]";
+        Title.text = Mission.Name; //+ $"[{Mission.DaysUntilExpiration} days remain]";
+        
+        if (Mission.IsGateMission)
+        {
+            Title.text = Mission.Name + " [Gatekeeper]";
+        }
         if (CurrentlySelected == this)
         {
             Title.color = Color.yellow;

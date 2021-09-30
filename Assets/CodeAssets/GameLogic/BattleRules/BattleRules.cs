@@ -70,9 +70,12 @@ public static class BattleRules
             totalDamageAfterModifiers = GetAnticipatedDamageToUnit(damageSource, target, baseDamage, isAttack, nullableCardPlayed);
         }
 
-        foreach(var damageMod in nullableCardPlayed.DamageModifiers)
+        if (nullableCardPlayed != null)
         {
-            damageMod.OnStrike(nullableCardPlayed, target, totalDamageAfterModifiers);
+            foreach (var damageMod in nullableCardPlayed.DamageModifiers)
+            {
+                damageMod.OnStrike(nullableCardPlayed, target, totalDamageAfterModifiers);
+            }
         }
 
         var damageDealtAfterBlocking = totalDamageAfterModifiers;
@@ -224,7 +227,7 @@ public static class BattleRules
 
         foreach (var attribute in source.StatusEffects)
         {
-            currentTotalDefense *= attribute.DefenseDealtIncrementalMultiplier();
+            currentTotalDefense *= (attribute.DefenseDealtIncrementalMultiplier() + 1);
             currentTotalDefense += attribute.DefenseDealtAddition();
         }
 
@@ -233,7 +236,7 @@ public static class BattleRules
         {
             foreach (var attribute in source.StatusEffects)
             {
-                currentTotalDefense *= attribute.DefenseReceivedIncrementalMultiplier();
+                currentTotalDefense *= (attribute.DefenseReceivedIncrementalMultiplier() + 1);
                 currentTotalDefense += attribute.DefenseReceivedAddition();
             }
 
@@ -415,11 +418,16 @@ public static class BattleRules
         {
             character.StatusEffects.RemoveAll(item => item.GetType() != typeof(StressStatusEffect));
         }
-
-        // for each character who participated, give them a card reward.
-        foreach (var character in GameState.Instance.AllyUnitsInBattle)
+        if (result == CombatResult.VICTORY)
         {
-            character.LevelUp();
+            // for each character who participated, give them a card reward.
+            foreach (var character in GameState.Instance.AllyUnitsInBattle)
+            {
+                if (!character.IsDead)
+                {
+                    character.LevelUp();
+                }
+            }
         }
     }
 

@@ -27,7 +27,7 @@ public class MissionListPrefab : MonoBehaviour
         }
     }
 
-    public void AddMission(Mission mission)
+    public void AddMission(AbstractMission mission)
     {
         var missionPrefab = PrefabTemplate.Spawn(MissionsParent);
         missionPrefab.Mission = mission;
@@ -59,7 +59,7 @@ public class MissionListPrefab : MonoBehaviour
 
     }
 
-    private GameObject GetMissionPrefab(Mission mission)
+    private GameObject GetMissionPrefab(AbstractMission mission)
     {
         return ChildPrefabs.FirstOrDefault(item => item.Mission == mission).gameObject;
     }

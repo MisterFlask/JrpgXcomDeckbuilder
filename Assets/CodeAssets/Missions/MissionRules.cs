@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using static MissionGenerator;
 using System;
+using Assets.CodeAssets.BattleEntities.Enemies.Columbal;
+using Assets.CodeAssets.BattleEntities.Enemies.Efficiency;
 
 public static class MissionRules
 {
@@ -31,24 +33,24 @@ public static class MissionRules
     public static Dictionary<GameAct, List<Squad>> ActToSquadsMet => new Dictionary<GameAct, List<Squad>>
     {
         { 
-            ActOne, 
-            
-            
-            new List<Squad>{ 
+            ActOne, new List<Squad>{ 
             new Squad
             {
                 Members = new List<AbstractBattleUnit>
                 {
-                    new BrainCrab(),
-                    new BrainCrab()
-                }
+                    new ColumbalConscripts(),
+                    new ColumbalConscripts()
+                },
+                Description = "An inconvenience of geese."
             },
             new Squad
             {
                 Members = new List<AbstractBattleUnit>
                 {
-                    new UnitThatDealsDamageWhenAttackedMultipleTimesInATurn()
-                }
+                    new EfficiencyProselytizer(),
+                    new EfficiencySpotter()
+                },
+                Description = "Efficiency scouting party"
             }
         } 
         },
@@ -58,22 +60,20 @@ public static class MissionRules
             {
                 Members = new List<AbstractBattleUnit>
                 {
-                    new UnitThatDealsDamageWhenAttackedMultipleTimesInATurn(),
-                    new UnitThatDealsDamageWhenAttackedMultipleTimesInATurn(),
-                    new UnitThatAppliesDazedWhenStruck()
+                    new ColumbalConscripts(),
+                    new ColumbalConscripts()
                 },
+                Description = "An inconvenience of geese."
             },
-            new Squad{
+            new Squad
+            {
                 Members = new List<AbstractBattleUnit>
                 {
-
-                    new UnitThatAppliesDazedWhenStruck(),
-                    new BrainCrab(),
-                    new UnitThatAppliesDazedWhenStruck(),
-                    new BrainCrab()
-                }
+                    new EfficiencyProselytizer(),
+                    new EfficiencySpotter()
+                },
+                Description = "Efficiency scouting party"
             }
-
         } },
     };
 
@@ -87,12 +87,47 @@ public static class MissionRules
         {
             throw new Exception("Couldn't find any squads for day " + day);
         }
+
+        // modify squads based on difficulty setting [1-10]
         return squads;
     }
 
     public static Squad GetRandomSquadForDay(int dayMissionSpawned)
     {
-        return GetPossibleEnemySquadsForDay(dayMissionSpawned).First();
+        return GetPossibleEnemySquadsForDay(dayMissionSpawned).PickRandom().CopySquad();
+    }
+
+    public static Squad GetEliteSquad()
+    {
+        return GetPossibleBossSquads();
+    }
+
+    private static Squad GetPossibleBossSquads()
+    {
+        return new List<Squad>{
+            new Squad
+            {
+                Members = new List<AbstractBattleUnit>
+                {
+                    new ColumbalConscripts(),
+                    new ColumbalConscripts(),
+                    new ColumbalConscripts(),
+                    new ColumbalConscripts()
+                },
+                Description = "A devastation of geese."
+            },
+            new Squad
+            {
+                Members = new List<AbstractBattleUnit>
+                {
+                    new EfficiencyProselytizer(),
+                    new EfficiencySpotter(),
+                    new EfficiencySpotter(),
+                    new EfficiencySubduer()
+                },
+                Description = "Efficiency hunting party"
+            }
+        }.PickRandom();
     }
 }
 

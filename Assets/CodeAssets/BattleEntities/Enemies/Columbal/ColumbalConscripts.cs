@@ -12,6 +12,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Columbal
             CharacterNicknameOrEnemyName = "Conscripts";
             EnemyFaction = EnemyFaction.COLUMBAL;
             SquadRole = EnemySquadRole.SMALL;
+            
         }
 
         public override List<AbstractIntent> GetNextIntents()

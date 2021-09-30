@@ -70,7 +70,7 @@ public class GameState
     public List<AbstractBattleUnit> EnemyUnitsInBattle { get; set; } = new List<AbstractBattleUnit>();
 
     public List<AbstractStatusEffect> AllAlliedStatusEffects => AllyUnitsInBattle.SelectMany(item => item.StatusEffects).ToList();
-    public Mission CurrentMission { get; set; }
+    public AbstractMission CurrentMission { get; set; }
 
     /// <summary>
     /// List of global battle mechanics for the mission.  Note that this list is emptied at the start of each mission.
@@ -86,6 +86,10 @@ public class GameState
     #region UI State
     public AbstractBattleUnit CharacterSelected { get; set; }
     public int Day { get; set; }
+
+    public bool NextRegionUnlocked { get; set; } = false;
+
+    public bool HasPopulatedRegionWithMissions { get; set; } = false;
     #endregion
 
     #region Convenience

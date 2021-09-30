@@ -13,6 +13,6 @@ public class WeakenedStatusEffect : AbstractStatusEffect
 
     public override float DamageDealtIncrementalMultiplier()
     {
-        return .666f;
+        return -.333f;
     }
 }

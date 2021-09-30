@@ -4,10 +4,13 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
 {
-    public class Subduer : AbstractBattleUnit
+    public class EfficiencySubduer : AbstractEnemyUnit
     {
-        public Subduer()
+        public EfficiencySubduer()
         {
+            this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.green);
+            this.Description = "???";
+            this.EnemyFaction = EnemyFaction.EFFICIENCY;
             CharacterNicknameOrEnemyName = "Subduer XLR";
             //Big attack, but has to charge up first
         }

@@ -11,7 +11,7 @@ public class MissionDescriptorPrefab : MonoBehaviour
     public TMPro.TextMeshProUGUI Description;
     public Button EmbarkButton;
 
-    public static Mission SelectedMission => SelectableMissionPrefab.CurrentlySelected?.Mission;
+    public static AbstractMission SelectedMission => SelectableMissionPrefab.CurrentlySelected?.Mission;
     public static bool ShouldBeAbleToGoOnMission(out string reasonWhyNot)
     {
         if (SelectedMission == null)
@@ -55,7 +55,7 @@ public class MissionDescriptorPrefab : MonoBehaviour
         }
         else
         {
-            Title.text = SelectedMission.Name + $"<color=red>[Unable to embark; {reasonInadmissable}]</color>";
+            Title.text = SelectedMission.Name + $"\n<color=red>[Unable to embark; {reasonInadmissable}]</color>";
             EmbarkButton.interactable = false;
         }
 
@@ -91,7 +91,7 @@ public class MissionDescriptorPrefab : MonoBehaviour
         return RosterPrefab.Instance.GetCharactersSelected().ToList();
     }
 
-    private Mission GetMissionSelected()
+    private AbstractMission GetMissionSelected()
     {
         return SelectedMission;
     }

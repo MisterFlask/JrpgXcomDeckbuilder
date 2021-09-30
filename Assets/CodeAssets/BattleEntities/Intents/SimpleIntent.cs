@@ -116,7 +116,7 @@ public static class IntentsFromPercentBase
 
     public static List<AbstractIntent> Charging(AbstractBattleUnit unit)
     {
-        return new List<AbstractIntent>();
+        throw new NotImplementedException();
     }
 }
 public static class IntentRotation

@@ -9,7 +9,7 @@ public class ArmoredStatusEffect : AbstractStatusEffect
         this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/fast-forward-button");
     }
 
-    public override string Description => "Decreases attack damage taken by the number of stacks.";
+    public override string Description => "Decreases attack damage taken by the number of stacks.  Ignored by Precision.";
 
     public override int DamageReceivedAddition()
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class GameScenes 
 {
-    public static void SwitchToBattleScene(Mission mission, List<AbstractBattleUnit> CharactersSent)
+    public static void SwitchToBattleScene(AbstractMission mission, List<AbstractBattleUnit> CharactersSent)
     {
         GameState.Instance.AllyUnitsInBattle = CharactersSent;
         GameState.Instance.EnemyUnitsInBattle = mission.EnemySquad.Members;

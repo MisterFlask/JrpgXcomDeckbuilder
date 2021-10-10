@@ -139,7 +139,10 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
             }
         }
         intentsToRemove.ForEach(item => IntentPrefabs.Remove(item)); // remove from list of prefabs
-        intentsToRemove.ForEach(item => item.transform.parent = null); // remove from parent (thus removing from the UI)
+        intentsToRemove
+                .Where(item => item != null)
+                .ToList()
+                .ForEach(item => item.transform.parent = null); // remove from parent (thus removing from the UI)
 
         if (ShouldHighlight())
         {

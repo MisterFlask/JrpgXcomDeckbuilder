@@ -7,7 +7,7 @@ using System.Linq;
 public abstract class AbstractMission 
 {
 
-    public List<MissionModifier> MissionModifiers { get; set; }
+    public List<MissionModifier> MissionModifiers { get; set; } = new List<MissionModifier>();
 
     public static string GenerateMissionName()
     {

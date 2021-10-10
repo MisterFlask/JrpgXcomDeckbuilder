@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Assets.CodeAssets.BattleEntities.Enemies.Efficiency;
+using Assets.CodeAssets.BattleEntities.Intents;
 
 public abstract class SimpleIntent : AbstractIntent
 {
@@ -116,7 +117,7 @@ public static class IntentsFromPercentBase
 
     public static List<AbstractIntent> Charging(AbstractBattleUnit unit)
     {
-        throw new NotImplementedException();
+        return new List<AbstractIntent> { (new ChargingIntent(unit)) };
     }
 }
 public static class IntentRotation

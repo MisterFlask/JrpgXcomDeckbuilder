@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using Assets.CodeAssets.Utils;
 
 public static class MissionGenerator
 {
@@ -10,7 +10,7 @@ public static class MissionGenerator
     {
         var dayNumber = GameState.Instance.Day;
 
-        return new List<AbstractMission>
+        var missions = new List<AbstractMission>
         {
             new KillEnemiesMission()
             {
@@ -39,7 +39,19 @@ public static class MissionGenerator
                 Rewards = new List<AbstractMissionReward>{new GateBypassMissionReward()},
                 EnemySquad = MissionRules.GetEliteSquad()
             }
+
         };
+
+        foreach(var mission in missions)
+        {
+            ProbabilityUtils.PerformWithProbability(.2f, () =>
+            {
+                var modifier = MissionModifier.GetRandomMissionModifier();
+                mission.MissionModifiers.Add(modifier);
+            });
+        }
+
+        return missions;
     }
 }
 
@@ -88,6 +100,21 @@ public class Squad
 
 public abstract class MissionModifier
 {
+    public static MissionModifier GetRandomMissionModifier()
+    {
+        return new List<MissionModifier>()
+        {
+            new DarknessMissionModifier(),
+            new HighWindsMissionModifier()
+        }.PickRandom();
+    }
+
+    public virtual int IncrementalMoney()
+    {
+        return 0;
+    }
+
+
     public abstract void OnMissionCombatBegins();
     public abstract string Description();
 }

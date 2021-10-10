@@ -24,9 +24,10 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
             return $"Deal {DisplayedDamage()} damage to a random enemy.  Exert. Add a Manuever to your hand.";
         }
 
-        public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
+        public override void OnPlay(AbstractBattleUnit _t, EnergyPaidInformation energyPaid)
         {
-            action().AttackUnitForDamage(CardTargeting.RandomTargetableEnemy(), Owner, BaseDamage, this);
+            var target = CardTargeting.RandomTargetableEnemy();
+            action().AttackUnitForDamage(target, Owner, BaseDamage, this);
             CardAbilityProcs.ProcExert(this);
             action().ApplyStatusEffect(target, new AdvancedStatusEffect(), 1);
         }

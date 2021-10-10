@@ -110,7 +110,17 @@ public class ActionManager : MonoBehaviour
 
     public void ApplyStatusEffect(AbstractBattleUnit unit, AbstractStatusEffect attribute, int stacks = 1)
     {
-        if (stacks == 0)
+        if (unit == null)
+        {
+            throw new Exception("No unit specified");
+        }
+
+        if (attribute == null)
+        {
+            throw new Exception("No attribute specified");
+        }
+
+            if (stacks == 0)
         {
             return;
         }

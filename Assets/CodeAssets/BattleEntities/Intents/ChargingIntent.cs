@@ -26,7 +26,7 @@ namespace Assets.CodeAssets.BattleEntities.Intents
 
         protected override void Execute()
         {
-
+            // nothing happens
         }
 
         public override string GetOverlayText()

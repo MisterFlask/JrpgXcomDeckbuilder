@@ -40,10 +40,19 @@ public class DayBeginsActions : MonoBehaviour
     public void StartANewDay()
     {
         GameState.Instance.Day++;
-        RotateMissions();
+        // RotateMissions(); nah, not doing this anymore
+        HealAndDestressForTheDay();
         ApplyTriggers();
     }
 
+    public void HealAndDestressForTheDay()
+    {
+        GameState.Instance.PersistentCharacterRoster.ForEach(character =>
+        {
+            character.Heal(character.PerDayHealingRate);
+            character.ModifyStress(character.PerDayStressHealingRate * -1);
+        });
+    }
 
 }
 

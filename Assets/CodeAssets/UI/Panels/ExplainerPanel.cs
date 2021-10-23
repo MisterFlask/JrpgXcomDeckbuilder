@@ -56,6 +56,11 @@ public class ExplainerPanel : MonoBehaviour
 
     internal static void ShowPerkHelp(AbstractSoldierPerk perk)
     {
+        if (perk == null)
+        {
+            return;
+        }
+
         TooltipToDisplay = $"<color=green>{perk.Name()}</color>: {perk.Description()}";
     }
 
@@ -71,6 +76,7 @@ public class ExplainerPanel : MonoBehaviour
         {
             return;
         }
+
         var entity = battleUnitPrefab.UnderlyingEntity;
 
         string nameTooltip = $"<color=yellow>{entity.CharacterFullName}</color>" + Newline();

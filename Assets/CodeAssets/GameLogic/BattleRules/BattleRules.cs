@@ -418,6 +418,7 @@ public static class BattleRules
         {
             character.StatusEffects.RemoveAll(item => item.GetType() != typeof(StressStatusEffect));
         }
+
         if (result == CombatResult.VICTORY)
         {
             // for each character who participated, give them a card reward.

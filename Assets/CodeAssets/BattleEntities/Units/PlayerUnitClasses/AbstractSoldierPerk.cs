@@ -19,6 +19,11 @@ public abstract class AbstractSoldierPerk
     public ProtoGameSprite Sprite { get; set; } = ProtoGameSprite.Default;
     public AbstractBattleUnit Owner { get; internal set; }
 
+    internal static AbstractSoldierPerk GetRandomAcquireableAugmentation()
+    {
+        throw new NotImplementedException();
+    }
+
     public List<string> CompatibleSoldierGuids = new List<string>();
     public List<AbstractBattleUnit> CompatibleSoldiers => CompatibleSoldierGuids.ConvertGuidsToSoldiers();
 

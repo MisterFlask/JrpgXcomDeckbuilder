@@ -381,6 +381,19 @@ public abstract class AbstractBattleUnit
         CurrentHp += 2;
     }
 
+    public void Heal(int amount)
+    {
+        this.CurrentHp += amount;
+        if (CurrentHp > MaxHp)
+        {
+            CurrentHp = MaxHp;
+        }
+    }
+
+    public void ModifyStress(int amount)
+    {
+        this.ApplyStatusEffect<StressStatusEffect>(new StressStatusEffect(), stacks: amount);
+    }
 
     public string GetDisplayName(DisplayNameType type)
     {

@@ -12,8 +12,8 @@ public static class CampaignMapState
 
     public static bool GameInitialized { get; set; } = false;
 
-    public static List<AbstractBattleUnit> Roster;
-    public static List<AbstractBattleUnit> CurrentSelectedParty;
+    public static List<AbstractBattleUnit> Roster = new List<AbstractBattleUnit>();
+    public static List<AbstractBattleUnit> CurrentSelectedParty = new List<AbstractBattleUnit>();
 
     public static List<AbstractMission> MissionsActive= new List<AbstractMission>();
 

@@ -19,7 +19,8 @@ public static class MissionGenerator
                 MaxNumberOfFriendlyCharacters = 3,
                 Name = AbstractMission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
-                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber)
+                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber),
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash")
             },
             new KillEnemiesMission()
             {
@@ -28,7 +29,8 @@ public static class MissionGenerator
                 MaxNumberOfFriendlyCharacters = 3,
                 Name = AbstractMission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
-                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber)
+                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber),
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash")
             },
             new KillEnemiesMission()
             {
@@ -37,7 +39,8 @@ public static class MissionGenerator
                 MaxNumberOfFriendlyCharacters = 3,
                 Name = AbstractMission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GateBypassMissionReward()},
-                EnemySquad = MissionRules.GetEliteSquad()
+                EnemySquad = MissionRules.GetEliteSquad(),
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("gate")
             }
 
         };
@@ -105,7 +108,8 @@ public abstract class MissionModifier
         return new List<MissionModifier>()
         {
             new DarknessMissionModifier(),
-            new HighWindsMissionModifier()
+            new HighWindsMissionModifier(),
+            new NoxiousGasesMissionModifier()
         }.PickRandom();
     }
 

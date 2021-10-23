@@ -22,7 +22,7 @@ public class SelectableMissionPrefab : MonoBehaviour, IPointerClickHandler
     // Use this for initialization
     void Start()
     {
-        MissionImage.SetProtoSprite(ImageUtils.ProtoGameSpriteFromGameIcon());
+        MissionImage.SetProtoSprite(Mission.ProtoSprite);
     }
 
     // Update is called once per frame

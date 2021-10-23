@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.CodeAssets.BattleEntities.Augmentations
 {
     public static class BasicAugmentations
     {
-
-
         public static AbstractSoldierPerk GrantsPowerAugmentation = new GrantsStatusEffectPerk("Power Fist", "Increases this soldier's Power by 1.", new StrengthStatusEffect(), 1);
         public static AbstractSoldierPerk GrantsAblativeArmorAugmentation = new GrantsStatusEffectPerk("Ablative Armor", "Decreases ALL damage taken by 1", new ArmoredStatusEffect(), 1);
         public static AbstractSoldierPerk IncreaseHpOnGettingNewCardsPerk = new HpGainOnCardAddedPerk();
+
+        public static List<AbstractSoldierPerk> BasicAugmentationsList = new List<AbstractSoldierPerk>
+        {
+            GrantsPowerAugmentation,
+            GrantsAblativeArmorAugmentation,
+            IncreaseHpOnGettingNewCardsPerk
+        }; 
     }
 
     public class DealGreaterDamageToEnemiesWithStatusEffectPerk : AbstractSoldierPerk

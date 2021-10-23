@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Assets.CodeAssets.BattleEntities.Augmentations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.CodeAssets.BattleEntities
@@ -8,7 +10,10 @@ namespace Assets.CodeAssets.BattleEntities
     public static class PerkAndAugmentationRegistrar
     {
 
-        public static List<AbstractSoldierPerk> TotalPerkAndAugmentationList = new List<AbstractSoldierPerk>();
+        public static List<AbstractSoldierPerk> TotalPerkAndAugmentationList
+            = new List<AbstractSoldierPerk>()
+            .Concat(BasicAugmentations.BasicAugmentationsList)
+            .ToList();
 
         public static AbstractSoldierPerk GetRandomPerkForNewSoldier()
         {
@@ -17,7 +22,14 @@ namespace Assets.CodeAssets.BattleEntities
 
         public static AbstractSoldierPerk GetRandomAugmentation(Rarity rarity)
         {
-            throw new NotImplementedException();
+            if (rarity == Rarity.ANY)
+            {
+                return TotalPerkAndAugmentationList.PickRandom();
+            }
+            else
+            {
+                return TotalPerkAndAugmentationList.PickRandomWhere(item => item.Rarity == rarity);
+            }
         }
     }
 }

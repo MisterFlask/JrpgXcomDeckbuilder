@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -43.8, y: 103.9}
+  m_SizeDelta: {x: 187.56, y: 303.78394}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1867328430396553878
 MonoBehaviour:
@@ -338,8 +338,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 157410845816378924, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 157410845816378924, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
+        type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 157410845816378924, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
@@ -356,10 +361,15 @@ PrefabInstance:
       propertyPath: m_textInfo.characterCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 157410845816378924, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
@@ -369,17 +379,22 @@ PrefabInstance:
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 3
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 2
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 12
+      value: 334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764880568410005975, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24.15
       objectReference: {fileID: 0}
     - target: {fileID: 4764880568410005975, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
@@ -525,6 +540,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6651423861139470816, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 24.15
       objectReference: {fileID: 0}
     - target: {fileID: 6651423861139470816, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}

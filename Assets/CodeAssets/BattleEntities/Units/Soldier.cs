@@ -29,9 +29,15 @@ public class Soldier : AbstractAllyUnit
         return rookie;
     }
 
-    public static AbstractBattleUnit GenerateSoldier(AbstractSoldierClass soldierClass)
+    public static AbstractBattleUnit GenerateSoldierOfClass(AbstractSoldierClass soldierClass,
+        int level = 1)
     {
-        return new Soldier(soldierClass);
+        var soldier= new Soldier(soldierClass).CloneUnit();
+        for(int i = 1; i < level; i++)
+        {
+            soldier.LevelUp();
+        }
+        return soldier;
     }
 
     public override List<AbstractCard> CardsSelectableOnLevelUp()

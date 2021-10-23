@@ -7,6 +7,7 @@ using System.Linq;
 public abstract class AbstractMission 
 {
 
+    public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
     public List<MissionModifier> MissionModifiers { get; set; } = new List<MissionModifier>();
 
     public static string GenerateMissionName()
@@ -27,6 +28,11 @@ public abstract class AbstractMission
         start += Environment.NewLine + $"Foes: {enemiesText}\n";
         start += Environment.NewLine + "Days left: " + DaysUntilExpiration;
         return start;
+    }
+
+    internal static ProtoGameSprite RetrieveIconFromMissionIconFolder(string path)
+    {
+        return ProtoGameSprite.FromGameIcon(path: "Sprites/MissionIcons/" + path);
     }
 
     public bool IsGateMission => Rewards.Any(item => item is GateBypassMissionReward);

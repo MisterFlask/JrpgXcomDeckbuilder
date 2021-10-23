@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using Assets.CodeAssets.BattleEntities.Augmentations;
 using Assets.CodeAssets.GameLogic;
+using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 
 public class CampaignStarter : MonoBehaviour
 {
@@ -23,8 +24,9 @@ public class CampaignStarter : MonoBehaviour
         {
             Soldier.GenerateFreshRookie(),
             Soldier.GenerateFreshRookie(),
-            Soldier.GenerateFreshRookie(),
-            Soldier.GenerateFreshRookie(),
+            Soldier.GenerateSoldierOfClass(new BlackhandSoldierClass()),
+            Soldier.GenerateSoldierOfClass(new DiabolistSoldierClass()),
+            Soldier.GenerateSoldierOfClass(new CogSoldierClass()),
             GetHigherLevelSoldier(),
             GetDeadSoldier()
         };
@@ -39,16 +41,15 @@ public class CampaignStarter : MonoBehaviour
         var soldier = Soldier.GenerateFreshRookie();
         soldier.CombatsParticipatedIn = 10;
         soldier.NumberCardRewardsEligibleFor = 1;
+        soldier.CurrentHp = 0;
         return soldier;
     }
 
     private static AbstractBattleUnit GetHigherLevelSoldier()
     {
-
         var soldier = Soldier.GenerateFreshRookie();
         soldier.CombatsParticipatedIn = 10;
         soldier.NumberCardRewardsEligibleFor = 1;
-        soldier.CurrentHp = 0;
         return soldier;
     }
 

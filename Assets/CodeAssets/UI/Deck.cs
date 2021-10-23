@@ -113,7 +113,7 @@ public class BattleDeck
         var fromPile = GetPileForPosition(fromPosition);
         if (!newCardsAllowed && !TotalDeckList.Contains(card))
         {
-            throw new Exception("Card did not exist prior to pile move");
+            Log.Info("Card did not exist prior to pile move");
         }
         var toPile = GetPileForPosition(position);
         if (fromPile == null)

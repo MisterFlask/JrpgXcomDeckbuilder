@@ -22,7 +22,7 @@ namespace Assets.CodeAssets.UI.Screens.CampaignScreen
             }
 
             var cardsInInventory = GameState.Instance.AugmentationInventory.Count;
-            Text.text = $"Assign Card From Inventory [{cardsInInventory}]";
+            Text.text = $"Assign Augmentation From Inventory [{cardsInInventory}]";
         }
     }
 }

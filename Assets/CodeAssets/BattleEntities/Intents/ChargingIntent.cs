@@ -9,7 +9,9 @@ namespace Assets.CodeAssets.BattleEntities.Intents
 
     public class ChargingIntent : AbstractIntent
     {
-        public ChargingIntent(AbstractBattleUnit source) : base(source, source.ToSingletonList())
+        public ChargingIntent(AbstractBattleUnit source) : base(source, 
+            source.ToSingletonList(),
+            IntentIcons.UnknownIntent)
         {
         }
 

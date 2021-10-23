@@ -5,7 +5,7 @@ using System;
 public class DebuffOtherIntent : SimpleIntent
 {
     public DebuffOtherIntent(AbstractBattleUnit owner, Action onPerformance): base(owner, 
-        ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/poison-gas", color: Color.green))
+        IntentIcons.DebuffIntent)
     {
     }
 

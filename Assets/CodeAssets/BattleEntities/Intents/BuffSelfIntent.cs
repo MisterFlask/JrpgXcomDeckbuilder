@@ -9,7 +9,7 @@ public class BuffSelfIntent : SimpleIntent
         AbstractStatusEffect statusEffect,
         int stacks = 1): 
         base(self,
-            ProtoGameSprite.FromGameIcon(path: "Sprites/fire-bowl-strength", color: Color.cyan))
+            IntentIcons.BuffIntent)
     {
         Stacks = stacks;
         this.StatusEffect = statusEffect;

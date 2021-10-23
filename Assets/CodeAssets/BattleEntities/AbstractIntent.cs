@@ -6,6 +6,9 @@ using System.Linq;
 
 public abstract class AbstractIntent
 {
+
+    public static IntentIcons IntentIcons = new IntentIcons();
+
     public AbstractIntent(AbstractBattleUnit source,
         List<AbstractBattleUnit> unitsTargeted = null,
         ProtoGameSprite protoSprite = null)
@@ -16,7 +19,6 @@ public abstract class AbstractIntent
     }
 
     public string Id = Guid.NewGuid().ToString();
-
 
     public abstract string GetGenericDescription();
 
@@ -67,4 +69,17 @@ public abstract class AbstractIntent
     }
 
     public abstract string GetOverlayText();
+}
+
+public class IntentIcons
+{
+    public ProtoGameSprite AttackIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/sword-clash");
+    public ProtoGameSprite DefendIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/attached-shield");
+    public ProtoGameSprite UnknownIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/uncertainty");
+    public ProtoGameSprite MagicIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/magick-trick");
+    public ProtoGameSprite DebuffIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/poison-bottle");
+    public ProtoGameSprite BuffIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/unstable-orb");
+    public ProtoGameSprite DazedIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/star-swirl");
+
+
 }

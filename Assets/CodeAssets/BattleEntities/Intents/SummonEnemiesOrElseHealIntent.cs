@@ -9,8 +9,7 @@ namespace Assets.CodeAssets.BattleEntities.Intents
 
         public AbstractBattleUnit MinionToCreate;
         public SummonEnemiesOrElseHealIntent(AbstractBattleUnit source, 
-            AbstractBattleUnit minionToCreate,
-            ProtoGameSprite protoSprite = null) : base(source, null, protoSprite)
+            AbstractBattleUnit minionToCreate) : base(source, null, IntentIcons.MagicIntent)
         {
             this.MinionToCreate = minionToCreate;
         }

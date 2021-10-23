@@ -13,7 +13,7 @@ public class SingleUnitAttackIntent : AbstractIntent
         this.Target = Target;
         BaseDamage = damage;
         NumberOfTimesStruck = numberOfTimesStruck;
-        this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(color: Color.red, path: "Sprites/crossed-swords");
+        this.ProtoSprite = IntentIcons.AttackIntent;
     }
 
     public override string GetGenericDescription()

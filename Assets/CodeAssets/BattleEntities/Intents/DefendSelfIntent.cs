@@ -7,6 +7,7 @@ public class DefendSelfIntent : AbstractIntent
     private int baseDefenseGranted;
     public DefendSelfIntent(AbstractBattleUnit source, int baseDefenseGranted) : base(source, source.ToSingletonList())
     {
+        ProtoSprite = IntentIcons.DefendIntent;
         this.baseDefenseGranted = baseDefenseGranted;
     }
 

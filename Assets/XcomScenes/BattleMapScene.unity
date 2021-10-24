@@ -7068,7 +7068,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -20561,7 +20561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0.62352943}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -20622,6 +20622,8 @@ MonoBehaviour:
   CardParent: {fileID: 938397695}
   CardTemplate: {fileID: 5784240604436191572, guid: d430660c512b66647a0bb363baa6de2b,
     type: 3}
+  HideShowDeckScreenButton: {fileID: 0}
+  DisplayText: {fileID: 0}
 --- !u!1 &1720231805
 GameObject:
   m_ObjectHideFlags: 0
@@ -20927,21 +20929,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53451fdce1f641045bf50594540d20ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MapParentObjects:
-  - {fileID: 1536572347}
-  - {fileID: 0}
-  - {fileID: 1609071997}
-  CardDisplayObjects:
-  - {fileID: 0}
-  SelectCardToAddDisplayObjects:
-  - {fileID: 0}
-  DeckDisplayPopup: {fileID: 2768199399129938844, guid: e19a90878b6833545972c66e8c8c4282,
-    type: 3}
-  SelectCardToAddPopup: {fileID: 2993929426904410425, guid: 845df5525b1d87247901c0a9e823e48c,
-    type: 3}
-  ShowCardModifiedScreen: {fileID: 3653367781595687998, guid: bcb0e4482f8020b44a960ac7ac7e878b,
-    type: 3}
-  popupBackground: {fileID: 0}
 --- !u!1 &1782222481
 GameObject:
   m_ObjectHideFlags: 0

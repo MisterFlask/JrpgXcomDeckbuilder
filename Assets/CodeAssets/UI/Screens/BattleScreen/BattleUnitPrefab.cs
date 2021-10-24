@@ -78,6 +78,12 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             return;
         }
+
+        // no advance or retreat button
+        this.AdvanceOrRetreatButton.gameObject.SetActive(false);
+        this.AdvanceOrRetreatButtonText.gameObject.SetActive(false);
+        FatigueText.gameObject.SetActive(false);
+        /*
         if (UnderlyingEntity.IsAiControlled)
         {
             this.AdvanceOrRetreatButton.gameObject.SetActive(false);
@@ -95,6 +101,8 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             this.AdvanceOrRetreatButton.interactable = false;
         }
+        */
+
         var buttonText = BattleRules.GetAdvanceOrFallBackButtonText(this.UnderlyingEntity);
         this.AdvanceOrRetreatButtonText.SetText(buttonText);
 
@@ -110,7 +118,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         this.CharacterNameText.SetText(UnderlyingEntity.GetDisplayName(DisplayNameType.SHORT_NAME));
         this.HealthText.SetText($"HP: {UnderlyingEntity.CurrentHp}/{UnderlyingEntity.MaxHp}");
-        this.FatigueText.SetText($"Fatigue: {UnderlyingEntity.CurrentFatigue}/{UnderlyingEntity.MaxFatigue}");
+        // this.FatigueText.SetText($"Fatigue: {UnderlyingEntity.CurrentFatigue}/{UnderlyingEntity.MaxFatigue}");
         this.DefenseText.SetText($"{UnderlyingEntity.CurrentBlock}");
         var intentsExistingInPrefabForm = this.IntentPrefabs.Select(item => item.UnderlyingIntent);
         var relevantIntents = IntentsRelevantToCharacter();

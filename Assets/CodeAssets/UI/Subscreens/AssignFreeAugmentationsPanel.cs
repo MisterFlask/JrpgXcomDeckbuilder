@@ -12,16 +12,14 @@ namespace Assets.CodeAssets.UI.Subscreens
         {
             Instance = this;
         }
-
+        public void Start()
+        {
+            Instance = this;
+        }
 
         public AssignAugmentationDisplay AugmentationDisplayTemplate;
         public Transform AugmentationDisplayParent;
 
-        // Use this for initialization
-        void Start()
-        {
-
-        }
 
         // Update is called once per frame
         void Update()

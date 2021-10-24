@@ -13,6 +13,11 @@ namespace Assets.CodeAssets.UI.Subscreens
             Instance = this;
         }
 
+        public void Start()
+        {
+            Instance = this;
+        }
+
         public GridLayoutGroup CardParent;
         public AssignCardDisplay CardTemplate;
 
@@ -20,9 +25,7 @@ namespace Assets.CodeAssets.UI.Subscreens
         private List<GameObject> CardsDisplayed = new List<GameObject>();
 
         private static SelectCardToAddFromInventoryScreen Instance;
-        public void Start()
-        {
-        }
+        
 
         public static void ShowDeckForSelectedCharacter()
         {

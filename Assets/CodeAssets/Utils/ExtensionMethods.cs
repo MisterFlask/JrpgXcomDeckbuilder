@@ -323,22 +323,26 @@ public static class ExtensionMethods
     #region object pools
     public static Transform Spawn(this GameObject transform)
     {
-        return GetSpawnPool().Spawn(transform.transform);
+        return GameObject.Instantiate(transform).transform;
+        //return GetSpawnPool().Spawn(transform.transform);
     }
     public static void Despawn(this GameObject transform)
     {
-
-        GetSpawnPool().Despawn(transform.transform);
+        GameObject.Destroy(transform);
+        //GetSpawnPool().Despawn(transform.transform);
     }
 
     public static Transform Spawn(this GameObject transform, Transform parent)
     {
-        return GetSpawnPool().Spawn(transform.transform, parent);
+        return GameObject.Instantiate(transform, parent).transform;
+        // return GetSpawnPool().Spawn(transform.transform, parent);
     }
 
     public static Transform Spawn(this GameObject transform, Vector3 position, Quaternion rotation)
     {
-        return GetSpawnPool().Spawn(transform.transform, position, rotation);
+        
+        return GameObject.Instantiate(transform, position, rotation).transform;
+        //return GetSpawnPool().Spawn(transform.transform, position, rotation);
     }
 
     public static string AsString<T>(this IEnumerable<T> list, Func<T, string> stringifyFunction)

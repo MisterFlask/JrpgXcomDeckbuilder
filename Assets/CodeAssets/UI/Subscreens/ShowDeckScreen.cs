@@ -11,7 +11,6 @@ public class ShowDeckScreen : MonoBehaviour
     public ShowDeckScreen()
     {
         Instance = this;
-
     }
 
     public string IdentifierName;
@@ -25,6 +24,7 @@ public class ShowDeckScreen : MonoBehaviour
     private static ShowDeckScreen Instance;
     public void Start()
     {
+        Instance = this;
 
         // validation
         if (HideShowDeckScreenButton == null)

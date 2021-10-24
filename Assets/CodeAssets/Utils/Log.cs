@@ -8,6 +8,11 @@ public class Log: MonoBehaviour
         Instance = this;
     }
 
+    public void Start()
+    {
+        Instance = this;
+    }
+
     public static Log Instance;
 
     public static void Info(string msg)

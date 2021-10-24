@@ -14,6 +14,7 @@ namespace Assets.CodeAssets.CampaignScene.Shop
             Instance = this;
         }
 
+
         public int MaxNumCardOffersAvailable => CardOffers.Count;
         public int MaxNumAugmentationOffersAvailable => AugmentationOffers.Count;
 
@@ -28,6 +29,8 @@ namespace Assets.CodeAssets.CampaignScene.Shop
 
         public void Start()
         {
+            Instance = this;
+
             if (!Initialized)
             {
                 CardOffers = CardOfferParent.GetComponentsInChildren<ShopCardOfferPrefab>().ToList();

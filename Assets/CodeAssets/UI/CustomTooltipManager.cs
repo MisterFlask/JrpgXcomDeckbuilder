@@ -21,9 +21,10 @@ namespace Assets.CodeAssets.UI
             INSTANCE = this;
         }
 
-        // Use this for initialization
-        void Start()
+
+        public void Start()
         {
+            INSTANCE = this;
         }
 
         // Update is called once per frame

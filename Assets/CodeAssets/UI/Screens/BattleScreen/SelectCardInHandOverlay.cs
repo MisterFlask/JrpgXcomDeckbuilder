@@ -50,6 +50,7 @@ namespace Assets.CodeAssets.UI.Screens.BattleScreen
         // Use this for initialization
         void Start()
         {
+            INSTANCE = this;
             ConfirmButton.onClick.AddListener(() =>
             {
                 if (INSTANCE.BehaviorActive == null)

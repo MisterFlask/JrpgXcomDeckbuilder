@@ -48,6 +48,8 @@ public class CardRewardScreen : MonoBehaviour
 
     public void Start()
     {
+        Instance = this;
+
         Log.Info("new card reward screen: " + this.gameObject.name + $" [child of {this.gameObject.transform.parent.name}]");
 
         DeclineButton.onClick.AddListener(() => {

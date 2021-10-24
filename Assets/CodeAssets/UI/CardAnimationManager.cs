@@ -40,8 +40,10 @@ public class CardAnimationManager : MonoBehaviour
         .Select(item => item.LogicalCard).ToList();
 
     // Use this for initialization
-    void Start() 
+    void Start()
     {
+        INSTANCE = this;
+
         cardSpawnPoint = GameObject.Find("CARD_SPAWN_POINT");
         cardsInHand = new List<Card>();
         leftHandMarker = GameObject.Find("LEFT_HAND_BORDER");

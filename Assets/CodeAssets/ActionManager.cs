@@ -316,6 +316,7 @@ public class ActionManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Instance = this;
         gameObject.AddComponent<UiAnimationHandler>();
         animationHandler = this.GetComponent<UiAnimationHandler>();
     }

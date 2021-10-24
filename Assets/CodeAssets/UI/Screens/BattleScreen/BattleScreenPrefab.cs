@@ -12,6 +12,8 @@ public class BattleScreenPrefab : MonoBehaviour
         INSTANCE = this;
     }
 
+
+
     private GameState state => ServiceLocator.GameState();
     private ActionManager action => ServiceLocator.GetActionManager();
 
@@ -88,6 +90,7 @@ public class BattleScreenPrefab : MonoBehaviour
 
     public void Start()
     {
+        INSTANCE = this;
         GameObject.FindObjectOfType<UtilityObjectHolder>().Start();
 
         PotentialBattleEntityEnemySpots = EnemyUnitSpotsParent.GetComponentsInChildren<BattleUnitPrefab>().ToList();

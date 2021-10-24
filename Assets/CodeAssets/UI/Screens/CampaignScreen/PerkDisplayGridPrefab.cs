@@ -15,16 +15,15 @@ namespace Assets.CodeAssets.UI.Screens.CampaignScreen
             Instance = this;
         }
 
+        public void Start()
+        {
+            Instance = this;
+        }
         public PerkDisplayPrefab PerkPrefabTemplate;
         public List<AbstractSoldierPerk> PerksWeHaveRepresented = new List<AbstractSoldierPerk>();
         private List<PerkDisplayPrefab> PerksManaged  = new List<PerkDisplayPrefab>();
 
         public AbstractBattleUnit SoldierWhosePerksToDisplay => GameState.Instance.CharacterSelected;
-
-        // Use this for initialization
-        void Start()
-        {
-        }
 
         // Update is called once per frame
         void Update()

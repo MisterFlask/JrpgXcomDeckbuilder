@@ -13,6 +13,11 @@ public class CardModificationDisplayScreen : MonoBehaviour
         Instance = this;
     }
 
+    public void Start()
+    {
+        Instance = this;
+    }
+
     public GameCardDisplay cardDisplayBefore;
     public GameCardDisplay cardDisplayAfter;
     public TMPro.TextMeshProUGUI Title;
@@ -73,11 +78,6 @@ public class CardModificationDisplayScreen : MonoBehaviour
         {
             return $"Purchase [cost: ${goldCost}]";
         }
-    }
-
-    // Use this for initialization
-    void Start()
-    {
     }
 
     // Update is called once per frame

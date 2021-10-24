@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
+using Assets.CodeAssets.UI.Subscreens;
+using Assets.CodeAssets.CampaignScene.Shop;
 
 public static class CampaignMapState 
 {
@@ -39,6 +41,12 @@ public static class CampaignMapState
     {
         MissionListPrefab.Instance.Initialize();
         RosterPrefab.Instance.Initialize();
+
+        ShowDeckScreen.Hide();
+        CardRewardScreen.Hide();
+        AssignFreeAugmentationsPanel.Instance.Hide();
+        SelectCardToAddFromInventoryScreen.Hide();
+        ShopScreen.Instance.Hide();
     }
 }
 

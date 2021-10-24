@@ -5,6 +5,7 @@ using System;
 
 public class CardPresentationUtil
 {
+    // returns "true" if this is a template object rather than something in the scene (not allowed)
     private static bool IsPrefab(GameObject obj)
     {
         return obj.scene.name == null;

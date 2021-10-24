@@ -8,6 +8,9 @@ using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 
 public class CampaignStarter : MonoBehaviour
 {
+    public ShowDeckScreen ShowDeckScreen;
+
+
 
     public void InitializeCampaign()
     {
@@ -16,6 +19,7 @@ public class CampaignStarter : MonoBehaviour
         InitializeSelectableMissions();
         InitializeRoster();
         CampaignMapState.GameInitialized = true;
+        ShowDeckScreen.Start(); // done to ensure that Instance variable gets initialized
     }
 
     public static void InitializeRoster()

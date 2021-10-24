@@ -1,14 +1,17 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using HyperCard;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using HyperCard;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowDeckScreen : MonoBehaviour
 {
     public ShowDeckScreen()
+    {
+    }
+
+    public void Awake()
     {
         Instance = this;
     }
@@ -22,14 +25,17 @@ public class ShowDeckScreen : MonoBehaviour
     private List<GameObject> CardsDisplayed = new List<GameObject>();
 
     private static ShowDeckScreen Instance;
+
+    private static int numTimesInitialized = 0;
     public void Start()
     {
-        Instance = this;
+        Log.Info("Starting ShowDeckScreen prefab; has been done " + numTimesInitialized + " times before.");
+        numTimesInitialized++;
 
         // validation
         if (HideShowDeckScreenButton == null)
         {
-            throw new Exception("Hide/show deck screen button is null; screen: "+ IdentifierName);
+            throw new Exception("Hide/show deck screen button is null; screen: " + IdentifierName);
         }
     }
 
@@ -48,7 +54,7 @@ public class ShowDeckScreen : MonoBehaviour
         ShowDeckScreen.Instance.HideShowDeckScreenButton.gameObject.SetActive(true);
         Show(GameState.Instance.Deck.ExhaustPile, "Exhaust Pile", true);
     }
-     
+
     public static void ShowDeckForSelectedCharacter()
     {
         if (GameState.Instance.CharacterSelected != null)
@@ -105,8 +111,8 @@ public class ShowDeckScreen : MonoBehaviour
 
     public static void Show(IEnumerable<AbstractCard> cardsToDisplay, string prompt, bool screenExitAllowed)
     {
-        Instance.Populate(cardsToDisplay);
         Instance.gameObject.SetActive(true);
+        Instance.Populate(cardsToDisplay);
         Instance.HideShowDeckScreenButton.interactable = screenExitAllowed;
         Instance.DisplayText.text = prompt;
     }

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using Assets.CodeAssets.UI.Subscreens;
 
 public class GameScenes 
 {
@@ -16,6 +17,7 @@ public class GameScenes
     public static void SwitchToCampaignScene()
     {
         SceneManager.LoadScene(sceneName: "CampaignMapScene");
+
     }
     public static void SwitchToBattleResultSceneAndProcessCombatResults(CombatResult combatResult)
     {

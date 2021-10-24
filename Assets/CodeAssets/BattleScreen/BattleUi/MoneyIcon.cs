@@ -9,10 +9,12 @@ public class MoneyIcon : MonoBehaviour
 
     private int lastKnownValue = -1;
     public static MoneyIcon Instance;
-
-    public void Start()
+    public void Awake()
     {
         Instance = this;
+    }
+    public void Start()
+    {
         image.color = image.color.WithAlpha(0f);
     }
 

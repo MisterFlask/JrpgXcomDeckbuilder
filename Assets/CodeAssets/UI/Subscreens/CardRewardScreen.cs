@@ -6,10 +6,12 @@ using System.Collections.Generic;
 public class CardRewardScreen : MonoBehaviour
 {
     public static CardRewardScreen Instance;
-    public CardRewardScreen()
+
+    public void Awake()
     {
         Instance = this;
     }
+
 
     public Transform CardGrid;
     public CardSelectionOption CardTemplate;
@@ -46,10 +48,9 @@ public class CardRewardScreen : MonoBehaviour
         }
     }
 
+
     public void Start()
     {
-        Instance = this;
-
         Log.Info("new card reward screen: " + this.gameObject.name + $" [child of {this.gameObject.transform.parent.name}]");
 
         DeclineButton.onClick.AddListener(() => {

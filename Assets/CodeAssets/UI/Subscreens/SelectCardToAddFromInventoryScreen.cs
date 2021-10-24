@@ -10,6 +10,10 @@ namespace Assets.CodeAssets.UI.Subscreens
     {
         public SelectCardToAddFromInventoryScreen()
         {
+        }
+
+        public void Awake()
+        {
             Instance = this;
         }
 

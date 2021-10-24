@@ -10,6 +10,9 @@ public class CardModificationDisplayScreen : MonoBehaviour
 
     public CardModificationDisplayScreen()
     {
+    }
+    public void Awake()
+    {
         Instance = this;
     }
 

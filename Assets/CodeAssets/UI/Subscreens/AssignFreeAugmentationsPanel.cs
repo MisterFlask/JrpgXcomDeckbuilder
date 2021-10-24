@@ -10,9 +10,8 @@ namespace Assets.CodeAssets.UI.Subscreens
         public static AssignFreeAugmentationsPanel Instance;
         public AssignFreeAugmentationsPanel()
         {
-            Instance = this;
         }
-        public void Start()
+        public void Awake()
         {
             Instance = this;
         }

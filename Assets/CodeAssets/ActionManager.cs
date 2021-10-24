@@ -14,6 +14,10 @@ public class ActionManager : MonoBehaviour
 
     public ActionManager()
     {
+    }
+
+    public void Awake()
+    {
         Instance = this;
     }
 

@@ -63,6 +63,10 @@ namespace Assets.CodeAssets.CampaignScene.Shop
             {
                 return;
             }
+            if (PriceText == null || Offer == null)
+            {
+                return;
+            }
             PriceText.text = "" + Offer.Price;
         }
     }

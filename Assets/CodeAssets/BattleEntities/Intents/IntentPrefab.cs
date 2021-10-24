@@ -36,6 +36,11 @@ public class IntentPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void Update()
     {
+        if (UnderlyingIntent == null)
+        {
+            return;
+        }
+
         var currentMousedOverUnit = BattleScreenPrefab.BattleUnitMousedOver;
         if (this.UnderlyingIntent.Source == currentMousedOverUnit || this.UnderlyingIntent.UnitsTargeted.Contains(currentMousedOverUnit))
         {

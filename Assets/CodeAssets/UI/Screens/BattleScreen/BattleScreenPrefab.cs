@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
+using Assets.CodeAssets.UI.Screens.BattleScreen;
 
 public class BattleScreenPrefab : MonoBehaviour
 {
     public static BattleScreenPrefab INSTANCE;
     public BattleScreenPrefab()
     {
-        INSTANCE = this;
     }
 
-
+    public void OnAwake()
+    {
+        INSTANCE = this;
+    }
 
     private GameState state => ServiceLocator.GameState();
     private ActionManager action => ServiceLocator.GetActionManager();
@@ -91,6 +94,9 @@ public class BattleScreenPrefab : MonoBehaviour
     public void Start()
     {
         INSTANCE = this;
+        SelectCardInHandOverlay.Hide();
+        ShowDeckScreen.Hide();
+
         GameObject.FindObjectOfType<UtilityObjectHolder>().Start();
 
         PotentialBattleEntityEnemySpots = EnemyUnitSpotsParent.GetComponentsInChildren<BattleUnitPrefab>().ToList();
@@ -98,7 +104,7 @@ public class BattleScreenPrefab : MonoBehaviour
 
         /// TODO:  Remove after getting strategic map up and running
 
-
+        state.Deck = new BattleDeck();
         foreach (var character in state.AllyUnitsInBattle)
         {
             character.InitForBattle();

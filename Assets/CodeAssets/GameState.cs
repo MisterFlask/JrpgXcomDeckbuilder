@@ -10,13 +10,19 @@ public class GameState
 {
     public GameState()
     {
+        Instance = this;
+
         Initialize();
+    }
+
+    public void Awake()
+    {
+
     }
 
     public static GameState Instance = new GameState();
     public void Initialize()
     {
-        Instance = this;
         var totalDeck = new List<AbstractCard>
         {
         };

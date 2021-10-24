@@ -5,8 +5,12 @@ public class Log: MonoBehaviour
 {
     public Log()
     {
+    }
+    public void Awake()
+    {
         Instance = this;
     }
+
 
     public void Start()
     {

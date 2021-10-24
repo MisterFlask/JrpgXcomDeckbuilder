@@ -12,9 +12,12 @@ namespace Assets.CodeAssets.UI.Screens.BattleScreen
         public static SelectCardInHandOverlay INSTANCE;
         public SelectCardInHandOverlay()
         {
-            INSTANCE = this;
         }
 
+        public void Awake()
+        {
+            INSTANCE = this;
+        }
 
         public TMPro.TextMeshProUGUI SelectInstructions;
         public Button ConfirmButton;
@@ -35,7 +38,7 @@ namespace Assets.CodeAssets.UI.Screens.BattleScreen
             INSTANCE.CurrentFuture = future;
         }
 
-        public static void HidePromptForCardSelection()
+        public static void Hide()
         {
             INSTANCE.gameObject.SetActive(false);
             CardAnimationManager.INSTANCE.cardsInHand.ForEach((item) =>
@@ -56,14 +59,14 @@ namespace Assets.CodeAssets.UI.Screens.BattleScreen
                 if (INSTANCE.BehaviorActive == null)
                 {
                     Debug.Log("Failed to submit cards; no behavior selected");
-                    HidePromptForCardSelection();
+                    Hide();
                     return;
                 }
 
                 if (BehaviorActive.IsAcceptableToSubmit())
                 {
                     Submit();
-                    HidePromptForCardSelection();
+                    Hide();
                 }
                 else
                 {
@@ -98,7 +101,7 @@ namespace Assets.CodeAssets.UI.Screens.BattleScreen
             if (this.BehaviorActive == null)
             {
                 Debug.Log("No behavior active; closing overlay");
-                HidePromptForCardSelection();
+                Hide();
             }
         }
     }

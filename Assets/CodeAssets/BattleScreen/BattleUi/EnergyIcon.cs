@@ -12,8 +12,11 @@ public class EnergyIcon : MonoBehaviour
 
     public void Start()
     {
-        Instance = this;
         image.color = image.color.WithAlpha(0f);
+    }
+    public void Awake()
+    {
+        Instance = this;
     }
 
     public void Update()

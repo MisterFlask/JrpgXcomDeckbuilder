@@ -592,6 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d91e03b885d4c44817f15ab1618bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdentifierName: Default
   CardParent: {fileID: 4575330692470172075}
   CardTemplate: {fileID: 5784240604436191572, guid: d430660c512b66647a0bb363baa6de2b,
     type: 3}

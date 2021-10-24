@@ -12,6 +12,9 @@ namespace Assets.CodeAssets.UI.Screens.CampaignScreen
 
         public PerkDisplayGridPrefab()
         {
+        }
+        public void Awake()
+        {
             Instance = this;
         }
 

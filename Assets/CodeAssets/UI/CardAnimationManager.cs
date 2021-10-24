@@ -13,6 +13,9 @@ public class CardAnimationManager : MonoBehaviour
 
     public CardAnimationManager()
     {
+    }
+    public void Awake()
+    {
         INSTANCE = this;
     }
 

@@ -18,6 +18,9 @@ namespace Assets.CodeAssets.UI
 
         public CustomTooltipManager()
         {
+        }
+        public void Awake()
+        {
             INSTANCE = this;
         }
 

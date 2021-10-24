@@ -11,8 +11,10 @@ public class ShowDeckScreen : MonoBehaviour
     public ShowDeckScreen()
     {
         Instance = this;
+
     }
 
+    public string IdentifierName;
     public GridLayoutGroup CardParent;
     public GameCardDisplay CardTemplate;
     public Button HideShowDeckScreenButton;
@@ -27,7 +29,7 @@ public class ShowDeckScreen : MonoBehaviour
         // validation
         if (HideShowDeckScreenButton == null)
         {
-            throw new Exception("Hide/show deck screen button is null");
+            throw new Exception("Hide/show deck screen button is null; screen: "+ IdentifierName);
         }
     }
 

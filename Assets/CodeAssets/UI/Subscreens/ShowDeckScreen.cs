@@ -23,6 +23,12 @@ public class ShowDeckScreen : MonoBehaviour
     private static ShowDeckScreen Instance;
     public void Start()
     {
+
+        // validation
+        if (HideShowDeckScreenButton == null)
+        {
+            throw new Exception("Hide/show deck screen button is null");
+        }
     }
 
     public static void ShowDiscardPile()

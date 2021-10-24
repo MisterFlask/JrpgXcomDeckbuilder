@@ -299,7 +299,14 @@ public static class BattleRules
             }
         }
 
-        return (currentTotalDamage + totalDamageAddition) * totalDamageMultiplier;
+        var result = (currentTotalDamage + totalDamageAddition) * totalDamageMultiplier;
+
+        if (result < 0)
+        {
+            result = 0;
+        }
+
+        return result;
     }
 
     internal static bool CanFallBack(AbstractBattleUnit underlyingEntity)
@@ -343,8 +350,8 @@ public static class BattleRules
 
         var unitTargeted = BattleScreenPrefab.BattleUnitMousedOver;
 
-
         var totalPreBlockDamage = CalculateTotalPreBlockDamage(card.Owner, unitTargeted, baseDamage, card);
+
 
         return (int)totalPreBlockDamage;
     }

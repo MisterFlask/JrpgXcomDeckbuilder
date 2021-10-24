@@ -7,6 +7,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
     {
         public SlashAndBurn()
         {
+            BaseDamage = 4;
             ProtoSprite = ProtoGameSprite.BlackhandIcon("regeneration");
             SetCommonCardAttributes("Slash And Burn", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 0);
         }

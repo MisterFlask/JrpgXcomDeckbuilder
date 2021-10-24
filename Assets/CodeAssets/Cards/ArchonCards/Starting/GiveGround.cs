@@ -8,6 +8,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
     {
         public GiveGround()
         {
+            ProtoSprite = ProtoGameSprite.ArchonIcon("ringmaster");
 
             this.SoldierClassCardPools.Add(typeof(ArchonSoldierClass)); // todo: remove
             this.SetCommonCardAttributes(

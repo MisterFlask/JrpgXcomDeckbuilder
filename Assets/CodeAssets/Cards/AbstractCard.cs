@@ -441,7 +441,7 @@ public abstract class AbstractCard
         {
             this.ProtoSprite = protoGameSprite;
         }
-        else
+        else if (ProtoSprite == null)
         {
             var color = GetDefaultColoration(Name);
             ProtoSprite = ProtoGameSprite.FromGameIcon(color: color);

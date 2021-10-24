@@ -7,6 +7,7 @@ public class Flamer : AbstractCard
 {
     public Flamer()
     {
+        ProtoSprite = ProtoGameSprite.BlackhandIcon("flame");
         this.SoldierClassCardPools.Add(typeof(Rarity));
         SetCommonCardAttributes("Flamer", Rarity.BASIC, TargetType.ENEMY, CardType.AttackCard, 0);
         this.MagicNumber = 3;

@@ -9,7 +9,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
     {
         public MarkForDeath()
         {
-
+            ProtoSprite = ProtoGameSprite.ArchonIcon("reticule");
             this.SoldierClassCardPools.Add(typeof(ArchonSoldierClass)); //todo: remove, this is a starting card
             this.SetCommonCardAttributes(
                 "Mark For Death",

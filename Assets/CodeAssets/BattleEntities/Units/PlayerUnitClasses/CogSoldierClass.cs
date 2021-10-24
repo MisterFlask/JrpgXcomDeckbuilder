@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.Cards.CogCards.Starting;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,10 +16,10 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
         {
             return new List<AbstractCard>
             {
-                new Attack(),
-                new Attack(),
-                new Defend(),
-                new Defend()
+                new CogAttack(),
+                new CogAttack(),
+                new CogDefend(),
+                new CogDefend()
             };
         }
 

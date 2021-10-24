@@ -8,6 +8,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards
     {
         public GiveGround()
         {
+            ProtoSprite = ProtoGameSprite.ArchonIcon("cavalry");
             this.SetCommonCardAttributes(
                 "Get stuck in!",
                 Rarity.BASIC,

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Assets.CodeAssets.Cards.RookieCards;
 
 public abstract class AbstractSoldierClass
 {
@@ -17,8 +18,8 @@ public abstract class AbstractSoldierClass
     {
         return new List<AbstractCard>
         {
-            new Attack(),
-            new Defend(),
+            new RookieAttack(),
+            new RookieDefend(),
             GetRandomCardOfRarity(Rarity.COMMON)
         };
             

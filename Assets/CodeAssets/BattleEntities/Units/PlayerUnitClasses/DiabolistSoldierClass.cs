@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.Cards.DiabolistCards.Starting;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,10 +17,10 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
         {
             return new List<AbstractCard>()
             {
-                new Attack(),
-                new Attack(),
-                new Attack(),
-                new Attack()
+                new DiabolistAttack(),
+                new DiabolistAttack(),
+                new DiabolistDefend(),
+                new DiabolistDefend()
 
             };
         }

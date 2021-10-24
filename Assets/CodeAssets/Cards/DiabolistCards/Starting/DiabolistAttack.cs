@@ -7,7 +7,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Starting
     {
         public DiabolistAttack()
         {
-            ProtoSprite = ProtoGameSprite.DiabolistIcon("cobra");
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("gunshot");
         }
     }
 }

@@ -7,6 +7,7 @@ public class CoveringFire : AbstractCard
 
     public CoveringFire()
     {
+        ProtoSprite = ProtoGameSprite.RookieIcon("machine-gun");
         SoldierClassCardPools.Add(typeof(RookieClass));
         this.BaseDamage = 4;
         TargetType = TargetType.ENEMY;

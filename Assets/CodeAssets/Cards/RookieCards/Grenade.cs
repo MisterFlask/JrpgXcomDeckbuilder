@@ -6,6 +6,7 @@ public class Grenade : AbstractCard
 {
     public Grenade()
     {
+        ProtoSprite = ProtoGameSprite.RookieIcon("grenade");
         SoldierClassCardPools.Add(typeof(RookieClass));
         this.BaseDamage = 5;
         TargetType = TargetType.ENEMY;

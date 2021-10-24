@@ -11,7 +11,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
 
             this.SoldierClassCardPools.Add(typeof(ArchonSoldierClass)); // todo: remove
             this.SetCommonCardAttributes(
-                "Give Ground!",
+                "Fall back, damn you!",
                 Rarity.BASIC,
                 TargetType.ALLY,
                 CardType.SkillCard,

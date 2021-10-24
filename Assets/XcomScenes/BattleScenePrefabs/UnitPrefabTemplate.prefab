@@ -427,8 +427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 61.6}
-  m_SizeDelta: {x: 100, y: 29.6}
+  m_AnchoredPosition: {x: 39.5, y: 61.6}
+  m_SizeDelta: {x: 179.0864, y: 29.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4113283189215526631
 CanvasRenderer:
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 24, y: 24}
+  m_CellSize: {x: 39.5, y: 35}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -618,6 +618,7 @@ MonoBehaviour:
   highlights: {fileID: 9053839642190212549}
   TooltipController: {fileID: 1157864817775569783}
   TooltipTrigger: {fileID: 3047122129406212461}
+  NameOfCharacter: 
 --- !u!114 &8148492676870065089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,7 +678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b86cdecfd804e44284b879521c4d844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardTooltipTrigger: {fileID: 3047122129406212461}
 --- !u!1 &1276469410231468443
 GameObject:
   m_ObjectHideFlags: 0

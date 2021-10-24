@@ -46,6 +46,40 @@ public abstract class ProtoGameSprite
     {
         return ImageUtils.ProtoGameSpriteFromGameIcon(path, color);
     }
+
+    public static ProtoGameSprite CogIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/Cog/" + name);
+    }
+    public static ProtoGameSprite BlackhandIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/Blackhand/" + name);
+    }
+    public static ProtoGameSprite DiabolistIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/Diabolist/" + name);
+    }
+    public static ProtoGameSprite ArchonIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/Archon/" + name);
+    }
+    public static ProtoGameSprite SifterIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/Sifter/" + name);
+    }
+    public static ProtoGameSprite HammerIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/Hammer/" + name);
+    }
+    public static ProtoGameSprite RookieIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/Rookie/" + name);
+    }
+
+    public static ProtoGameSprite OtherIcons(string name)
+    {
+        return FromGameIcon("Sprites/OtherIcons/" + name);
+    }
 }
 
 public static class ImageExtensions

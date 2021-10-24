@@ -9,7 +9,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards
         public GiveGround()
         {
             this.SetCommonCardAttributes(
-                "Give ground",
+                "Get stuck in!",
                 Rarity.BASIC,
                 TargetType.ALLY,
                 CardType.SkillCard,

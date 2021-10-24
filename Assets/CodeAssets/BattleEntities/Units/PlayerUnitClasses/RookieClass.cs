@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
+using Assets.CodeAssets.Cards.RookieCards;
 
 public class RookieClass : AbstractSoldierClass
 {
@@ -11,8 +12,8 @@ public class RookieClass : AbstractSoldierClass
     {
         return new List<AbstractCard>
         {
-            new Defend(),
-            new Attack(),
+            new RookieDefend(),
+            new RookieAttack(),
             new Grenade(),
             new CoveringFire()
         };

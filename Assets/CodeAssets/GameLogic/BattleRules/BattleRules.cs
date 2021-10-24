@@ -418,6 +418,9 @@ public static class BattleRules
             currentMission.IsFailure = true;
             currentMission.OnFailed();
         }
+
+        // remove from list of available missions
+        CampaignMapState.MissionsActive.Remove(currentMission);
         
         // now, remove all non-persistent status effects.  Right now that's going to be everything except stress.
 

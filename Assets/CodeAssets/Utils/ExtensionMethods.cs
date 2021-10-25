@@ -227,7 +227,7 @@ public static class ExtensionMethods
     {
         for (int i = 0; i < obj.gameObject.transform.childCount; i++)
         {
-            UnityEngine.Object.Destroy(obj.transform.GetChild(i));
+            UnityEngine.Object.Destroy(obj.transform.GetChild(i).gameObject);
         }
     }
     public static void PurgeChildren(this GameObject obj)
@@ -390,6 +390,22 @@ public static class ExtensionMethods
         hyperCard.LogicalCardId = abstractCard.Id;
         hyperCard.LogicalCard = abstractCard;
         
+        if (abstractCard.Rarity == Rarity.COMMON || abstractCard.Rarity == Rarity.BASIC || abstractCard.Rarity == Rarity.NOT_IN_POOL)
+        {
+            hyperCard.CardFrame.color = Color.grey;
+        }
+        else if (abstractCard.Rarity == Rarity.UNCOMMON)
+        {
+            hyperCard.CardFrame.color = Color.blue;
+        }
+        else if (abstractCard.Rarity == Rarity.RARE)
+        {
+            hyperCard.CardFrame.color = Color.yellow;
+        }
+        else
+        {
+            hyperCard.CardFrame.color = Color.magenta;
+        }
     }
 
     private static string BuildTextBoxStringForCard(AbstractCard abstractCard)

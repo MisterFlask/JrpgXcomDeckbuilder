@@ -22,7 +22,6 @@ public abstract class AbstractSoldierClass
             new RookieDefend(),
             GetRandomCardOfRarity(Rarity.COMMON)
         };
-            
     }
 
     public AbstractCard GetRandomCardOfRarity(Rarity rarity)

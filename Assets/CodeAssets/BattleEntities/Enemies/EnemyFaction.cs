@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.BattleEntities.Enemies
 {
-    public class EnemyFaction : MonoBehaviour
+    public class EnemyFaction
     {
         public string FactionName { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿
 using Assets.CodeAssets.Cards;
 using Assets.CodeAssets.GameLogic;
+using Assets.CodeAssets.UI.CardParts;
 using HyperCard;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using UnityEngine;
 
 public abstract class AbstractCard
 {
+
     public AbstractCard ReferencesAnotherCard { get; set; }
 
     public int MagicNumber { get; set; }
@@ -74,7 +76,7 @@ public abstract class AbstractCard
     public int BaseDefenseValue { get; set; } = 0;
 
     public List<string> CardTags { get; set; } = new List<string>();
-
+    public List<CardVisualTag> CardVisualTags { get; set; } = new List<CardVisualTag>();
     /// <summary>
     /// Similar to focus; non-general-purpose and not applicable to all cards
     /// </summary>
@@ -445,6 +447,17 @@ public abstract class AbstractCard
         {
             var color = GetDefaultColoration(Name);
             ProtoSprite = ProtoGameSprite.FromGameIcon(color: color);
+        }
+
+        if (cardType == CardType.AttackCard)
+        {
+            CardVisualTags.Add(CardVisualTag.AttackIcon);
+        }else if (cardType == CardType.SkillCard)
+        {
+            CardVisualTags.Add(CardVisualTag.SkillIcon);
+        }else if (cardType == CardType.PowerCard)
+        {
+            CardVisualTags.Add(CardVisualTag.PowerIcon);
         }
     }
 

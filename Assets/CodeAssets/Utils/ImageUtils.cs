@@ -40,6 +40,9 @@ public abstract class ProtoGameSprite
 
     // convenience methods follow
     public static ProtoGameSprite Default => ImageUtils.ProtoGameSpriteFromGameIcon();
+
+    public string SpritePath { get; set; }
+
     public static ProtoGameSprite FromGameIcon(
         string path = ImageUtils.MeepleImagePath,
         Color? color = null)
@@ -80,6 +83,10 @@ public abstract class ProtoGameSprite
     {
         return FromGameIcon("Sprites/OtherIcons/" + name);
     }
+    public static ProtoGameSprite VisualTagIcon(string name)
+    {
+        return FromGameIcon("Sprites/VisualTags/" + name);
+    }
 }
 
 public static class ImageExtensions
@@ -105,7 +112,6 @@ public class GameIconProtoSprite: ProtoGameSprite
     // todo: animation functionality
     //public List<string> AnimatedSpritePath = null;
 
-    public string SpritePath { get; set; }
     public Color Color { get; set; }
 
     public override GameSprite ToGameSpriteImage()
@@ -151,8 +157,5 @@ public class GameIconProtoSprite: ProtoGameSprite
 
         return imagesList;
     }
-
-
-    
 
 }

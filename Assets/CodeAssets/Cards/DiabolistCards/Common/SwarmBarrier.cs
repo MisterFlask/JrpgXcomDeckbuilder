@@ -15,6 +15,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SetCommonCardAttributes("Swarm Barrier", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.AttackCard, 1);
             BaseDefenseValue = 2;
             this.CardTags.Add(BattleCardTags.SWARM);
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("shield-bounces");
         }
 
         public override string DescriptionInner()

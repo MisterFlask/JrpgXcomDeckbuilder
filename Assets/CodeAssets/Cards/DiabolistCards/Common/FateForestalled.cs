@@ -15,6 +15,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Fate Forestalled", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 2);
             this.BaseDefenseValue = 12;
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("templar-shield");
         }
 
         public override string DescriptionInner()

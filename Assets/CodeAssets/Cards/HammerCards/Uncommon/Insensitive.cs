@@ -16,6 +16,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
             this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
 
             SetCommonCardAttributes("Insensitive", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 2);
+            ProtoSprite = ProtoGameSprite.HammerIcon("giant");
+
         }
 
         public override string DescriptionInner()

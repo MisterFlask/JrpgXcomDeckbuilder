@@ -18,7 +18,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             TargetType = TargetType.ALLY;
             CardType = CardType.SkillCard;
             this.StaticBaseEnergyCost = 2;
-            this.ProtoSprite = GameIconProtoSprite.FromGameIcon(path: "Sprites/bayonet");
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("reaper-scythe");
         }
 
         public override string DescriptionInner()

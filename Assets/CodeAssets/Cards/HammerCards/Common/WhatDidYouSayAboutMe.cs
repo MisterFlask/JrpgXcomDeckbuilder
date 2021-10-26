@@ -12,6 +12,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
         public WhatDidYouSayAboutMe()
         {
             SetCommonCardAttributes("What Did You Just Say About Me", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1, typeof(HammerSoldierClass));
+
+            ProtoSprite = ProtoGameSprite.HammerIcon("flying-fox");
         }
 
         public override string DescriptionInner()

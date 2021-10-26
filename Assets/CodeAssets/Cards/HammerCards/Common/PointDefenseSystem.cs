@@ -13,7 +13,9 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
             this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
 
             SetCommonCardAttributes("Point Defense System", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 0);
-            BaseDefenseValue = 5;
+            BaseDefenseValue = 5; 
+            ProtoSprite = ProtoGameSprite.HammerIcon("guards");
+
         }
 
         public override string DescriptionInner()

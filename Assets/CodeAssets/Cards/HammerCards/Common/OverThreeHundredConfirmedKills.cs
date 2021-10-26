@@ -17,6 +17,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
             BaseDamage = 5;
             BaseDefenseValue = 2;
             DamageModifiers.Add(new OverThreeHundredConfirmedKillsLethalDamageModifier());
+            ProtoSprite = ProtoGameSprite.HammerIcon("pianist");
+
         }
 
         public override string DescriptionInner()

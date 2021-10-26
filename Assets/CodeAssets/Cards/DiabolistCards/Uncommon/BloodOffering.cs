@@ -16,6 +16,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Uncommon
 
             SetCommonCardAttributes("Blood Offering", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 7);
             Stickers.Add(new ExhaustCardSticker());
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("pentacle");
         }
 
         public override string DescriptionInner()

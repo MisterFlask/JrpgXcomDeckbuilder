@@ -11,6 +11,8 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Uncommon
         {
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             SetCommonCardAttributes("Shared Hunger", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("gym-pendant");
         }
 
         // Power:

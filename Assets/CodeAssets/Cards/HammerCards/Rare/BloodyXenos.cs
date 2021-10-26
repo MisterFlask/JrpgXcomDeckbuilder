@@ -12,6 +12,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
         public BloodyXenos()
         {
             SetCommonCardAttributes("B___dy Xenos", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
+            ProtoSprite = ProtoGameSprite.HammerIcon("alien-bug");
         }
 
         public override string DescriptionInner()

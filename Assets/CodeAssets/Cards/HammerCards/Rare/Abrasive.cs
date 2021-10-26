@@ -14,6 +14,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
         public Abrasive()
         {
             this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+            ProtoSprite = ProtoGameSprite.HammerIcon("stone-pile");
 
             SetCommonCardAttributes("Abrasive", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
         }

@@ -16,6 +16,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Uncommon
             
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Final Curse", Rarity.RARE, TargetType.ENEMY, CardType.SkillCard, 0);
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("skull-staff");
         }
 
         public override string DescriptionInner()

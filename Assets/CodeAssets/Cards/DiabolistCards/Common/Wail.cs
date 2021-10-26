@@ -12,6 +12,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Wail", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
 
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("terror");
         }
 
         public override string DescriptionInner()

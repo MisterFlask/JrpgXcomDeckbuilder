@@ -12,7 +12,9 @@ namespace Assets.CodeAssets.Cards.HammerCards
         public ArmorSaves()
         {
             this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
-            this.SetCommonCardAttributes("Armor Save", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
+            this.SetCommonCardAttributes("Armor Save", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1); 
+            ProtoSprite = ProtoGameSprite.HammerIcon("shield-reflect");
+
         }
 
         public override string DescriptionInner()

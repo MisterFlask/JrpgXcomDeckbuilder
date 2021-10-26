@@ -15,7 +15,8 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
         {
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Swarm Barrier", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
-            BaseDefenseValue = 2; 
+            BaseDefenseValue = 2;
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("praying-mantis");
 
         }
 

@@ -14,7 +14,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
             SetCommonCardAttributes("Professional", Rarity.RARE, TargetType.ALLY, CardType.SkillCard, 1);
             MagicNumber = 1;
             BaseDefenseValue = 1;
-            
+            ProtoSprite = ProtoGameSprite.HammerIcon("pikeman");
+
         }
 
         public override string DescriptionInner()

@@ -127,7 +127,7 @@ public abstract class AbstractBattleUnit
             BattleRules.ProcessHooksWhenStatusEffectAppliedToUnit(this, effect, stacks);
         }
 
-        if (GetStatusEffect<T>().Stacks == 0)
+        if (GetStatusEffect<T>() != null && GetStatusEffect<T>().Stacks == 0)
         {
             RemoveStatusEffect<T>();
         }

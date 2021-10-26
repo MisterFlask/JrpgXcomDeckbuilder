@@ -11,6 +11,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
         public PowerArmor()
         {
             SetCommonCardAttributes("Power Armor", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
+            ProtoSprite = ProtoGameSprite.HammerIcon("armor-head");
+
         }
 
         public override string DescriptionInner()

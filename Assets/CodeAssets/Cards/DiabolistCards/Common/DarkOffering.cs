@@ -13,6 +13,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Dark Offering", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
             this.BaseDefenseValue = 8;
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("skull-staff");
         }
 
         public override string DescriptionInner()

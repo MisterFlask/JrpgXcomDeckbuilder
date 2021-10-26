@@ -14,6 +14,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
             this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
 
             SetCommonCardAttributes("Bastion", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 3);
+            ProtoSprite = ProtoGameSprite.HammerIcon("fancy-castle");
+
         }
 
         public override string DescriptionInner()

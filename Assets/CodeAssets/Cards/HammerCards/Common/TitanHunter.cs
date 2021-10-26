@@ -13,6 +13,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
             BaseDamage = 10;
             Stickers.Add(new ExertCardSticker());
             DamageModifiers.Add(new SlayerDamageModifier());
+            ProtoSprite = ProtoGameSprite.HammerIcon("atlas");
         }
 
         public override string DescriptionInner()

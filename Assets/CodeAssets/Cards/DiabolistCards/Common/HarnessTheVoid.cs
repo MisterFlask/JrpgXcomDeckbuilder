@@ -14,6 +14,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
         {
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Harness the Void", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 2);
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("pentagram-rose");
         }
 
 

@@ -17,6 +17,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Uncommon
         public TheGreaterGoodPower()
         {
             Name = "The Greater 'Good'";
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("despair");
         }
 
         public override void ProcessProc(AbstractProc proc)

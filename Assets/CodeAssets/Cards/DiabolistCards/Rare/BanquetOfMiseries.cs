@@ -13,6 +13,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Rare
         {
             this.SetCommonCardAttributes("Banquet of Miseries", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 1, typeof(DiabolistSoldierClass));
 
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("despair");
         }
 
         public override string DescriptionInner()

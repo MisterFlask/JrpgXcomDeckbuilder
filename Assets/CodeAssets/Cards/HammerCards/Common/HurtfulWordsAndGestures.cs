@@ -9,6 +9,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
         public HurtfulWordsAndGestures()
         {
             SetCommonCardAttributes("Hurtful Words and Gestures", Rarity.NOT_IN_POOL, TargetType.ENEMY, CardType.SkillCard, 0);
+            ProtoSprite = ProtoGameSprite.HammerIcon("profanity");
+
         }
 
         public override string DescriptionInner()

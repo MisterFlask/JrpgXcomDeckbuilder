@@ -379,6 +379,7 @@ public abstract class AbstractCard
         {
             copy.Id = Guid.NewGuid().ToString();
         }
+        copy._Initialize();
         return copy;
     }
 
@@ -390,8 +391,21 @@ public abstract class AbstractCard
 
     public void _Initialize()
     {
+        CardVisualTags.Clear();
         // does postprocessing work
-
+        var cardType = CardType;
+        if (cardType == CardType.AttackCard)
+        {
+            CardVisualTags.Add(CardVisualTag.AttackIcon);
+        }
+        else if (cardType == CardType.SkillCard)
+        {
+            CardVisualTags.Add(CardVisualTag.SkillIcon);
+        }
+        else if (cardType == CardType.PowerCard)
+        {
+            CardVisualTags.Add(CardVisualTag.PowerIcon);
+        }
     }
 
     public void AddSticker(AbstractCardSticker sticker)
@@ -447,17 +461,6 @@ public abstract class AbstractCard
         {
             var color = GetDefaultColoration(Name);
             ProtoSprite = ProtoGameSprite.FromGameIcon(color: color);
-        }
-
-        if (cardType == CardType.AttackCard)
-        {
-            CardVisualTags.Add(CardVisualTag.AttackIcon);
-        }else if (cardType == CardType.SkillCard)
-        {
-            CardVisualTags.Add(CardVisualTag.SkillIcon);
-        }else if (cardType == CardType.PowerCard)
-        {
-            CardVisualTags.Add(CardVisualTag.PowerIcon);
         }
     }
 

@@ -13,6 +13,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
             this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
 
             SetCommonCardAttributes("Hair Trigger Temper", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+            ProtoSprite = ProtoGameSprite.HammerIcon("volcano");
+
         }
 
         public override string DescriptionInner()

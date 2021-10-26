@@ -18,6 +18,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
             SetCommonCardAttributes("Impenetrable", Rarity.RARE, TargetType.ENEMY, CardType.SkillCard, 2);
             BaseDefenseValue = 15;
             Stickers.Add(new BasicDefendSelfSticker());
+            ProtoSprite = ProtoGameSprite.HammerIcon("stone-block");
+
         }
 
         public override string DescriptionInner()

@@ -2463,6 +2463,7 @@ MonoBehaviour:
   parent: {fileID: 112936902238028792}
   TemplatePrefab: {fileID: 4275523532053493668, guid: cfbcc4f8694886543857d42846ceb96d,
     type: 3}
+  Card: {fileID: -6997799470661648914}
 --- !u!1 &8742458933024341576
 GameObject:
   m_ObjectHideFlags: 0

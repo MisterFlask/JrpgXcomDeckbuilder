@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
         {
             this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
             SetCommonCardAttributes("Loquacious", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+            ProtoSprite = ProtoGameSprite.HammerIcon("parrot-head");
         }
 
         // Whenever you Taunt an enemy, apply 1 Weak and 1 Vulnerable.

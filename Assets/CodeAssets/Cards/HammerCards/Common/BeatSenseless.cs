@@ -14,6 +14,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
 
             SetCommonCardAttributes("Beat Senseless", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 2);
             BaseDamage = 10;
+            ProtoSprite = ProtoGameSprite.HammerIcon("thor-hammer");
         }
 
         public override string DescriptionInner()

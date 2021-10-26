@@ -85,7 +85,7 @@ public abstract class ProtoGameSprite
     }
     public static ProtoGameSprite VisualTagIcon(string name)
     {
-        return FromGameIcon("Sprites/VisualTags/" + name);
+        return FromGameIcon("Sprites/Cards/CardVisualTags/" + name);
     }
 }
 

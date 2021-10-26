@@ -12,6 +12,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
         {
             SetCommonCardAttributes("Hooliganism", Rarity.RARE, TargetType.ENEMY, CardType.SkillCard, 2, typeof(HammerSoldierClass));
             BaseDamage = 22;
+            ProtoSprite = ProtoGameSprite.HammerIcon("hoodie");
+
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

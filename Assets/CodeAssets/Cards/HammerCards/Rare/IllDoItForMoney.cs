@@ -10,6 +10,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Rare
             this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
 
             SetCommonCardAttributes("I'll Do It For Money", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
+            ProtoSprite = ProtoGameSprite.HammerIcon("receive-money");
+
         }
 
         // Lose 5 credits and 20 stress.  Exhaust.  Cost 0.

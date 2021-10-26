@@ -14,17 +14,18 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
         public MeanDrunk()
         {
             SetCommonCardAttributes("Mean Drunk", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1, typeof(HammerSoldierClass));
+            ProtoSprite = ProtoGameSprite.HammerIcon("angry-eyes");
+
         }
 
         public override string DescriptionInner()
         {
-            return $"Gain 5 Rage, plus another 1 per Barricade you have. Draw a card.";
+            return $"Gain 5 Rage, plus another 1 per Barricade you have. Add a Hurtful Words and Gestures to your hand.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             Action_ApplyStatusEffectToOwner(new RageStatusEffect(), 5 + GetStacksOf<BarricadeStatusEffect>());
-            action().DrawCards(1);
             action().CreateCardToHand(new HurtfulWordsAndGestures());
         }
     }

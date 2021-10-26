@@ -15,6 +15,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SetCommonCardAttributes("Unleash The Swarm", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 3);
             this.CardTags.Add(BattleCardTags.SWARM);
             this.BaseDamage = 4;
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("ants");
 
         }
 

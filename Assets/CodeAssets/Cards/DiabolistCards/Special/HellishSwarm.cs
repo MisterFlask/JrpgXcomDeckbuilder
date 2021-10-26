@@ -13,6 +13,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Special
             this.SetCommonCardAttributes("Hellish Swarm", Rarity.NOT_IN_POOL, TargetType.ENEMY, CardType.AttackCard, 1);
             this.Stickers.Add(new HazardousCardSticker());
             this.BaseDamage = 2;
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("spider-eye");
         }
 
         // Deal 4 damage and apply 1 Vulnerable.  Draw a card.  Exhaust.  Cost 1.

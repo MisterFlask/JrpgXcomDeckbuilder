@@ -12,6 +12,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
         public OnMySignal()
         {
             this.SoldierClassCardPools.Add(typeof(HammerSoldierClass));
+            ProtoSprite = ProtoGameSprite.HammerIcon("crosshair");
 
             SetCommonCardAttributes("On My Signal", Rarity.COMMON, TargetType.ENEMY, CardType.SkillCard, 1, typeof(HammerSoldierClass));
         }

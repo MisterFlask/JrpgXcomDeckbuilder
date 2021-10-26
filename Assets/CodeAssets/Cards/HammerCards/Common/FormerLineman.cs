@@ -16,6 +16,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
             SetCommonCardAttributes("Former Lineman", Rarity.COMMON, TargetType.ALLY, CardType.AttackCard, 2, typeof(HammerSoldierClass));
             BaseDamage = 7;
             BaseDefenseValue = 8;
+            ProtoSprite = ProtoGameSprite.HammerIcon("american-football-player");
+
         }
 
         public override string DescriptionInner()

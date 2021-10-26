@@ -16,6 +16,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Abyssal Gaze", Rarity.COMMON, TargetType.ENEMY, CardType.SkillCard, 2);
             this.BaseDefenseValue = 12;
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("terror");
         }
 
         public override EnergyPaidInformation GetNetEnergyCost()

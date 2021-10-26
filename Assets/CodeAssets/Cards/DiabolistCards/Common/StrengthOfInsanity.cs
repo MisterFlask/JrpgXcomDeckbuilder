@@ -15,6 +15,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SetCommonCardAttributes("Strength of Insanity", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.ErosionCard, 0);
             this.Unplayable = true;
             this.Stickers.Add(new HazardousCardSticker());
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("horned-skull");
         }
 
         public override string DescriptionInner()

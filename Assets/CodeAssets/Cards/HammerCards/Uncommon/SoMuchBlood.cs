@@ -11,6 +11,8 @@ namespace Assets.CodeAssets.Cards.HammerCards.Uncommon
         {
             SetCommonCardAttributes("So Much Blood", Rarity.UNCOMMON, TargetType.ALLY, CardType.SkillCard, 1);
             BaseDefenseValue = 5;
+            ProtoSprite = ProtoGameSprite.HammerIcon("spatter");
+
         }
 
         public override string DescriptionInner()

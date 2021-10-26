@@ -14,7 +14,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SetCommonCardAttributes("Bloodswarm", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 1);
             this.CardTags.Add(BattleCardTags.SWARM);
             BaseDamage = 6;
-
+            ProtoSprite = ProtoGameSprite.DiabolistIcon("wasp-sting");
         }
 
         public override string DescriptionInner()

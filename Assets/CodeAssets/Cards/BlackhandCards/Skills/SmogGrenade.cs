@@ -11,6 +11,8 @@ public class  SmogGrenade : AbstractCard
     {
         SetCommonCardAttributes("Smog Grenade", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
         BaseDefenseValue = 3;
+        ProtoSprite = ProtoGameSprite.BlackhandIcon("smog-grenade");
+
     }
 
     public override string DescriptionInner()

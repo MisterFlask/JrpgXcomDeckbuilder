@@ -11,6 +11,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         public DeadMansSwitch()
         {
             SetCommonCardAttributes("Dead Man's Switch", Rarity.UNCOMMON, TargetType.ALLY, CardType.SkillCard, 1);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("half-dead");
         }
 
         public override string DescriptionInner()

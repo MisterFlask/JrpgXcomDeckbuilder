@@ -12,6 +12,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Skills
         public FireShelter()
         {
             SetCommonCardAttributes("Fire Shelter", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 2, typeof(BlackhandSoldierClass));
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("dog-house");
         }
 
         public override string DescriptionInner()

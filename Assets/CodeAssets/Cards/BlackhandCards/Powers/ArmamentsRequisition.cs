@@ -11,6 +11,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         {
             this.SetCommonCardAttributes("Armaments Requisition", 
                 Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("fireball");
         }
 
         public override string DescriptionInner()

@@ -11,6 +11,7 @@ public class Firewall : AbstractCard
 
         BaseDefenseValue = 10;
         SetCommonCardAttributes("Firewall", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 2);
+        ProtoSprite = ProtoGameSprite.BlackhandIcon("stone-wall");
     }
 
     public override string DescriptionInner()

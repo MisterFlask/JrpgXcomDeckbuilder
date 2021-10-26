@@ -12,6 +12,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
             SetCommonCardAttributes("Napalm Grenade", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
             Stickers.Add(new BasicAttackRandomEnemySticker());
             BaseDamage = 2;
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("grenade-a");
         }
 
         public override string DescriptionInner()

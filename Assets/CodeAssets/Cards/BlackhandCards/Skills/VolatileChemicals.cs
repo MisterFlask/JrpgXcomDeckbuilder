@@ -8,6 +8,8 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         public VolatileChemicals()
         {
             SetCommonCardAttributes("Volatile Chemicals", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
+
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("chemical-tank");
         }
 
         public override string DescriptionInner()

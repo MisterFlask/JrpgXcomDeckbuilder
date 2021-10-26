@@ -13,6 +13,8 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
             this.DamageModifiers.Add(new SweeperDamageModifier());
             this.DamageModifiers.Add(new CleansingFireLethalTrigger());
             this.BaseDamage = 8;
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("vacuum-cleaner");
+
         }
 
         public override string DescriptionInner()

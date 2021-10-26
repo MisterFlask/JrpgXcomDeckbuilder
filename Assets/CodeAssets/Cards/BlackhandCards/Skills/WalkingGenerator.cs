@@ -11,6 +11,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         public WalkingGenerator()
         {
             SetCommonCardAttributes("Walking Generator", Rarity.RARE, TargetType.ALLY, CardType.SkillCard, 1, typeof(BlackhandSoldierClass));
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("power-generator");
         }
 
         public override string DescriptionInner()

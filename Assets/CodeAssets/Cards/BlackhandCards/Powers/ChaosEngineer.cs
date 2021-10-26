@@ -9,6 +9,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         public ChaosEngineer()
         {
             SetCommonCardAttributes("Chaos Engineer", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("radial-balance");
         }
 
         public override string DescriptionInner()

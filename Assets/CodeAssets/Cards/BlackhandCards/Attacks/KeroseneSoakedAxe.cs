@@ -9,6 +9,8 @@ public class KeroseneSoakedAxe : AbstractCard
         SetCommonCardAttributes("Kerosene-Soaked Axe", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 2);
         this.DamageModifiers.Add(new SlayerDamageModifier());
         BaseDamage = 14;
+        ProtoSprite = ProtoGameSprite.BlackhandIcon("fire-axe");
+
     }
     public override string DescriptionInner()
     {

@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         public DarkComedy()
         {
             SetCommonCardAttributes("Dark Comedy", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 3);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("balloon-dog");
         }
 
         public override string DescriptionInner()

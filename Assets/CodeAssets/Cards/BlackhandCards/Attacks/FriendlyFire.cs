@@ -14,6 +14,8 @@ public class IndiscriminateFire : AbstractCard
             CardType.AttackCard,
             1);
         DamageModifiers.Add(new SweeperDamageModifier());
+        ProtoSprite = ProtoGameSprite.BlackhandIcon("baby-face");
+
     }
 
     public override string DescriptionInner()

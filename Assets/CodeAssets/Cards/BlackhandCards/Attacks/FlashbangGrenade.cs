@@ -12,6 +12,8 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
             SetCommonCardAttributes("Flashbang", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
             BaseDamage = 1;
             Stickers.Add(new BasicAttackTargetSticker());
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("flash-grenade");
+
         }
 
         public override string DescriptionInner()

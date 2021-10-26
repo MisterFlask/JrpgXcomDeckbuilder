@@ -8,6 +8,7 @@ public class FumesLeak : AbstractCard
     {
         SetCommonCardAttributes("Fumes Leak", Rarity.COMMON, TargetType.ENEMY, CardType.SkillCard, 1);
         BaseDefenseValue = 4;
+        ProtoSprite = ProtoGameSprite.BlackhandIcon("bottle-vapors");
     }
 
     public override string DescriptionInner()

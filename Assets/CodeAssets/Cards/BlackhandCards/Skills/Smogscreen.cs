@@ -9,6 +9,8 @@ public class Smokescreen : AbstractCard
     {
         SetCommonCardAttributes("Smokescreen", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
         this.BaseDefenseValue = 8;
+        ProtoSprite = ProtoGameSprite.BlackhandIcon("tv");
+
     }
 
     public override string DescriptionInner()

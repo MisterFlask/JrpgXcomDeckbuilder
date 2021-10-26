@@ -9,6 +9,8 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         {
             SetCommonCardAttributes("From Hell", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 2);
             this.BaseDamage = 10;
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("flaming-trident");
+
         }
 
         public override string DescriptionInner()

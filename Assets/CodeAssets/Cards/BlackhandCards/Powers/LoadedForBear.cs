@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Skills
         public LoadedForBear()
         {
             this.SetCommonCardAttributes("Loaded for Bear", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("bear-head");
         }
 
         public override string DescriptionInner()

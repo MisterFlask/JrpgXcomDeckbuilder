@@ -8,6 +8,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         public GuerillaMindset()
         {
             this.SetCommonCardAttributes("Guerilla Mindset", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("hidden");
         }
 
         public override string DescriptionInner()

@@ -12,6 +12,8 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Skills
         {
             SetCommonCardAttributes("Smog Wall", Rarity.UNCOMMON, TargetType.ALLY, CardType.SkillCard, 1, typeof(BlackhandSoldierClass));
             BaseDefenseValue = 8;
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("defensive-wall");
+
         }
 
         public override string DescriptionInner()

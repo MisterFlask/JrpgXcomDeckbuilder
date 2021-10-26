@@ -10,6 +10,8 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         public StrikeFromSmog()
         {
             SetCommonCardAttributes("Strike From Smog", Rarity.UNCOMMON, TargetType.ENEMY, CardType.SkillCard, 1);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("cigar");
+
         }
 
         public override string DescriptionInner()

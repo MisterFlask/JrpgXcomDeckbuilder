@@ -11,6 +11,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Powers
         public GorillaTactics()
         {
             SetCommonCardAttributes("Gorilla Tactics", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("gorilla");
         }
 
         public override string DescriptionInner()

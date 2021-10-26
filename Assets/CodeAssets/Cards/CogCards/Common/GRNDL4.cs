@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         {
             SetCommonCardAttributes("GRNDL XL", Rarity.COMMON, TargetType.ALLY, CardType.AttackCard, 1);
             BaseDamage = 4;
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("shambling-mound");
         }
 
         // Apply 2 Charged to target ally.  Exhaust.

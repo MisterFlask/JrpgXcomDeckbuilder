@@ -8,6 +8,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         public PenetratorRounds()
         {
             SetCommonCardAttributes("Penetrator Rounds", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("pierced-body");
         }
 
         // The leftmost attack in your hand gains "Whenever this deals damage to an enemy, apply 1 Weak to it."

@@ -11,6 +11,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         public AdaptiveTargetingAi()
         {
             SetCommonCardAttributes("Adaptive Targeting AI", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 2);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("artificial-intelligence");
         }
 
         public override string DescriptionInner()

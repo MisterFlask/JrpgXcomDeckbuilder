@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         {
             SetCommonCardAttributes("Shielding Plax", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
             BaseDefenseValue = 4;
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("honeypot");
         }
 
         // Apply 6 block and 1 Charged to target ally.

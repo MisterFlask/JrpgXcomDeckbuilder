@@ -14,6 +14,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
             AddSticker(new BasicAttackTargetSticker());
             BaseDamage = 8;
             DamageModifiers.Add(new SweeperDamageModifier());
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("pendulum-swing");
+
         }
 
         public override string DescriptionInner()

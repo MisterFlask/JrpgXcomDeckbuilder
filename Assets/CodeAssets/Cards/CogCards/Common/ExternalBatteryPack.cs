@@ -11,6 +11,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         public ExternalBatteryPack()
         {
             SetCommonCardAttributes("External Battery Pack", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
+            ProtoSprite = ProtoGameSprite.BlackhandIcon("battery-pack-alt");
         }
 
         public override string DescriptionInner()

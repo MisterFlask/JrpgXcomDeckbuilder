@@ -11,6 +11,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
         {
             SetCommonCardAttributes("Cutthroat Practices", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 1);
             BaseDamage = 8;
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("tearing");
         }
         public override string DescriptionInner()
         {

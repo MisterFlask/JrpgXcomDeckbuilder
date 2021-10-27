@@ -11,6 +11,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
         public ExpensiveArmaments()
         {
             SetCommonCardAttributes("Expensive Armaments", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("relic-blade");
         }
 
         public override string DescriptionInner()

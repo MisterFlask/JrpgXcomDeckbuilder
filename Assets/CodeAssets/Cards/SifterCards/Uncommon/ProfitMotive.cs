@@ -8,6 +8,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Uncommon
         public ProfitMotive()
         {
             SetCommonCardAttributes("Profit Motive", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("coins");
         }
 
         // Whenever you trigger a Lethal or Bounty effect, draw a card and gain 5 credits.

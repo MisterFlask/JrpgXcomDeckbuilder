@@ -11,6 +11,8 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
             SetCommonCardAttributes("Arrive Late And Claim Credit", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 1);
             BaseDamage = 4;
             this.DamageModifiers.Add(BountyDamageModifier.GetBountyDamageModifier()); //todo
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("conquerer");
         }
 
         public override string DescriptionInner()

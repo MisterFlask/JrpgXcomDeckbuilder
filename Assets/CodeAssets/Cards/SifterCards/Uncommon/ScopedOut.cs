@@ -12,6 +12,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Uncommon
         {
             SetCommonCardAttributes("Scoped Out", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 1);
             DamageModifiers.Add(new PrecisionDamageModifier());
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("targeting");
         }
 
         public override string DescriptionInner()

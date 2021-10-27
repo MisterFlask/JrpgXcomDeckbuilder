@@ -8,6 +8,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Uncommon
         public KnownCheat()
         {
             SetCommonCardAttributes("Known Cheat", Rarity.UNCOMMON, TargetType.ENEMY, CardType.SkillCard, 0);
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("card-random");
         }
 
         // Apply 2 Weak to an enemy.  Ambush: Gain 5 gold.  Cost 0.

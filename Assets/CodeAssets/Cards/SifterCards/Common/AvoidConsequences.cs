@@ -11,6 +11,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
         public AvoidConsequences()
         {
             SetCommonCardAttributes("But First They Must Catch You", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 1);
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("spy");
         }
 
         public override string DescriptionInner()

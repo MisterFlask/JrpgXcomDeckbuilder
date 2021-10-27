@@ -9,6 +9,8 @@ namespace Assets.CodeAssets.Cards.SifterCards.Uncommon
         public HastyDefenses()
         {
             SetCommonCardAttributes("Hasty Defenses", Rarity.UNCOMMON, TargetType.ALLY, CardType.SkillCard, 1);
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("stick-frame");
             BaseDefenseValue = 6;
         }
 

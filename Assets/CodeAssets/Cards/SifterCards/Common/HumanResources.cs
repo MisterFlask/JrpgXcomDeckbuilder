@@ -9,6 +9,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
         public HumanResources()
         {
             SetCommonCardAttributes("Human Resources", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("human-pyramid");
         }
 
         // apply 2 Charged to an ally.  Hoard 5.

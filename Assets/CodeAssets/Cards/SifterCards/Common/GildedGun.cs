@@ -13,6 +13,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Special
             SetCommonCardAttributes("Gilded Gun", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 0);
             Stickers.Add(sticker);
             DamageModifiers.Add(new PrecisionDamageModifier());
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("machine-gun");
         }
 
         public override string DescriptionInner()

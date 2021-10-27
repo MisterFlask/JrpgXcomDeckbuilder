@@ -11,6 +11,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
         {
             SetCommonCardAttributes("Covered Short", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
             BaseDefenseValue = 8;
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("shorts"); 
             this.AddSticker(new GildedCardSticker(2));
         }
 

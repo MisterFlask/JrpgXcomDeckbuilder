@@ -9,7 +9,7 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
 
         public Potshot()
         {
-            
+            //human-target
         }
     }
 }

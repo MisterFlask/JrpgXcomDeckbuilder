@@ -10,6 +10,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
         {
             SetCommonCardAttributes("Loot Crate", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 10);
             Stickers.Add(new GildedCardSticker(5));
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("wooden-crate");
         }
 
         public override string DescriptionInner()

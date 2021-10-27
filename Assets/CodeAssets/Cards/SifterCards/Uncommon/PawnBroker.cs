@@ -6,10 +6,18 @@ namespace Assets.CodeAssets.Cards.SifterCards.Uncommon
 {
     public class PawnBroker : AbstractCard
     {
+        public PawnBroker()
+        {
+            SetCommonCardAttributes("Pawnbroker", Rarity.UNCOMMON, TargetType.ALLY, CardType.SkillCard, 1);
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("pawn");
+        }
+
         // Gain 5 block.  Whenever you trigger Sacrifice, ALL characters gain 1 Charged.  Cost 1.
         public override string DescriptionInner()
         {
-            return "Gain 5 block.  Whenever you trigger sacrifice, ALL allies gain 1 Charged.  Exhaust.";
+            return "Apply 5 block.  Whenever sacrifice is triggered, ALL allies gain 1 Charged.  Exhaust.";
 
         }
 

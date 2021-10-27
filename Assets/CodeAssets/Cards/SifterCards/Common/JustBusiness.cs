@@ -11,6 +11,9 @@ namespace Assets.CodeAssets.Cards.SifterCards.Common
         {
             SetCommonCardAttributes("Just Business", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 1);
             this.DamageModifiers.Add(new PrecisionDamageModifier());
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("half-crawling-body");
         }
 
         public override string DescriptionInner()

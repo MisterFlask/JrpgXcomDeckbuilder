@@ -12,6 +12,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         public DirtyMods()
         {
             SetCommonCardAttributes("Dirty Mods", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
+            ProtoSprite = ProtoGameSprite.CogIcon("bayonet");
 
         }
 

@@ -7,7 +7,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
     {
         public EfficientBrutality()
         {
-            SetCommonCardAttributes("Efficient Brutality", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.AttackCard, 2);
+            SetCommonCardAttributes("Efficient Brutality", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.AttackCard, 2,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("bloody-stash"));
         }
 
         public override string DescriptionInner()

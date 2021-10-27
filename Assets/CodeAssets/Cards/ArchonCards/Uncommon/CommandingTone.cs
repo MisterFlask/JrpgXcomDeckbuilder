@@ -9,7 +9,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
     {
         public CommandingTone()
         {
-            SetCommonCardAttributes("Commanding Tone", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1, typeof(ArchonSoldierClass));
+            SetCommonCardAttributes("Commanding Tone", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1, typeof(ArchonSoldierClass),
+                protoGameSprite: ProtoGameSprite.ArchonIcon("shouting"));
         }
 
         public override string DescriptionInner()

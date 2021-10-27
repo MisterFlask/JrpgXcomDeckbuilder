@@ -16,7 +16,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
                 Rarity.UNCOMMON,
                 TargetType.ALLY,
                 CardType.SkillCard,
-                1
+                1,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("shield-bash")
                 );
             this.BaseDamage = 5;
         }

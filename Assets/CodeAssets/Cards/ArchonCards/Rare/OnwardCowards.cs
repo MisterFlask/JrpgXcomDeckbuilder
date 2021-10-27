@@ -12,7 +12,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
             Name = "Onward, cowards!";
             TargetType = TargetType.NO_TARGET_OR_SELF;
             CardType = CardType.SkillCard;
-            this.ProtoSprite = GameIconProtoSprite.FromGameIcon(path: "Sprites/bayonet");
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("mailed-fist");
         }
 
         public override string DescriptionInner()

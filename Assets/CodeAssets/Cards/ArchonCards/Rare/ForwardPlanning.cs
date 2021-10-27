@@ -13,7 +13,9 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
         public ForwardPlanning()
         {
             SoldierClassCardPools.Add(typeof(ArchonSoldierClass));
-            SetCommonCardAttributes("Forward Planning", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
+            SetCommonCardAttributes("Forward Planning", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, 
+                CardType.SkillCard, 1,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("forward-sun"));
         }
 
         public override string DescriptionInner()

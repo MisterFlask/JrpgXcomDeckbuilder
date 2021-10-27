@@ -10,6 +10,9 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
         public SprintStories()
         {
             SetCommonCardAttributes("Sprint Stories", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
+
+            this.ProtoSprite =
+                ProtoGameSprite.ArchonIcon("sprint");
         }
 
         public override string DescriptionInner()

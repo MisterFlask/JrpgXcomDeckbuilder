@@ -13,6 +13,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
             SetCommonCardAttributes("Shield Drone", Rarity.NOT_IN_POOL, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
             BaseDefenseValue = 6;
             AddSticker(new LightCardSticker());
+            ProtoSprite = ProtoGameSprite.CogIcon("shield-drone");
+
         }
 
         public override string DescriptionInner()

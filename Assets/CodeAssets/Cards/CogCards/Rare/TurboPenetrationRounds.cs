@@ -8,6 +8,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         // Whenever a character plays a card with Buster, they gain 1 strength.
         public TurboPenetrationRounds()
         {
+            //            ProtoSprite = ProtoGameSprite.CogIcon("headshot");
 
         }
     }

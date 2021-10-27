@@ -14,6 +14,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
             Stickers.Add(new BasicAttackTargetSticker());
             DamageModifiers.Add(new BusterDamageModifier());
             DamageModifiers.Add(new PrecisionDamageModifier());
+            ProtoSprite = ProtoGameSprite.CogIcon("vr-headset");
+
         }
 
         public override string DescriptionInner()

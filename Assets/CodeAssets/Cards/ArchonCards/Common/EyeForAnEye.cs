@@ -15,7 +15,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
                 Rarity.COMMON,
                 TargetType.ALLY,
                 CardType.SkillCard,
-                1
+                1,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("eyepatch")
                 );
         }
 

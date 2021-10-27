@@ -10,7 +10,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
         public DefensivePerimeter()
         {
             this.SoldierClassCardPools.Add(typeof(ArchonSoldierClass));
-            SetCommonCardAttributes("Defensive Perimeter", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1);
+            SetCommonCardAttributes("Defensive Perimeter", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 1,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("gate"));
         }
 
         /// apply 8 defense.  Leadership:  Each ally gains 2 Temporary Dexterity.

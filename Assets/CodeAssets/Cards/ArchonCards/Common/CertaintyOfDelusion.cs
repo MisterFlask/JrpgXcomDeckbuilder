@@ -16,7 +16,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
                 Rarity.COMMON,
                 TargetType.NO_TARGET_OR_SELF,
                 CardType.SkillCard,
-                2
+                2,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("uprising")
                 );
             this.BaseDefenseValue = 10;
             

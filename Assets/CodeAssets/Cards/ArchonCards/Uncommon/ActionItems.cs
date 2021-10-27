@@ -11,7 +11,9 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
 
         public ActionItems()
         {
-            SetCommonCardAttributes("Action Items", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1, typeof(ArchonSoldierClass));
+            SetCommonCardAttributes("Action Items", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1, typeof(ArchonSoldierClass),
+
+                protoGameSprite: ProtoGameSprite.ArchonIcon("checklist"));
             Stickers.Add(new ExhaustCardSticker());
         }
 

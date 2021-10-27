@@ -13,6 +13,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Uncommon
         {
             SetCommonCardAttributes("BSL-SK", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 1);
             BaseDamage = 7;
+            ProtoSprite = ProtoGameSprite.CogIcon("sea-serpent");
+
         }
 
         public override string DescriptionInner()

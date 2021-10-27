@@ -14,7 +14,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
                 Rarity.COMMON,
                 TargetType.ENEMY,
                 CardType.AttackCard,
-                1
+                1,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("bowling-propulsion")
                 );
             this.BaseDamage = 5;
         }

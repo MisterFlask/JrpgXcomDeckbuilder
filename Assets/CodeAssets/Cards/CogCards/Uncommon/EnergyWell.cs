@@ -8,6 +8,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
     {
         public EnergyWell()
         {
+            ProtoSprite = ProtoGameSprite.CogIcon("well");
 
         }
 

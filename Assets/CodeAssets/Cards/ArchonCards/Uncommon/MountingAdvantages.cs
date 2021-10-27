@@ -15,9 +15,11 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
                 Rarity.UNCOMMON,
                 TargetType.ALLY,
                 CardType.PowerCard,
-                3
+                3,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("mountaintop")
                 );
             this.PersistentCostModifiers.Add(new PlannedCostModifier());
+
         }
 
 

@@ -14,6 +14,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
             BaseDefenseValue = 10;
             DamageModifiers.Add(new BusterDamageModifier());
             DamageModifiers.Add(new SlayerDamageModifier());
+            ProtoSprite = ProtoGameSprite.CogIcon("anubis");
+
         }
 
         public override string DescriptionInner()

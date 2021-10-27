@@ -8,7 +8,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         public BeanbagGunAttachment()
         {
             SetCommonCardAttributes("Beanbag Gun Attachment", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
-            ProtoSprite = ProtoGameSprite.BlackhandIcon("coffee-beans");
+            ProtoSprite = ProtoGameSprite.CogIcon("coffee-beans");
         }
 
         // The leftmost attack in your hand gains "Whenever this deals damage to an enemy, apply 1 Weak to it."

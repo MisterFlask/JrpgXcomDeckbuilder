@@ -15,7 +15,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Starting
                 Rarity.RARE,
                 TargetType.NO_TARGET_OR_SELF,
                 CardType.SkillCard,
-                1
+                1,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("dread")
                 );
 
             this.BaseDefenseValue = 5;

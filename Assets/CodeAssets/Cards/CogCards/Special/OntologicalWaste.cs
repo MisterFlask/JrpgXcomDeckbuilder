@@ -15,6 +15,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
             {
                 Stacks = 2
             });
+            ProtoSprite = ProtoGameSprite.CogIcon("ontological-waste");
+
         }
 
         public override string DescriptionInner()

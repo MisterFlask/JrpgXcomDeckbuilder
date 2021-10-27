@@ -10,7 +10,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         public DroneController()
         {
             SetCommonCardAttributes("Drone Controller", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
-            ProtoSprite = ProtoGameSprite.BlackhandIcon("delivery-drone");
+            ProtoSprite = ProtoGameSprite.CogIcon("delivery-drone");
         }
 
         public override string DescriptionInner()

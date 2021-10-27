@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         public ImprovisedTechnomancy()
         {
             SetCommonCardAttributes("Improvised Technomancy", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 2);
+            ProtoSprite = ProtoGameSprite.CogIcon("magick-trick");
         }
 
         public override string DescriptionInner()

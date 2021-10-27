@@ -11,7 +11,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         public FlowOfTensors()
         {
             SetCommonCardAttributes("Flow of Tensors", Rarity.COMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
-            ProtoSprite = ProtoGameSprite.BlackhandIcon("movement-sensor");
+            ProtoSprite = ProtoGameSprite.CogIcon("movement-sensor");
         }
 
         public override string DescriptionInner()

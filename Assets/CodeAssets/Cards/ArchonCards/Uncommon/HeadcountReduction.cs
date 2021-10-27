@@ -11,7 +11,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
 
         public HeadcountReduction()
         {
-            SetCommonCardAttributes("HeadcountReduction", Rarity.UNCOMMON, TargetType.ENEMY, CardType.SkillCard, 0);
+            SetCommonCardAttributes("HeadcountReduction", Rarity.UNCOMMON, TargetType.ENEMY, CardType.SkillCard, 0,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("headshot"));
         }
 
         public override string DescriptionInner()

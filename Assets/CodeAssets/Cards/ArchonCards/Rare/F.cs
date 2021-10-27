@@ -13,7 +13,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
         public F()
         {
             SoldierClassCardPools.Add(typeof(ArchonSoldierClass));
-            SetCommonCardAttributes("F", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 1);
+            SetCommonCardAttributes("F", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 1,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("grave-flowers"));
             this.DamageModifiers.Add(BountyDamageModifier.Create());
             this.DamageModifiers.Add(new PrecisionDamageModifier());
             this.BaseDamage = 10;

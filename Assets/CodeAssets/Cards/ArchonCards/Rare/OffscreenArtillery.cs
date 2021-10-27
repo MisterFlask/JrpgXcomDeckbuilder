@@ -8,7 +8,9 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
         public OffscreenArtillery()
         {
             DamageModifiers.Add(new BusterDamageModifier());
-            SetCommonCardAttributes("Offscreen Artillery", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.AttackCard, 3);
+            SetCommonCardAttributes("Offscreen Artillery", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, 
+                CardType.AttackCard, 3,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("artillery-shell"));
             this.BaseDamage = 11;
         }
 

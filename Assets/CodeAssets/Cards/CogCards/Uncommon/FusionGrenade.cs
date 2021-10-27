@@ -12,6 +12,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Uncommon
             SetCommonCardAttributes("Fusion Grenade", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 0);
             Stickers.Add(new ExhaustCardSticker());
             BaseDamage = 3;
+            ProtoSprite = ProtoGameSprite.CogIcon("stick-grenade");
+
         }
 
         public override string DescriptionInner()

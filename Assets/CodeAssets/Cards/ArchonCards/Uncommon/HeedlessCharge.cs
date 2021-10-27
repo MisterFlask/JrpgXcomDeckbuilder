@@ -11,7 +11,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
 
         public HeedlessCharge()
         {
-            SetCommonCardAttributes("Heedless Charge", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 2);
+            SetCommonCardAttributes("Heedless Charge", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 2,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("running-ninja"));
             BaseDamage = 12;
         }
 

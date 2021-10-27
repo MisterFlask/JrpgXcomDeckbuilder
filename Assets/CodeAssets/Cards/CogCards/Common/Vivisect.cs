@@ -15,7 +15,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
             Stickers.Add(new ExhaustCardSticker());
             BaseDamage = 6;
             DamageModifiers.Add(new GainDataPointsOnSlayDamageModifier { DataPointsToAcquire = 3 });
-            ProtoSprite = ProtoGameSprite.BlackhandIcon("split-body");
+            ProtoSprite = ProtoGameSprite.CogIcon("split-body");
         }
 
         public override string DescriptionInner()

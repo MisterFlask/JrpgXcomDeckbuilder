@@ -9,7 +9,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
 
         public HandCannon()
         {
-            SetCommonCardAttributes("Hand Cannon", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 2);
+            SetCommonCardAttributes("Hand Cannon", Rarity.UNCOMMON, TargetType.ENEMY, CardType.AttackCard, 2,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("cannon-shot"));
             Stickers.Add(new BasicAttackTargetSticker());
             BaseDamage = 20;
             DamageModifiers.Add(new BusterDamageModifier());

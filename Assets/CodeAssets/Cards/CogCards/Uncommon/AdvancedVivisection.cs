@@ -9,6 +9,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Uncommon
         // Add two Autocannon Sentries to your hand.  They have Lethal: Gain 2 data points.  Cost 0.
         public AdvancedVivisection()
         {
+            ProtoSprite = ProtoGameSprite.CogIcon("split-person-star");
 
         }
 

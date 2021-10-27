@@ -13,6 +13,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
             BaseDamage = 4;
             DamageModifiers.Add(new PrecisionDamageModifier());
             AddSticker(new LightCardSticker());
+            ProtoSprite = ProtoGameSprite.CogIcon("autogun");
+
         }
 
         public override string DescriptionInner()

@@ -9,6 +9,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Common
         public MeltItDown()
         {
             SetCommonCardAttributes("Melt It Down", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
+            ProtoSprite = ProtoGameSprite.CogIcon("melting-ice-cube");
         }
 
         // Technocannibalize:  Gain 1 energy and 1 Charged.

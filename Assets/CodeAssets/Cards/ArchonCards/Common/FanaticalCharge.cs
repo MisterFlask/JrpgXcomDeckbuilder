@@ -14,7 +14,8 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Common
                 Rarity.COMMON,
                 TargetType.NO_TARGET_OR_SELF,
                 CardType.AttackCard,
-                1
+                1,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("mounted-knight")
                 );
             this.BaseDamage = 5;
         }

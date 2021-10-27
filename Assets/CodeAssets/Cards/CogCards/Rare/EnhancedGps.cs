@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         public EnhancedGps()
         {
             SetCommonCardAttributes("Very Enhanced GPS", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
+            ProtoSprite = ProtoGameSprite.CogIcon("gps");
         }
 
         public override string DescriptionInner()

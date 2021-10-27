@@ -12,7 +12,9 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
         {
             this.DamageModifiers.Add(new DamnYouAllDamageModifier());
             this.SoldierClassCardPools.Add(typeof(ArchonSoldierClass));
-            SetCommonCardAttributes("D*** You All", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.AttackCard, 1);
+            SetCommonCardAttributes("D*** You All", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, 
+                CardType.AttackCard, 1,
+                protoGameSprite: ProtoGameSprite.ArchonIcon("lightning-shout"));
             BaseDamage = 3;
         }
 

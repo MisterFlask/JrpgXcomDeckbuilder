@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         public SelfSupervisedLearning()
         {
             SetCommonCardAttributes("Self-Supervised Learning", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 0);
+            ProtoSprite = ProtoGameSprite.CogIcon("mirror-mirror");
         }
 
         public override string DescriptionInner()

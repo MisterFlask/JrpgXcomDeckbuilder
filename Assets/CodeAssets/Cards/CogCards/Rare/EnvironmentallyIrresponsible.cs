@@ -11,6 +11,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         public EnvironmentallyIrresponsible()
         {
             SetCommonCardAttributes("Environmentally Irresponsible", Rarity.RARE, TargetType.ENEMY, CardType.SkillCard, 3);
+            ProtoSprite = ProtoGameSprite.CogIcon("ecology");
+
         }
 
         public override string DescriptionInner()

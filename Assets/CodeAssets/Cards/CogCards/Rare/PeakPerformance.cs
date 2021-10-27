@@ -11,6 +11,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         public PeakPerformance()
         {
             SetCommonCardAttributes("Peak Performance", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.SkillCard, 1);
+            ProtoSprite = ProtoGameSprite.CogIcon("peaks");
         }
 
         public override string DescriptionInner()

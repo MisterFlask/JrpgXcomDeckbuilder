@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         public SufficientlyAdvancedTechnology()
         {
             SetCommonCardAttributes("Sufficiently Advanced Technology", Rarity.RARE, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
+            ProtoSprite = ProtoGameSprite.CogIcon("processor");
         }
 
         public override string DescriptionInner()

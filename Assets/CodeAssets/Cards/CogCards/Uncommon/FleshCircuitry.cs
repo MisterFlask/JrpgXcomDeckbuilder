@@ -10,6 +10,8 @@ namespace Assets.CodeAssets.Cards.CogCards.Uncommon
         {
             SetCommonCardAttributes("Fleshy Circuitry", Rarity.UNCOMMON, TargetType.NO_TARGET_OR_SELF, CardType.PowerCard, 1);
             Stickers.Add(new ExhaustCardSticker());
+            ProtoSprite = ProtoGameSprite.CogIcon("circuitry");
+
         }
 
         public override string DescriptionInner()

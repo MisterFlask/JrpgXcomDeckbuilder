@@ -76,7 +76,30 @@ public abstract class AbstractMission
     public bool IsFailure { get; set; } = false;
     public bool IsVictory { get; set; } = false;
 
-    public ProtoGameSprite TerrainImage { get; set; } = ProtoGameSprite.TerrainIcon("forest");
+    public MissionTerrain Terrain { get; set; } = MissionTerrain.FOREST;
     public ProtoGameSprite BattleBackground { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Backgrounds/Battleback1");
 
+}
+
+
+public class MissionTerrain 
+{
+    public static MissionTerrain FOREST = new MissionTerrain
+    {
+        TerrainImage = ProtoGameSprite.TerrainIcon("forest"),
+        TerrainName = "Forest"
+    };
+    public static List<MissionTerrain> TerrainTypes = new List<MissionTerrain>
+    {
+        FOREST,
+        new MissionTerrain
+        {
+            TerrainImage = ProtoGameSprite.TerrainIcon("modern-city"),
+            TerrainName = "Forest"
+        }
+    };
+
+    public ProtoGameSprite TerrainImage { get; set; } = ProtoGameSprite.TerrainIcon("forest");
+
+    public string TerrainName { get; set; } = "Default";
 }

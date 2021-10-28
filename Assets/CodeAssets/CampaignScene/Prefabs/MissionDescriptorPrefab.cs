@@ -10,6 +10,7 @@ public class MissionDescriptorPrefab : MonoBehaviour
     public TMPro.TextMeshProUGUI Title;
     public TMPro.TextMeshProUGUI Description;
     public Button EmbarkButton;
+    public Image terrainImage;
 
     public static AbstractMission SelectedMission => SelectableMissionPrefab.CurrentlySelected?.Mission;
     public static bool ShouldBeAbleToGoOnMission(out string reasonWhyNot)
@@ -60,6 +61,11 @@ public class MissionDescriptorPrefab : MonoBehaviour
         }
 
         Description.text = SelectedMission.GenerateMissionDescriptiveText();
+
+        if (SelectedMission?.Terrain?.TerrainImage != null)
+        {
+            terrainImage.sprite = SelectedMission.Terrain.TerrainImage.ToSprite();
+        }
      }
 
     public void Start()

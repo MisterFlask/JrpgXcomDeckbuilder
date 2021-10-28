@@ -5,6 +5,7 @@ using System;
 using Assets.CodeAssets.BattleEntities.Augmentations;
 using Assets.CodeAssets.GameLogic;
 using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
+using Assets.CodeAssets.Utils;
 
 public class CampaignStarter : MonoBehaviour
 {
@@ -60,6 +61,11 @@ public class CampaignStarter : MonoBehaviour
     public static void InitializeSelectableMissions()
     {
         CampaignMapState.MissionsActive = MissionGenerator.GenerateAllMissionsForRegion();
+    }
+
+    void Awake()
+    {
+        EagerMonobehaviour.InitializeAllEagerMonobehaviours();
     }
 
     // Use this for initialization

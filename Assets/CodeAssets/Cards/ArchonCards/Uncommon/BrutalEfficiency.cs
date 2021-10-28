@@ -16,7 +16,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Uncommon
                 CardType.SkillCard,
                 1,
 
-                protoGameSprite: ProtoGameSprite.ArchonIcon("uprising")
+                protoGameSprite: ProtoGameSprite.ArchonIcon("factory")
                 );
         }
 

@@ -5,6 +5,7 @@ using System;
 using UnityEngine.UI;
 using Assets.CodeAssets.UI.Subscreens;
 using Assets.CodeAssets.CampaignScene.Shop;
+using Assets.CodeAssets.Utils;
 
 public static class CampaignMapState 
 {
@@ -47,6 +48,7 @@ public static class CampaignMapState
         AssignFreeAugmentationsPanel.Instance.Hide();
         SelectCardToAddFromInventoryScreen.Hide();
         ShopScreen.Instance.Hide();
+
     }
 }
 

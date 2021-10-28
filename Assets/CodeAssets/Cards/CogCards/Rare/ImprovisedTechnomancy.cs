@@ -30,6 +30,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
         public ImprovisedTechnomancyStatusEffect()
         {
             Name = "Improvised Technomancy";
+            ProtoSprite = ProtoGameSprite.CogIcon("magick-trick");
         }
 
         public override string Description => $"The first {DisplayedStacks()} Created cards you play each turn cost 1 less.";

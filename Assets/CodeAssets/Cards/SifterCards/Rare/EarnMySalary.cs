@@ -15,6 +15,8 @@ namespace Assets.CodeAssets.Cards.SifterCards.Rare
             DamageModifiers.Add(BountyDamageModifier.GetBountyDamageModifier());
             Stickers.Add(new GildedCardSticker(4));
             BaseDamage = 30;
+            ProtoSprite = ProtoGameSprite.CogIcon("farmer");
+
         }
 
         public override string DescriptionInner()

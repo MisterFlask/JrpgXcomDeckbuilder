@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 using Assets.CodeAssets.UI.Screens.BattleScreen;
+using Assets.CodeAssets.Utils;
 
 public class BattleScreenPrefab : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class BattleScreenPrefab : MonoBehaviour
 
     public void OnAwake()
     {
+        EagerMonobehaviour.InitializeAllEagerMonobehaviours();
+
         INSTANCE = this;
     }
 

@@ -79,6 +79,11 @@ public abstract class ProtoGameSprite
         return FromGameIcon("Sprites/Cards/Rookie/" + name);
     }
 
+    internal static ProtoGameSprite TerrainIcon(string v)
+    {
+        return FromGameIcon("Sprites/MissionTerrain/" + v);
+    }
+
     public static ProtoGameSprite OtherIcons(string name)
     {
         return FromGameIcon("Sprites/OtherIcons/" + name);

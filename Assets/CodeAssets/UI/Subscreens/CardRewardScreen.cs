@@ -2,14 +2,14 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Assets.CodeAssets.Utils;
 
-public class CardRewardScreen : MonoBehaviour
+public class CardRewardScreen : EagerMonobehaviour
 {
     public static CardRewardScreen Instance;
 
     public void Awake()
     {
-        Instance = this;
     }
 
 
@@ -56,5 +56,10 @@ public class CardRewardScreen : MonoBehaviour
         DeclineButton.onClick.AddListener(() => {
             Hide();
         });
+    }
+
+    public override void AwakenOnSceneStart()
+    {
+        Instance = this;
     }
 }

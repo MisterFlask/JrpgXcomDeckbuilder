@@ -1,19 +1,23 @@
-﻿using HyperCard;
+﻿using Assets.CodeAssets.Utils;
+using HyperCard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowDeckScreen : MonoBehaviour
+public class ShowDeckScreen : EagerMonobehaviour
 {
     public ShowDeckScreen()
     {
     }
 
-    public void Awake()
+    public override void AwakenOnSceneStart()
     {
-        Instance = this;
+        if (this.IdentifierName != "Default" && this.IdentifierName != "")
+        {
+            Instance = this;
+        }
     }
 
     public string IdentifierName;

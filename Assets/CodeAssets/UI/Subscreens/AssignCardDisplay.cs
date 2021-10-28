@@ -1,4 +1,5 @@
-﻿using HyperCard;
+﻿using Assets.CodeAssets.Utils;
+using HyperCard;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ namespace Assets.CodeAssets.UI.Subscreens
         private bool IsTaken { get; set; }
         private AbstractCard Card { get; set; }
         private AbstractBattleUnit UnitSelected { get; set; }
+
+
         public void Init(AbstractBattleUnit unitWeAreSelectingFor, AbstractCard card)
         {
             GameCardDisplay.GameCard.SetToAbstractCardAttributes(card);

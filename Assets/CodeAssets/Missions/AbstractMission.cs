@@ -35,6 +35,8 @@ public abstract class AbstractMission
         return ProtoGameSprite.FromGameIcon(path: "Sprites/MissionIcons/" + path);
     }
 
+
+
     public bool IsGateMission => Rewards.Any(item => item is GateBypassMissionReward);
     public string Name { get; set; }
     public int Difficulty { get; set; } // 1 to 5
@@ -74,6 +76,7 @@ public abstract class AbstractMission
     public bool IsFailure { get; set; } = false;
     public bool IsVictory { get; set; } = false;
 
+    public ProtoGameSprite TerrainImage { get; set; } = ProtoGameSprite.TerrainIcon("forest");
     public ProtoGameSprite BattleBackground { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Backgrounds/Battleback1");
 
 }

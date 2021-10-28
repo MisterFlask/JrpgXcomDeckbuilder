@@ -12,6 +12,8 @@ namespace Assets.CodeAssets.Cards.SifterCards.Rare
         {
             SetCommonCardAttributes("Stupid Meme Money", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 0);
             Stickers.Add(new GildedCardSticker(4));
+            ProtoSprite = ProtoGameSprite.CogIcon("shiny-purses");
+
         }
 
         public override string DescriptionInner()

@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.Utils;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.CodeAssets.UI.Subscreens
 {
-    public class AssignFreeAugmentationsPanel : MonoBehaviour
+    public class AssignFreeAugmentationsPanel : EagerMonobehaviour
     {
 
         public static AssignFreeAugmentationsPanel Instance;
@@ -13,7 +14,6 @@ namespace Assets.CodeAssets.UI.Subscreens
         }
         public void Awake()
         {
-            Instance = this;
         }
 
         public AssignAugmentationDisplay AugmentationDisplayTemplate;
@@ -47,6 +47,11 @@ namespace Assets.CodeAssets.UI.Subscreens
                 newDisplay.Augmentation = augmentation;
                 newDisplay.Init();
             }
+        }
+
+        public override void AwakenOnSceneStart()
+        {
+            Instance = this;
         }
     }
 }

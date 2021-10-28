@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.CodeAssets.Utils;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,15 +7,20 @@ using UnityEngine.UI;
 namespace Assets.CodeAssets.UI.Subscreens
 {
 
-    public class SelectCardToAddFromInventoryScreen : MonoBehaviour
+    public class SelectCardToAddFromInventoryScreen : EagerMonobehaviour
     {
+
+        public override void AwakenOnSceneStart()
+        {
+            Instance = this;
+        }
         public SelectCardToAddFromInventoryScreen()
         {
+
         }
 
         public void Awake()
         {
-            Instance = this;
         }
 
         public void Start()

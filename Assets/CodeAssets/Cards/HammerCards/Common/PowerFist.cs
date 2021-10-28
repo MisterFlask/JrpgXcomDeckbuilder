@@ -12,7 +12,7 @@ namespace Assets.CodeAssets.Cards.HammerCards.Common
         {
             SetCommonCardAttributes("Power Fist", Rarity.COMMON, TargetType.ENEMY, CardType.AttackCard, 1, typeof(HammerSoldierClass));
             BaseDamage = 5; 
-            ProtoSprite = ProtoGameSprite.HammerIcon("guards");
+            ProtoSprite = ProtoGameSprite.HammerIcon("mailed-fist");
 
         }
 

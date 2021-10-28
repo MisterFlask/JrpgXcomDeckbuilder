@@ -1,19 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using Assets.CodeAssets.Utils;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.CodeAssets.CampaignScene.Shop
 {
-    public class ShopScreen : MonoBehaviour
+    public class ShopScreen : EagerMonobehaviour
     {
         public static ShopScreen Instance = null;
 
         public ShopScreen()
         {
-            Instance = this;
         }
-
 
         public int MaxNumCardOffersAvailable => CardOffers.Count;
         public int MaxNumAugmentationOffersAvailable => AugmentationOffers.Count;
@@ -126,6 +125,11 @@ namespace Assets.CodeAssets.CampaignScene.Shop
                     offerPrefab.gameObject.SetActive(false);
                 }
             }
+        }
+
+        public override void AwakenOnSceneStart()
+        {
+            Instance = this;
         }
     }
 }

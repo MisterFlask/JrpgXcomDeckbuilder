@@ -12,6 +12,8 @@ namespace Assets.CodeAssets.Cards.SifterCards.Rare
         {
             SetCommonCardAttributes("Financial Advisor", Rarity.RARE, TargetType.ENEMY, CardType.AttackCard, 2);
             DamageModifiers.Add(new FinancialAdvisorSlayTrigger());
+            ProtoSprite = ProtoGameSprite.CogIcon("shadow-follower");
+
         }
 
         public override string DescriptionInner()

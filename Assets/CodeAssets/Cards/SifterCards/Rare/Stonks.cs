@@ -15,6 +15,8 @@ namespace Assets.CodeAssets.Cards.SifterCards.Rare
             Stickers.Add(new BasicAttackTargetSticker());
             Stickers.Add(new GildedCardSticker(2));
             BaseDamage = 10;
+            ProtoSprite = ProtoGameSprite.CogIcon("chart");
+
         }
 
         public override string DescriptionInner()

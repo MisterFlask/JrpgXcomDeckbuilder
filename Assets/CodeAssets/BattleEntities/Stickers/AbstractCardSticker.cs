@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// These are used for card "passives"
 /// </summary>
-public abstract class AbstractCardSticker: MonoBehaviour
+public abstract class AbstractCardSticker
 {
     public AbstractCard CardAttachedTo { get; set; }
     public AbstractCard card => CardAttachedTo;

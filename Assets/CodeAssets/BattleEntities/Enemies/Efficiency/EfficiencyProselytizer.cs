@@ -13,6 +13,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
             this.CharacterNicknameOrEnemyName = "Proselytizer";
             this.EnemyFaction = EnemyFaction.EFFICIENCY;
             this.ApplyStatusEffect(new ArmoredStatusEffect(), stacks: 4);
+            UnitSize = UnitSize.LARGE;
         }
 
         //Increase stress of all characters by 10 => attack for 20%

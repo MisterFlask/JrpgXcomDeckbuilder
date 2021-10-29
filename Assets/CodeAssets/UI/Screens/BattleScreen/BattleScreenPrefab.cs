@@ -52,27 +52,27 @@ public class BattleScreenPrefab : MonoBehaviour
         var forbiddenMediumEnemyIndices = new List<int>();
         if (mediumEnemies.Count() >= 1)
         {
+            forbiddenSmallEnemyIndices.Add(0);
             forbiddenSmallEnemyIndices.Add(1);
-            forbiddenSmallEnemyIndices.Add(2);
+            forbiddenSmallEnemyIndices.Add(3);
             forbiddenSmallEnemyIndices.Add(4);
-            forbiddenSmallEnemyIndices.Add(5);
         }
         if (mediumEnemies.Count() == 2)
         {
+            forbiddenSmallEnemyIndices.Add(6);
             forbiddenSmallEnemyIndices.Add(7);
-            forbiddenSmallEnemyIndices.Add(8);
+            forbiddenSmallEnemyIndices.Add(9);
             forbiddenSmallEnemyIndices.Add(10);
-            forbiddenSmallEnemyIndices.Add(11);
         }
         if (largeEnemies.Count() == 1)
         {
+            forbiddenSmallEnemyIndices.Add(0);
             forbiddenSmallEnemyIndices.Add(1);
             forbiddenSmallEnemyIndices.Add(2);
             forbiddenSmallEnemyIndices.Add(3);
             forbiddenSmallEnemyIndices.Add(4);
             forbiddenSmallEnemyIndices.Add(5);
-            forbiddenSmallEnemyIndices.Add(6);
-            forbiddenMediumEnemyIndices.Add(1);
+            forbiddenMediumEnemyIndices.Add(0);
         }
 
         if (largeEnemies.Count() > 1)

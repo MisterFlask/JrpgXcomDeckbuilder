@@ -13,10 +13,9 @@ public class BattleScreenPrefab : MonoBehaviour
     {
     }
 
-    public void OnAwake()
+    public void Awake()
     {
         EagerMonobehaviour.InitializeAllEagerMonobehaviours();
-
         INSTANCE = this;
     }
 

@@ -18,7 +18,16 @@ namespace HyperCard
         public CardStickerHolder CardStickerHolder;
         public Image CardImage;
         public TooltipTriggerController TooltipController;
-        public Image CardFrame;
+
+        public Image CommonCardFrame;
+        public Image UncommonCardFrame;
+        public Image RareCardFrame;
+
+        /// <summary>
+        /// other purposes, tbd
+        /// </summary>
+        public Image PurpleCardFrame;
+        public Image RedCardFrame;
 
 
         public AbstractCard LogicalCard { get; set; }

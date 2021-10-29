@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class ExtensionMethods
 {
@@ -389,22 +390,46 @@ public static class ExtensionMethods
         hyperCard.SetCardEnergyCost(abstractCard.GetDisplayedEnergyCost());
         hyperCard.LogicalCardId = abstractCard.Id;
         hyperCard.LogicalCard = abstractCard;
-        
+
+        Image toEnable;
+        List<Image> mutuallyExclusiveCardFrames = new List<Image>
+        {
+            hyperCard.CommonCardFrame,
+            hyperCard.UncommonCardFrame,
+            hyperCard.RareCardFrame,
+            hyperCard.PurpleCardFrame,
+            hyperCard.RedCardFrame
+        };
+
         if (abstractCard.Rarity == Rarity.COMMON || abstractCard.Rarity == Rarity.BASIC || abstractCard.Rarity == Rarity.NOT_IN_POOL)
         {
-            hyperCard.CardFrame.color = Color.grey;
+            toEnable = hyperCard.CommonCardFrame;
         }
         else if (abstractCard.Rarity == Rarity.UNCOMMON)
         {
-            hyperCard.CardFrame.color = Color.blue;
+
+            toEnable = hyperCard.UncommonCardFrame;
         }
         else if (abstractCard.Rarity == Rarity.RARE)
         {
-            hyperCard.CardFrame.color = Color.yellow;
+            toEnable = hyperCard.RareCardFrame;
         }
         else
         {
-            hyperCard.CardFrame.color = Color.magenta;
+            toEnable = hyperCard.PurpleCardFrame;
+        }
+
+        foreach(var image in mutuallyExclusiveCardFrames)
+        {
+            if (image != toEnable)
+            {
+                image.gameObject.SetActive(false);
+            }
+            else
+            {
+                image.gameObject.SetActive(true);
+            }
+            
         }
     }
 

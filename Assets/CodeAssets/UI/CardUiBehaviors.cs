@@ -114,7 +114,6 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
             {
                 ActionManager.Instance.AttemptPlayCardFromHand(this.logicalCard, null);
             }
-
         }
 
         ServiceLocator.GameState().UnselectCard();

@@ -54,7 +54,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5784240604436191576}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -125,7 +125,7 @@ PrefabInstance:
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
@@ -135,17 +135,17 @@ PrefabInstance:
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 3
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 2
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 3274680008809042353, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 12
+      value: 334
       objectReference: {fileID: 0}
     - target: {fileID: 4764880568410005975, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
@@ -155,22 +155,22 @@ PrefabInstance:
     - target: {fileID: 4764880568410005975, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4764880568410005975, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4764880568410005975, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4764880568410005975, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5338327047488387131, guid: 95a1088fbf3f06c40be3ecc2f29ac1eb,
         type: 3}

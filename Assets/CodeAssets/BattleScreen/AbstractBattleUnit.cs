@@ -8,6 +8,8 @@ using Assets.CodeAssets.BattleEntities.Enemies;
 
 public abstract class AbstractBattleUnit
 {
+    public UnitSize UnitSize { get; set; } = UnitSize.SMALL;
+
     public string Guid = UnityEditor.GUID.Generate().ToString();
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
 
@@ -445,4 +447,13 @@ public class BattleUnitStatisticsInThisCombat
 {
     int AmountOfDamageTaken = 0;
     int NumberOfTimesStruck = 0;
+}
+
+public class UnitSize
+{
+    public string Name { get; set; }
+
+    public static UnitSize SMALL = new UnitSize { Name = "small" };
+    public static UnitSize MEDIUM = new UnitSize { Name = "medium" };
+    public static UnitSize LARGE = new UnitSize { Name = "large" };
 }

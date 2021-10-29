@@ -96,6 +96,11 @@ public class CardAnimationManager : MonoBehaviour
         {
             return new Vector3(0, 0, 0);
         }
+        if (cardsInHand == 0)
+        {
+            return new Vector3(0, 0, 0);
+        }
+
 
         var startRotationOffsetInDegrees = 20;
         var endRotationOffsetInDegrees = -20;

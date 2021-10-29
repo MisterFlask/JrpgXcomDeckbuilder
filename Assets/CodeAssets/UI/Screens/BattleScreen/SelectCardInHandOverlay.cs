@@ -1,4 +1,5 @@
-﻿using HyperCard;
+﻿using Assets.CodeAssets.Utils;
+using HyperCard;
 using System;
 using System.Collections;
 using System.Linq;
@@ -7,16 +8,11 @@ using UnityEngine.UI;
 
 namespace Assets.CodeAssets.UI.Screens.BattleScreen
 {
-    public class SelectCardInHandOverlay : MonoBehaviour
+    public class SelectCardInHandOverlay : EagerMonobehaviour
     {
         public static SelectCardInHandOverlay INSTANCE;
         public SelectCardInHandOverlay()
         {
-        }
-
-        public void Awake()
-        {
-            INSTANCE = this;
         }
 
         public TMPro.TextMeshProUGUI SelectInstructions;
@@ -103,6 +99,11 @@ namespace Assets.CodeAssets.UI.Screens.BattleScreen
                 Debug.Log("No behavior active; closing overlay");
                 Hide();
             }
+        }
+
+        public override void AwakenOnSceneStart()
+        {
+            INSTANCE = this;
         }
     }
 }

@@ -22,16 +22,17 @@ public class RookieClass : AbstractSoldierClass
     public override void LevelUpEffects(AbstractBattleUnit me)
     {
         base.LevelUpEffects(me);
-        me.RemoveCardsFromPersistentDeckByType<Bayonet>();
-        me.RemoveCardsFromPersistentDeckByType<Defend>();
-        me.RemoveCardsFromPersistentDeckByType<IneptShot>();
-        me.RemoveCardsFromPersistentDeckByType<Attack>();
-        me.RemoveCardsFromPersistentDeckByType<CoveringFire>();
+        me.RemoveCardsFromPersistentDeck(me.CardsInPersistentDeck);//Remove all cards
         me.ChangeClass(GetRandomNewClass());
 
         var newClass = me.SoldierClass;
         me.AddCardsToPersistentDeck(newClass.StartingCards());
-        var commonCardToAdd = newClass.UniqueCardRewardPool().Where(item => item.Rarity == Rarity.COMMON).PickRandom();
+        var commonCardToAdd = newClass.UniqueCardRewardPool()
+            .Where(item => item.Rarity == Rarity.COMMON).PickRandom();
+        if (commonCardToAdd == null)
+        {
+            Log.Error("No common cards in pool for class " + newClass.Name());
+        }
         me.AddCardsToPersistentDeck(new List<AbstractCard> {
             commonCardToAdd.CopyCard(),
             commonCardToAdd.CopyCard()

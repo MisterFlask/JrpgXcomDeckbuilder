@@ -116,7 +116,16 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
             DefenseText.gameObject.SetActive(false);
             DefenseImage.gameObject.SetActive(false);
         }
-        this.CharacterNameText.SetText(UnderlyingEntity.GetDisplayName(DisplayNameType.SHORT_NAME));
+
+        if (UnderlyingEntity.IsEnemy)
+        {
+            CharacterNameText.SetText("");
+        }
+        else
+        {
+            this.CharacterNameText.SetText(UnderlyingEntity.GetDisplayName(DisplayNameType.SHORT_NAME));
+        }
+
         this.HealthText.SetText($"HP: {UnderlyingEntity.CurrentHp}/{UnderlyingEntity.MaxHp}");
         // this.FatigueText.SetText($"Fatigue: {UnderlyingEntity.CurrentFatigue}/{UnderlyingEntity.MaxFatigue}");
         this.DefenseText.SetText($"{UnderlyingEntity.CurrentBlock}");

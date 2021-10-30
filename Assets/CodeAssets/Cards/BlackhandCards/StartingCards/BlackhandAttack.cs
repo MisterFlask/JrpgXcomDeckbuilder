@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.BlackhandCards.StartingCards
 {
-    public class BlackhandAttack : Attack
+    public class BlackhandAttack : Shoot
     {
         public BlackhandAttack()
         {

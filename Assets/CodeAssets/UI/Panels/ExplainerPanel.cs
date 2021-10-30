@@ -79,15 +79,15 @@ public class ExplainerPanel : MonoBehaviour
 
         var entity = battleUnitPrefab.UnderlyingEntity;
 
-        string nameTooltip = $"<color=yellow>{entity.CharacterFullName}</color>" + Newline();
+        string nameTooltip = $"<color=yellow>{entity.CharacterNicknameOrEnemyName}</color>" + Newline();
         string intentTooltip = "";
         if (battleUnitPrefab.UnderlyingEntity.CurrentIntents != null)
         {
-            intentTooltip = "<color=red>Intent:</color>";
+            intentTooltip = "<color=red>Intents:</color>";
 
             foreach (var intent in battleUnitPrefab.UnderlyingEntity.CurrentIntents)
             {
-                intentTooltip += Environment.NewLine + intent.GetGenericDescription();
+                intentTooltip += Environment.NewLine + "    *" + intent.GetGenericDescription();
             }
         }
         var basicTooltip = nameTooltip+intentTooltip;

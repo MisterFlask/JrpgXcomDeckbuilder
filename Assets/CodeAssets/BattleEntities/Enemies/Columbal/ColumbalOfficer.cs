@@ -7,6 +7,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Columbal
     {
         public ColumbalOfficer()
         {
+            //this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Bureaucrats/Officer");
 
         }
         // Use this for initialization

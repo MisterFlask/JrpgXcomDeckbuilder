@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.DiabolistCards.Starting
 {
-    public class DiabolistAttack : Attack
+    public class DiabolistAttack : Shoot
     {
         public DiabolistAttack()
         {

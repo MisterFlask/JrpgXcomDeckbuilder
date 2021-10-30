@@ -8,7 +8,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
     {
         public EfficiencySubduer()
         {
-            this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.green);
+            this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/Subduer");
             this.Description = "???";
             this.EnemyFaction = EnemyFaction.EFFICIENCY;
             CharacterNicknameOrEnemyName = "Subduer XLR";

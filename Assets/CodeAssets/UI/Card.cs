@@ -18,6 +18,7 @@ namespace HyperCard
         public CardStickerHolder CardStickerHolder;
         public Image CardImage;
         public TooltipTriggerController TooltipController;
+        public TextMeshProUGUI cardType;
 
         public Image CommonCardFrame;
         public Image UncommonCardFrame;

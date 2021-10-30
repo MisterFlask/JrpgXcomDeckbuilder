@@ -12,7 +12,9 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Columbal
             CharacterNicknameOrEnemyName = "Conscripts";
             EnemyFaction = EnemyFaction.COLUMBAL;
             SquadRole = EnemySquadRole.SMALL;
-            
+            this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Lawyers/Conscript");
+
+
         }
 
         public override List<AbstractIntent> GetNextIntents()

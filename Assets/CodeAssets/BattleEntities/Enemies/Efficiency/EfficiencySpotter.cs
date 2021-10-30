@@ -9,7 +9,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
     {
         public EfficiencySpotter()
         {
-            this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.blue);
+            this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/Spotter");
             this.Description = "???";
             this.EnemyFaction = EnemyFaction.EFFICIENCY;
             CharacterNicknameOrEnemyName = "Spotter W-203-series";

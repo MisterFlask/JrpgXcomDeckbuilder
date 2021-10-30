@@ -8,7 +8,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
     {
         public EfficiencyProselytizer()
         {
-            this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/RoboVAK", color: Color.red);
+            this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/Proselytizer");
             this.Description = "???";
             this.CharacterNicknameOrEnemyName = "Proselytizer";
             this.EnemyFaction = EnemyFaction.EFFICIENCY;

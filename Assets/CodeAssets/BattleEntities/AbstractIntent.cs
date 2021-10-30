@@ -73,11 +73,11 @@ public abstract class AbstractIntent
 
 public class IntentIcons
 {
-    public ProtoGameSprite AttackIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/sword-clash");
-    public ProtoGameSprite DefendIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/attached-shield");
+    public ProtoGameSprite AttackIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/knife-thrust");
+    public ProtoGameSprite DefendIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/round-shield");
     public ProtoGameSprite UnknownIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/uncertainty");
     public ProtoGameSprite MagicIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/magick-trick");
-    public ProtoGameSprite DebuffIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/poison-bottle");
+    public ProtoGameSprite DebuffIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/poison-bottle-2");
     public ProtoGameSprite BuffIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/unstable-orb");
     public ProtoGameSprite DazedIntent = ProtoGameSprite.FromGameIcon("Sprites/IntentIcons/star-swirl");
 

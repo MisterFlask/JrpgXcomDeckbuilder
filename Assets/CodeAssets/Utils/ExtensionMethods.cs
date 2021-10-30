@@ -385,12 +385,11 @@ public static class ExtensionMethods
         hyperCard.SetCardTitle(abstractCard.Name);
         hyperCard.SetCardDescription(BuildTextBoxStringForCard(abstractCard));
         var ownerName = abstractCard.Owner?.CharacterFullName ?? "Communal";
-        hyperCard.SetCardTopText($"{ownerName} | {abstractCard.CardType}");
+        hyperCard.SetCardTopText($"{abstractCard.CardType}");
 
         hyperCard.SetCardEnergyCost(abstractCard.GetDisplayedEnergyCost());
         hyperCard.LogicalCardId = abstractCard.Id;
         hyperCard.LogicalCard = abstractCard;
-
         Image toEnable;
         List<Image> mutuallyExclusiveCardFrames = new List<Image>
         {

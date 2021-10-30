@@ -2,6 +2,7 @@
 using System.Collections;
 using Assets.CodeAssets.Cards;
 using System;
+using Assets.CodeAssets.UI.CardParts;
 
 /// <summary>
 /// These are used for card "passives"
@@ -12,10 +13,6 @@ public abstract class AbstractCardSticker
     public AbstractCard card => CardAttachedTo;
     public CardStickerPrefab Prefab { get; set; }
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
-
-    public string Title_deprecated { get; set; } = "Card Sticker Title";
-
-    public string Description_deprecated { get; set; } = "Card Sticker Description";
 
     /// <summary>
     /// Added onto the end of the card description.
@@ -88,6 +85,10 @@ public abstract class AbstractCardSticker
         return true;
     }
 
+    public virtual CardVisualTag GetVisualTagIfAny()
+    {
+        return null;
+    }
 }
 
 public class NascentCardSticker: AbstractCardSticker
@@ -108,7 +109,6 @@ public class ExertCardSticker: AbstractCardSticker
 
 public class GildedCardSticker: AbstractCardSticker
 {
-
     public GildedCardSticker(int initialValue)
     {
         this.GildedValue = initialValue;

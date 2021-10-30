@@ -396,15 +396,15 @@ public abstract class AbstractCard
         var cardType = CardType;
         if (cardType == CardType.AttackCard)
         {
-            CardVisualTags.Add(CardVisualTag.AttackIcon);
+            //CardVisualTags.Add(CardVisualTag.AttackIcon);
         }
         else if (cardType == CardType.SkillCard)
         {
-            CardVisualTags.Add(CardVisualTag.SkillIcon);
+            //CardVisualTags.Add(CardVisualTag.SkillIcon);
         }
         else if (cardType == CardType.PowerCard)
         {
-            CardVisualTags.Add(CardVisualTag.PowerIcon);
+            //CardVisualTags.Add(CardVisualTag.PowerIcon);
         }
     }
 

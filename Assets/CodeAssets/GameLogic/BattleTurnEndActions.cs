@@ -11,22 +11,17 @@ public class BattleTurnEndActions
     internal void EndTurn()
     {
         actionManager.DiscardHand();
-        ActionManager.Instance.DoAThing(() => 
+
+        gameState.AllyUnitsInBattle.ForEachCreateAction(item => item.OnTurnEnd());
+
+        gameState.EnemyUnitsInBattle.ForEachCreateAction(item => item.OnTurnEnd());
+
+        gameState.EnemyUnitsInBattle.ForEachCreateAction(item => item.ExecuteOnIntentIfAvailable());
+
+        GameState.Instance.Deck.TotalDeckList.ForEachCreateAction(item =>
         {
-            gameState.AllyUnitsInBattle.ForEach(item => item.OnTurnEnd());
+            item.RestOfTurnCostMod = 0; // these get reset to 0 at the beginning of each turn.
         });
-
-        ActionManager.Instance.DoAThing(() =>
-        {
-            gameState.EnemyUnitsInBattle.ForEach(item => item.OnTurnEnd());
-        });
-
-        gameState.EnemyUnitsInBattle.ForEach(item => item.ExecuteOnIntentIfAvailable());
-
-        foreach(var card in GameState.Instance.Deck.TotalDeckList)
-        {
-            card.RestOfTurnCostMod = 0; // these get reset to 0 at the beginning of each turn.
-        }
 
         StartNewTurn();
     }

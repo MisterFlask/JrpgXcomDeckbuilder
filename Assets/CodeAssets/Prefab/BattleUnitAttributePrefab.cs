@@ -33,11 +33,7 @@ public class BattleUnitAttributePrefab : MonoBehaviour, IPointerEnterHandler, IP
         {
             return;
         }
-
-        if (CorrespondingAttribute.Stacks != 1 && CorrespondingAttribute.Stacks != 0)
-        {
-            Text.SetText(CorrespondingAttribute.Stacks.ToString());
-        }
+        Text.SetText(CorrespondingAttribute.Stacks.ToString());
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -7,6 +7,7 @@ public class BurningStatusEffect : AbstractStatusEffect
 
     public BurningStatusEffect()
     {
+        Name = "Burning";
         this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("burning-forest");
     }
 

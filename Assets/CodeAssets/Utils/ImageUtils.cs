@@ -105,6 +105,11 @@ public abstract class ProtoGameSprite
         return FromGameIcon("Sprites/Cards/StatusCards/" + name);
 
     }
+
+    internal static ProtoGameSprite EmblemIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/ClassEmblems/" + name);
+    }
 }
 
 public static class ImageExtensions

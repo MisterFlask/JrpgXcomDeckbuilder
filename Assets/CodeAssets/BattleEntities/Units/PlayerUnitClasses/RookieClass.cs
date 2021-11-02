@@ -8,6 +8,11 @@ using Assets.CodeAssets.Cards.RookieCards;
 
 public class RookieClass : AbstractSoldierClass
 {
+
+    public RookieClass()
+    {
+        EmblemIcon = ProtoGameSprite.EmblemIcon("dread-emblem");
+    }
     public override List<AbstractCard> StartingCards()
     {
         return new List<AbstractCard>

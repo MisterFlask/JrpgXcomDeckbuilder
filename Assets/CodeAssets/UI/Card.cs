@@ -30,7 +30,7 @@ namespace HyperCard
         public Image PurpleCardFrame;
         public Image RedCardFrame;
 
-
+        public Image ClassEmblem;
         public AbstractCard LogicalCard { get; set; }
         public string LogicalCardId { get; set; }
 

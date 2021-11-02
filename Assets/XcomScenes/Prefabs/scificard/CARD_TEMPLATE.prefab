@@ -1497,6 +1497,7 @@ MonoBehaviour:
   RareCardFrame: {fileID: 1700649568742524805}
   PurpleCardFrame: {fileID: 8762216666149549842}
   RedCardFrame: {fileID: 3261601095366048626}
+  ClassEmblem: {fileID: 588898874567115348}
 --- !u!61 &-5625214315048553695
 BoxCollider2D:
   m_ObjectHideFlags: 0

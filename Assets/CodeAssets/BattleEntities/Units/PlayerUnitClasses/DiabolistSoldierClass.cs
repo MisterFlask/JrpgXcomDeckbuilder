@@ -7,6 +7,10 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
 {
     public class DiabolistSoldierClass : AbstractSoldierClass
     {
+        public DiabolistSoldierClass()
+        {
+            EmblemIcon = ProtoGameSprite.EmblemIcon("horned-skull");
+        }
         public override string Name()
         {
 

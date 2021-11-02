@@ -35,6 +35,8 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public TooltipTriggerController TooltipController;
     public TooltipTrigger TooltipTrigger;
 
+    public Image EmblemImage;
+
     Color OriginalImageColor { get; set; }
     Color BrighterImageColor { get; set; }
 
@@ -77,6 +79,16 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (UnderlyingEntity == null)
         {
             return;
+        }
+
+        if (UnderlyingEntity.SoldierClass != null && !UnderlyingEntity.IsEnemy)
+        {
+            EmblemImage.gameObject.SetActive(true);
+            EmblemImage.sprite = UnderlyingEntity.SoldierClass.EmblemIcon.ToSprite();
+        }
+        else
+        {
+            EmblemImage.gameObject.SetActive(false);
         }
 
         // no advance or retreat button

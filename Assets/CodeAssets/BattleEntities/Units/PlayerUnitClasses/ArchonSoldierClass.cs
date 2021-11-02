@@ -6,6 +6,10 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
 {
     public class ArchonSoldierClass : AbstractSoldierClass
     {
+        public ArchonSoldierClass()
+        {
+            EmblemIcon = ProtoGameSprite.EmblemIcon("archon-emblem");
+        }
         public override string Name()
         {
             return "Archon";

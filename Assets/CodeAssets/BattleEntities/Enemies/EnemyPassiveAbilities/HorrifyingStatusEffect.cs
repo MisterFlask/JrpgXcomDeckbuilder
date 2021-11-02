@@ -7,6 +7,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.EnemyPassiveAbilities
     {
         public HorrifyingStatusEffect()
         {
+
             Name = "Horrifying";
         }
 

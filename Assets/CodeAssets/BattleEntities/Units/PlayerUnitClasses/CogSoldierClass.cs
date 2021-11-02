@@ -7,6 +7,11 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
 {
     public class CogSoldierClass : AbstractSoldierClass
     {
+
+        public CogSoldierClass()
+        {
+            EmblemIcon = ProtoGameSprite.EmblemIcon("cog");
+        }
         public override string Name()
         {
             return "Cog";

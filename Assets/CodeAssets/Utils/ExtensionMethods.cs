@@ -426,7 +426,12 @@ public static class ExtensionMethods
             toEnable = hyperCard.PurpleCardFrame;
         }
 
-        foreach(var image in mutuallyExclusiveCardFrames)
+        if (abstractCard.Owner != null)
+        {
+            hyperCard.ClassEmblem.sprite = abstractCard.Owner.SoldierClass.EmblemIcon.ToSprite();
+        }
+
+        foreach (var image in mutuallyExclusiveCardFrames)
         {
             if (image != toEnable)
             {

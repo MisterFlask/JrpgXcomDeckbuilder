@@ -608,7 +608,8 @@ public class ActionManager : MonoBehaviour
     {
         Require.NotNull(targetUnit);
         QueuedActions.DelayedActionWithCustomTrigger("ShakeUnit", () => {
-            if (targetUnit.IsDead)
+
+            if (targetUnit.IsDead || sourceUnit.IsDead)
             {
                 // do nothing if it's already dead
                 IsCurrentActionFinished = true;

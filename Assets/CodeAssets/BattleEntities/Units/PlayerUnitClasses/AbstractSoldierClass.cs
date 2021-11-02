@@ -24,6 +24,7 @@ public abstract class AbstractSoldierClass
         };
     }
 
+    public ProtoGameSprite EmblemIcon { get; set; } = ProtoGameSprite.Default;
     public AbstractCard GetRandomCardOfRarity(Rarity rarity)
     {
         var possibilities=  UniqueCardRewardPool().Where(item => item.Rarity.Equals(rarity));

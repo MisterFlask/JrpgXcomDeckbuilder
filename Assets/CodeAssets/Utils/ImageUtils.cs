@@ -26,7 +26,6 @@ public class ImageUtils
         }
         return loaded;
     }
-
 }
 
 public abstract class ProtoGameSprite
@@ -99,6 +98,12 @@ public abstract class ProtoGameSprite
     public static ProtoGameSprite VisualTagIcon(string name)
     {
         return FromGameIcon("Sprites/Cards/CardVisualTags/" + name);
+    }
+
+    internal static ProtoGameSprite StatusCardIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/StatusCards/" + name);
+
     }
 }
 

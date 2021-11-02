@@ -9,7 +9,7 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
     {
         public BlackhandSoldierClass()
         {
-
+            EmblemIcon = ProtoGameSprite.EmblemIcon("flamethrower-soldier");
         }
 
         public override string Name()

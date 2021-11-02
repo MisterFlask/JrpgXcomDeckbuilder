@@ -241,6 +241,7 @@ MonoBehaviour:
   CardStickerHolder: {fileID: 0}
   CardImage: {fileID: 0}
   TooltipController: {fileID: 0}
+  cardType: {fileID: 0}
   CommonCardFrame: {fileID: 0}
   UncommonCardFrame: {fileID: 0}
   RareCardFrame: {fileID: 0}
@@ -47542,6 +47543,61 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 448531249}
     m_Modifications:
+    - target: {fileID: 3453480722457634690, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_text
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634690, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 169.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634690, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 1107.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634690, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634690, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634690, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634690, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634691, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 364.84036
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634691, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 189.40724
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634691, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 13.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3453480722457634691, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -9.4
+      objectReference: {fileID: 0}
     - target: {fileID: 5182049491975353144, guid: 450e2d6c04ef70e41a957bb61b5d9ac4,
         type: 3}
       propertyPath: m_Pivot.x

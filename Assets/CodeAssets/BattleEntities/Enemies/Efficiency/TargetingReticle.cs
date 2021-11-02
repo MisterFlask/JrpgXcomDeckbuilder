@@ -16,7 +16,9 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
 
         public TargetingReticle()
         {
-            Name = "Targeting Reticle";
+            Name = "Efficiency Targeting Reticle";
+            this.ProtoSprite = ProtoGameSprite.StatusCardIcon("targeting-reticle");
+
         }
 
         public override string DescriptionInner()

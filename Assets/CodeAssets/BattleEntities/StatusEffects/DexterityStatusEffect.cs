@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// todo: Do we actually want this?  Maybe call it "technique"?
 public class DexterityStatusEffect : AbstractStatusEffect
 {
     public DexterityStatusEffect()
     {
         this.Name = "Technique";
-        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/leapfrog", Color.cyan);
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("body-balance");
         this.Stackable = true;
         this.AllowedToGoNegative = true;
     }

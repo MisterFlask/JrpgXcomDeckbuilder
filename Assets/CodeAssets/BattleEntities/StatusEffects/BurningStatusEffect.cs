@@ -7,7 +7,7 @@ public class BurningStatusEffect : AbstractStatusEffect
 
     public BurningStatusEffect()
     {
-        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/firewall", Color.red);
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("burning-forest");
     }
 
     public override void OnTurnEnd()

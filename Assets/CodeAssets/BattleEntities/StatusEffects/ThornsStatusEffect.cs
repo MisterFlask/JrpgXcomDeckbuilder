@@ -6,7 +6,7 @@ public class ThornsStatusEffect : AbstractStatusEffect
     public ThornsStatusEffect()
     {
         Name = "Thorns";
-        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/thorny-vine", Color.green);
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("spiked-tentacle");
     }
 
     public override void OnStruck(AbstractBattleUnit unitStriking, AbstractCard cardUsedIfAny, int totalDamageTaken)

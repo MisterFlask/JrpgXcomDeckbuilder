@@ -198,35 +198,41 @@ public class DoomLevel
 {
     public int BaseHealth { get; set; }
     public int BaseDamage { get; set; }
-
+    public string Description { get; set; }
     public static DoomLevel EASY = new DoomLevel
     {
         BaseHealth = 40,
-        BaseDamage = 10
+        BaseDamage = 10,
+        Description = "Easy"
     };
     public static DoomLevel MEDIUM = new DoomLevel
     {
         BaseHealth = 50,
-        BaseDamage = 12
+        BaseDamage = 12,
+        Description = "Medium"
     };
     public static DoomLevel HARD = new DoomLevel
     {
         BaseHealth = 60,
-        BaseDamage = 14
+        BaseDamage = 14,
+        Description = "Hard"
     };
     public static DoomLevel VERY_HARD = new DoomLevel
     {
         BaseHealth = 70,
-        BaseDamage = 16
+        BaseDamage = 16,
+        Description = "Very Hard"
     };
     public static DoomLevel OH_NO = new DoomLevel
     {
         BaseHealth = 80,
-        BaseDamage = 20
+        BaseDamage = 20,
+        Description = "Oh No"
     };
     public static DoomLevel DATA_EXPUNGED = new DoomLevel
     {
         BaseHealth = 90,
-        BaseDamage = 25
+        BaseDamage = 25,
+        Description = "[DATA EXPUNGED]"
     };
 }

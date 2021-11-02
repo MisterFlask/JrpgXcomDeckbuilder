@@ -8,7 +8,9 @@ namespace Assets.CodeAssets.BattleEntities.StatusEffects
         public TemporaryStrengthStatusEffect()
         {
             this.Name = "Temporary Strength";
-            this.AllowedToGoNegative = true;
+            this.AllowedToGoNegative = true; 
+            this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("weight-lifting-up");
+
         }
 
         public override int DamageDealtAddition()

@@ -6,7 +6,8 @@ public class TemporaryThorns : AbstractStatusEffect
     public TemporaryThorns()
     {
         Name = "Temporary Thorns";
-        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/thorny-vine", Color.yellow);
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("spiked-tentacle");
+
     }
 
     public override void OnStruck(AbstractBattleUnit unitStriking, AbstractCard cardUsedIfAny, int totalDamageTaken)

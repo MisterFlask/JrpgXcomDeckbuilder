@@ -8,12 +8,11 @@ public class StressStatusEffect : AbstractStatusEffect
     public StressStatusEffect()
     {
         Name = "Stress";
-        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/cracked-glass", Color.red);
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("shattered-heart");
     }
-    public override string Description => $"If this goes above a character's maximum Hit Points," +
-        $" the character gets a permanent Madness card to their " +
-        $"deck and the Snapped status effect.  If this goes above a character's " +
-        $"maximum hit points while Snapped, the character <color=red>dies.</color>";
+    public override string Description => $"If this goes above 100," +
+        $"stress goes to 0, the character gets a permanent Madness card to their " +
+        $"deck and the Snapped status effect (increases cost of all cards by 1.)";
 
     public override void OnApplicationOrIncrease()
     {

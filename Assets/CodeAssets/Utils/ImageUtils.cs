@@ -88,6 +88,14 @@ public abstract class ProtoGameSprite
     {
         return FromGameIcon("Sprites/OtherIcons/" + name);
     }
+    public static ProtoGameSprite AttributeOrAugmentIcon(string name)
+    {
+        return FromGameIcon("Sprites/AttributesAndAugments/" + name);
+    }
+    public static ProtoGameSprite MadnessIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/Madness/" + name);
+    }
     public static ProtoGameSprite VisualTagIcon(string name)
     {
         return FromGameIcon("Sprites/Cards/CardVisualTags/" + name);

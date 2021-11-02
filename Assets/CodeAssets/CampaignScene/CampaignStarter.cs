@@ -35,10 +35,6 @@ public class CampaignStarter : MonoBehaviour
             GetHigherLevelSoldier(),
             GetDeadSoldier()
         };
-
-        foreach (var soldier in CampaignMapState.Roster) {
-            soldier.ApplySoldierPerk(new DealGreaterDamageToEnemiesWithStatusEffectPerk(new BurningStatusEffect(), 1, "Firefighter"));
-        }
     }
 
     private static AbstractBattleUnit GetDeadSoldier()

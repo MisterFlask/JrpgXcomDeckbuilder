@@ -17,6 +17,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SetCommonCardAttributes("Abyssal Gaze", Rarity.COMMON, TargetType.ENEMY, CardType.SkillCard, 2);
             this.BaseDefenseValue = 12;
             ProtoSprite = ProtoGameSprite.DiabolistIcon("terror");
+            MagicNumber = 20;
         }
 
         public override EnergyPaidInformation GetNetEnergyCost()
@@ -26,13 +27,13 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
 
         public override string DescriptionInner()
         {
-            return "Apply 20 Binding and 1 Vulnerable to the enemy.  Bloodprice.";
+            return $"Apply {MagicNumber} Binding and 1 Vulnerable to the enemy.  Bloodprice.";
         }
 
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().ApplyStatusEffect(target, new BindingStatusEffect(), 20);
+            action().ApplyStatusEffect(target, new BindingStatusEffect(), MagicNumber);
             action().ApplyStatusEffect(target, new VulnerableStatusEffect(), 1);
         }
 

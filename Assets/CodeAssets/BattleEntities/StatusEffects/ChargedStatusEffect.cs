@@ -11,6 +11,8 @@ namespace Assets.CodeAssets.BattleEntities.StatusEffects
 
         public ChargedStatusEffect()
         {
+            this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("car-battery");
+
             Name = "Charged";
         }
 

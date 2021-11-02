@@ -6,7 +6,7 @@ public class ArmoredStatusEffect : AbstractStatusEffect
     public ArmoredStatusEffect()
     {
         this.Name = "Armored";
-        this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/fast-forward-button");
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("abdominal-armor");
     }
 
     public override string Description => "Decreases attack damage taken by the number of stacks.  Ignored by Precision.";

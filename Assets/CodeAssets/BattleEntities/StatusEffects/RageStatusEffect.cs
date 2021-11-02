@@ -9,6 +9,8 @@ namespace Assets.CodeAssets.BattleEntities.StatusEffects
 
         public RageStatusEffect()
         {
+            this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("enrage");
+
             Name = "Rage";
         }
 

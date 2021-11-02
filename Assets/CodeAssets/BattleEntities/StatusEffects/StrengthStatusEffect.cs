@@ -6,7 +6,7 @@ public class StrengthStatusEffect : AbstractStatusEffect
     public StrengthStatusEffect()
     {
         this.Name = "Power";
-        this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/weight-lifting-up");
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("weight-lifting-up");
         this.Stackable = true;
         this.AllowedToGoNegative = true;
     }

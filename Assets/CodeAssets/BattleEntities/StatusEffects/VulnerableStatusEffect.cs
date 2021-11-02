@@ -6,9 +6,9 @@ public class VulnerableStatusEffect : AbstractStatusEffect
     public VulnerableStatusEffect()
     {
         Name = "Vulnerable";
-        this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/shield-minus", Color.red);
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("achilles-heel");
     }
-    
+
     public override string Description => $"increases damage received by 50%";
 
     public override float DamageReceivedIncrementalMultiplier()

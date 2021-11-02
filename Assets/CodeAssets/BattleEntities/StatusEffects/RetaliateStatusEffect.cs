@@ -6,7 +6,7 @@ public class RetaliateStatusEffect : AbstractStatusEffect
     public RetaliateStatusEffect()
     {
         Name = "Retaliate";
-        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/thorny-vine", Color.red);
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("armor-punch");
     }
 
     public override void OnStruck(AbstractBattleUnit unitStriking, AbstractCard cardUsedIfAny, int totalDamageTaken)

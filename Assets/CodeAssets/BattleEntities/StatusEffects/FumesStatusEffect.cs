@@ -6,7 +6,7 @@ public class FumesStatusEffect : AbstractStatusEffect
     public FumesStatusEffect()
     {
         Name = "Fumes";
-        ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon("Sprites/gas-stove", Color.yellow);
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("matchbox");
     }
     public override string Description => "Target deals a flat -2 damage. Ticks down by half its stacks per turn.  " +
         "If Fuel is applied, removes all Flammable and adds that much Burning.";

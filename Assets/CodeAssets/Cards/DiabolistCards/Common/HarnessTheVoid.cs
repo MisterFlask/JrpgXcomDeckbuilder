@@ -15,17 +15,18 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             this.SoldierClassCardPools.Add(typeof(DiabolistSoldierClass));
             this.SetCommonCardAttributes("Harness the Void", Rarity.COMMON, TargetType.ALLY, CardType.SkillCard, 2);
             ProtoSprite = ProtoGameSprite.DiabolistIcon("pentagram-rose");
+            MagicNumber = 10;
         }
 
 
         public override string DescriptionInner()
         {
-            return "Apply 10 temp HP.  Sacrifice: exhaust, and ALL allies gain 1 strength.";
+            return $"Apply {MagicNumber} temp HP.  Sacrifice: exhaust, and ALL allies gain 1 strength.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
-            action().ApplyStatusEffect(target, new TemporaryHpStatusEffect(), 10);
+            action().ApplyStatusEffect(target, new TemporaryHpStatusEffect(), MagicNumber);
 
             this.Sacrifice(() =>
             {

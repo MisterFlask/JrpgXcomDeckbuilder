@@ -10,6 +10,8 @@ namespace Assets.CodeAssets.BattleEntities.StatusEffects
         public BarricadeStatusEffect()
         {
             Name = "Barricade";
+            this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("barricade");
+
         }
 
         public override string Description => $"Decrease received damage by {DisplayedStacks()}.  Decreases by half each turn.";

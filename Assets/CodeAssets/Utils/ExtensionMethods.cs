@@ -428,7 +428,12 @@ public static class ExtensionMethods
 
         if (abstractCard.Owner != null)
         {
+            hyperCard.ClassEmblem.gameObject.SetActive(true);
             hyperCard.ClassEmblem.sprite = abstractCard.Owner.SoldierClass.EmblemIcon.ToSprite();
+        }
+        else
+        {
+            hyperCard.ClassEmblem.gameObject.SetActive(false);
         }
 
         foreach (var image in mutuallyExclusiveCardFrames)

@@ -28,7 +28,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
                     this,
                     200,
                     1),
-                IntentsFromPercentBase.DefendSelf(this, 50));
+                IntentsFromPercentBase.StatusEffectToRandomPc(this, new WeakenedStatusEffect(), 4));
         }
     }
 }

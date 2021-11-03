@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Linq;
 
 public class DebuffOtherIntent : SimpleIntent
 {
@@ -15,14 +16,27 @@ public class DebuffOtherIntent : SimpleIntent
         return new DebuffOtherIntent(owner, onPerformance);
     }
 
+    public static DebuffOtherIntent StatusEffectToRandomPc(
+        AbstractBattleUnit source,
+        AbstractStatusEffect effect,
+        int stacks)
+    {
+        return StatusEffect(source,
+            GameState.Instance.AllyUnitsInBattle.Where(item => !item.IsDead).PickRandom(),
+            effect, 
+            stacks);
+
+    }
+
     public static DebuffOtherIntent StatusEffect(
         AbstractBattleUnit source,
         AbstractBattleUnit target, 
-        AbstractStatusEffect effect)
+        AbstractStatusEffect effect,
+        int stacks)
     {
         return new DebuffOtherIntent(source, () =>
         {
-            ActionManager.Instance.ApplyStatusEffect(target, effect, effect.Stacks);
+            ActionManager.Instance.ApplyStatusEffect(target, effect, stacks);
         });
     }
 

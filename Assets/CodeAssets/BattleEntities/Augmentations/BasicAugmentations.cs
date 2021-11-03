@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.CodeAssets.BattleEntities.Augmentations
 {
     public static class BasicAugmentations
     {
-        public static AbstractSoldierPerk GrantsPowerAugmentation = new GrantsStatusEffectPerk("Power Fist", "Increases this soldier's Power by 1.", new StrengthStatusEffect(), 1);
+        public static AbstractSoldierPerk GrantsPowerAugmentation = new GrantsStatusEffectPerk("Power Fist", "Increases this soldier's Strength by 1.", new StrengthStatusEffect(), 1);
         public static AbstractSoldierPerk GrantsAblativeArmorAugmentation = new GrantsStatusEffectPerk("Ablative Armor", "Decreases ALL damage taken by 1", new ArmoredStatusEffect(), 1);
         public static AbstractSoldierPerk IncreaseHpOnGettingNewCardsPerk = new HpGainOnCardAddedPerk();
+        public static AbstractSoldierPerk GrantsDexterityAugmentation = new GrantsStatusEffectPerk("Power Legs", "Increases this soldier's Dexterity by 1.", new DexterityStatusEffect(), 1);
+        public static AbstractSoldierPerk GrantPowerToSpecificCardPerk = new GrantsStatusEffectPerk("Buzzsaw", "Increases the power of a random card in your deck by 4.", new DexterityStatusEffect(), 1);
 
         public static List<AbstractSoldierPerk> BasicAugmentationsList = new List<AbstractSoldierPerk>
         {
             GrantsPowerAugmentation,
             GrantsAblativeArmorAugmentation,
-            IncreaseHpOnGettingNewCardsPerk
+            IncreaseHpOnGettingNewCardsPerk,
+            GrantsDexterityAugmentation
         }; 
     }
 
@@ -103,6 +107,8 @@ namespace Assets.CodeAssets.BattleEntities.Augmentations
         }
     }
 
+
+
     public class HpGainOnCardAddedPerk : AbstractSoldierPerk
     {
         public HpGainOnCardAddedPerk()
@@ -123,6 +129,53 @@ namespace Assets.CodeAssets.BattleEntities.Augmentations
         public override string Description()
         {
             return $"Whenever you add a card to your deck, increase your HP by {Stacks}.";
+        }
+    }
+
+    /// <summary>
+    /// Applies a card sticker to a random card in your deck.
+    /// </summary>
+    public abstract class ApplyStickerToRandomCardPerk : AbstractSoldierPerk
+    {
+        public AbstractCardSticker StickerToApply;
+
+        public virtual bool IsApplicableToCard(AbstractCard card)
+        {
+            return StickerToApply.IsCardTagApplicable(card);
+        }
+
+        public string GivenName { get; set; }
+        public string GivenDescription { get; set; }
+        public ApplyStickerToRandomCardPerk()
+        {
+
+        }
+
+        public override bool CanAssignToSoldier(AbstractBattleUnit soldier)
+        {
+            var applicableCards = soldier.CardsInPersistentDeck
+                            .Where(item => IsApplicableToCard(item));
+            return applicableCards.Any();
+        }
+
+        public override void OnAssignment(AbstractBattleUnit abstractBattleUnit)
+        {
+            //todo
+            var applicableCard = abstractBattleUnit.CardsInPersistentDeck
+                .Where(item => IsApplicableToCard(item))
+                .PickRandom();
+
+            applicableCard.AddSticker(StickerToApply);
+        }
+
+        public override string Name()
+        {
+            return GivenName;
+        }
+
+        public override string Description()
+        {
+            return GivenDescription;
         }
     }
 

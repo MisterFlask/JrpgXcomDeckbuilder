@@ -33,6 +33,14 @@ public abstract class SimpleIntent : AbstractIntent
 
 public static class IntentsFromPercentBase
 {
+
+    public static List<AbstractIntent> ApplyStressToRandomOther(AbstractBattleUnit source,
+        int amountOfStress)
+    {
+        throw new Exception("Not implemented yet");
+        //todo
+    }
+
     public static List<AbstractIntent> AttackRandomPc(
         AbstractBattleUnit source,
         int percentDamage, int numHits = 1)
@@ -53,7 +61,7 @@ public static class IntentsFromPercentBase
         return new List<AbstractIntent>
         {
             attackIntent,
-            DebuffOtherIntent.StatusEffect(source, attackIntent.Target, debuff_requiresSetStacks.CloneStatusEffect())
+            DebuffOtherIntent.StatusEffect(source, attackIntent.Target, debuff_requiresSetStacks.CloneStatusEffect(), debuff_requiresSetStacks.Stacks)
         };
     }
 
@@ -106,6 +114,31 @@ public static class IntentsFromPercentBase
     {
         return new BuffSelfIntent(self, statusEffect, stacks)
             .ToSingletonList<AbstractIntent>();
+    }
+
+    public static List<AbstractIntent> StatusEffectToRandomPc(
+        AbstractBattleUnit source,
+        AbstractStatusEffect effect,
+        int stacks)
+    {
+        return DebuffOtherIntent.StatusEffectToRandomPc(
+            source, 
+            effect, stacks
+            ).ToSingletonList<AbstractIntent>();
+    }
+
+        public static List<AbstractIntent> BuffOther(AbstractBattleUnit self,
+        AbstractStatusEffect statusEffect,
+        int stacks = 1,
+        Func<AbstractBattleUnit> battleUnitDecider = null)
+    {
+        var intent = new BuffOtherIntent(self, statusEffect, stacks);
+        if (battleUnitDecider != null)
+        {
+            intent.BattleUnitDeciderFunction = battleUnitDecider;
+        }
+        return intent.ToSingletonList<AbstractIntent>();
+
     }
     public static List<AbstractIntent> DefendSelf(AbstractBattleUnit self,
         int shieldPercent)

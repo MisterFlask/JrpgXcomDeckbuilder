@@ -13,7 +13,7 @@ public class GoldMissionReward : AbstractMissionReward
         GameState.Instance.Credits += MoneyEarned;
     }
 
-    public override string Description()
+    public override string GenericDescription()
     {
         return $"Earn {MoneyEarned} gold.";
     }

@@ -86,12 +86,14 @@ public class GameState
     public ShopData ShopData { get; } = new ShopData();
 
     public DoomCounter DoomCounter { get; } = new DoomCounter();
+    public StrategicDetails StrategicDetails { get; } = new StrategicDetails();
 
     public int cardsPlayedThisTurn = 0;
 
     #region UI State
     public AbstractBattleUnit CharacterSelected { get; set; }
     public int Day { get; set; }
+    public bool GateMissionUnlocked { get; internal set; }
 
     public bool NextRegionUnlocked { get; set; } = false;
 

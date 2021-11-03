@@ -36,7 +36,6 @@ public class MissionDescriptorPrefab : MonoBehaviour
         }
         reasonWhyNot = "";
         return true;
-
     }
 
     public void Update()

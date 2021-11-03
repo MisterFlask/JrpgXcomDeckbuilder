@@ -24,7 +24,7 @@ namespace Assets.CodeAssets.UI
                 {
                     foreach (var reward in GameState.Instance.CurrentMission.Rewards)
                     {
-                        text = text + reward.Description() + "\n";
+                        text = text + reward.GenericDescription() + "\n";
                     }
                 }
 

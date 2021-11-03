@@ -20,19 +20,19 @@ public abstract class AbstractMission
         var start = $"Kill enemies for a reward!  Rewards include: ";
         foreach(var reward in Rewards)
         {
-            start += Environment.NewLine + "*" + reward.Description();
+            start += Environment.NewLine + "*" + reward.GenericDescription();
         }
 
         var enemiesText = this.EnemySquad.Description;
 
         start += Environment.NewLine + $"Foes: {enemiesText}\n";
-        start += Environment.NewLine + "Days left: " + DaysUntilExpiration;
+        // start += Environment.NewLine + "Days left: " + DaysUntilExpiration;
         return start;
     }
 
-    internal static ProtoGameSprite RetrieveIconFromMissionIconFolder(string path)
+    internal static ProtoGameSprite RetrieveIconFromMissionIconFolder(string name)
     {
-        return ProtoGameSprite.FromGameIcon(path: "Sprites/MissionIcons/" + path);
+        return ProtoGameSprite.MissionIcon(name);
     }
 
 
@@ -67,6 +67,11 @@ public abstract class AbstractMission
     public virtual void OnStartOfBattle()
     {
 
+    }
+
+    public virtual bool CanGoOnMission()
+    {
+        return true;
     }
 
     public Squad EnemySquad { get; set; }

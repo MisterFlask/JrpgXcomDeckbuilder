@@ -30,7 +30,17 @@ public static class MissionGenerator
                 Name = AbstractMission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
                 EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash")
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("key")
+            },
+            new KillEnemiesMission()
+            {
+                DaysUntilExpiration = 1000,
+                Difficulty = 1,
+                MaxNumberOfFriendlyCharacters = 3,
+                Name = AbstractMission.GenerateMissionName(),
+                Rewards = new List<AbstractMissionReward>{new RandomAugmentationMissionReward()},
+                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber),
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("relic")
             },
             new KillEnemiesMission()
             {
@@ -41,8 +51,27 @@ public static class MissionGenerator
                 Rewards = new List<AbstractMissionReward>{new GateBypassMissionReward()},
                 EnemySquad = MissionRules.GetEliteSquad(),
                 ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("gate")
+            },
+            new KillEnemiesMission()
+            {
+                DaysUntilExpiration = 1000,
+                Difficulty = 2,
+                MaxNumberOfFriendlyCharacters = 3,
+                Name = AbstractMission.GenerateMissionName(),
+                Rewards = new List<AbstractMissionReward>{new GateKeyMissionReward()},
+                EnemySquad = MissionRules.GetEliteSquad(),
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("key")
+            },
+            new KillEnemiesMission()
+            {
+                DaysUntilExpiration = 1000,
+                Difficulty = 2,
+                MaxNumberOfFriendlyCharacters = 3,
+                Name = AbstractMission.GenerateMissionName(),
+                Rewards = new List<AbstractMissionReward>{new GateKeyMissionReward()},
+                EnemySquad = MissionRules.GetEliteSquad(),
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("key")
             }
-
         };
 
         foreach(var mission in missions)

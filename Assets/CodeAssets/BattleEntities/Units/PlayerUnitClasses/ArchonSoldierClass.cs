@@ -19,8 +19,8 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
         {
             return new List<AbstractCard>
             {
-                new Shoot(),
-                new Shoot(),
+                new Gunfire(),
+                new Gunfire(),
                 new Defend(),
                 new Defend()
             };

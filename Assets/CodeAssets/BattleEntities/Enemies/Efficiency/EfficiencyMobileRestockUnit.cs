@@ -12,6 +12,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
             this.Description = "???";
             this.CharacterNicknameOrEnemyName = "Mobile Restock Unit";
             this.EnemyFaction = EnemyFaction.EFFICIENCY;
+            this.MaxHp = 55;
             this.ApplyStatusEffect(new ArmoredStatusEffect(), stacks: 1);
             UnitSize = UnitSize.MEDIUM;
         }

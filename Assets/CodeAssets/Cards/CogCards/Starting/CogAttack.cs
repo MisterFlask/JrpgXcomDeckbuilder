@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.CogCards.Starting
 {
-    public class CogAttack : Shoot
+    public class CogAttack : Gunfire
     {
         public CogAttack()
         {

@@ -86,22 +86,23 @@ public abstract class AbstractMission
 
 }
 
-
-public class MissionTerrain 
+public class MissionTerrain
 {
     public static MissionTerrain FOREST = new MissionTerrain
     {
         TerrainImage = ProtoGameSprite.TerrainIcon("forest"),
         TerrainName = "Forest"
     };
+
+    public static MissionTerrain CITY = new MissionTerrain
+    {
+        TerrainImage = ProtoGameSprite.TerrainIcon("modern-city"),
+        TerrainName = "City"
+    };
+
     public static List<MissionTerrain> TerrainTypes = new List<MissionTerrain>
     {
-        FOREST,
-        new MissionTerrain
-        {
-            TerrainImage = ProtoGameSprite.TerrainIcon("modern-city"),
-            TerrainName = "Forest"
-        }
+        FOREST,CITY
     };
 
     public ProtoGameSprite TerrainImage { get; set; } = ProtoGameSprite.TerrainIcon("forest");

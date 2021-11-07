@@ -13,6 +13,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
             this.Description = "???";
             this.EnemyFaction = EnemyFaction.EFFICIENCY;
             CharacterNicknameOrEnemyName = "Spotter W-203-series";
+            this.MaxHp = 11;
         }
 
         public override List<AbstractIntent> GetNextIntents()

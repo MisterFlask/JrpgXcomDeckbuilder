@@ -11,7 +11,8 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
             this.ProtoSprite = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Sprites/Enemies/Machines/Subduer");
             this.Description = "???";
             this.EnemyFaction = EnemyFaction.EFFICIENCY;
-            CharacterNicknameOrEnemyName = "Subduer XLR";
+            CharacterNicknameOrEnemyName = "Subduer XSML";
+            this.MaxHp = 11;
             //Big attack, but has to charge up first
         }
 

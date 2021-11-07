@@ -5,9 +5,12 @@ using System.Linq;
 
 public class DebuffOtherIntent : SimpleIntent
 {
+    public Action OnPerformance { get; }
+
     public DebuffOtherIntent(AbstractBattleUnit owner, Action onPerformance): base(owner, 
         IntentIcons.DebuffIntent)
     {
+        OnPerformance = onPerformance;
     }
 
     public static DebuffOtherIntent SomeAction(AbstractBattleUnit owner,
@@ -65,6 +68,6 @@ public class DebuffOtherIntent : SimpleIntent
 
     protected override void Execute()
     {
-        
+        OnPerformance();
     }
 }

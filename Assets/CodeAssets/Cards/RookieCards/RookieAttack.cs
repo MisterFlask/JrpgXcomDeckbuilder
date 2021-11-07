@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.RookieCards
 {
-    public class RookieAttack : Shoot
+    public class RookieAttack : Gunfire
     {
         public RookieAttack()
         {

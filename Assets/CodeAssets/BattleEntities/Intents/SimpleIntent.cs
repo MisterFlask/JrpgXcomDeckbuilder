@@ -34,12 +34,6 @@ public abstract class SimpleIntent : AbstractIntent
 public static class IntentsFromPercentBase
 {
 
-    public static List<AbstractIntent> ApplyStressToRandomOther(AbstractBattleUnit source,
-        int amountOfStress)
-    {
-        throw new Exception("Not implemented yet");
-        //todo
-    }
 
     public static List<AbstractIntent> AttackRandomPc(
         AbstractBattleUnit source,
@@ -65,10 +59,13 @@ public static class IntentsFromPercentBase
         };
     }
 
-    public static List<AbstractIntent> TargetRandomNpcWithMagic(AbstractBattleUnit source, 
+    public static List<AbstractIntent> DoMagic(AbstractBattleUnit source, 
         Action action)
     {
-        return new List<AbstractIntent>();
+        return new List<AbstractIntent>()
+        {
+            
+        };
     }
 
 

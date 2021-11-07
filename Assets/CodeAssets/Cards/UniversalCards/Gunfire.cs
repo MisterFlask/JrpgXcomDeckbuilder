@@ -2,12 +2,12 @@
 using System.Collections;
 using Assets.CodeAssets.Cards;
 
-public class Shoot : AbstractCard
+public class Gunfire : AbstractCard
 {
-    public Shoot()
+    public Gunfire()
     {
         BaseDamage = 6;
-        this.SetCommonCardAttributes("Shoot", Rarity.BASIC, TargetType.ENEMY, CardType.AttackCard, 1, protoGameSprite: ProtoGameSprite.FromGameIcon("Sprites/sword-wound"));
+        this.SetCommonCardAttributes("Gunfire", Rarity.BASIC, TargetType.ENEMY, CardType.AttackCard, 1, protoGameSprite: ProtoGameSprite.FromGameIcon("Sprites/sword-wound"));
     }
 
     public override string DescriptionInner()

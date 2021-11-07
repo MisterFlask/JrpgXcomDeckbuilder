@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.ArchonCards.Starting
 {
-    public class ArchonAttack : Shoot
+    public class ArchonAttack : Gunfire
     {
         public ArchonAttack()
         {

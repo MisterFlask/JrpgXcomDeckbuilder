@@ -9,7 +9,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Special
         // Playable for 1.  Retained: A random character takes 3 Stress.
         public OntologicalWaste()
         {
-            SetCommonCardAttributes("Ontological Waste", Rarity.NOT_IN_POOL, TargetType.NO_TARGET_OR_SELF, CardType.StatusCard, 2);
+            SetCommonCardAttributes("Ontological Waste", Rarity.NOT_IN_POOL, TargetType.NO_TARGET_OR_SELF, CardType.ConditionCard, 2);
             this.Stickers.Add(new ExhaustCardSticker());
             this.Stickers.Add(new HazardousCardSticker
             {

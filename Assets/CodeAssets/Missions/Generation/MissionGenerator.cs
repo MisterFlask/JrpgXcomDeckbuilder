@@ -20,9 +20,10 @@ public static class MissionGenerator
                 Name = AbstractMission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
                 EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash")
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash"),
+                MissionModifiers = GetRandomMissionModifiers()
             },
-            new KillEnemiesMission()
+    new KillEnemiesMission()
             {
                 DaysUntilExpiration = 1000,
                 Difficulty = 1,
@@ -42,7 +43,7 @@ public static class MissionGenerator
                 EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber),
                 ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("relic")
             },
-            new KillEnemiesMission()
+            new GateMission()
             {
                 DaysUntilExpiration = 1000,
                 Difficulty = 4,
@@ -76,6 +77,8 @@ public static class MissionGenerator
 
         foreach(var mission in missions)
         {
+            mission.Terrain = MissionTerrain.TerrainTypes.PickRandom();
+
             ProbabilityUtils.PerformWithProbability(.2f, () =>
             {
                 var modifier = MissionModifier.GetRandomMissionModifier();
@@ -84,6 +87,11 @@ public static class MissionGenerator
         }
 
         return missions;
+    }
+
+    private static List<MissionModifier> GetRandomMissionModifiers()
+    {
+        return new List<MissionModifier>();
     }
 }
 
@@ -100,6 +108,13 @@ public class KillEnemiesMission: AbstractMission
             return string.Join(",", names);
         }
         return Description;
+    }
+}
+public class GateMission : KillEnemiesMission
+{
+    public override bool CanGoOnMission()
+    {
+        return GameState.Instance.GateMissionUnlocked;
     }
 }
 

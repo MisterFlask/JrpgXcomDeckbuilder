@@ -114,6 +114,11 @@ public abstract class ProtoGameSprite
     {
         return FromGameIcon("Sprites/MissionIcons/" + name);
     }
+
+    internal static ProtoGameSprite MachineBattler(string name)
+    {
+        return FromGameIcon("Sprites/Enemies/Machines/" + name);
+    }
 }
 
 public static class ImageExtensions

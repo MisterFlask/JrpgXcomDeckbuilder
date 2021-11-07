@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.Cards.DiabolistCards.Starting
 {
-    public class HammerAttack : Shoot
+    public class HammerAttack : Gunfire
     {
         public HammerAttack()
         {

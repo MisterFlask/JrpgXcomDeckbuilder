@@ -6,9 +6,9 @@ public class SnappedStatusEffect : AbstractStatusEffect
     public SnappedStatusEffect()
     {
         Name = "Snapped";
-        Stackable = false;
+        Stackable = true;
         this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("breaking-chain");
     }
 
-    public override string Description => "if this character's Stress goes above their maximum HP value this battle, the character <color=red>dies</color>";
+    public override string Description => "Increases the cost of cards played by this character by [stacks]";
 }

@@ -16,7 +16,7 @@ public class StressStatusEffect : AbstractStatusEffect
 
     public override void OnApplicationOrIncrease()
     {
-        if (Stacks > OwnerUnit.MaxHp)
+        if (Stacks > 100)
         {
             if (OwnerUnit.HasStatusEffect<SnappedStatusEffect>())
             {

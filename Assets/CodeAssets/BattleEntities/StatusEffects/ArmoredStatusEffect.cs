@@ -16,3 +16,19 @@ public class ArmoredStatusEffect : AbstractStatusEffect
         return -1 * Stacks;
     }
 }
+
+public class ToughnessStatusEffect : AbstractStatusEffect
+{
+    public ToughnessStatusEffect()
+    {
+        this.Name = "Toughness";
+        this.ProtoSprite = ProtoGameSprite.AttributeOrAugmentIcon("abdominal-armor");
+    }
+
+    public override string Description => "Add [stacks] block at the start of each turn.";
+
+    public override void  OnTurnStart()
+    {
+        ActionManager.Instance.ApplyDefense(OwnerUnit, null, Stacks);
+    }
+}

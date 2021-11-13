@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using System;
 using ModelShark;
 using Assets.CodeAssets.UI.Tooltips;
+using MoreMountains.Feedbacks;
 
 public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -25,7 +26,6 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public Image SpeechBubble;
     public CustomGuiText SpeechBubbleText;
-
     public List<IntentPrefab> IntentPrefabs { get; set; } = new List<IntentPrefab>();
 
     public AbstractBattleUnit UnderlyingEntity { get; private set; }
@@ -36,6 +36,10 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public TooltipTrigger TooltipTrigger;
 
     public Image EmblemImage;
+
+    public BattleUnitPrefabHardpoints Hardpoints;
+    public MMFeedbacks FlickerFeedbacks;
+
 
     Color OriginalImageColor { get; set; }
     Color BrighterImageColor { get; set; }

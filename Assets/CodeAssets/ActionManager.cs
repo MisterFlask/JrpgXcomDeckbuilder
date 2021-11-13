@@ -6,6 +6,7 @@ using System;
 using UnityEngine.UI;
 using HyperCard;
 using Assets.CodeAssets.UI.Screens.BattleScreen;
+using Assets.CodeAssets.ParticleSystemEffects;
 
 [RequireComponent(typeof(Log))]
 public class ActionManager : MonoBehaviour
@@ -478,6 +479,11 @@ public class ActionManager : MonoBehaviour
             {
                 speechBubbleText.gameObject.SetActive(false);
             });
+
+            ParticleSystemSpawner.Instance.PlaceParticleSystem(
+                ProtoParticleSystem.GreenSlash,
+                unit.CorrespondingPrefab.transform as RectTransform
+                );
         });
     }
 
@@ -616,6 +622,7 @@ public class ActionManager : MonoBehaviour
                 return;
             }
             targetUnit.CorrespondingPrefab.gameObject.AddComponent<ShakePrefab>();
+            targetUnit.CorrespondingPrefab.FlickerFeedbacks.PlayFeedbacks();
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
 

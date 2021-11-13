@@ -181,7 +181,8 @@ public class CardAnimationManager : MonoBehaviour
         }
         else
         {
-            scriptableMovement.MoveToLocation(GetAppropriateCardPositionInHand(index, cardsInHand.Count, mousedOver),
+            scriptableMovement.MoveToLocation(
+                GetAppropriateCardPositionInHand(index, cardsInHand.Count, mousedOver),
                 GetAppropriateCardRotation(index, cardsInHand.Count, mousedOver, card.IsSelected), GetAppropriateScale(mousedOver));
         }
         // now, we reorder the cards on the canvas according to z-axis

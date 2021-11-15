@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.CodeAssets.Cards;
+using Assets.CodeAssets.ParticleSystemEffects;
 
 public class Gunfire : AbstractCard
 {

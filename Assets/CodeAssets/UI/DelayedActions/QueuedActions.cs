@@ -6,9 +6,11 @@ public static class QueuedActions
 {
 
     /// <summary>
-    /// Don't use this one, it's a pain in the ass
+    /// REQUIRED that the IsCurrentActionFinished flag be set by the end of the action.
     /// </summary>
-    public static void DelayedActionWithCustomTrigger(string name, Action action, QueueingType queueingType = QueueingType.TO_BACK)
+    public static void DelayedActionWithCustomTrigger(string name, 
+        Action action,
+        QueueingType queueingType = QueueingType.TO_BACK)
     {
         if (queueingType == QueueingType.TO_BACK)
         {

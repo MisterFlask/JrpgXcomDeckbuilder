@@ -9,4 +9,23 @@ public class BattleUnitPrefabHardpoints: MonoBehaviour
     public Transform LeftOrMuzzle;
     public Transform Bottom;
     public Transform Top;
+
+
+    public Transform FromHardpointLocation(HardpointLocation location)
+    {
+        if (location == HardpointLocation.CENTER)
+        {
+            return Center;
+        }
+        if (location == HardpointLocation.LEFT)
+        {
+            return LeftOrMuzzle;
+        }
+        if (location == HardpointLocation.BOTTOM)
+        {
+            return Bottom;
+        }
+
+        return Center;
+    }
 }

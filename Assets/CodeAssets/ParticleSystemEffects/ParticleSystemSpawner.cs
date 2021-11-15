@@ -22,7 +22,7 @@ namespace Assets.CodeAssets.ParticleSystemEffects
         public Camera particleCamera;
 
         private void MoveParticleSystemToUiBoundingBox(ParticleSystem systemToNormalize,
-            RectTransform intendedBoundingBox)
+            Transform intendedBoundingBox)
         {
             var screenLocationOfIntendedPosition = uiCamera.WorldToViewportPoint(intendedBoundingBox.position);
             var worldLocationInParticleCameraOfIntendedPosition = particleCamera.ViewportToWorldPoint(screenLocationOfIntendedPosition);
@@ -31,7 +31,7 @@ namespace Assets.CodeAssets.ParticleSystemEffects
             Debug.Log($"INTENDED:  {intendedBoundingBox.position.x}, {intendedBoundingBox.position.y}  ACTUAL: {systemToNormalize.transform.position.x}, {systemToNormalize.transform.position.y}");
         }
 
-        const string DefaultParticleSystemPath = "SpecialEffects/Bonfire_loop";
+        const string DefaultParticleSystemPath = "SpecialEffects/Ricochet_normal";
 
         public static string GetSpecialEffectPath(string path)
         {
@@ -40,16 +40,17 @@ namespace Assets.CodeAssets.ParticleSystemEffects
 
         public ParticleSystemContainer GenerateSpecialEffectAtCharacter(AbstractBattleUnit unit,
             ProtoParticleSystem particleSystem,
+            HardpointLocation locationToHit,
             Action afterAnimationIsFinishedAction = null)
         {
             return PlaceParticleSystem(particleSystem,
-                unit.CorrespondingPrefab.SpriteImage.rectTransform,
+                unit.CorrespondingPrefab.Hardpoints.FromHardpointLocation(locationToHit),
                 afterAnimationIsFinishedAction
                 );
         }
 
         public ParticleSystemContainer PlaceParticleSystem(ProtoParticleSystem particleSystem,
-            RectTransform intendedBoundingBox,
+            Transform intendedBoundingBox,
             Action afterAnimationIsFinishedAction = null,
             Transform parent = null)
         {
@@ -73,7 +74,7 @@ namespace Assets.CodeAssets.ParticleSystemEffects
             instance.gameObject.layer = 10;//particle layer
             var container =  new ParticleSystemContainer { 
                 Particles = instance,
-                GoodUntil = DateTime.Now + TimeSpan.FromSeconds(particleSystem.NumSeconds)
+                GoodUntil = DateTime.Now + TimeSpan.FromSeconds(particleSystem.KillAfterNumSeconds)
             };
             if (afterAnimationIsFinishedAction != null)
             {
@@ -109,16 +110,27 @@ public class ProtoParticleSystem
 {
     public string PrefabPath { get; set; }
     public float SizeRatio { get; set; } = 0.1f;
-    public float NumSeconds { get; set; } = 5;
+    public float KillAfterNumSeconds { get; set; } = 5;
     public HardpointLocation Location { get; set; } = HardpointLocation.CENTER;
+
+    public static ProtoParticleSystem MuzzleFlash = new ProtoParticleSystem
+    {
+        PrefabPath = ParticleSystemSpawner.GetSpecialEffectPath("ef_10_red"),
+        SizeRatio = .1f
+    };
 
     public static ProtoParticleSystem GreenSlash = new ProtoParticleSystem
     {
         PrefabPath = ParticleSystemSpawner.GetSpecialEffectPath("green_circular_slash"),
         SizeRatio = .1f
     };
-    
-    
+    public static ProtoParticleSystem Richochet = new ProtoParticleSystem
+    {
+        PrefabPath = ParticleSystemSpawner.GetSpecialEffectPath("Ricochet_normal"),
+        SizeRatio = .1f
+    };
+
+
 }
 
 public class ParticleSystemContainer

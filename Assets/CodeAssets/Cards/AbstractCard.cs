@@ -1,6 +1,7 @@
 ﻿
 using Assets.CodeAssets.Cards;
 using Assets.CodeAssets.GameLogic;
+using Assets.CodeAssets.ParticleSystemEffects;
 using Assets.CodeAssets.UI.CardParts;
 using HyperCard;
 using System;
@@ -17,6 +18,7 @@ public abstract class AbstractCard
     public int RestOfTurnCostMod { get; set; } = 0;
 
     public List<AbstractCostModifier> PersistentCostModifiers = new List<AbstractCostModifier>();
+
 
     protected Color GetDefaultColoration(string cardName)
     {
@@ -331,6 +333,7 @@ public abstract class AbstractCard
         {
             sticker.OnThisCardPlayed(this, target);
         }
+
     }
 
     public Card CreateHyperCard()
@@ -541,6 +544,16 @@ public abstract class AbstractCard
     protected void Action_Exhaust()
     {
         action().ExhaustCard(this);
+    }
+
+    public SpecialEffect GetSpecialEffect_Nullable(AbstractBattleUnit target)
+    {
+        if (this.CardType == CardType.AttackCard && target != null && Owner != null)
+        {
+            return CompositeSpecialEffect.DefaultAttackEffect_WithMuzzleFlash(target, this.Owner);
+        }
+
+        return null;
     }
 }
 

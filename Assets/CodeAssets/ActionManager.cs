@@ -26,9 +26,10 @@ public class ActionManager : MonoBehaviour
 
     GameState gameState => ServiceLocator.GameState();
 
-    internal void IncrementDoomCounter(int v)
+    internal void IncrementDoomCounter(int amount)
     {
-        throw new NotImplementedException();
+        // todo
+        GameState.Instance.DoomCounter.CurrentDoomCounter += amount;
     }
 
     // Used to end the current action/start the next delayed action
@@ -360,18 +361,40 @@ public class ActionManager : MonoBehaviour
 
     public void EvokeCardEffect(AbstractCard card, AbstractBattleUnit target, QueueingType queuingType = QueueingType.TO_BACK)
     {
-            QueuedActions.ImmediateAction(() =>
+        QueuedActions.DelayedActionWithCustomTrigger("Evoke card effect", () =>
             {
+                RunCardEvocationSpecialEffects(card, target);
                 card.EvokeCardEffect(target);
             }
         );
     }
 
+    private void RunCardEvocationSpecialEffects(AbstractCard card, AbstractBattleUnit target)
+    {
+        var specialEffect = card.GetSpecialEffect_Nullable(target);
+        if (specialEffect != null)
+        {
+            IsCurrentActionFinished = false;
+
+            specialEffect.Afterward_SetByActionManager = () =>
+            {
+                IsCurrentActionFinished = true;
+            };
+            specialEffect.BeginSpecialEffect();
+        }
+        else
+        {
+            IsCurrentActionFinished = true;
+        }
+    }
+
     public void AttemptPlayCardFromHand(AbstractCard logicalCard, AbstractBattleUnit target, QueueingType queueingType = QueueingType.TO_BACK
         )
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.DelayedActionWithCustomTrigger("Attempt play card from hand: " + logicalCard.Name, () =>
         {
+            IsCurrentActionFinished = true;
+
             if (logicalCard != null)
             {
                 if (!logicalCard.CanPlay(target).Playable)
@@ -380,6 +403,7 @@ public class ActionManager : MonoBehaviour
                 }
                 else
                 {
+                    RunCardEvocationSpecialEffects(logicalCard, target);
                     logicalCard.PlayCardFromHandIfAble_Action(target);
                 }
             }
@@ -560,8 +584,13 @@ public class ActionManager : MonoBehaviour
         });
     }
     */
+
+    private DateTime currentActionStartedAtThisTime = DateTime.Now;
+
     public void Update()
     {
+
+
         var firstAction = this.actionsQueue.FirstOrDefault();
         if (firstAction != null)
         {
@@ -570,6 +599,7 @@ public class ActionManager : MonoBehaviour
                 firstAction.IsStarted = true;
                 try
                 {
+                    currentActionStartedAtThisTime = DateTime.Now;
                     firstAction.onStart();
                 } catch (Exception e)
                 {
@@ -577,8 +607,15 @@ public class ActionManager : MonoBehaviour
                     throw;
                 }
             }
+            if (currentActionStartedAtThisTime + firstAction.Timeout > DateTime.Now)
+            {
+                Log.Error("Action timed out!: " + firstAction.ActionId);
+                IsCurrentActionFinished = true;
+            }
+
             if (firstAction.IsFinished())
             {
+
                 IsCurrentActionFinished = false; // the current action isn't started yet.
                 actionsQueue.PopFirstElement(); // remove the action to get a new current action.
                 Console.Out.Write("Finished action on queue!");
@@ -622,7 +659,6 @@ public class ActionManager : MonoBehaviour
                 return;
             }
             targetUnit.CorrespondingPrefab.gameObject.AddComponent<ShakePrefab>();
-            targetUnit.CorrespondingPrefab.FlickerFeedbacks.PlayFeedbacks();
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
 

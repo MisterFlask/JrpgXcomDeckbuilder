@@ -80,6 +80,7 @@ namespace Assets.CodeAssets.ParticleSystemEffects
         {
             var container = ParticleSystemSpawner.Instance.GenerateSpecialEffectAtCharacter(SpawnAt, ProtoSystem, LocationToHit, Afterward_SetByActionManager);
             Container = container;
+            var renderr = new SpriteRenderer();
         }
 
         public bool IsFinished()

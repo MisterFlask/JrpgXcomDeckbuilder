@@ -129,6 +129,26 @@ public static class ImageExtensions
         image.color = protoSprite.ToGameSpriteImage().Color;
 
     }
+
+    /// <summary>
+    /// attempts to keep same sprite size
+    /// </summary>
+    /// <param name="image"></param>
+    /// <param name="protoSprite"></param>
+    public static void SetProtoSprite(this SpriteRenderer image, ProtoGameSprite protoSprite)
+    {
+        var originalSpriteSize = image.sprite.rect;
+
+        image.sprite = protoSprite.ToSprite();
+        image.color = protoSprite.ToGameSpriteImage().Color;
+
+        var newSpriteSize = image.sprite.rect;
+
+        var scaleFactorWidth = originalSpriteSize.width / newSpriteSize.width;
+        var scaleFactorHeight = originalSpriteSize.height / newSpriteSize.height;
+
+        image.transform.localScale = new Vector3(scaleFactorWidth * image.transform.localScale.x, scaleFactorHeight * image.transform.localScale.y, image.transform.localScale.z);
+    }
 }
 
 public class GameSprite

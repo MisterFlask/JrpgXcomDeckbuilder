@@ -9,8 +9,9 @@ using System;
 using ModelShark;
 using Assets.CodeAssets.UI.Tooltips;
 using MoreMountains.Feedbacks;
+using Assets.CodeAssets.UI;
 
-public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class BattleUnitPrefab:MonoBehaviour
 {
     public CustomGuiText CharacterNameText;
     public Image SpriteImage;
@@ -41,6 +42,8 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public MMFeedbacks FlickerFeedbacks;
 
 
+    public SpriteRenderer SpriteImage_Worldspace;
+
     Color OriginalImageColor { get; set; }
     Color BrighterImageColor { get; set; }
 
@@ -49,6 +52,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         NameOfCharacter = entity.CharacterFullName ?? entity.GetDisplayName(DisplayNameType.SHORT_NAME);
         SpriteImage.SetProtoSprite(entity.ProtoSprite);
+        SpriteImage_Worldspace.SetProtoSprite(entity.ProtoSprite);
         entity.CorrespondingPrefab = this;
         UnderlyingEntity = entity;
 
@@ -175,7 +179,7 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
         intentsToRemove
                 .Where(item => item != null)
                 .ToList()
-                .ForEach(item => item.transform.parent = null); // remove from parent (thus removing from the UI)
+                .ForEach(item => item.transform.SetParent(null)); // remove from parent (thus removing from the UI)
 
         if (ShouldHighlight())
         {
@@ -262,5 +266,18 @@ public class BattleUnitPrefab:MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerClick(PointerEventData eventData)
     {
         ServiceLocator.GetActionManager().Shout(this.UnderlyingEntity, "Clicked on unit.");
+    }
+
+    void OnMouseDown()
+    {
+        OnPointerClick(null);
+    }
+    void OnMouseEnter()
+    {
+        OnPointerEnter(null);
+    }
+    void OnMouseExit()
+    {
+        OnPointerExit(null);
     }
 }

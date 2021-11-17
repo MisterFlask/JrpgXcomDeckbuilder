@@ -93,6 +93,8 @@ public abstract class AbstractBattleUnit
 
     public List<AbstractSoldierPerk> Perks { get; } = new List<AbstractSoldierPerk>();
 
+    public bool HasDied { get; set; } = false;
+
     public void InitializePersistentDeck()
     {
         _CardsInPersistentDeck = new List<AbstractCard>();
@@ -170,10 +172,6 @@ public abstract class AbstractBattleUnit
 
     public bool IsAdvanced => HasStatusEffect<AdvancedStatusEffect>();
 
-    public void Die()
-    {
-        CurrentHp = 0;
-    }
 
     /// <summary>
     /// This happens AFTER all enemies have executed intents.

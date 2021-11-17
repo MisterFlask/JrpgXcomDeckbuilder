@@ -179,7 +179,7 @@ public static class BattleRules
             }
 
             BattleRules.TriggerProc(new CharacterDeathProc { CharacterDead = unit });
-            ActionManager.Instance.DestroyUnit(unit);
+            ActionManager.Instance.MarkUnitKilled(unit);
 
         }
     }

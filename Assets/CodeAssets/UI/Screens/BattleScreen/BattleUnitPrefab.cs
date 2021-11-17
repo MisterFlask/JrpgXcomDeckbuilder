@@ -44,6 +44,10 @@ public class BattleUnitPrefab:MonoBehaviour
 
     public SpriteRenderer SpriteImage_Worldspace;
 
+    public MMFeedbacks DeathRotationFeedbacks;
+    public MMFeedbacks HighlightUnitFeedbacks;
+    public MMFeedbacks FloatingTextFeedbacks;
+
     Color OriginalImageColor { get; set; }
     Color BrighterImageColor { get; set; }
 
@@ -183,7 +187,10 @@ public class BattleUnitPrefab:MonoBehaviour
 
         if (ShouldHighlight())
         {
-            highlights.gameObject.SetActive(true);
+            if (!HighlightUnitFeedbacks.IsPlaying)
+            {
+                HighlightUnitFeedbacks.PlayFeedbacks();
+            }
         }
         else
         {

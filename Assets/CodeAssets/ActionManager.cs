@@ -110,7 +110,7 @@ public class ActionManager : MonoBehaviour
     {
         QueuedActions.ImmediateAction(() =>
         {
-            unit.Die();
+            MarkUnitKilled(unit);
         });
     }
 
@@ -661,7 +661,7 @@ public class ActionManager : MonoBehaviour
             targetUnit.CorrespondingPrefab.gameObject.AddComponent<ShakePrefab>();
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
-
+            targetUnit.CorrespondingPrefab.FlickerFeedbacks.PlayFeedbacks();
             BattleRules.ProcessDamageWithCalculatedModifiers(sourceUnit, targetUnit, cardPlayed, baseDamageDealt);
 
         });
@@ -683,6 +683,7 @@ public class ActionManager : MonoBehaviour
             targetUnit.CorrespondingPrefab.gameObject.AddComponent<ShakePrefab>();
             var shakePrefab = targetUnit.CorrespondingPrefab.gameObject.GetComponent<ShakePrefab>();
             shakePrefab.Begin(() => { IsCurrentActionFinished = true; });
+            targetUnit.CorrespondingPrefab.FlickerFeedbacks.PlayFeedbacks();
 
             BattleRules.ProcessDamageWithCalculatedModifiers(nullableSourceUnit, targetUnit, 
                 nullableCardPlayed: null,
@@ -692,13 +693,20 @@ public class ActionManager : MonoBehaviour
         });
     }
 
-    public void DestroyUnit(AbstractBattleUnit unit)
+    public void MarkUnitKilled(AbstractBattleUnit unit)
     {
         Require.NotNull(unit);
         QueuedActions.ImmediateAction(() =>
         {
+            unit.CurrentHp = 0;
+            if (unit.HasDied)
+            {
+                return;
+            }
+
+            unit.HasDied = true;
             // todo: Figure out approrpiate despawning logic.
-            unit.CorrespondingPrefab.HideUnit();
+            unit.CorrespondingPrefab.DeathRotationFeedbacks.PlayFeedbacks();
             foreach(var card in GameState.Instance.Deck.TotalDeckList)
             {
                 if (card.Owner == unit)

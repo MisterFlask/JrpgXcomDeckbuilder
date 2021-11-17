@@ -11,11 +11,11 @@ using UnityEngine.UI;
 public static class ExtensionMethods
 {
 
-    public static void ForEachCreateAction<T>(this IEnumerable<T> items, Action<T> toPerform)
+    public static void ForEachCreateActionToBack<T>(this IEnumerable<T> items, string name, Action<T> toPerform)
     {
         foreach(var item in items)
         {
-            ActionManager.Instance.DoAThing(() => toPerform(item));
+            ActionManager.Instance.PushActionToBack("ForEachCreateActionToBack_" + name, () => toPerform(item));
         }
     }
 
@@ -448,6 +448,8 @@ public static class ExtensionMethods
             }
             
         }
+
+        hyperCard.CurrentCardFrame = toEnable;
     }
 
     private static string BuildTextBoxStringForCard(AbstractCard abstractCard)

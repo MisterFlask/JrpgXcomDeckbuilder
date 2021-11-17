@@ -35,11 +35,10 @@ public class ActionManager : MonoBehaviour
     // Used to end the current action/start the next delayed action
     public bool IsCurrentActionFinished { get; set; }
 
-    public List<BasicDelayedAction> actionsQueue = new List<BasicDelayedAction>();
-
+    public static BasicDelayedAction MasterAction = new NeverEndingAction();
     public string GetQueueActionsDebugLogs()
     {
-        var actionStrings = actionsQueue.Select(item => $"[id={item.ActionId}, started={item.IsStarted}]");
+        var actionStrings = MasterAction.ChildActionsQueue.Select(item => $"[id={item.ActionId}, started={item.IsStarted}]");
         return $"ACTION MANAGER QUEUE STATE: [[{string.Join("|", actionStrings)}]]  ; total count of items in queue = ${actionStrings.Count()}";
 
     }
@@ -61,7 +60,7 @@ public class ActionManager : MonoBehaviour
 
     public void AddStickerToCard(AbstractCard card, AbstractCardSticker stickerToAdd)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("AddStickerToCard", () =>
         {
             card.AddSticker(stickerToAdd);
         });
@@ -69,7 +68,7 @@ public class ActionManager : MonoBehaviour
 
     public void CheckIsBattleOver()
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("CheckIsBattleOver", () =>
         {
             BattleRules.CheckIsBattleOverAndIfSoSwitchScenes();
         });
@@ -95,7 +94,7 @@ public class ActionManager : MonoBehaviour
 
     public void RemoveStatusEffect<T>(AbstractBattleUnit unit) where T: AbstractStatusEffect
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("RemoveStatusEffect", () =>
         {
             unit.StatusEffects.RemoveAll(item => item.GetType() == typeof(T));
         });
@@ -108,9 +107,10 @@ public class ActionManager : MonoBehaviour
 
     public void KillUnit(AbstractBattleUnit unit)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("KillUnit", () =>
         {
-            MarkUnitKilled(unit);
+            unit.CurrentHp = 0;
+            BattleRules.CheckAndRegisterDeath(unit, null, null);
         });
     }
 
@@ -131,7 +131,7 @@ public class ActionManager : MonoBehaviour
             return;
         }
 
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("ApplyStatusEffect", () =>
         {
             unit.ApplyStatusEffect(attribute, stacks);
         });
@@ -139,7 +139,7 @@ public class ActionManager : MonoBehaviour
 
     public void TickDownStatusEffect<T>(AbstractBattleUnit unit) where T : AbstractStatusEffect
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("TickDownStatusEffect", () =>
         {
             unit.TickDownStatusEffect<T>();
         });
@@ -147,15 +147,15 @@ public class ActionManager : MonoBehaviour
     }
 
 
-    public void DoAThing(Action action)
+    public void PushActionToBack(string nameOfAction, Action action)
     {
-        QueuedActions.ImmediateAction(action);
+        QueuedActions.ImmediateAction("PushActionToBack_"+ nameOfAction, action, QueueingType.TO_BACK);
     }
 
 
     public void UpgradeCard(AbstractCard card)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("UpgradeCard", () =>
         {
             card.Upgrade();
         });
@@ -175,7 +175,7 @@ public class ActionManager : MonoBehaviour
 
     public void ApplyDefense(AbstractBattleUnit target, AbstractBattleUnit source, int baseQuantity)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("ApplyDefense", () =>
         {
             target.CurrentBlock += BattleRules.GetDefenseApplied(source, target, baseQuantity);
             if (target.CurrentBlock < 0)
@@ -201,7 +201,7 @@ public class ActionManager : MonoBehaviour
     /// </summary>
     public void TauntEnemy(AbstractBattleUnit target, AbstractBattleUnit source)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("TauntEnemy", () =>
         {
             var eligibleAttackIntents = target.CurrentIntents.Where(item => item is SingleUnitAttackIntent );
             foreach(var intent in eligibleAttackIntents)
@@ -217,7 +217,7 @@ public class ActionManager : MonoBehaviour
     internal void PurgeCardFromDeck(AbstractCard card, QueueingType queueingType = QueueingType.TO_BACK)
     {
         Require.NotNull(card);
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("PurgeCardFromDeck", () =>
         {
 
             var position = deck.PurgeCardFromDeck(card.Id);
@@ -225,7 +225,7 @@ public class ActionManager : MonoBehaviour
             {
                 // Animate dissolving
                 var movement = ServiceLocator.GetCardAnimationManager().GetCardMovementBehavior(card);
-                movement.DissolveAndDestroyCard();
+                movement.DissolveAndDestroyCard(() => { });
                 ServiceLocator.GetCardAnimationManager().RemoveHypercardFromHand(card);
 
             }
@@ -234,7 +234,7 @@ public class ActionManager : MonoBehaviour
 
     public void DrawCards(int n = 1, QueueingType queueingType = QueueingType.TO_BACK, Action<List<AbstractCard>> performOnCards = null)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("DrawCards", () =>
         {
             var cardsToPutInHand = deck.DrawNextNCards(n);
             ServiceLocator.GetCardAnimationManager().AddHypercardsToHand(cardsToPutInHand.Select(item => item.CreateHyperCard()).ToList());
@@ -254,7 +254,7 @@ public class ActionManager : MonoBehaviour
         Require.NotNull(abstractCard);
         abstractCard.Owner = owner;
         BattleRules.MarkCreatedCard(abstractCard, owner);
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("CreateCardToBattleDeckDrawPile", () =>
         {
             if (location == CardCreationLocation.BOTTOM)
             {
@@ -281,7 +281,7 @@ public class ActionManager : MonoBehaviour
     {
         Require.NotNull(abstractCard);
         abstractCard.Owner = owner;
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("CreateCardToBattleDeckDiscardPile",() =>
         {
 
             BattleRules.MarkCreatedCard(abstractCard, owner);
@@ -309,7 +309,7 @@ public class ActionManager : MonoBehaviour
     {
         Require.NotNull(abstractCard);
         abstractCard.Owner = owner;
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("CreateCardToHand", () =>
         {
             BattleRules.MarkCreatedCard(abstractCard, owner);
             ServiceLocator.GameState().Deck.Hand.Add(abstractCard);
@@ -342,7 +342,7 @@ public class ActionManager : MonoBehaviour
 
     public void AddCardToPersistentDeck(AbstractCard protoCard, AbstractBattleUnit unit, QueueingType queueingType = QueueingType.TO_BACK)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("AddCardToPersistentDeck", () =>
         {
 
             var persistentDeckList = unit.CardsInPersistentDeck;
@@ -441,7 +441,7 @@ public class ActionManager : MonoBehaviour
 
     public void DiscardCard(AbstractCard protoCard,  QueueingType queueingType = QueueingType.TO_BACK)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("DiscardCard", () =>
         {
 
             gameState.Deck.MoveCardToPile(protoCard, CardPosition.DISCARD);
@@ -451,17 +451,19 @@ public class ActionManager : MonoBehaviour
 
     public void ExhaustCard(AbstractCard protoCard, QueueingType queueingType = QueueingType.TO_BACK)
     {
-        QueuedActions.ImmediateAction(() =>
-        {
+        QueuedActions.DelayedActionWithCustomTrigger("ExhaustCard", () =>  {
             gameState.Deck.MoveCardToPile(protoCard, CardPosition.EXPENDED);
-            ServiceLocator.GetCardAnimationManager().MoveCardToDiscardPile(protoCard, assumedToExistInHand: false);
+            ServiceLocator.GetCardAnimationManager().DisappearCard(protoCard, assumedToExistInHand: false, callbackWhenFinished: () =>
+            {
+                IsCurrentActionFinished = true;
+            });
             BattleRules.TriggerProc(new ExhaustedCardProc { TriggeringCardIfAny = protoCard });
         }, queueingType);
     }
 
     public void DiscardHand()
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("DiscardHand", () =>
         {
             var hand = ServiceLocator.GameState().Deck.Hand.ToList();
             foreach (var card in hand)
@@ -476,7 +478,7 @@ public class ActionManager : MonoBehaviour
     BattleTurnEndActions turnEndActions = new BattleTurnEndActions();
     public void EndBattleTurn()
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("EndBattleTurn", () =>
         {
             turnEndActions.EndTurn();
         });
@@ -484,13 +486,12 @@ public class ActionManager : MonoBehaviour
 
     public void FleeCombat()
     {
-        actionsQueue.Clear();
         GameScenes.SwitchToBattleResultSceneAndProcessCombatResults(CombatResult.FLED);
     }
 
     public void Shout(AbstractBattleUnit unit, string stuffToSay)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("Shout", () =>
         {
             var speechBubbleText = unit.CorrespondingPrefab.SpeechBubbleText;
             var bubbleImg = unit.CorrespondingPrefab.SpeechBubble;
@@ -513,7 +514,7 @@ public class ActionManager : MonoBehaviour
 
     public void PerformAdvanceActionIfPossible(AbstractBattleUnit unit)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("PerformAdvanceActionIfPossible", () =>
         {
             if (gameState.energy > 0)
             {
@@ -530,7 +531,7 @@ public class ActionManager : MonoBehaviour
     }
     public void PerformFallbackActionIfPossible(AbstractBattleUnit unit)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("PerformFallbackActionIfPossible", () =>
         {
             if (gameState.energy > 0)
             {
@@ -549,7 +550,7 @@ public class ActionManager : MonoBehaviour
 
     public void Advance(AbstractBattleUnit unit)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("Advance", () =>
         {
             unit.StatusEffects.Add(new AdvancedStatusEffect());
         });
@@ -557,7 +558,7 @@ public class ActionManager : MonoBehaviour
 
     public void FallBack(AbstractBattleUnit unit)
     {
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("FallBack", () =>
         {
             if (unit.HasStatusEffect<AdvancedStatusEffect>())
             {
@@ -568,7 +569,7 @@ public class ActionManager : MonoBehaviour
 
     public void OnceFinished(Action action)
     {
-        QueuedActions.ImmediateAction(action);
+        QueuedActions.ImmediateAction("OnceFinished", action);
     }
 
     /*
@@ -587,39 +588,67 @@ public class ActionManager : MonoBehaviour
 
     private DateTime currentActionStartedAtThisTime = DateTime.Now;
 
+
+    public BasicDelayedAction ActionCurrentlyBeingPerformed = MasterAction;
+
+    public BasicDelayedAction GetCurrentOrNextAction()
+    {
+        return GetNextActionToMonitorOrPerform(MasterAction);
+    }
+
+    /// <summary>
+    ///  depth-first search on action manager
+    /// </summary>
+    private BasicDelayedAction GetNextActionToMonitorOrPerform(BasicDelayedAction parent)
+    {
+        if (parent.ChildActionsQueue.IsEmpty())
+        {
+            return parent;
+        }
+
+        if (!parent.IsFinished()) // we want to finish with the parent BEFORE we finish with the child
+        {
+            return parent;
+        }
+
+        var nextActionInFirstChild = GetNextActionToMonitorOrPerform(parent.ChildActionsQueue.First());
+
+        return nextActionInFirstChild;
+    }
+
     public void Update()
     {
+        var currentAction = GetCurrentOrNextAction();
 
+        ActionCurrentlyBeingPerformed = currentAction;
 
-        var firstAction = this.actionsQueue.FirstOrDefault();
-        if (firstAction != null)
+        if (!ActionCurrentlyBeingPerformed.IsStarted)
         {
-            if (!firstAction.IsStarted)
+            ActionCurrentlyBeingPerformed.IsStarted = true;
+            try
             {
-                firstAction.IsStarted = true;
-                try
-                {
-                    currentActionStartedAtThisTime = DateTime.Now;
-                    firstAction.onStart();
-                } catch (Exception e)
-                {
-                    Debug.LogError(firstAction.stackTrace.ToString());
-                    throw;
-                }
-            }
-            if (currentActionStartedAtThisTime + firstAction.Timeout > DateTime.Now)
+                currentActionStartedAtThisTime = DateTime.Now;
+                ActionCurrentlyBeingPerformed.onStart();
+            } catch (Exception)
             {
-                Log.Error("Action timed out!: " + firstAction.ActionId);
+                Debug.LogError(ActionCurrentlyBeingPerformed?.stackTrace?.ToString());
                 IsCurrentActionFinished = true;
             }
+        }
 
-            if (firstAction.IsFinished())
+        if (ActionCurrentlyBeingPerformed.IsFinished())
+        {
+            if (!ActionCurrentlyBeingPerformed.Parent.ChildActionsQueue.IsEmpty()) // check performed solely for sake of Master Action
             {
-
-                IsCurrentActionFinished = false; // the current action isn't started yet.
-                actionsQueue.PopFirstElement(); // remove the action to get a new current action.
+                ActionCurrentlyBeingPerformed.Parent.ChildActionsQueue.PopFirstElement(); // remove the action to get a new current action.
                 Console.Out.Write("Finished action on queue!");
             }
+            IsCurrentActionFinished = false; // the current action isn't started yet; resetting this flag so that we can use it in the next action.
+        }
+        else if (currentActionStartedAtThisTime + ActionCurrentlyBeingPerformed.Timeout > DateTime.Now && ActionCurrentlyBeingPerformed.IsTimeoutRelevant)
+        {
+            Log.Error("Action timed out!: " + ActionCurrentlyBeingPerformed.ActionId);
+            IsCurrentActionFinished = true;
         }
     }
     #region RivalUnits
@@ -650,7 +679,7 @@ public class ActionManager : MonoBehaviour
     public void AttackUnitForDamage(AbstractBattleUnit targetUnit, AbstractBattleUnit sourceUnit, int baseDamageDealt, AbstractCard cardPlayed)
     {
         Require.NotNull(targetUnit);
-        QueuedActions.DelayedActionWithCustomTrigger("ShakeUnit", () => {
+        QueuedActions.DelayedActionWithCustomTrigger("AttackUnitForDamage_ShakeUnit", () => {
 
             if (targetUnit.IsDead || sourceUnit.IsDead)
             {
@@ -673,7 +702,7 @@ public class ActionManager : MonoBehaviour
         {
             return;
         }
-        QueuedActions.DelayedActionWithCustomTrigger("ShakeUnit", () => {
+        QueuedActions.DelayedActionWithCustomTrigger("DamageUnitNonAttack_ShakeUnit", () => {
             if (targetUnit.IsDead)
             {
                 // do nothing if it's already dead
@@ -693,35 +722,18 @@ public class ActionManager : MonoBehaviour
         });
     }
 
-    public void MarkUnitKilled(AbstractBattleUnit unit)
+    public void TriggerUnitKilledFeedback(AbstractBattleUnit unit)
     {
         Require.NotNull(unit);
-        QueuedActions.ImmediateAction(() =>
-        {
-            unit.CurrentHp = 0;
-            if (unit.HasDied)
-            {
-                return;
-            }
+        unit.CorrespondingPrefab.DeathRotationFeedbacks.PlayFeedbacks();
 
-            unit.HasDied = true;
-            // todo: Figure out approrpiate despawning logic.
-            unit.CorrespondingPrefab.DeathRotationFeedbacks.PlayFeedbacks();
-            foreach(var card in GameState.Instance.Deck.TotalDeckList)
-            {
-                if (card.Owner == unit)
-                {
-                    // we always exhaust all cards owned by dead people.
-                    ActionManager.Instance.ExhaustCard(card);
-                }
-            }
-        });
+
     }
 
     public void ChangeUnit(AbstractBattleUnit unit, Action<AbstractBattleUnit> action)
     {
         Require.NotNull(unit);
-        QueuedActions.ImmediateAction(() =>
+        QueuedActions.ImmediateAction("ChangeUnit", () =>
         {
             action(unit);
         });

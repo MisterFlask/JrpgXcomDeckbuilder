@@ -12,38 +12,35 @@ public static class QueuedActions
         Action action,
         QueueingType queueingType = QueueingType.TO_BACK)
     {
+        PushActionOntoRelevantQueue(new BasicDelayedAction(action, ActionManager.Instance.ActionCurrentlyBeingPerformed, name),
+            queueingType);
+    }
+
+
+    private static void PushActionOntoRelevantQueue(BasicDelayedAction action, QueueingType queueingType)
+    {
+        var parentAction = ActionManager.Instance.ActionCurrentlyBeingPerformed;
+
         if (queueingType == QueueingType.TO_BACK)
         {
-            ServiceLocator.GetActionManager().actionsQueue.Add(new BasicDelayedAction(action, name));
+            parentAction.ChildActionsQueue.Add(action);
         }
         else
         {
-            ServiceLocator.GetActionManager().actionsQueue.AddToFront(new BasicDelayedAction(action));
+            parentAction.ChildActionsQueue.AddToFront(action);
         }
     }
 
     public static void DelayedActionWithFinishTrigger(string name, Action action, Func<bool> finishTrigger, QueueingType queueingType = QueueingType.TO_BACK)
     {
-        if (queueingType == QueueingType.TO_BACK)
-        {
-            ServiceLocator.GetActionManager().actionsQueue.Add(new DelayedActionWithFinishTrigger(name, action, finishTrigger));
-        }
-        else
-        {
-            ServiceLocator.GetActionManager().actionsQueue.AddToFront(new DelayedActionWithFinishTrigger(name, action, finishTrigger));
-        }
+        PushActionOntoRelevantQueue(new DelayedActionWithFinishTrigger(name, action, ActionManager.Instance.ActionCurrentlyBeingPerformed, finishTrigger),
+            queueingType);
     }
 
-    public static void ImmediateAction(Action action, QueueingType queueingType = QueueingType.TO_BACK)
+    public static void ImmediateAction(string name, Action action, QueueingType queueingType = QueueingType.TO_BACK)
     {
-        if (queueingType == QueueingType.TO_BACK)
-        {
-            ServiceLocator.GetActionManager().actionsQueue.Add(new ImmediateAction(action));
-        }
-        else
-        {
-            ServiceLocator.GetActionManager().actionsQueue.AddToFront(new ImmediateAction(action));
-        }
+        PushActionOntoRelevantQueue(new ImmediateAction( action, ActionManager.Instance.ActionCurrentlyBeingPerformed, name:name),
+            queueingType);
     }
 }
 public enum QueueingType

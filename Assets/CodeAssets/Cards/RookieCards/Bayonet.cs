@@ -38,7 +38,7 @@ public class Bayonet : AbstractCard
         Require.NotNull(target);
         action().AttackUnitForDamage(target, Owner, BaseDamage, this);
         var cardDiscarded = action().PromptDiscardOfSingleCard();
-        action().DoAThing(() =>
+        action().PushActionToBack("Bayonet_OnPlay", () =>
         {
             Debug.Log("Cards discarded: " + cardDiscarded.CardsSelected.GetCardNames());
         });

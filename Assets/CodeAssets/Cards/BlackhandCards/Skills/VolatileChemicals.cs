@@ -21,7 +21,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         {
             this.Sacrifice(() =>
             {
-                action().DoAThing(() =>
+                action().PushActionToBack("VolatileChemicals_OnPlay", () =>
                 {
                     state().energy+=2;
                 });

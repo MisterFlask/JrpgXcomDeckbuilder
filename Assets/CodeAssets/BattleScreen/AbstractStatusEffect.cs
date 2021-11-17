@@ -221,7 +221,7 @@ public abstract class AbstractStatusEffect: MagicWord
     }
     public void Action_HalveStacks()
     {
-        ActionManager.Instance.DoAThing(() =>
+        ActionManager.Instance.PushActionToBack("HalveStacks", () =>
         {
             HalveStacks();
         });
@@ -230,7 +230,7 @@ public abstract class AbstractStatusEffect: MagicWord
 
     public void Action_DecrementStacks()
     {
-        ActionManager.Instance.DoAThing(() =>
+        ActionManager.Instance.PushActionToBack("DecrementStacks", () =>
         {
             DecrementStacks();
         });

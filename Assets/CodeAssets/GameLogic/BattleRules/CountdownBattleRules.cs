@@ -8,7 +8,7 @@ namespace Assets.CodeAssets.GameLogic.BattleRules
     {
         public static void RunCountdown(AbstractCard card, Action whenAtZero)
         {
-            ActionManager.Instance.DoAThing(() =>
+            ActionManager.Instance.PushActionToBack("RunCountdown", () =>
             {
                 card.Countdown--;
                 if (card.Countdown == 0)

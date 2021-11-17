@@ -12,13 +12,13 @@ public class BattleTurnEndActions
     {
         actionManager.DiscardHand();
 
-        gameState.AllyUnitsInBattle.ForEachCreateAction(item => item.OnTurnEnd());
+        gameState.AllyUnitsInBattle.ForEachCreateActionToBack("OnTurnEnd_Ally", item => item.OnTurnEnd());
 
-        gameState.EnemyUnitsInBattle.ForEachCreateAction(item => item.OnTurnEnd());
+        gameState.EnemyUnitsInBattle.ForEachCreateActionToBack("OnTurnEnd_Enemy", item => item.OnTurnEnd());
 
-        gameState.EnemyUnitsInBattle.ForEachCreateAction(item => item.ExecuteOnIntentIfAvailable());
+        gameState.EnemyUnitsInBattle.ForEachCreateActionToBack("Intent Execution", item => item.ExecuteOnIntentIfAvailable());
 
-        GameState.Instance.Deck.TotalDeckList.ForEachCreateAction(item =>
+        GameState.Instance.Deck.TotalDeckList.ForEachCreateActionToBack("reset rest of turn cost mods", item =>
         {
             item.RestOfTurnCostMod = 0; // these get reset to 0 at the beginning of each turn.
         });
@@ -31,19 +31,19 @@ public class BattleTurnEndActions
         GameState.Instance.NumCardsPlayedThisTurn = 0;
         ServiceLocator.GameState().BattleTurn++;
 
-        ServiceLocator.GetActionManager().DoAThing(() =>
+        ServiceLocator.GetActionManager().PushActionToBack("OnTurnStart(allies)", () =>
         {
             gameState.AllyUnitsInBattle.ForEach(item => item.OnTurnStart());
         });
-        ServiceLocator.GetActionManager().DoAThing(() =>
+        ServiceLocator.GetActionManager().PushActionToBack("OnTurnStart(enemies)", () =>
         {
             gameState.EnemyUnitsInBattle.ForEach(item => item.OnTurnStart());
         });
-        actionManager.DrawCards(5);
-        ServiceLocator.GetActionManager().DoAThing(() =>
+        ServiceLocator.GetActionManager().PushActionToBack("Draw cards for turn", () => actionManager.DrawCards(5));
+        ServiceLocator.GetActionManager().PushActionToBack("Set energy", () =>
         {
             ServiceLocator.GameState().energy = ServiceLocator.GameState().maxEnergy;
         });
-        ActionManager.Instance.CheckIsBattleOver();
+        ServiceLocator.GetActionManager().PushActionToBack("check is battle over", () => ActionManager.Instance.CheckIsBattleOver());
     }
 }

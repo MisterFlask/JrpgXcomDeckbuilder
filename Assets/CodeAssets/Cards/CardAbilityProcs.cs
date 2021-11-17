@@ -26,7 +26,7 @@ namespace Assets.CodeAssets.Cards
 
         public static void GainEnergy(AbstractCard card, int amount = 1)
         {
-            ActionManager.Instance.DoAThing(() =>
+            ActionManager.Instance.PushActionToBack("GainEnergy",() =>
             {
                 GameState.Instance.energy += amount;
             });
@@ -34,7 +34,7 @@ namespace Assets.CodeAssets.Cards
 
         public static void Refund(AbstractCard card, int amount = 1)
         {
-            ActionManager.Instance.DoAThing(() =>
+            ActionManager.Instance.PushActionToBack("Refund",() =>
             {
                 GameState.Instance.energy+=amount;
             });

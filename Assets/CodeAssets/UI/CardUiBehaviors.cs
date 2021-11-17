@@ -37,7 +37,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         var movement = this.GetComponent<CardMovementBehaviors>();
         var handManager = ServiceLocator.GetCardAnimationManager();
-        handManager.MoveCardToAppropriateLocation(movement.GetComponent<Card>(), true);
+        handManager.MoveCardToAppropriateLocationInHand(movement.GetComponent<Card>(), true);
     }
 
     public void OnPointerExit(PointerEventData data)
@@ -48,7 +48,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
         var movement = this.GetComponent<CardMovementBehaviors>();
         var handManager = ServiceLocator.GetCardAnimationManager();
-        handManager.MoveCardToAppropriateLocation(movement.GetComponent<Card>(), false);
+        handManager.MoveCardToAppropriateLocationInHand(movement.GetComponent<Card>(), false);
     }
 
     public void OnPointerDown(PointerEventData data)
@@ -67,7 +67,7 @@ public class CardUiBehaviors : MonoBehaviour, IPointerEnterHandler, IPointerExit
         var movement = this.GetComponent<CardMovementBehaviors>();
         var handManager = ServiceLocator.GetCardAnimationManager();
 
-        handManager.MoveCardToAppropriateLocation(movement.GetComponent<Card>(), false);
+        handManager.MoveCardToAppropriateLocationInHand(movement.GetComponent<Card>(), false);
 
         SendMessageToFirstValidMouseButtonUpHandler(Input.mousePosition);
         ServiceLocator.GameState().SetCardSelected(null);

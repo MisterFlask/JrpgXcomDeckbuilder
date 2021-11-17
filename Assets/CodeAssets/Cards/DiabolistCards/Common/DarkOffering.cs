@@ -27,7 +27,7 @@ namespace Assets.CodeAssets.Cards.DiabolistCards.Common
             action().ApplyDefense(target, this.Owner, BaseDefenseValue);
             this.Sacrifice(() =>
             {
-                action().DoAThing(() =>
+                action().PushActionToBack("DarkOffering_OnPlay", () =>
                 {
                     state().energy++;
                 });

@@ -25,36 +25,19 @@ public class CardMovementBehaviors: MonoBehaviour
         StartCoroutine(MoveToPosition(this.transform.localPosition, moveTo, toRotation.Value, .3f, this.transform.localScale, false, newLocalScale));
     }
 
-    public void DissolveAndDestroyCard()
+    public void DissolveAndDestroyCard(Action callbackWhenFinished)
     {
-
         if (Disappearing)
         {
+            callbackWhenFinished();
             return;
         }
         Disappearing = true;
-        StartCoroutine(DisappearSlowly(1f));
+        StartCoroutine(Disappear(1f, callbackWhenFinished));
     }
 
     bool Disappearing = false;
 
-    IEnumerator DisappearSlowly(float duration)
-    {
-        yield return null;
-        var card = GetComponent<Card>();
-
-        var counter = 0f;
-        while (counter < duration)
-        {
-            counter += Time.deltaTime / duration;
-            // TODO:  Some kind of animation
-            yield return new WaitForEndOfFrame();
-        }
-
-        Debug.Log("Finished animation, destroying object");
-        Disappearing = false;
-        this.gameObject.Despawn();
-    }
 
     public void KillMovement()
     {
@@ -113,6 +96,43 @@ public class CardMovementBehaviors: MonoBehaviour
 
             this.gameObject.Despawn();
         }
-        
+
+    }
+    public IEnumerator Disappear( float duration, Action callbackWhenFinished)
+    {
+        killSwitch = false;
+        //Make sure there is only one instance of this function running
+        if (isMoving)
+        {
+            yield break; ///exit if this is still running
+        }
+        isMoving = true;
+
+        float counter = 0;
+
+        //Get the current position of the object to be moved
+
+
+        while (counter < duration)
+        {
+            var fractionComplete = counter / duration;
+
+            if (killSwitch)
+            {
+                Debug.Log("Kill switch thrown");
+                killSwitch = false;
+                isMoving = false;
+                break;
+            }
+            counter += Time.deltaTime;
+
+            var frameMaterial = this.GetComponent<Card>().CurrentCardFrame.material;
+            frameMaterial.SetFloat("_Destroyer_Value_1", fractionComplete);
+            yield return null;
+        }
+
+        isMoving = false;
+        this.gameObject.Despawn();
+        callbackWhenFinished();
     }
 }

@@ -171,16 +171,32 @@ public static class BattleRules
 
     public static void CheckAndRegisterDeath(AbstractBattleUnit unit, AbstractBattleUnit nullableUnitThatKilledMe, AbstractCard cardUsedIfAny)
     {
+        if (unit.HasDied)
+        {
+            /// stopping this from triggering more than once on a unit
+            return;
+        }
+
         if (unit.CurrentHp <= 0)
         {
+            unit.HasDied = true;
+            ActionManager.Instance.TriggerUnitKilledFeedback(unit);
+
             foreach (var effect in unit.StatusEffects)
             {
                 effect.OnDeath(nullableUnitThatKilledMe, cardUsedIfAny);
             }
 
             BattleRules.TriggerProc(new CharacterDeathProc { CharacterDead = unit });
-            ActionManager.Instance.MarkUnitKilled(unit);
 
+            foreach (var card in GameState.Instance.Deck.TotalDeckList)
+            {
+                if (card.Owner == unit)
+                {
+                    // we always exhaust all cards owned by dead people.
+                    ActionManager.Instance.ExhaustCard(card);
+                }
+            }
         }
     }
 

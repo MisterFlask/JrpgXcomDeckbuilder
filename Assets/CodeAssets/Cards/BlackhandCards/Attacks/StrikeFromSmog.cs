@@ -22,7 +22,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyStatusEffect(target, new FumesStatusEffect(), 10);
-            action().DoAThing(() =>
+            action().PushActionToBack("StrikeFromSmog_OnPlay", () =>
             {
                 var damageToDo = target.GetStatusEffect<FumesStatusEffect>().Stacks + 10;
                 action().DamageUnitNonAttack(target, this.Owner, damageToDo);

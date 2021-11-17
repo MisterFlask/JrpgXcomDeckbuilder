@@ -21,7 +21,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Attacks
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().AttackWithCard(this, target);
-            action().DoAThing( () =>
+            action().PushActionToBack("FromHell_OnPlay", () =>
             {
                 this.BaseDamage += 8;
             });

@@ -24,7 +24,7 @@ namespace Assets.CodeAssets.Cards.BlackhandCards.Skills
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)
         {
             action().ApplyDefense(target, this.Owner, BaseDefenseValue);
-            action().DoAThing(() =>
+            action().PushActionToBack("SmogWall", () =>
             {
                 var fumesToApply = target.CurrentBlock;
                 action().ApplyStatusEffect(CardTargeting.RandomTargetableEnemy(), new FumesStatusEffect(), fumesToApply);

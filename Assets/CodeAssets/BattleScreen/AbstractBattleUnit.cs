@@ -178,7 +178,7 @@ public abstract class AbstractBattleUnit
     /// </summary>
     public void OnTurnStart()
     {
-        ActionManager.Instance.DoAThing(() =>
+        ActionManager.Instance.PushActionToBack("AbstractBattleUnit_OnTurnStart", () =>
         {
 
             CurrentBlock = 0;

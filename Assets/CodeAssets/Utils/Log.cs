@@ -40,7 +40,7 @@ public class Log: MonoBehaviour
 
     public void Err(string msg, System.Diagnostics.StackTrace st)
     {
-        Debug.LogError(msg + $" [trace is <color=red>{st.ToString()}</color>]");
+        Debug.LogError(msg + $" [trace is <color=red>{st?.ToString()}</color>]");
     }
     public void DebugInner(string msg)
     {

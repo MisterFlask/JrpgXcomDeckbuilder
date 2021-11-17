@@ -58,7 +58,6 @@ public class CardAnimationManager : MonoBehaviour
         ScriptExecutionTracker.ScriptsFinishedExecuting.Add(nameof(CardAnimationManager));
     }
 
-
     public void RefreshCardAppearance(AbstractCard card)
     {
         var hypercard = this.cardsInHand.SingleOrDefault(item => item.GetComponent<PlayerCard>().LogicalCard.Id == card.Id);
@@ -156,7 +155,13 @@ public class CardAnimationManager : MonoBehaviour
 
             foreach (var item in cardsInHand)
             {
-                MoveCardToAppropriateLocation(item, false);
+                MoveCardToAppropriateLocationInHand(item, false);
+            }
+
+            /// doing this twice as a hack, since the first time cards may destroy themselves
+            foreach (var item in cardsInHand)
+            {
+                MoveCardToAppropriateLocationInHand(item, false);
             }
         });
     }
@@ -165,25 +170,33 @@ public class CardAnimationManager : MonoBehaviour
     {
         foreach (var card in cardsInHand)
         {
-            MoveCardToAppropriateLocation(card, false);
+            MoveCardToAppropriateLocationInHand(card, false);
         }
     }
 
-    public void MoveCardToAppropriateLocation(Card card, bool mousedOver)
+    public void MoveCardToAppropriateLocationInHand(Card card, bool mousedOver)
     {
+
         var index = GetHandIndexOfCard(card);
+
+        if (index == null)
+        {
+            card.gameObject.Despawn();
+            return;
+        }
+
         var scriptableMovement = card.GetComponent<CardMovementBehaviors>();
         scriptableMovement.KillMovement();
 
         if (card.IsSelected)
         {
-            scriptableMovement.MoveToLocation(GetAppropriateCardPositionInCardSelectionArea(index, cardsInHand.Count));
+            scriptableMovement.MoveToLocation(GetAppropriateCardPositionInCardSelectionArea(index.Value, cardsInHand.Count));
         }
         else
         {
             scriptableMovement.MoveToLocation(
-                GetAppropriateCardPositionInHand(index, cardsInHand.Count, mousedOver),
-                GetAppropriateCardRotation(index, cardsInHand.Count, mousedOver, card.IsSelected), GetAppropriateScale(mousedOver));
+                GetAppropriateCardPositionInHand(index.Value, cardsInHand.Count, mousedOver),
+                GetAppropriateCardRotation(index.Value, cardsInHand.Count, mousedOver, card.IsSelected), GetAppropriateScale(mousedOver));
         }
         // now, we reorder the cards on the canvas according to z-axis
         var hand = GameObject.Find("Hand");
@@ -209,8 +222,12 @@ public class CardAnimationManager : MonoBehaviour
         return new Vector3(cardX, y, z);
     }
 
-    private int GetHandIndexOfCard(Card card)
+    private int? GetHandIndexOfCard(Card card)
     {
+        if (!this.cardsInHand.Contains(card))
+        {
+            return null;
+        }
         return this.cardsInHand.IndexOf(card);
     }
 
@@ -240,6 +257,33 @@ public class CardAnimationManager : MonoBehaviour
             else
             {
                 throw new System.Exception("Attempted to discard card that doesn't exist");
+            }
+            cardsInHand.Remove(hypercard);
+            ReorientAllCards();
+        }
+        catch (InvalidOperationException e)
+        {
+            if (assumedToExistInHand)
+            {
+                Debug.LogError($"Failed to move card {abstractCard.Name} because {e.Message}");
+            }
+        }
+    }
+
+    public void DisappearCard(AbstractCard abstractCard, bool assumedToExistInHand, Action callbackWhenFinished)
+    {
+        try
+        {
+            var logicalCardsInHand = this.cardsInHand.Select(item => item.LogicalCard).ToList();
+            var hypercard = this.cardsInHand.Single(item => item.LogicalCard.Id == abstractCard.Id);
+            if (cardsInHand.Contains(hypercard))
+            {
+                hypercard.GetComponent<CardMovementBehaviors>().DissolveAndDestroyCard(callbackWhenFinished);
+            }
+            else
+            {
+                callbackWhenFinished();
+                Log.Error("Attempted to discard card that doesn't exist");
             }
             cardsInHand.Remove(hypercard);
             ReorientAllCards();
@@ -287,14 +331,6 @@ public class CardAnimationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.E))
-        {
-            foreach(var item in cardsInHand)
-            {
-                item.GetComponent<CardMovementBehaviors>().DissolveAndDestroyCard();
-            }
-            cardsInHand.Clear();
-        }
 
     }
 }

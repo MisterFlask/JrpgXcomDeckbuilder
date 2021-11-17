@@ -106,6 +106,7 @@ namespace HyperCard
         }
 
         public static Action<AbstractCard> ClickHandler { get; set; }
+        public Image CurrentCardFrame { get; set; }
     }
 
 }

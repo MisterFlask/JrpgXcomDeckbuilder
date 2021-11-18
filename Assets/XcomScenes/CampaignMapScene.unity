@@ -7186,6 +7186,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPool
       objectReference: {fileID: 0}
+    - target: {fileID: 4889313481864475257, guid: 9d18b2663c71f8b47b95b568d984c91e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4889313481864475258, guid: 9d18b2663c71f8b47b95b568d984c91e,
         type: 3}
       propertyPath: _perPrefabPoolOptions.Array.size

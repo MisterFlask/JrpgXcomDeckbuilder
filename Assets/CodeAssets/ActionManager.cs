@@ -629,9 +629,9 @@ public class ActionManager : MonoBehaviour
             {
                 currentActionStartedAtThisTime = DateTime.Now;
                 ActionCurrentlyBeingPerformed.onStart();
-            } catch (Exception)
+            } catch (Exception e)
             {
-                Debug.LogError(ActionCurrentlyBeingPerformed?.stackTrace?.ToString());
+                Debug.LogError(e.Message + " [stack trace] " + ActionCurrentlyBeingPerformed?.stackTrace?.ToString());
                 IsCurrentActionFinished = true;
             }
         }

@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.CodeAssets.UI
 {
-    public class BattleUnitClickableImage : MonoBehaviour
+    public class BattleUnitClickableImage : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public BattleUnitPrefab linkedTo;
 
@@ -28,20 +29,19 @@ namespace Assets.CodeAssets.UI
         {
             return GetComponent<SpriteRenderer>();
         }
-
-        public void OnMouseDown()
+        public void OnPointerClick(PointerEventData eventData)
         {
-            linkedTo.OnPointerClick(null);
+            linkedTo.OnPrefabClick(null);
         }
 
-        public void OnMouseEnter()
+        public void OnPointerEnter(PointerEventData eventData)
         {
-            linkedTo.OnPointerEnter(null);
+            linkedTo.OnPrefabEnter(null);
         }
 
-        public void OnMouseExit()
+        public void OnPointerExit(PointerEventData eventData)
         {
-            linkedTo.OnPointerExit(null);
+            linkedTo.OnPrefabExit(null);
         }
     }
 }

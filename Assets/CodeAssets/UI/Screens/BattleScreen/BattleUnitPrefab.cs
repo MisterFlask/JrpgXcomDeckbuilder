@@ -244,23 +244,16 @@ public class BattleUnitPrefab:MonoBehaviour
         return intentsAccumulator;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPrefabEnter(PointerEventData eventData)
     {
         Debug.Log("Entered battle unit prefab; setting battle unit moused over");
         BattleScreenPrefab.BattleUnitMousedOver = this.UnderlyingEntity;
         ExplainerPanel.ShowBattleUnitHelp(this);
-        if (UnderlyingEntity.IsAlly)
-        {
-            TooltipController.ShowTooltipForBattleUnitClass(this.UnderlyingEntity);
-            TooltipController.GetComponent<TooltipTrigger>().enabled = true;
-        }
-        else
-        {
-            TooltipController.GetComponent<TooltipTrigger>().enabled = false;
-        }
+        TooltipController.ShowTooltipForBattleUnitClass(this.UnderlyingEntity);
+        TooltipController.GetComponent<TooltipTrigger>().enabled = true;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnPrefabExit(PointerEventData eventData)
     {
         Debug.Log("Exited battle unit prefab; unsetting battle unit moused over");
         if (BattleScreenPrefab.BattleUnitMousedOver == this.UnderlyingEntity)
@@ -270,21 +263,8 @@ public class BattleUnitPrefab:MonoBehaviour
         ExplainerPanel.Hide();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPrefabClick(PointerEventData eventData)
     {
         ServiceLocator.GetActionManager().Shout(this.UnderlyingEntity, "Clicked on unit.");
-    }
-
-    void OnMouseDown()
-    {
-        OnPointerClick(null);
-    }
-    void OnMouseEnter()
-    {
-        OnPointerEnter(null);
-    }
-    void OnMouseExit()
-    {
-        OnPointerExit(null);
     }
 }

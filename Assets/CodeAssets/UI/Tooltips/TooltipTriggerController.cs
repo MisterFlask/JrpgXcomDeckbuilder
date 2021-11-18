@@ -21,7 +21,7 @@ namespace Assets.CodeAssets.UI.Tooltips
 
         public void ShowTooltipForBattleUnitClass(AbstractBattleUnit unit)
         {
-            if (unit.SoldierClass != null)
+            if (unit.IsAlly && unit.SoldierClass != null)
             {
                 RefreshTooltip(cardReferenced: null,
                     title: "Reference",
@@ -31,7 +31,7 @@ namespace Assets.CodeAssets.UI.Tooltips
             {
                 RefreshTooltip(cardReferenced: null,
                     title: "Reference",
-                    description: null);
+                    description: "Flavor text for enemy!");
             }
         }
 

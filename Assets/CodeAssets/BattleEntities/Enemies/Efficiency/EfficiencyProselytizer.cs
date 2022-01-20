@@ -14,7 +14,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
             this.EnemyFaction = EnemyFaction.EFFICIENCY;
             this.ApplyStatusEffect(new ArmoredStatusEffect(), stacks: 2);
             UnitSize = UnitSize.LARGE;
-            this.MaxHp = 55;
+            this.MaxHp = 44;
         }
 
         //Increase stress of all characters by 10 => attack for 20%

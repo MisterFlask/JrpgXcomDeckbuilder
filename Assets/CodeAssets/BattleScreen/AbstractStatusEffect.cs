@@ -254,6 +254,11 @@ public abstract class AbstractStatusEffect: MagicWord
 
     }
 
+    public void OnUnblockedDamageDealt()
+    {
+
+    }
+
 }
 
 public enum StatusEffectChange

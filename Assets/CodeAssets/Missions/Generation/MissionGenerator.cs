@@ -19,7 +19,7 @@ public static class MissionGenerator
                 MaxNumberOfFriendlyCharacters = 3,
                 Name = AbstractMission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
-                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber),
+                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.NORMAL),
                 ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash"),
                 MissionModifiers = GetRandomMissionModifiers()
             },
@@ -30,8 +30,10 @@ public static class MissionGenerator
                 MaxNumberOfFriendlyCharacters = 3,
                 Name = AbstractMission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
-                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("key")
+                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.ELITE),
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("key"),
+                    MissionModifiers = GetRandomMissionModifiers()
+
             },
             new KillEnemiesMission()
             {
@@ -40,7 +42,7 @@ public static class MissionGenerator
                 MaxNumberOfFriendlyCharacters = 3,
                 Name = AbstractMission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new RandomAugmentationMissionReward()},
-                EnemySquad = MissionRules.GetRandomSquadForDay(dayNumber),
+                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.NORMAL),
                 ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("relic")
             },
             new GateMission()
@@ -50,7 +52,7 @@ public static class MissionGenerator
                 MaxNumberOfFriendlyCharacters = 3,
                 Name = AbstractMission.GenerateMissionName(),
                 Rewards = new List<AbstractMissionReward>{new GateBypassMissionReward()},
-                EnemySquad = MissionRules.GetEliteSquad(),
+                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.BOSS),
                 ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("gate")
             },
             new KillEnemiesMission()
@@ -84,6 +86,8 @@ public static class MissionGenerator
                 var modifier = MissionModifier.GetRandomMissionModifier();
                 mission.MissionModifiers.Add(modifier);
             });
+
+            mission.Init();
         }
 
         return missions;
@@ -91,7 +95,10 @@ public static class MissionGenerator
 
     private static List<MissionModifier> GetRandomMissionModifiers()
     {
-        return new List<MissionModifier>();
+        return new List<MissionModifier>()
+        {
+            MissionModifier.GetRandomMissionModifier()
+        };
     }
 }
 
@@ -121,9 +128,8 @@ public class GateMission : KillEnemiesMission
 public class Squad
 {
     public List<AbstractBattleUnit> Members { get; set; }
-    public int BaseDifficulty { get; set; }
-
-    public string Description { get; set; }
+    public int BaseDifficulty { get; set; } = 0;
+    public string Description { get; set; } = "???";
 
     public void SetDifficulty(int difficulty)
     {

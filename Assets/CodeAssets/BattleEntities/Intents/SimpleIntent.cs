@@ -20,20 +20,11 @@ public abstract class SimpleIntent : AbstractIntent
     }
 
 
-    protected override IntentPrefab GeneratePrefab(GameObject parent)
-    {
-        var parentPrefab = ServiceLocator.GameObjectTemplates().AttackPrefab;
-        var returnedPrefab = parentPrefab.Spawn(parent.transform);
-        return returnedPrefab;
-    }
 }
-
-
 
 
 public static class IntentsFromPercentBase
 {
-
 
     public static List<AbstractIntent> AttackRandomPc(
         AbstractBattleUnit source,
@@ -137,13 +128,6 @@ public static class IntentsFromPercentBase
         return intent.ToSingletonList<AbstractIntent>();
 
     }
-    public static List<AbstractIntent> DefendSelf(AbstractBattleUnit self,
-        int shieldPercent)
-    {
-        return new DefendSelfIntent(self, 
-            GameState.Instance.DoomCounter.GetAdjustedDamage(shieldPercent))
-            .ToSingletonList<AbstractIntent>();
-    }
 
     public static List<AbstractIntent> Charging(AbstractBattleUnit unit)
     {
@@ -186,11 +170,8 @@ public static class IntentRotation
 
 }
 
-#region obsolete
-[Obsolete]
 public static class IntentsFromBaseDamage
 {
-    [Obsolete]
     public static List<AbstractIntent> AttackRandomPc(
         AbstractBattleUnit source, 
         int damagePerHit, int numHits = 1)
@@ -256,5 +237,23 @@ public static class IntentsFromBaseDamage
 
         return generateLastAction(GameState.Instance.BattleTurn);
     }
+    public static List<AbstractIntent> DefendSelf(AbstractBattleUnit self,
+        int shieldValue)
+    {
+        return new DefendSelfIntent(self,
+            shieldValue)
+            .ToSingletonList<AbstractIntent>();
+    }
+
+    public static List<AbstractIntent> DebuffRandomOther(AbstractBattleUnit self, AbstractStatusEffect debuff_requiresStacksSet)
+    {
+        return new DebuffOtherIntent(self, () =>
+        {
+            var target = IntentTargeting.GetRandomLivingPlayerUnit();
+
+            ActionManager.Instance.ApplyStatusEffect(target,
+                debuff_requiresStacksSet,
+                debuff_requiresStacksSet.Stacks);
+        }).ToSingletonList<AbstractIntent>();
+    }
 }
-#endregion

@@ -94,8 +94,10 @@ public class GameState
     public AbstractBattleUnit CharacterSelected { get; set; }
     public int Day { get; set; }
     public bool GateMissionUnlocked { get; internal set; }
-
+    public int Act { get; set; } = 1;
     public bool NextRegionUnlocked { get; set; } = false;
+
+    public List<AbstractMissionReward> AdditionalRewardsAccrued = new List<AbstractMissionReward>();
 
     public bool HasPopulatedRegionWithMissions { get; set; } = false;
     #endregion
@@ -150,6 +152,7 @@ public class DoomCounter
         CurrentDoomCounter += 2;
     }
 
+    #region obsolete
     /// <summary>
     /// This works similarly to how risk of rain represents character damage.  There's a base level dictated by the Doom Counter, and this is multiplied by whatever percentage to 
     /// get the actual damage for the creature this combat enocounter.
@@ -171,6 +174,8 @@ public class DoomCounter
         perc = perc / 100;
         return (int)(perc * GetCurrentDoomLevel().BaseDamage);
     }
+
+    #endregion
 
     public int CurrentDoomCounter { get; set; } = 0;
 

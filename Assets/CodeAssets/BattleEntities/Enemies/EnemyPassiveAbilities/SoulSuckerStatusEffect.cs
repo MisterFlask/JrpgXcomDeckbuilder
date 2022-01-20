@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets.CodeAssets.BattleEntities.Enemies.EnemyPassiveAbilities
 {
     // Whenever ANY enemy in the combat dies, gains +3 strength.
-    public class SoulSucker : AbstractStatusEffect
+    public class SoulSuckerStatusEffect : AbstractStatusEffect
     {
         public override string Description => "Whenever a unit dies in combat, gain [stacks] strength.";
 

@@ -22,4 +22,9 @@ public class HighWindsMissionModifier : MissionModifier
         }
 
     }
+
+    public override int IncrementalMoney()
+    {
+        return 15;
+    }
 }

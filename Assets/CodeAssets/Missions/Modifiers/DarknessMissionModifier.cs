@@ -16,6 +16,11 @@ public class DarknessMissionModifier : MissionModifier
             ActionManager.Instance.ApplyStatusEffect(c, new DarknessStatusEffect(), 2);
         }
     }
+
+    public override int IncrementalMoney()
+    {
+        return 40;
+    }
 }
 
 public class DarknessStatusEffect : AbstractStatusEffect

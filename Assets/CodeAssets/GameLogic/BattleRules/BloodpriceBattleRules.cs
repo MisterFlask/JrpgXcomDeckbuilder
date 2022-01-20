@@ -10,9 +10,10 @@ namespace Assets.CodeAssets.GameLogic
     {
         public static EnergyPaidInformation GetNetEnergyCostWithBloodprice(AbstractCard card)
         {
-            if (GameState.Instance.energy < card.BaseEnergyCost())
+            if (GameState.Instance.energy < card.GetDisplayedEnergyCost())
             {
-                var missingEnergy = card.BaseEnergyCost() - GameState.Instance.energy;
+                var missingEnergy = card.GetDisplayedEnergyCost() - GameState.Instance.energy;
+
                 return new EnergyPaidInformation()
                 {
                     ActionsToTake = new List<EnergyPaidAction>
@@ -28,7 +29,7 @@ namespace Assets.CodeAssets.GameLogic
 
             return new EnergyPaidInformation()
             {
-                EnergyCost = card.BaseEnergyCost()
+                EnergyCost = card.GetDisplayedEnergyCost()
             };
         }
     }

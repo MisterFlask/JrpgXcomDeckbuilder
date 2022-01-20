@@ -12,17 +12,5 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Summer
     /// </summary>
     public class Summer : MonoBehaviour
     {
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }

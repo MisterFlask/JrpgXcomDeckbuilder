@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GoldMissionReward : AbstractMissionReward
 {
-    private int MoneyEarned { get; set; }
+    public int MoneyEarned { get; set; }
     public GoldMissionReward(int amount)
     {
         MoneyEarned = amount;

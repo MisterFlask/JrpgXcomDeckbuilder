@@ -41,6 +41,57 @@ public class BattleScreenPrefab : MonoBehaviour
     public static AbstractBattleUnit BattleUnitMousedOver { get; set; }
     public static AbstractCard CardMousedOver { get; set; }
 
+
+    private List<int> ForbiddenSmallEnemyIndicesIfLargeEnemyExists = new List<int>
+    {
+        0,1,2,3,4,5
+    };
+
+    private List<int> ForbiddenSmallEnemyIndicesIfMediumEnemyExistsInSlotOne = new List<int>
+    {
+        0,1,3,4
+    };
+
+    private List<int> ForbiddenSmallEnemyIndicesIfMediumEnemyExistsInSlotTwo = new List<int>
+    {
+        6,7,9,10
+    };
+
+    
+    public List<int> GetForbiddenIndicesForSmallCharacters_BasedOnExistingPrefabPopulations()
+    {
+        var forbiddenSmallSlots = new List<int>();
+
+        var mediumEnemyInSlotOne = PotentialBattleEntityLargeEnemySpots[0].UnderlyingEntity != null;
+        var mediumEnemyInSlotTwo = PotentialBattleEntityLargeEnemySpots[1].UnderlyingEntity != null;
+        var largeEnemyExists = PotentialBattleEntityHugeEnemySpots[0].UnderlyingEntity != null;
+
+        if (mediumEnemyInSlotOne)
+        {
+            forbiddenSmallSlots.AddRange(ForbiddenSmallEnemyIndicesIfMediumEnemyExistsInSlotOne);
+        }
+        if (mediumEnemyInSlotTwo)
+        {
+            forbiddenSmallSlots.AddRange(ForbiddenSmallEnemyIndicesIfMediumEnemyExistsInSlotTwo);
+        }
+        if (largeEnemyExists)
+        {
+            forbiddenSmallSlots.AddRange(ForbiddenSmallEnemyIndicesIfLargeEnemyExists);
+        }
+
+        return forbiddenSmallSlots;
+    }
+
+    public List<BattleUnitPrefab> GetAvailableSpotsForNewSmallUnits()
+    {
+        var emptySpots = PotentialBattleEntityEnemySpots.Where(item => item.UnderlyingEntity == null);
+        var forbiddenIndices = GetForbiddenIndicesForSmallCharacters_BasedOnExistingPrefabPopulations();
+
+        return emptySpots
+            .Where(item => !forbiddenIndices.Contains(PotentialBattleEntityEnemySpots.IndexOf(item)))
+            .ToList();
+    }
+
     public void Setup(List<AbstractBattleUnit> StartingEnemies, List<AbstractBattleUnit> StartingAllies
         )
     {
@@ -52,26 +103,16 @@ public class BattleScreenPrefab : MonoBehaviour
         var forbiddenMediumEnemyIndices = new List<int>();
         if (mediumEnemies.Count() >= 1)
         {
-            forbiddenSmallEnemyIndices.Add(0);
-            forbiddenSmallEnemyIndices.Add(1);
-            forbiddenSmallEnemyIndices.Add(3);
-            forbiddenSmallEnemyIndices.Add(4);
+            forbiddenSmallEnemyIndices.AddRange(ForbiddenSmallEnemyIndicesIfMediumEnemyExistsInSlotOne);
         }
         if (mediumEnemies.Count() == 2)
         {
-            forbiddenSmallEnemyIndices.Add(6);
-            forbiddenSmallEnemyIndices.Add(7);
-            forbiddenSmallEnemyIndices.Add(9);
-            forbiddenSmallEnemyIndices.Add(10);
+            forbiddenSmallEnemyIndices.AddRange(ForbiddenSmallEnemyIndicesIfMediumEnemyExistsInSlotTwo);
+
         }
         if (largeEnemies.Count() == 1)
         {
-            forbiddenSmallEnemyIndices.Add(0);
-            forbiddenSmallEnemyIndices.Add(1);
-            forbiddenSmallEnemyIndices.Add(2);
-            forbiddenSmallEnemyIndices.Add(3);
-            forbiddenSmallEnemyIndices.Add(4);
-            forbiddenSmallEnemyIndices.Add(5);
+            forbiddenSmallEnemyIndices.AddRange(ForbiddenSmallEnemyIndicesIfLargeEnemyExists);
             forbiddenMediumEnemyIndices.Add(0);
         }
 
@@ -91,7 +132,6 @@ public class BattleScreenPrefab : MonoBehaviour
         var acceptableStartingSmallEnemySpots = PotentialBattleEntityEnemySpots
             .Where(item => !forbiddenSmallEnemyIndices.Contains(PotentialBattleEntityEnemySpots.IndexOf(item)))
             .ToList();
-
 
         if (GameState.Instance.CurrentMission?.BattleBackground != null)
         {
@@ -125,19 +165,14 @@ public class BattleScreenPrefab : MonoBehaviour
         }
     }
 
-    public BattleUnitPrefab GetFirstEmptyBattleUnitHolder()
-    {
-        return PotentialBattleEntityEnemySpots.FirstOrDefault(item => item.UnderlyingEntity == null);
-    }
-
     public bool IsRoomForAnotherEnemy()
     {
-        return GetFirstEmptyBattleUnitHolder() != null;
+        return !GetAvailableSpotsForNewSmallUnits().IsEmpty();
     }
 
     public CreateEnemyResult CreateNewEnemyAndRegisterWithGamestate(AbstractBattleUnit battleUnit)
     {
-        var firstEmptyBattleUnitHolder = GetFirstEmptyBattleUnitHolder();
+        var firstEmptyBattleUnitHolder = GetAvailableSpotsForNewSmallUnits()[0];
         if (firstEmptyBattleUnitHolder == null)
         {
 

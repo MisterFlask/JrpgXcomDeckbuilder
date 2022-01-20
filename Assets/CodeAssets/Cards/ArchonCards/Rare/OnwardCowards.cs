@@ -8,7 +8,7 @@ namespace Assets.CodeAssets.Cards.ArchonCards.Rare
 
         public OnwardCowards()
         {
-            SoldierClassCardPools.Add(typeof(RookieClass));
+            SoldierClassCardPools.Add(typeof(RookieClass)); //todo
             Name = "Onward, cowards!";
             TargetType = TargetType.NO_TARGET_OR_SELF;
             CardType = CardType.SkillCard;

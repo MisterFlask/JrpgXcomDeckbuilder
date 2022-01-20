@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +17,19 @@ namespace Assets.CodeAssets.BattleEntities.Intents
 
         public override string GetGenericDescription()
         {
-            return "This enemy intends to summon allies next round.  If there aren't spots available, will heal 1/3 of its HP.";
+            return "This enemy intends to summon allies next round.  If there aren't spots available, will heal 1/3 of its HP.  Current status: " + GetCurrentStatusDescription();
+        }
+
+        private string GetCurrentStatusDescription()
+        {
+            if (CanSummon())
+            {
+                return "Will summon a unit.";
+            }
+            else
+            {
+                return "Will heal itself.";
+            }
         }
 
         public override string GetOverlayText()
@@ -26,7 +39,7 @@ namespace Assets.CodeAssets.BattleEntities.Intents
 
         protected override void Execute()
         {
-            if (CurrentlyAvailableForUsage())
+            if (CanSummon())
             {
                 ActionManager.Instance.CreateEnemyMinionInBattle(MinionToCreate);
             }
@@ -36,9 +49,14 @@ namespace Assets.CodeAssets.BattleEntities.Intents
             }
         }
 
-        protected override bool CurrentlyAvailableForUsage()
+        private bool CanSummon()
         {
             return BattleScreenPrefab.INSTANCE.IsRoomForAnotherEnemy();
+        }
+
+        protected override bool CurrentlyAvailableForUsage()
+        {
+            return true;
         }
 
         protected override IntentPrefab GeneratePrefab(GameObject parent)

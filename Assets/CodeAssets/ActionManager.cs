@@ -173,6 +173,20 @@ public class ActionManager : MonoBehaviour
         //todo
     }
 
+    public void ForceSwapIntents_RightNow(AbstractBattleUnit target, List<AbstractIntent> newIntents)
+    {
+        QueuedActions.ImmediateAction("ForceSwapIntents", () => {
+            target.CurrentIntents = newIntents;
+        });
+    }
+
+    public void ForceSwapIntents_NextTurn(AbstractBattleUnit target, List<AbstractIntent> newIntents)
+    {
+        QueuedActions.ImmediateAction("ForceSwapIntents_NextTurn", () => {
+            target.NextIntentOverride = newIntents;
+        });
+    }
+
     public void ApplyDefense(AbstractBattleUnit target, AbstractBattleUnit source, int baseQuantity)
     {
         QueuedActions.ImmediateAction("ApplyDefense", () =>
@@ -657,14 +671,21 @@ public class ActionManager : MonoBehaviour
     /// Spawns a new enemy in battle, if there's room.
     /// </summary>
     /// <param name="unit"></param>
-    public void CreateEnemyMinionInBattle(AbstractBattleUnit unit, Action toPerformAfterSummoning = null)
+    public bool CreateEnemyMinionInBattle(AbstractBattleUnit unit, Action toPerformAfterSummoning = null)
     {
+        if (BattleScreenPrefab.INSTANCE.GetAvailableSpotsForNewSmallUnits().Count == 0)
+        {
+            return false;
+        }
+
         var clone = unit.CloneUnit();
         BattleScreenPrefab.INSTANCE.CreateNewEnemyAndRegisterWithGamestate(clone);
         if (toPerformAfterSummoning != null)
         {
             toPerformAfterSummoning();
         }
+
+        return true;
     }
 
     public void HealUnit(AbstractBattleUnit unitHealed, int healedAmount, AbstractBattleUnit healer = null, bool allowedToReviveTheDead = false)

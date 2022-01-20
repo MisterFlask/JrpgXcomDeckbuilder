@@ -166,10 +166,17 @@ public abstract class AbstractCard
         return (StaticBaseEnergyCost ?? 1);
     }
 
+    /// <summary>
+    /// This IS allowed to take into account the current UI state (e.g. cursor position)
+    /// </summary>
+    /// <returns></returns>
     public int GetDisplayedEnergyCost()
     {
+        var targetedUnitIfAny = GameState.Instance.CharacterSelected;
+        var costMod = targetedUnitIfAny.StatusEffects.Sum(item => item.GetTargetedCostModifier(this));
         return BaseEnergyCost()
             + RestOfTurnCostMod
+            + costMod
             + PersistentCostModifiers
                 .Select(item => item.GetCostModifier())
                 .Sum();
@@ -181,11 +188,7 @@ public abstract class AbstractCard
     /// <returns></returns>
     public virtual EnergyPaidInformation GetNetEnergyCost()
     {
-        var cost = BaseEnergyCost() 
-            + RestOfTurnCostMod 
-            + PersistentCostModifiers
-                .Select(item => item.GetCostModifier())
-                .Sum();
+        var cost = GetDisplayedEnergyCost();
 
         return new EnergyPaidInformation
         {

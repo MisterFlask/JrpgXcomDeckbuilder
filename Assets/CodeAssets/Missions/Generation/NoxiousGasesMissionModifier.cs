@@ -13,6 +13,11 @@
             ActionManager.Instance.AddStickerToCard(card, new NoxiousCardSticker());
         }
     }
+
+    public override int IncrementalMoney()
+    {
+        return 25;
+    }
 }
 
 public class NoxiousCardSticker : AbstractCardSticker

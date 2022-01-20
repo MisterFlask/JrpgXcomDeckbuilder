@@ -11,7 +11,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.EnemyPassiveAbilities
             Name = "Horrifying";
         }
 
-        public override string Description => "Whenever this character is the target of a card, the character gains [stacks] stress.";
+        public override string Description => "Whenever this character is the target of a card, the targeting character gains [stacks] stress.";
 
         public override void OnTargetedByCard(AbstractCard sourceCard)
         {

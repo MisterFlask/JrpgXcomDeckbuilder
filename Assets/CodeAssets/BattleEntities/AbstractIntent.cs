@@ -39,7 +39,13 @@ public abstract class AbstractIntent
         return true;
     }
 
-    protected abstract IntentPrefab GeneratePrefab(GameObject parent);
+    protected virtual IntentPrefab GeneratePrefab(GameObject parent)
+    {
+        // the attack prefab gets swapped out for whatever the actual prefab is.
+        var parentPrefab = ServiceLocator.GameObjectTemplates().AttackPrefab;
+        var returnedPrefab = parentPrefab.Spawn(parent.transform);
+        return returnedPrefab;
+    }
 
     public IntentPrefab GeneratePrefabAndAssign(GameObject parent)
     {

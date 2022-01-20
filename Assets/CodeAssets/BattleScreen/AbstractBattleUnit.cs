@@ -172,6 +172,8 @@ public abstract class AbstractBattleUnit
 
     public bool IsAdvanced => HasStatusEffect<AdvancedStatusEffect>();
 
+    public List<AbstractIntent> NextIntentOverride { get; set; }
+
 
     /// <summary>
     /// This happens AFTER all enemies have executed intents.
@@ -218,6 +220,11 @@ public abstract class AbstractBattleUnit
                 {
                     intent.ExecuteIntent();
                 }
+            }
+            if (NextIntentOverride != null)
+            {
+                CurrentIntents = NextIntentOverride;
+                NextIntentOverride = null;
             }
             CurrentIntents = GetNextIntents();
         }

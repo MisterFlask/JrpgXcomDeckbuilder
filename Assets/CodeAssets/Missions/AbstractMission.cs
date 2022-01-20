@@ -30,6 +30,16 @@ public abstract class AbstractMission
         return start;
     }
 
+    /// <summary>
+    /// This exists to support missions whose "reward" is
+    /// stopping the boss (gateway) mission from becoming harder
+    /// (e.g. getting additional minions or buffs at combat start.)
+    /// </summary>
+    public virtual void OnGatewayMissionStartIfThisMissionStillActive()
+    {
+
+    }
+
     internal static ProtoGameSprite RetrieveIconFromMissionIconFolder(string name)
     {
         return ProtoGameSprite.MissionIcon(name);
@@ -58,7 +68,6 @@ public abstract class AbstractMission
             reward.OnReward();
         }
     }
-
     public virtual bool IsFailed()
     {
         return GameState.Instance.AllyUnitsInBattle.TrueForAll(item => item.IsDead);
@@ -84,6 +93,24 @@ public abstract class AbstractMission
     public MissionTerrain Terrain { get; set; } = MissionTerrain.FOREST;
     public ProtoGameSprite BattleBackground { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon(path: "Backgrounds/Battleback1");
 
+    public void Init()
+    {
+        var incrementalGoldFromModifiers = MissionModifiers.Sum(item => item.IncrementalMoney());
+
+        if (incrementalGoldFromModifiers > 0)
+        {
+            var goldRewardAlreadyExisting = Rewards.FirstOrDefault(item => item is GoldMissionReward);
+            if (goldRewardAlreadyExisting != null)
+            {
+                var goldReward = goldRewardAlreadyExisting as GoldMissionReward;
+                goldReward.MoneyEarned += incrementalGoldFromModifiers;
+            }
+            else
+            {
+                Rewards.Add(new GoldMissionReward(incrementalGoldFromModifiers));
+            }
+        }
+    }
 }
 
 public class MissionTerrain

@@ -106,7 +106,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.UnitSquad
                 // The Chesscourt
                 new Squad()
                 {
-                    Members = new()
+                    Members = new List<AbstractBattleUnit>()
                     {
                         new ConscriptedPawn(),
                         new ConscriptedPawn(),
@@ -117,7 +117,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.UnitSquad
                 },
                 new Squad()
                 {
-                    Members = new()
+                    Members = new List<AbstractBattleUnit>()
                     {
                         new ConscriptedPawn(),
                         new MeltingKnight()

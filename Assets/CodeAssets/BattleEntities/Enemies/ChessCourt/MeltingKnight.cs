@@ -36,7 +36,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.ChessCourt
             return IntentRotation.FixedRotation(
                 IntentsFromBaseDamage.AttackRandomPc(this, 15, 1),
                 IntentsFromBaseDamage.DefendSelf(this, 15),
-                IntentsFromBaseDamage.BuffSelf(this, new StrengthStatusEffect(), 3);
+                IntentsFromBaseDamage.BuffSelf(this, new StrengthStatusEffect(), 3));
         }
 
     }

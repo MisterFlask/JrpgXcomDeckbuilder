@@ -9,7 +9,10 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.ChessCourt
 
         public override void AssignStatusEffectsOnCombatStart()
         {
-            StatusEffects.Add(new RedBishopStatusEffect(), 30);
+            StatusEffects.Add(new RedBishopStatusEffect()
+            {
+                Stacks = 30
+            });
         }
 
         //Black Bishop/Red Bishop: All-Around Helper attack pattern for each.  

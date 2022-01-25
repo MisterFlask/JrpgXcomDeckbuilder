@@ -6,7 +6,7 @@ namespace Assets.CodeAssets.BattleEntities.Intents
 {
     public class StunnedIntent : AbstractIntent
     {
-        public StunnedIntent(AbstractBattleUnit source) : base(source, new List<AbstractBattleUnit>(), protoSprite)
+        public StunnedIntent(AbstractBattleUnit source) : base(source, new List<AbstractBattleUnit>(), null) //todo
         {
             ProtoSprite = IntentIcons.DazedIntent;
         }

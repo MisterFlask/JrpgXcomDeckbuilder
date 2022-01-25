@@ -50,6 +50,11 @@ public static class IntentsFromPercentBase
         };
     }
 
+    internal static List<AbstractIntent> DefendSelf(AbstractBattleUnit self, int blockAmount)
+    {
+        throw new NotImplementedException();
+    }
+
     public static List<AbstractIntent> DoMagic(AbstractBattleUnit source, 
         Action action)
     {

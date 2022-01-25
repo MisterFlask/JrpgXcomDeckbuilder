@@ -20,8 +20,8 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Columbal
         public override List<AbstractIntent> GetNextIntents()
         {
             return IntentRotation.FixedRotation(
-                IntentsFromPercentBase.AttackRandomPc(this, 50, 1),
-                IntentsFromPercentBase.DefendSelf(this, 50));
+                IntentsFromPercentBase.AttackRandomPc(this, 50, 1));//,
+                //IntentsFromPercentBase.DefendSelf(this, 50));
         }
 
         public override void AssignStatusEffectsOnCombatStart()

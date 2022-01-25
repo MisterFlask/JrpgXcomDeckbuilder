@@ -5,6 +5,7 @@ using HyperCard;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using Map;
 
 public class GameState
 {
@@ -30,6 +31,10 @@ public class GameState
         totalDeck.ForEach(item => deck.AddNewCardToDiscardPile(item));
 
     }
+
+    public MapNode CurrentMapNode { get; set; }
+
+
 
     /// <summary>
     /// Battles start at turn ZERO, and iterate at the start of each new turn.

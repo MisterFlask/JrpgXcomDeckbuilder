@@ -2,6 +2,7 @@
 
 namespace Map
 {
+
     public enum NodeType
     {
         MinorEnemy,

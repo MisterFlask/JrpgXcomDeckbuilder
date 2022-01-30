@@ -10,7 +10,7 @@ public class BattleResultsScreenPrefab : MonoBehaviour
     void Start()
     {
         BackToCampaignButton.onClick.AddListener(delegate {
-            GameScenes.SwitchToCampaignScene();
+            GameScenes.MissionPrepScene();
         });
 
     }

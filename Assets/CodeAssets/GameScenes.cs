@@ -14,11 +14,16 @@ public class GameScenes
         SceneManager.LoadScene(sceneName: "BattleMapScene");
 
     }
-    public static void SwitchToCampaignScene()
+    public static void MissionPrepScene()
     {
         SceneManager.LoadScene(sceneName: "CampaignMapScene");
-
     }
+
+    public static void StsMapScene()
+    {
+        SceneManager.LoadScene(sceneName: "StsMapScene");
+    }
+
     public static void SwitchToBattleResultSceneAndProcessCombatResults(CombatResult combatResult)
     {
         BattleRules.ProcessCombatResults(combatResult);

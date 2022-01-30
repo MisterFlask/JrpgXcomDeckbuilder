@@ -1,5 +1,6 @@
 ﻿
 using HyperCard;
+using Map;
 using PathologicalGames;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,11 @@ using UnityEngine.UI;
 
 public static class ExtensionMethods
 {
+    public static bool IsCombatNode(this NodeType nodeType)
+    {
+        return nodeType == NodeType.MinorEnemy || nodeType == NodeType.EliteEnemy || nodeType == NodeType.Boss;
+    }
+
 
     public static void ForEachCreateActionToBack<T>(this IEnumerable<T> items, string name, Action<T> toPerform)
     {

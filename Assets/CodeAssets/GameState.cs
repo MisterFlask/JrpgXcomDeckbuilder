@@ -34,7 +34,7 @@ public class GameState
 
     public MapNode CurrentMapNode { get; set; }
 
-
+    public bool AlreadyExploredNode { get; set; } = false;
 
     /// <summary>
     /// Battles start at turn ZERO, and iterate at the start of each new turn.
@@ -98,16 +98,15 @@ public class GameState
     #region UI State
     public AbstractBattleUnit CharacterSelected { get; set; }
     public int Day { get; set; }
-    public bool GateMissionUnlocked { get; internal set; }
     public int Act { get; set; } = 1;
-    public bool NextRegionUnlocked { get; set; } = false;
 
     public List<AbstractMissionReward> AdditionalRewardsAccrued = new List<AbstractMissionReward>();
 
-    public bool HasPopulatedRegionWithMissions { get; set; } = false;
     #endregion
 
     #region Convenience
+
+
     public List<AbstractBattleUnit> GetUnitsAttackingUnit(AbstractBattleUnit target)
     {
         var enemiesAttackingTarget = EnemyUnitsInBattle.Where(enemy => enemy.CurrentIntents.Any(intent => IsIntentAttackingMe(intent, target)));

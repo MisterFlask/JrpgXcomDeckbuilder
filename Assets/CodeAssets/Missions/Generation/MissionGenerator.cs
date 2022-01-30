@@ -3,94 +3,57 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.CodeAssets.Utils;
+using Map;
 
 public static class MissionGenerator
 {
-    public static List<AbstractMission> GenerateAllMissionsForRegion()
-    {
-        var dayNumber = GameState.Instance.Day;
 
-        var missions = new List<AbstractMission>
+    internal static AbstractMission GenerateMissionForNode(MapNode entered)
+    {
+        if (entered.Node.nodeType == NodeType.MinorEnemy)
         {
-            new KillEnemiesMission()
+            return new KillEnemiesMission()
             {
                 DaysUntilExpiration = 1000,
                 Difficulty = 1,
                 MaxNumberOfFriendlyCharacters = 3,
                 Name = AbstractMission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
+                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(60) },
                 EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.NORMAL),
                 ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash"),
                 MissionModifiers = GetRandomMissionModifiers()
-            },
-    new KillEnemiesMission()
-            {
-                DaysUntilExpiration = 1000,
-                Difficulty = 1,
-                MaxNumberOfFriendlyCharacters = 3,
-                Name = AbstractMission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward>{new GoldMissionReward(60)},
-                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.ELITE),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("key"),
-                    MissionModifiers = GetRandomMissionModifiers()
-
-            },
-            new KillEnemiesMission()
-            {
-                DaysUntilExpiration = 1000,
-                Difficulty = 1,
-                MaxNumberOfFriendlyCharacters = 3,
-                Name = AbstractMission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward>{new RandomAugmentationMissionReward()},
-                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.NORMAL),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("relic")
-            },
-            new GateMission()
-            {
-                DaysUntilExpiration = 1000,
-                Difficulty = 4,
-                MaxNumberOfFriendlyCharacters = 3,
-                Name = AbstractMission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward>{new GateBypassMissionReward()},
-                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.BOSS),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("gate")
-            },
-            new KillEnemiesMission()
-            {
-                DaysUntilExpiration = 1000,
-                Difficulty = 2,
-                MaxNumberOfFriendlyCharacters = 3,
-                Name = AbstractMission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward>{new GateKeyMissionReward()},
-                EnemySquad = MissionRules.GetEliteSquad(),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("key")
-            },
-            new KillEnemiesMission()
-            {
-                DaysUntilExpiration = 1000,
-                Difficulty = 2,
-                MaxNumberOfFriendlyCharacters = 3,
-                Name = AbstractMission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward>{new GateKeyMissionReward()},
-                EnemySquad = MissionRules.GetEliteSquad(),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("key")
-            }
-        };
-
-        foreach(var mission in missions)
+            };
+        }
+        if (entered.Node.nodeType == NodeType.EliteEnemy)
         {
-            mission.Terrain = MissionTerrain.TerrainTypes.PickRandom();
-
-            ProbabilityUtils.PerformWithProbability(.2f, () =>
+            return new KillEnemiesMission()
             {
-                var modifier = MissionModifier.GetRandomMissionModifier();
-                mission.MissionModifiers.Add(modifier);
-            });
-
-            mission.Init();
+                DaysUntilExpiration = 1000,
+                Difficulty = 1,
+                MaxNumberOfFriendlyCharacters = 3,
+                Name = AbstractMission.GenerateMissionName(),
+                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(60) },
+                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.ELITE),
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash"),
+                MissionModifiers = GetRandomMissionModifiers()
+            };
+        }
+        if (entered.Node.nodeType == NodeType.Boss)
+        {
+            return new KillEnemiesMission()
+            {
+                DaysUntilExpiration = 1000,
+                Difficulty = 1,
+                MaxNumberOfFriendlyCharacters = 3,
+                Name = AbstractMission.GenerateMissionName(),
+                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(60) },
+                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.NORMAL),
+                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash"),
+                MissionModifiers = GetRandomMissionModifiers()
+            };
         }
 
-        return missions;
+        throw new System.Exception("");
     }
 
     private static List<MissionModifier> GetRandomMissionModifiers()
@@ -115,13 +78,6 @@ public class KillEnemiesMission: AbstractMission
             return string.Join(",", names);
         }
         return Description;
-    }
-}
-public class GateMission : KillEnemiesMission
-{
-    public override bool CanGoOnMission()
-    {
-        return GameState.Instance.GateMissionUnlocked;
     }
 }
 

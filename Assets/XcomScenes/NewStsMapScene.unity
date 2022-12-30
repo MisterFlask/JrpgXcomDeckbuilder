@@ -660,6 +660,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapUiPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 3116322305687713531, guid: 774aecae0a763444a92c658a1c54a16b,
+        type: 3}
+      propertyPath: Wing
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6467032654157914881, guid: 774aecae0a763444a92c658a1c54a16b,
         type: 3}
       propertyPath: m_RootOrder

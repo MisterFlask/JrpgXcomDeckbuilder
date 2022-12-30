@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class MapUI : MonoBehaviour
 {
-    public GameObject nodeUIPrefab;
     public List<RoomNodeUI> Rooms;
     public LineRenderer LineRendererTemplatePrefab;
     
@@ -40,8 +39,8 @@ public class MapUI : MonoBehaviour
 
     public List<RoomNodeUI> RoomsReachableFromThisRoom(int level, int wing)
     {
-        var modelObjectsOfPreviousFloor = ModelObject.Rooms.Where(target => ModelObject.IsRoomAccessibleFrom(level, wing, target.Floor, target.Wing));
-        return GetCorrespondingRoomUiObjects(modelObjectsOfPreviousFloor);
+        var roomsAccessibleFromCurrentFloor = ModelObject.Rooms.Where(target => ModelObject.IsRoomAccessibleFrom(level, wing, target.Floor, target.Wing));
+        return GetCorrespondingRoomUiObjects(roomsAccessibleFromCurrentFloor);
     }
     
     public List<RoomNodeUI> GetCorrespondingRoomUiObjects(IEnumerable<RoomModel> models)

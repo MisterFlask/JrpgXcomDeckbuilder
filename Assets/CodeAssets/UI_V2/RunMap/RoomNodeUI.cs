@@ -35,6 +35,7 @@ namespace Assets.CodeAssets.UI_V2.RunMap
         public TextMeshPro NameText;
         public TextMeshPro DebugText;
 
+        public bool isInitialized;
         public List<LineRenderer> Lines { get; set; } = new List<LineRenderer>();
         public IEnumerable<RoomNodeUI> GetReachableNodesFromThisFloor()
         {
@@ -66,15 +67,13 @@ namespace Assets.CodeAssets.UI_V2.RunMap
             this.MapUi = mapUi;
             this.ModelObject = modelObject;
             this.ParentMapUi = parentMapUi;
-
+            isInitialized = true;
             modelObject.Floor = this.Floor;
             modelObject.Wing = this.Wing;
             
             Debug.Log($"Initializing room node ui for {modelObject.Floor} {modelObject.Wing}");
 
             //first kill all the line renderer objects
-
-            this.SpriteRenderer = GetComponent<SpriteRenderer>();
 
             //this.VisitedSprite = Resources.Load(modelObject.VisitedSpriteName) as Sprite;
             //this.UnvisitedSprite = Resources.Load(modelObject.UnvisitedSpriteName) as Sprite;
@@ -105,9 +104,14 @@ namespace Assets.CodeAssets.UI_V2.RunMap
 
         private void Update()
         {
+            if (!isInitialized)
+            {
+                return;
+            }
+            
             if (ModelObject == null)
             {
-                Debug.LogError("No model object!");
+                Debug.LogError("No model object!  " + this.Floor + " " + this.Wing);
                 return;
             }
             //SpriteRenderer.sprite = ModelObject.Visited ? VisitedSprite : UnvisitedSprite;
@@ -126,14 +130,15 @@ namespace Assets.CodeAssets.UI_V2.RunMap
             this.DebugText.text = this.ModelObject.Floor + "," + this.ModelObject.Wing;
             this.NameText.text = $"node: [visited={ModelObject.Visited}, current={ModelObject.Current}, reachable={this.ParentMapUi.isRoomCurrentlyAccessible(this.Floor, this.Wing)}]";
         }
-        
-        void OnMouseDown()
+
+        public void MouseDownClickHandler()
         {
-            Debug.Log("Mouse down over the room node: " + JsonConvert.ToString(this.ModelObject));
+            Debug.Log("Mouse down over the room node");
             if (this.ParentMapUi.isRoomCurrentlyAccessible(this.Floor, this.Wing))
             {
                 ParentMapUi.TravelToRoom(this.Floor, this.Wing);
             }
         }
+
     }
 }

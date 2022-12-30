@@ -19,14 +19,23 @@ namespace Assets.CodeAssets.UI_V2
             foreach (var currentRoom in Rooms)
             {
                 var nextFloorRooms = Rooms.Where(item => item.Floor == currentRoom.Floor + 1).ToList();
-                var wingOptions = new List<int>() { currentRoom.Wing, currentRoom.Wing - 1, currentRoom.Wing + 1 };
-                var randomSelection = wingOptions.PickRandom(2);
+                var bestWingOptions = new List<int>() { currentRoom.Wing, currentRoom.Wing - 1, currentRoom.Wing + 1 };
+                var randomSelection = bestWingOptions.PickRandom(2);
                 foreach (var wing in randomSelection)
                 {
                     var targetRoom = (GetRoom(currentRoom.Floor + 1, wing));
                     if (targetRoom != null)
                     {
                         currentRoom.ReachableWingsFromHere.Add(wing);
+                    }
+                }
+
+                if (currentRoom.ReachableWingsFromHere.Count == 0)
+                {
+                    var firstRoomOnNextFloor = nextFloorRooms.FirstOrDefault();
+                    if (firstRoomOnNextFloor != null)
+                    {
+                        currentRoom.ReachableWingsFromHere.Add(firstRoomOnNextFloor.Wing);
                     }
                 }
             }
@@ -45,21 +54,27 @@ namespace Assets.CodeAssets.UI_V2
         {
             var targetRoom = GetRoom(targetFloor, targetWing);
             
+            if (currentRoom == null && targetRoom.Floor == 0)
+            {
+                return true;
+            }
+            
+            // this means we're in our starting location; if we're here it's not floor 0 we're trying to go to, so false is returned
+            if (currentRoom == null)
+            {
+                return false;
+            }
+
             if (targetRoom == null)
             {
                 return false;
             }
             
-            if (targetRoom.Floor != CurrentFloor + 1)
+            if (targetRoom.Floor != currentRoom.Floor + 1)
             {
                 return false;
             }
 
-            // this means we're in our starting location
-            if (currentRoom == null)
-            {
-                return true;
-            }
             
             if (currentRoom.ReachableWingsFromHere.Contains(targetWing))
             {
@@ -103,8 +118,11 @@ namespace Assets.CodeAssets.UI_V2
 
         internal void TravelToRoom(int floor, int wing)
         {
-            GetRoom(CurrentFloor, CurrentWing).Visited = true;
-            GetRoom(CurrentFloor, CurrentWing).Current = false;
+            if (GetRoom(CurrentFloor, CurrentWing) != null)
+            {
+                GetRoom(CurrentFloor, CurrentWing).Visited = true;
+                GetRoom(CurrentFloor, CurrentWing).Current = false;
+            }
 
             CurrentFloor = floor;
             CurrentWing = wing;

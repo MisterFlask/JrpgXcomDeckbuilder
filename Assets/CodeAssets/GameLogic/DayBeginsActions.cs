@@ -5,27 +5,6 @@ using System.Collections.Generic;
 public class DayBeginsActions : MonoBehaviour
 {
 
-    public static void RotateMissions()
-    {
-        foreach (var mission in CampaignMapState.MissionsActive)
-        {
-            mission.DaysUntilExpiration--;
-            if (mission.DaysUntilExpiration == 0)
-            {
-                mission.OnFailed();
-            }
-        }
-
-        //now remove them from the active missions list.
-        CampaignMapState.MissionsActive.RemoveAll(item => item.DaysUntilExpiration <= 0);
-
-        if (CampaignMapState.MissionsActive.IsEmpty())
-        {
-            var newMissions = MissionGenerator.GenerateAllMissionsForRegion();
-            CampaignMapState.MissionsActive.AddRange(newMissions);
-        }
-    }
-
     public static void ApplyTriggers()
     {
         foreach(var character in GameState.Instance.PersistentCharacterRoster)

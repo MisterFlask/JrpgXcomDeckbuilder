@@ -34,10 +34,6 @@ public class SelectableMissionPrefab : MonoBehaviour, IPointerClickHandler
         }
         Title.text = Mission.Name; //+ $"[{Mission.DaysUntilExpiration} days remain]";
         
-        if (Mission.IsGateMission)
-        {
-            Title.text = Mission.Name + " [Gatekeeper]";
-        }
         if (CurrentlySelected == this)
         {
             Title.color = Color.yellow;

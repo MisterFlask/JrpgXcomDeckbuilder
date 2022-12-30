@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 namespace Assets.CodeAssets.UI.Subscreens
 {
     public class ShortCharacterShowoffPanel : MonoBehaviour
     {
-        public TMPro.TextMeshProUGUI CharacterNameText;
+        public TextMeshProUGUI CharacterNameText;
         public Image Image;
 
         public AbstractBattleUnit Character;

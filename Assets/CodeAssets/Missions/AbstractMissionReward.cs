@@ -74,37 +74,3 @@ public class MoneyMissionReward : AbstractMissionReward
         GameState.Instance.Credits+=quantity;
     }
 }
-
-public class GateBypassMissionReward : AbstractMissionReward
-{
-    public GateBypassMissionReward()
-    {
-    }
-
-    public override string GenericDescription()
-    {
-        return $"Travel to the next Circle.";
-    }
-
-    public override void OnReward()
-    {
-        GameState.Instance.NextRegionUnlocked = true;
-        GameState.Instance.GateMissionUnlocked = false;
-    }
-}
-public class GateKeyMissionReward : AbstractMissionReward
-{
-    public GateKeyMissionReward()
-    {
-    }
-
-    public override string GenericDescription()
-    {
-        return $"Enables taking on a Gate mission.";
-    }
-
-    public override void OnReward()
-    {
-        GameState.Instance.GateMissionUnlocked = true;
-    }
-}

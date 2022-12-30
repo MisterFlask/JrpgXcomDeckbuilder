@@ -5,7 +5,7 @@ using HyperCard;
 using UnityEngine.UI;
 using System;
 using System.Linq;
-using Map;
+using Assets.CodeAssets.StsMapScreen;
 
 public class GameState
 {
@@ -31,11 +31,13 @@ public class GameState
         totalDeck.ForEach(item => deck.AddNewCardToDiscardPile(item));
 
     }
-
-    public MapNode CurrentMapNode { get; set; }
-
-    public bool AlreadyExploredNode { get; set; } = false;
-
+    // current RUN state
+    public AbstractRichMapNode CurrentMapNode { get; set; }
+    public static AbstractRichMapNode GetCurrentNodeContents()
+    {
+        return Instance.CurrentMapNode;
+    }
+    
     /// <summary>
     /// Battles start at turn ZERO, and iterate at the start of each new turn.
     /// </summary>

@@ -56,7 +56,7 @@ public class CampaignStarter : MonoBehaviour
 
     public static void InitializeSelectableMissions()
     {
-        CampaignMapState.MissionsActive = MissionGenerator.GenerateAllMissionsForRegion();
+        // CampaignMapState.MissionsActive = MissionGenerator.GenerateAllMissionsForRegion();
     }
 
     void Awake()

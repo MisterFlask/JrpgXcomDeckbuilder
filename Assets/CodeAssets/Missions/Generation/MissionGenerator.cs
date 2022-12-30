@@ -3,60 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.CodeAssets.Utils;
-using Map;
+using Assets.CodeAssets.StsMapScreen;
 
 public static class MissionGenerator
 {
-
-    internal static AbstractMission GenerateMissionForNode(MapNode entered)
-    {
-        if (entered.Node.nodeType == NodeType.MinorEnemy)
-        {
-            return new KillEnemiesMission()
-            {
-                DaysUntilExpiration = 1000,
-                Difficulty = 1,
-                MaxNumberOfFriendlyCharacters = 3,
-                Name = AbstractMission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(60) },
-                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.NORMAL),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash"),
-                MissionModifiers = GetRandomMissionModifiers()
-            };
-        }
-        if (entered.Node.nodeType == NodeType.EliteEnemy)
-        {
-            return new KillEnemiesMission()
-            {
-                DaysUntilExpiration = 1000,
-                Difficulty = 1,
-                MaxNumberOfFriendlyCharacters = 3,
-                Name = AbstractMission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(60) },
-                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.ELITE),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash"),
-                MissionModifiers = GetRandomMissionModifiers()
-            };
-        }
-        if (entered.Node.nodeType == NodeType.Boss)
-        {
-            return new KillEnemiesMission()
-            {
-                DaysUntilExpiration = 1000,
-                Difficulty = 1,
-                MaxNumberOfFriendlyCharacters = 3,
-                Name = AbstractMission.GenerateMissionName(),
-                Rewards = new List<AbstractMissionReward> { new GoldMissionReward(60) },
-                EnemySquad = MissionRules.GetRandomSquadForCurrentActAndDay(SquadType.NORMAL),
-                ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash"),
-                MissionModifiers = GetRandomMissionModifiers()
-            };
-        }
-
-        throw new System.Exception("");
-    }
-
-    private static List<MissionModifier> GetRandomMissionModifiers()
+    public static List<MissionModifier> GetRandomMissionModifiers()
     {
         return new List<MissionModifier>()
         {

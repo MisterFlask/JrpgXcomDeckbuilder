@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine.UI;
 
 public class ImageUtils
 {
@@ -35,6 +35,11 @@ public abstract class ProtoGameSprite
     public Sprite ToSprite()
     {
         return ToGameSpriteImage().Sprite;
+    }
+
+    public Texture ToTexture()
+    {
+        return ToSprite().SpriteToTexture();
     }
 
     // convenience methods follow
@@ -119,10 +124,27 @@ public abstract class ProtoGameSprite
     {
         return FromGameIcon("Sprites/Enemies/Machines/" + name);
     }
+    internal static ProtoGameSprite MapIcon(string name)
+    {
+        return FromGameIcon("Sprites/MapSprites/" + name);
+    }
 }
 
 public static class ImageExtensions
 {
+
+    public static Texture SpriteToTexture(this Sprite sprite)
+    {
+        return  Texture2D.CreateExternalTexture(
+            (int)sprite.rect.width,
+            (int)sprite.rect.height,
+            TextureFormat.RGBA32,
+            false,
+            false,
+            sprite.texture.GetNativeTexturePtr()
+        );
+    }
+    
     public static void SetProtoSprite(this Image image, ProtoGameSprite protoSprite)
     {
         image.sprite = protoSprite.ToSprite();

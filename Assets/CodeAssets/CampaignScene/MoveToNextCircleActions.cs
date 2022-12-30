@@ -19,14 +19,6 @@ namespace Assets.CodeAssets.CampaignScene
 
         public void Update()
         {
-            if (!GameState.Instance.NextRegionUnlocked)
-            {
-                moveToNextCircleButton.interactable = false;
-            }
-            else
-            {
-                moveToNextCircleButton.interactable = true;
-            }
         }
     }
 }

@@ -2,14 +2,13 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using System.Linq;
-using UnityEngine.EventSystems;
 using System;
 using ModelShark;
 using Assets.CodeAssets.UI.Tooltips;
 using MoreMountains.Feedbacks;
 using Assets.CodeAssets.UI;
+using UnityEngine.UI;
 
 public class BattleUnitPrefab:MonoBehaviour
 {
@@ -43,7 +42,7 @@ public class BattleUnitPrefab:MonoBehaviour
 
 
     public SpriteRenderer SpriteImage_Worldspace;
-
+    
     public MMFeedbacks DeathRotationFeedbacks;
     public MMFeedbacks HighlightUnitFeedbacks;
     public MMFeedbacks FloatingTextFeedbacks;
@@ -244,7 +243,7 @@ public class BattleUnitPrefab:MonoBehaviour
         return intentsAccumulator;
     }
 
-    public void OnPrefabEnter(PointerEventData eventData)
+    public void OnPrefabEnter(UnityEngine.EventSystems.PointerEventData eventData)
     {
         Debug.Log("Entered battle unit prefab; setting battle unit moused over");
         BattleScreenPrefab.BattleUnitMousedOver = this.UnderlyingEntity;
@@ -253,7 +252,7 @@ public class BattleUnitPrefab:MonoBehaviour
         TooltipController.GetComponent<TooltipTrigger>().enabled = true;
     }
 
-    public void OnPrefabExit(PointerEventData eventData)
+    public void OnPrefabExit(UnityEngine.EventSystems.PointerEventData eventData)
     {
         Debug.Log("Exited battle unit prefab; unsetting battle unit moused over");
         if (BattleScreenPrefab.BattleUnitMousedOver == this.UnderlyingEntity)
@@ -263,7 +262,7 @@ public class BattleUnitPrefab:MonoBehaviour
         ExplainerPanel.Hide();
     }
 
-    public void OnPrefabClick(PointerEventData eventData)
+    public void OnPrefabClick(UnityEngine.EventSystems.PointerEventData eventData)
     {
         ServiceLocator.GetActionManager().Shout(this.UnderlyingEntity, "Clicked on unit.");
     }

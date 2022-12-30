@@ -47,7 +47,6 @@ public abstract class AbstractMission
 
 
 
-    public bool IsGateMission => Rewards.Any(item => item is GateBypassMissionReward);
     public string Name { get; set; }
     public int Difficulty { get; set; } // 1 to 5
 

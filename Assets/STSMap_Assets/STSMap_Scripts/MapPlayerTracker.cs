@@ -62,7 +62,6 @@ namespace Map
 
         private static void EnterNode(MapNode mapNode)
         {
-            MapNodeEntryRules.EnterMapNode(mapNode);
         }
 
         private void PlayWarningThatNodeCannotBeAccessed()

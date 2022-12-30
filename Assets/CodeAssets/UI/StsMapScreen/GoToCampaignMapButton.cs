@@ -4,11 +4,8 @@ using UnityEngine;
 
 namespace Assets.CodeAssets.UI.StsMapScreen
 {
-    public class PrepMissionButton : MonoBehaviour
+    public class GoToCampaignMapButton : MonoBehaviour
     {
-
-
-        public TMPro.TextMeshProUGUI ButtonText;
 
         // Use this for initialization
         void Start()
@@ -23,6 +20,7 @@ namespace Assets.CodeAssets.UI.StsMapScreen
 
         public void OnClick()
         {
+            GameScenes.StsMapScene();
         }
     }
 }

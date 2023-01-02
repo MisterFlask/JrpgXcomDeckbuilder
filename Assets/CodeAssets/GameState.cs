@@ -101,6 +101,7 @@ public class GameState
     public AbstractBattleUnit CharacterSelected { get; set; }
     public int Day { get; set; }
     public int Act { get; set; } = 1;
+    public List<AbstractBattleUnit> AllyUnitsSentOnRun { get; set; }
 
     public List<AbstractMissionReward> AdditionalRewardsAccrued = new List<AbstractMissionReward>();
 

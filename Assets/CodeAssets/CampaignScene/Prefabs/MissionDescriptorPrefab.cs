@@ -75,6 +75,7 @@ public class MissionDescriptorPrefab : MonoBehaviour
             // Set up static stuff for combat.
             var selectedMission = GetMissionSelected();
             var charactersSent = GetCharactersSent();
+
             if (selectedMission == null || (charactersSent?.Count ?? 0) == 0)
             {
                 if (selectedMission == null)
@@ -87,6 +88,8 @@ public class MissionDescriptorPrefab : MonoBehaviour
                 }
                 return;
             }
+
+            GameState.Instance.AllyUnitsSentOnRun = GetCharactersSent();
             GameScenes.SwitchToBattleScene(selectedMission, charactersSent);
         });
     }

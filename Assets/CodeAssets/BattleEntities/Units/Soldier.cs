@@ -44,7 +44,8 @@ public class Soldier : AbstractAllyUnit
         var filePath = sprites[UnityEngine.Random.Range(0, sprites.Length)].name;
         var protoGameSprite = new GameIconProtoSprite
         {
-            SpritePath = filePath
+            SpritePath = resourceFolderPath + "/" + filePath,
+            Color = Color.white
         };
         return protoGameSprite;
     }

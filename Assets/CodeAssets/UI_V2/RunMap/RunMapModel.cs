@@ -128,6 +128,8 @@ namespace Assets.CodeAssets.UI_V2
             CurrentWing = wing;
 
             GetRoom(CurrentFloor, CurrentWing).Current = true;
+
+            var room = GetRoom(CurrentFloor, CurrentWing);
         }
     }
 

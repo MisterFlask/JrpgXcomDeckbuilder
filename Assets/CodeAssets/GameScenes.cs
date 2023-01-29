@@ -8,13 +8,17 @@ public class GameScenes
 {
     public static void SwitchToBattleScene(AbstractMission mission, List<AbstractBattleUnit> CharactersSent)
     {
+        if (CharactersSent.IsEmpty())
+        {
+            throw new System.Exception("No characters in roster!");
+        }
         GameState.Instance.AllyUnitsInBattle = CharactersSent;
         GameState.Instance.EnemyUnitsInBattle = mission.EnemySquad.Members;
         GameState.Instance.CurrentMission = mission;
         SceneManager.LoadScene(sceneName: "BattleMapScene");
 
     }
-    public static void MissionPrepScene()
+    public static void RosterScreen()
     {
         SceneManager.LoadScene(sceneName: "CampaignMapScene");
     }

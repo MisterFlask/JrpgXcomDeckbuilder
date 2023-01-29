@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class MapUI : MonoBehaviour
 {
+    public Transform RestPanel;
+    public Transform ShopPanel;
+    
     public List<RoomNodeUI> Rooms;
     public LineRenderer LineRendererTemplatePrefab;
     
@@ -95,5 +98,23 @@ public class MapUI : MonoBehaviour
 
         Debug.Log("Found " + childComponents.Count + " rooms in scene.");
         return childComponents;
+    }
+
+    internal void ShowRestPanel()
+    {
+        RestPanel.gameObject.SetActive(true);
+    }
+    
+    public void HideRestPanel()
+    {
+        RestPanel.gameObject.SetActive(false);
+    }
+    public void ShowShopPanel()
+    {
+        ShopPanel.gameObject.SetActive(true);
+    }
+    public void HideShopPanel()
+    {
+        ShopPanel.gameObject.SetActive(false);
     }
 }

@@ -173,7 +173,13 @@ public abstract class AbstractCard
     public int GetDisplayedEnergyCost()
     {
         var targetedUnitIfAny = GameState.Instance.CharacterSelected;
-        var costMod = targetedUnitIfAny.StatusEffects.Sum(item => item.GetTargetedCostModifier(this));
+
+        var costMod = 0;
+        if (targetedUnitIfAny != null)
+        {
+            costMod = targetedUnitIfAny.StatusEffects.Sum(item => item.GetTargetedCostModifier(this));
+        }
+
         return BaseEnergyCost()
             + RestOfTurnCostMod
             + costMod

@@ -641,11 +641,12 @@ public class ActionManager : MonoBehaviour
             ActionCurrentlyBeingPerformed.IsStarted = true;
             try
             {
+
                 currentActionStartedAtThisTime = DateTime.Now;
                 ActionCurrentlyBeingPerformed.onStart();
             } catch (Exception e)
             {
-                Debug.LogError(e.Message + " [stack trace] " + ActionCurrentlyBeingPerformed?.stackTrace?.ToString());
+                Debug.LogError(e.Message + $" [stack trace] {ActionCurrentlyBeingPerformed.ActionId}" + ActionCurrentlyBeingPerformed?.stackTrace?.ToString());
                 IsCurrentActionFinished = true;
             }
         }

@@ -24,6 +24,8 @@ public abstract class AbstractSoldierClass
         };
     }
 
+    public string PortraitFolder { get; set; }
+
     public ProtoGameSprite EmblemIcon { get; set; } = ProtoGameSprite.Default;
     public AbstractCard GetRandomCardOfRarity(Rarity rarity)
     {

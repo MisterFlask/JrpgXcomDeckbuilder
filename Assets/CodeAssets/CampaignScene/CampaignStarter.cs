@@ -6,12 +6,12 @@ using Assets.CodeAssets.BattleEntities.Augmentations;
 using Assets.CodeAssets.GameLogic;
 using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 using Assets.CodeAssets.Utils;
+using System.Linq;
 
 public class CampaignStarter : MonoBehaviour
 {
+
     public ShowDeckScreen ShowDeckScreen;
-
-
 
     public void InitializeCampaign()
     {
@@ -20,7 +20,7 @@ public class CampaignStarter : MonoBehaviour
         InitializeSelectableMissions();
         InitializeRoster();
         CampaignMapState.GameInitialized = true;
-        ShowDeckScreen.Start(); // done to ensure that Instance variable gets initialized
+        ShowDeckScreen?.Start(); // done to ensure that Instance variable gets initialized
     }
 
     public static void InitializeRoster()
@@ -35,6 +35,8 @@ public class CampaignStarter : MonoBehaviour
             GetHigherLevelSoldier(),
             GetDeadSoldier()
         };
+        var firstThreeLivingCharacters = GameState.Instance.PersistentCharacterRoster.Where(item => !item.IsDead).Take(3).ToList();
+        GameState.Instance.AllyUnitsSentOnRun = (firstThreeLivingCharacters);
     }
 
     private static AbstractBattleUnit GetDeadSoldier()

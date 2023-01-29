@@ -40,14 +40,14 @@ public static class CampaignMapState
 
     public static void InitializeCampaignScreen()
     {
-        MissionListPrefab.Instance.Initialize();
-        RosterPrefab.Instance.Initialize();
+        // MissionListPrefab.Instance?.Initialize();
+        // RosterPrefab.Instance?.Initialize();
 
-        ShowDeckScreen.Hide();
-        CardRewardScreen.Hide();
-        AssignFreeAugmentationsPanel.Instance.Hide();
-        SelectCardToAddFromInventoryScreen.Hide();
-        ShopScreen.Instance.Hide();
+        // ShowDeckScreen.Hide();
+        // CardRewardScreen.Hide();
+        // AssignFreeAugmentationsPanel.Instance.Hide();
+        // SelectCardToAddFromInventoryScreen.Hide();
+        // ShopScreen.Instance.Hide();
 
     }
 }

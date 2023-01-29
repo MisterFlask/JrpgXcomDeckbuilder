@@ -15,7 +15,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
             this.CharacterNicknameOrEnemyName = "Alarm Drone";
             this.MaxHp = 22;
             this.EnemyFaction = EnemyFaction.EFFICIENCY;
-            UnitSize = UnitSize.MEDIUM;
+            UnitSize = UnitSize.SMALL;
         }
 
         public override List<AbstractIntent> GetNextIntents()

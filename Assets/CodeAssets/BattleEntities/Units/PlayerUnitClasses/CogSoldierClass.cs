@@ -11,6 +11,7 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
         public CogSoldierClass()
         {
             EmblemIcon = ProtoGameSprite.EmblemIcon("cog");
+            PortraitFolder = "CogPortraits";
         }
         public override string Name()
         {

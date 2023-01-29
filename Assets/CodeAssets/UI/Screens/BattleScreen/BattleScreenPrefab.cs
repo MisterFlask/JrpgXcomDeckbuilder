@@ -122,7 +122,7 @@ public class BattleScreenPrefab : MonoBehaviour
         }
         if (mediumEnemies.Count() > 2)
         {
-            throw new System.Exception("Too many medium enemies to fit in combat");
+            throw new System.Exception("Too many medium enemies to fit in combat: " + StartingEnemies.Count() + " enemies observed");
         }
         if (smallEnemies.Count() > 12)
         {
@@ -140,11 +140,11 @@ public class BattleScreenPrefab : MonoBehaviour
 
         if (StartingAllies.Count > PotentialBattleEntityAllySpots.Count)
         {
-            throw new System.Exception("Too many allies for available number of spots");
+            throw new System.Exception("Too many allies for available number of spots: " +PotentialBattleEntityAllySpots.Count + " vs actual number of allies required " + StartingAllies.Count);
         }
         if (StartingEnemies.Count > PotentialBattleEntityEnemySpots.Count)
         {
-            throw new System.Exception("Too many enemies for available number of spots");
+            throw new System.Exception("Too many enemies for available number of spots: " + PotentialBattleEntityEnemySpots.Count);
         }
 
         for(int i = 0; i < StartingAllies.Count; i++)
@@ -201,6 +201,24 @@ public class BattleScreenPrefab : MonoBehaviour
         PotentialBattleEntityLargeEnemySpots = LargeEnemyUnitSpotsParent.GetComponentsInChildren<BattleUnitPrefab>().ToList();
         PotentialBattleEntityHugeEnemySpots = HugeEnemyUnitSpotsParent.GetComponentsInChildren<BattleUnitPrefab>().ToList();
 
+        
+    }
+
+    bool battleStarted = false;
+
+    public void Update()
+    {
+        if (battleStarted)
+        {
+            return;
+        }
+
+        if (state.AllyUnitsInBattle == null || state.AllyUnitsInBattle.IsEmpty())
+        {
+            Debug.LogError("No allies in battle!");
+            return;
+        }
+        
         state.Deck = new BattleDeck();
         foreach (var character in state.AllyUnitsInBattle)
         {
@@ -226,10 +244,7 @@ public class BattleScreenPrefab : MonoBehaviour
 
 
         BattleStarter.StartBattle(this);
-    }
-
-    public void Update()
-    {
+        battleStarted = true;
     }
 }
 

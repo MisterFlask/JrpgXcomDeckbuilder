@@ -21,12 +21,12 @@ public class CardRewardScreen : EagerMonobehaviour
 
     public static void Hide()
     {
-        Instance.gameObject.SetActive(false);
+        Instance?.gameObject.SetActive(false);
     }
 
     public void Show(List<AbstractCard> cardsToDisplay, AbstractBattleUnit unitFor)
     {
-        Instance.gameObject.SetActive(true);
+        Instance?.gameObject.SetActive(true);
         foreach (var card in CardsDisplayed)
         {
             card.transform.parent = null;

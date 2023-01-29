@@ -14,7 +14,7 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.Efficiency
             this.EnemyFaction = EnemyFaction.EFFICIENCY;
             this.MaxHp = 55;
             this.ApplyStatusEffect(new ArmoredStatusEffect(), stacks: 1);
-            UnitSize = UnitSize.MEDIUM;
+            UnitSize = UnitSize.SMALL;
         }
 
         public override List<AbstractIntent> GetNextIntents()

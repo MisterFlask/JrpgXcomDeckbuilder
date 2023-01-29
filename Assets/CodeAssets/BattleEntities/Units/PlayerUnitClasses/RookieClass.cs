@@ -12,6 +12,7 @@ public class RookieClass : AbstractSoldierClass
     public RookieClass()
     {
         EmblemIcon = ProtoGameSprite.EmblemIcon("dread-emblem");
+        PortraitFolder = "BlackhandPortraits"; // no longer interested in using this class
     }
     public override List<AbstractCard> StartingCards()
     {

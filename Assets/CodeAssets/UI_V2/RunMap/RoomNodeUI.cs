@@ -14,7 +14,7 @@ namespace Assets.CodeAssets.UI_V2.RunMap
         /// <summary>
         /// required to set in editor
         /// </summary>
-        public SpriteRenderer SpriteRenderer;
+        public FramedImage SpriteRenderer;
         /// <summary>
         /// We can access 
         /// </summary>
@@ -26,17 +26,19 @@ namespace Assets.CodeAssets.UI_V2.RunMap
         /// </summary>
         public RoomModel ModelObject;
         public RunMapModel ParentMapUi;
-
-        public Sprite VisitedSprite;
-        public Sprite UnvisitedSprite;
-        public Sprite CurrentSprite;
+        
         public MapUI MapUi;
 
         public TextMeshPro NameText;
         public TextMeshPro DebugText;
 
         public bool isInitialized;
+        public MapNodeBehavior Behavior { get; set; }
         public List<LineRenderer> Lines { get; set; } = new List<LineRenderer>();
+
+        public float initialSpriteWidth;
+        public float initialSpriteHeight;
+        
         public IEnumerable<RoomNodeUI> GetReachableNodesFromThisFloor()
         {
             return MapUi.RoomsReachableFromThisRoom(Floor, Wing);
@@ -70,6 +72,8 @@ namespace Assets.CodeAssets.UI_V2.RunMap
             isInitialized = true;
             modelObject.Floor = this.Floor;
             modelObject.Wing = this.Wing;
+            this.Behavior = MapNodeBehavior.GetRandomBehaviorForFloor(modelObject.Floor);
+            SpriteRenderer.Subject.SetIcon(Behavior.PrimaryProtoSprite.ToSprite());
             
             Debug.Log($"Initializing room node ui for {modelObject.Floor} {modelObject.Wing}");
 
@@ -78,12 +82,15 @@ namespace Assets.CodeAssets.UI_V2.RunMap
             //this.VisitedSprite = Resources.Load(modelObject.VisitedSpriteName) as Sprite;
             //this.UnvisitedSprite = Resources.Load(modelObject.UnvisitedSpriteName) as Sprite;
             //this.CurrentSprite = Resources.Load(modelObject.PlayerLocationSpriteName) as Sprite;
+            
+            
         }
 
         public void RegenerateLinesBetweenRooms()
         {
             foreach (var line in Lines)
             {
+                line.enabled = false;
                 Destroy(line);
             }
 
@@ -100,6 +107,10 @@ namespace Assets.CodeAssets.UI_V2.RunMap
                 lineRenderer.endWidth = 0.2f;
                 Lines.Add(lineRenderer);
             }
+        }
+
+        public void Start()
+        {
         }
 
         private void Update()
@@ -119,24 +130,35 @@ namespace Assets.CodeAssets.UI_V2.RunMap
 
             if (ModelObject.Visited)
             {
-                this.SpriteRenderer.color = Color.cyan;
+                SpriteRenderer.Subject.Renderer.color = Color.cyan;
             }
             
             if (ModelObject.Current)
             {
-                this.SpriteRenderer.color = Color.red;
+                SpriteRenderer.Subject.Renderer.color = Color.red;
             }
 
+             // todo: secondary protosprite
             this.DebugText.text = this.ModelObject.Floor + "," + this.ModelObject.Wing;
             this.NameText.text = $"node: [visited={ModelObject.Visited}, current={ModelObject.Current}, reachable={this.ParentMapUi.isRoomCurrentlyAccessible(this.Floor, this.Wing)}]";
         }
+        void SetSpriteAndResize(SpriteRenderer renderer, Sprite sprite)
+        {
+            ProtoGameSprite.SetSpriteRendererToSpriteWhileMaintainingSize(initialSpriteWidth, initialSpriteHeight, sprite, renderer);
+         }
 
         public void MouseDownClickHandler()
         {
             Debug.Log("Mouse down over the room node");
             if (this.ParentMapUi.isRoomCurrentlyAccessible(this.Floor, this.Wing))
             {
+                Debug.Log("Moving to wing: " + this.Floor + " , " + this.Wing);
                 ParentMapUi.TravelToRoom(this.Floor, this.Wing);
+                Behavior.OnEnterNode();
+            }
+            else
+            {
+                Debug.Log("Wing inaccessible: " + this.Floor + " , " + this.Wing);
             }
         }
 

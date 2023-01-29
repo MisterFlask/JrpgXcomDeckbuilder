@@ -15,7 +15,7 @@ namespace Assets.CodeAssets.Cards.CogCards.Rare
 
         public override string DescriptionInner()
         {
-            return $"Whenever a card is created this combat, give it 'Deal 10 damage to ALL enemies.'  Gain 1 data point.";
+            return $"Whenever a card is created this combat, give it 'Deal 10 damage to ALL enemies and take 5 stresss.'  Gain 1 data point.";
         }
 
         public override void OnPlay(AbstractBattleUnit target, EnergyPaidInformation energyPaid)

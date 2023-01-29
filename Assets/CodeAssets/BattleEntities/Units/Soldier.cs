@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEditor;
+using Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses;
 
 public class Soldier : AbstractAllyUnit
 {
@@ -11,15 +12,41 @@ public class Soldier : AbstractAllyUnit
     {
         this.MaxHp = 10;
         this.MaxFatigue = 4;
-        this.SoldierClass = soldierClass ?? new RookieClass();
+        this.SoldierClass = soldierClass ?? new BlackhandSoldierClass();
 
         this.StartingCardsInDeck.AddRange(SoldierClass.StartingCards());
-        this.ProtoSprite = GetRandomProtoSprite();
+        this.ProtoSprite = GetRandomSoldierProtoSpriteForClass();
     }
 
-    private ProtoGameSprite GetRandomProtoSprite()
+    private ProtoGameSprite GetRandomSoldierProtoSpriteForClass()
     {
-        return OryxSprites.SelectRandomCharacterSpriteWithRandomColoration();
+        Debug.Log("looking for portrait for SoldierClass: " + SoldierClass.Name());
+        if (SoldierClass?.PortraitFolder != null)
+        {
+            return GetPortraitForFolder("Portraits/" + SoldierClass.PortraitFolder);
+        }
+        
+        return new GameIconProtoSprite();//default placeholder image
+    }
+
+    /// <summary>
+    /// Returns a random portrait sprite for this soldier.
+    /// </summary>
+    /// <returns></returns>
+    public ProtoGameSprite GetPortraitForFolder(string resourceFolderPath)
+    {
+        Sprite[] sprites = Resources.LoadAll<Sprite>(resourceFolderPath);
+        if (sprites.IsEmpty())
+        {
+            Log.Error("FAILED to find soldier sprite for path: " + resourceFolderPath + "; using default placeholder instead");
+            return new GameIconProtoSprite();
+        }
+        var filePath = sprites[UnityEngine.Random.Range(0, sprites.Length)].name;
+        var protoGameSprite = new GameIconProtoSprite
+        {
+            SpritePath = filePath
+        };
+        return protoGameSprite;
     }
 
     public static AbstractBattleUnit GenerateFreshRookie()
@@ -42,6 +69,7 @@ public class Soldier : AbstractAllyUnit
 
     public override List<AbstractCard> CardsSelectableOnLevelUp()
     {
-        throw new System.NotImplementedException();
+        // return list of cards
+        return SoldierClass.GetCardRewardsForLevel(this.CurrentLevel, 3);
     }
 }

@@ -59,6 +59,7 @@ namespace Assets.CodeAssets.UI_V2.RunMap
 
         public override void OnEnterNode()
         {
+            
             GameScenes.SwitchToBattleScene(Mission, GameState.Instance.AllyUnitsSentOnRun);
         }
     }
@@ -81,11 +82,6 @@ namespace Assets.CodeAssets.UI_V2.RunMap
 
 
     public class CombatNodeBehavior: MapNodeBehavior {
-
-        public CombatNodeBehavior()
-        {
-            PrimaryProtoSprite = ProtoGameSprite.MapIcon("diamond-hilt");
-        }
         
         AbstractMission Mission { get; set; }
         public static CombatNodeBehavior GenerateForFloorAndAct(int floor)
@@ -102,8 +98,9 @@ namespace Assets.CodeAssets.UI_V2.RunMap
                         Rewards = new List<AbstractMissionReward> { new GoldMissionReward(60) },
                         EnemySquad = GameAct.GetSquadForAct(1, SquadType.NORMAL),
                         ProtoSprite = AbstractMission.RetrieveIconFromMissionIconFolder("cash")
-                    }
-            };
+                    },
+                PrimaryProtoSprite = ProtoGameSprite.MapIcon("diamond-hilt")
+        };
         }
 
         public override void OnEnterNode()

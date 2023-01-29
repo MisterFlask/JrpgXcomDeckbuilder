@@ -13,6 +13,27 @@ public abstract class AbstractMissionReward
     public ProtoGameSprite ProtoSprite { get; set; } = ImageUtils.ProtoGameSpriteFromGameIcon();
     public abstract void OnReward();
 }
+
+public class RandomCardReward : AbstractMissionReward
+{
+    public Soldier Soldier;
+
+    public RandomCardReward(Soldier soldier)
+    {
+        Soldier = soldier;
+    }
+
+    public override string GenericDescription()
+    {
+        return "Card Reward for soldier: " + Soldier.CharacterFirstName;
+    }
+
+    public override void OnReward()
+    {
+        /// we're hacking this up and just hardcoding it in the ui
+    }
+}
+
 public class RandomAugmentationMissionReward : AbstractMissionReward
 {
     AbstractSoldierPerk randomizedAugmentation;

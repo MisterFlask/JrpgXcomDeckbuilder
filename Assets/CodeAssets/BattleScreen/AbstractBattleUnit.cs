@@ -44,6 +44,7 @@ public abstract class AbstractBattleUnit
 
     public AbstractSoldierClass SoldierClass { get; protected set; } = new RookieClass();
     public string UnitClassName => SoldierClass.Name();
+
     public string CharacterFullName { get; set; } = "";
 
     public string CharacterNicknameOrEnemyName { get; set; } = "";

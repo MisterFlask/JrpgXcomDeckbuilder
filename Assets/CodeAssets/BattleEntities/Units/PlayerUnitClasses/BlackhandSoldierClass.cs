@@ -10,6 +10,7 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
         public BlackhandSoldierClass()
         {
             EmblemIcon = ProtoGameSprite.EmblemIcon("flamethrower-soldier");
+            PortraitFolder = "BlackhandPortraits";
         }
 
         public override string Name()

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine.UI;
+using JetBrains.Annotations;
 
 public class ImageUtils
 {
@@ -47,6 +48,12 @@ public abstract class ProtoGameSprite
 
     public string SpritePath { get; set; }
 
+
+    public static ProtoGameSprite CogIcon(string name)
+    {
+        return FromGameIcon("Sprites/Cards/Cog/" + name);
+    }
+
     public static ProtoGameSprite FromGameIcon(
         string path = ImageUtils.MeepleImagePath,
         Color? color = null)
@@ -54,18 +61,31 @@ public abstract class ProtoGameSprite
         return ImageUtils.ProtoGameSpriteFromGameIcon(path, color);
     }
 
-    public static ProtoGameSprite CogIcon(string name)
+
+
+    /// <summary>
+    /// Sets a sprite renderer to a particular sprite, then resizes it so that it maintains the dimensions of sizeX*sizeY.
+    /// </summary>
+    public static void SetSpriteRendererToSpriteWhileMaintainingSize(float sizeX, float sizeY, Sprite sprite, SpriteRenderer spriteRenderer)
     {
-        return FromGameIcon("Sprites/Cards/Cog/" + name);
+        spriteRenderer.sprite = sprite;
+        float spriteWidth = sprite.bounds.size.x;
+        float spriteHeight = sprite.bounds.size.y;
+        float scaleFactorX = sizeX / spriteWidth;
+        float scaleFactorY = sizeY / spriteHeight;
+        spriteRenderer.transform.localScale = new Vector3(scaleFactorX, scaleFactorY, 1);
     }
+
     public static ProtoGameSprite BlackhandIcon(string name)
     {
         return FromGameIcon("Sprites/Cards/Blackhand/" + name);
     }
+
     public static ProtoGameSprite DiabolistIcon(string name)
     {
         return FromGameIcon("Sprites/Cards/Diabolist/" + name);
     }
+
     public static ProtoGameSprite ArchonIcon(string name)
     {
         return FromGameIcon("Sprites/Cards/Archon/" + name);
@@ -126,7 +146,7 @@ public abstract class ProtoGameSprite
     }
     internal static ProtoGameSprite MapIcon(string name)
     {
-        return FromGameIcon("Sprites/MapSprites/" + name);
+        return FromGameIcon("Sprites/MapIcons/" + name);
     }
 }
 
@@ -135,7 +155,7 @@ public static class ImageExtensions
 
     public static Texture SpriteToTexture(this Sprite sprite)
     {
-        return  Texture2D.CreateExternalTexture(
+        return Texture2D.CreateExternalTexture(
             (int)sprite.rect.width,
             (int)sprite.rect.height,
             TextureFormat.RGBA32,
@@ -144,7 +164,7 @@ public static class ImageExtensions
             sprite.texture.GetNativeTexturePtr()
         );
     }
-    
+
     public static void SetProtoSprite(this Image image, ProtoGameSprite protoSprite)
     {
         image.sprite = protoSprite.ToSprite();
@@ -179,7 +199,7 @@ public class GameSprite
     public Color Color { get; set; }
 }
 
-public class GameIconProtoSprite: ProtoGameSprite
+public class GameIconProtoSprite : ProtoGameSprite
 {
     public bool ReverseXAxis { get; set; } = false; //todo
 
@@ -214,7 +234,7 @@ public class GameIconProtoSprite: ProtoGameSprite
         Folder = new DirectoryInfo(folderName);
         Images = Folder.GetFiles();
 
-        foreach(var file in Folder.GetFiles())
+        foreach (var file in Folder.GetFiles())
         {
             // if file ends with jpg, add it to list
         }

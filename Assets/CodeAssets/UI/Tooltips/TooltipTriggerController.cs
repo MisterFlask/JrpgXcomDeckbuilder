@@ -3,6 +3,7 @@ using HyperCard;
 using ModelShark;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Assets.CodeAssets.UI.Tooltips
@@ -21,6 +22,10 @@ namespace Assets.CodeAssets.UI.Tooltips
 
         public void ShowTooltipForBattleUnitClass(AbstractBattleUnit unit)
         {
+            if (unit == null)
+            {
+                return;
+            }
             if (unit.IsAlly && unit.SoldierClass != null)
             {
                 RefreshTooltip(cardReferenced: null,
@@ -44,7 +49,14 @@ namespace Assets.CodeAssets.UI.Tooltips
 
         public void ShowTooltipForCard(AbstractCard card)
         {
-            RefreshTooltip(cardReferenced: card.ReferencesAnotherCard,
+            if (card == null)
+            {
+                Log.Error("Could not show tooltip for card.  Card was null.");
+                return;
+            }
+
+            RefreshTooltip(
+                cardReferenced: card.ReferencesAnotherCard,
                 title: "References", 
                 description: $"{MagicWord.GetFormattedMagicWordsForCard(card)}");
         }

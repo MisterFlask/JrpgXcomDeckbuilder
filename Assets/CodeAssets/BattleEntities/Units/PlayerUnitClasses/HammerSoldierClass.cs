@@ -8,6 +8,7 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
         public HammerSoldierClass()
         {
             EmblemIcon = ProtoGameSprite.EmblemIcon("hammer-break");
+            PortraitFolder = "HammerPortraits";
         }
         public override string Name()
         {

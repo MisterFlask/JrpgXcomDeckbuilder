@@ -20,7 +20,11 @@ namespace Assets.CodeAssets.BattleEntities.Enemies.UnitSquad
 
         public static Squad GetSquadForAct(int actNumber, SquadType squadType)
         {
-            var act = ACTS.FirstOrDefault(item => item.Level == actNumber);
+            Require.NotNull(ACTS);
+            Require.NotNull(squadType);
+
+            var actsMatchingPred = ACTS.Where(item => item != null && item.Level == actNumber);
+            var act = actsMatchingPred.FirstOrDefault();
             if (act == null)
             {
                 Log.Error("Could not find act " + actNumber);

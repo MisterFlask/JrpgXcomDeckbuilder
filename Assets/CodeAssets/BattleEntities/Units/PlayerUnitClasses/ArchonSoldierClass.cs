@@ -9,6 +9,7 @@ namespace Assets.CodeAssets.BattleEntities.Units.PlayerUnitClasses
         public ArchonSoldierClass()
         {
             EmblemIcon = ProtoGameSprite.EmblemIcon("archon-emblem");
+            PortraitFolder = "ArchonPortraits";
         }
         public override string Name()
         {

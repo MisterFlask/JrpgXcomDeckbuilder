@@ -9,7 +9,7 @@ public class RosterPrefab : MonoBehaviour
     public SelectableRosterCharacterPrefab PrefabTemplate;
     public List<SelectableRosterCharacterPrefab> ChildPrefabs { get; set; } = new List<SelectableRosterCharacterPrefab>();
     public static RosterPrefab Instance => GameObject.FindObjectOfType<RosterPrefab>();
-
+    public RosterPrefabType RosterType = RosterPrefabType.ENTIRE_ROSTER;
     public IEnumerable<AbstractBattleUnit> GetCharactersSelected()
     {
         return SelectableRosterCharacterPrefab.SelectedPrefabs.Select(item => item.Character);
@@ -18,13 +18,24 @@ public class RosterPrefab : MonoBehaviour
     public RosterPrefab()
     {
     }
-
+    
     public void Initialize()
     {
+        Debug.Log("Initializing roster prefab.");
         CharacterSelectorPrefabParent.gameObject.PurgeChildren();
-        foreach (var character in CampaignMapState.Roster)
+        if (RosterType == RosterPrefabType.ENTIRE_ROSTER)
         {
-            AddCharacter(character);
+            foreach (var character in GameState.Instance.PersistentCharacterRoster)
+            {
+                AddCharacter(character);
+            }
+        }
+        else if (RosterType == RosterPrefabType.ONLY_CHARS_ON_THIS_RUN)
+        {
+            foreach (var character in GameState.Instance.AllyUnitsSentOnRun)
+            {
+                AddCharacter(character);
+            }
         }
     }
 
@@ -35,4 +46,11 @@ public class RosterPrefab : MonoBehaviour
         unitPrefab.Character = unit;
         ChildPrefabs.Add(unitPrefab);
     }
+
+}
+
+public enum RosterPrefabType
+{
+    ENTIRE_ROSTER,
+    ONLY_CHARS_ON_THIS_RUN
 }

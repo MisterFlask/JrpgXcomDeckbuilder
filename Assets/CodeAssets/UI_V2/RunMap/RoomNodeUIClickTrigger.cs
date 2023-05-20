@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.CodeAssets.UI_V2.RunMap
 {
-    public class RoomNodeUIClickTrigger: MonoBehaviour
+    public class RoomNodeUIClickTrigger: MonoBehaviour, IPointerClickHandler
     {
         public RoomNodeUI ParentNode;
 
-        void OnMouseDown()
+        public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Clicked ui trigger for room node");
             ParentNode.MouseDownClickHandler();
         }
     }

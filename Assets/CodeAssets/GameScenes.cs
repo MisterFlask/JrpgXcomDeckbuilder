@@ -25,7 +25,7 @@ public class GameScenes
 
     public static void StsMapScene()
     {
-        SceneManager.LoadScene(sceneName: "StsMapScene");
+        SceneManager.LoadScene(sceneName: "NewStsMapScene");
     }
 
     public static void SwitchToBattleResultSceneAndProcessCombatResults(CombatResult combatResult)

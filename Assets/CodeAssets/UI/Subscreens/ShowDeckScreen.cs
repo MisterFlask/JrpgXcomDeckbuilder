@@ -28,7 +28,7 @@ public class ShowDeckScreen : EagerMonobehaviour
 
     private List<GameObject> CardsDisplayed = new List<GameObject>();
 
-    private static ShowDeckScreen Instance;
+    public static ShowDeckScreen Instance;
 
     private static int numTimesInitialized = 0;
     public void Start()
